@@ -6,6 +6,7 @@ import { COLORS } from './appStyles';
 import CustomButton from "@/components/shared/Button";
 
 export default function App() {
+  let test = ""
   return (
     <View style={styles.container}>
 
@@ -23,6 +24,18 @@ export default function App() {
         />
         <StatusBar style="auto" />
       </View>
+
+
+
+
+
+
+
+
+
+
+
+
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>Футер</Text>
