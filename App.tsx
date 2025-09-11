@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import CustomButton from "./components/shared/Button";
-
+import { COLORS, SIZES, FONTS,   utilityStyles } from './appStyles';
 export default function App() {
   return (
     <View style={styles.container}>
@@ -32,7 +32,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#a52121",
+    backgroundColor: COLORS.BLACK
+ 
   },
   header: {
     height: 60,
@@ -40,14 +41,14 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 20, // для статус бара на iOS
+    paddingTop: 20,  
   },
   headerText: {
     fontSize: 18,
     fontWeight: "bold",
   },
   content: {
-    flex: 1, // занимает все доступное пространство между хедером и футером
+    flex: 1, 
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
