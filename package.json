@@ -6,11 +6,17 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "format": "prettier --write . && eslint --fix .",
+    "lint": "eslint src/ --max-warnings 0 --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix --no-cache"
   },
   "dependencies": {
     "expo": "~53.0.22",
     "expo-status-bar": "~2.2.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "prettier": "^3.6.2",
     "prism-react-renderer": "^2.4.1",
     "react": "19.0.0",
     "react-native": "0.79.6",
@@ -20,9 +26,22 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@eslint/js": "^9.35.0",
     "@types/prismjs": "^1.26.5",
     "@types/react": "~19.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.4.0",
     "typescript": "~5.8.3"
   },
-  "private": true
+  "private": true,
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
 }
