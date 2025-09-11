@@ -13,10 +13,6 @@ export default function App() {
       <View style={styles.content}>
         <Text>Основное содержимое вашего приложения!</Text>
 
-
-
-
-
         <CustomButton 
         text="Редактировать профиль"
         handler={()=>{}}
