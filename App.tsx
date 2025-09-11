@@ -9,10 +9,13 @@ export default function App() {
     <View style={styles.header}>
         <Text style={styles.headerText}>Хедер</Text>
       </View>
-
-      {/* Основное содержимое */}
+ 
       <View style={styles.content}>
         <Text>Основное содержимое вашего приложения!</Text>
+
+
+
+
 
         <CustomButton 
         text="Редактировать профиль"
