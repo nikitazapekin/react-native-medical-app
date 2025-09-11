@@ -1,21 +1,27 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import CustomButton from "./components/shared/Button";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* Хедер */}
-      <View style={styles.header}>
+
+    <View style={styles.header}>
         <Text style={styles.headerText}>Хедер</Text>
       </View>
 
       {/* Основное содержимое */}
       <View style={styles.content}>
         <Text>Основное содержимое вашего приложения!</Text>
+
+        <CustomButton 
+        text="Редактировать профиль"
+        handler={()=>{}}
+        backgroundColor="green"
+        />
         <StatusBar style="auto" />
       </View>
 
-      {/* Футер */}
       <View style={styles.footer}>
         <Text style={styles.footerText}>Футер</Text>
       </View>
