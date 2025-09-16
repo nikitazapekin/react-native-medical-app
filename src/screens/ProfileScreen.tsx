@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from "react-native";
- 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { StatusBar } from "expo-status-bar";
 

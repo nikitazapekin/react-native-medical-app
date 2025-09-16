@@ -1,22 +1,23 @@
-import React from 'react';
-import { Text } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { COLORS } from 'appStyles';
+import React from "react";
+import { Text } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { COLORS } from "appStyles";
 
-import { ROUTES } from './routes';
-
-import HomeScreen from '@/screens/HomeScreen';
-import ProfileScreen from '@/screens/ProfileScreen';
-import SettingsScreen from '@/screens/SettingsScreen';
+import { ROUTES } from "@/navigation/routes";
+import AuthScreen from "@/screens/AuthScreen";
+import HomeScreen from "@/screens/HomeScreen";
+import ProfileScreen from "@/screens/ProfileScreen";
+import SettingsScreen from "@/screens/SettingsScreen";
 
 type RootStackParamList = {
   [ROUTES.STACK.MAIN]: undefined;
+  [ROUTES.STACK.AUTH]: undefined;
+  Home: undefined;
 };
 
 type TabParamList = {
-  [ROUTES.TABS.HOME]: undefined;
   [ROUTES.TABS.PROFILE]: undefined;
   [ROUTES.TABS.SETTINGS]: undefined;
 };
@@ -30,38 +31,24 @@ function TabNavigator() {
       screenOptions={{
         tabBarStyle: styles.tabBar,
         tabBarActiveTintColor: COLORS.PRIMARY,
-        tabBarInactiveTintColor: 'gray',
-        headerShown: false
+        tabBarInactiveTintColor: "gray",
+        headerShown: false,
       }}
     >
-      <Tab.Screen
-        name={ROUTES.TABS.HOME}
-        component={HomeScreen}
-        options={{
-          tabBarLabel: 'Главная',
-          tabBarIcon: ({ color, size }) => (
-            <Text style={{ color, fontSize: size }}>🏠</Text>
-          ),
-        }}
-      />
       <Tab.Screen
         name={ROUTES.TABS.PROFILE}
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Профиль',
-          tabBarIcon: ({ color, size }) => (
-            <Text style={{ color, fontSize: size }}>👤</Text>
-          ),
+          tabBarLabel: "Профиль",
+          tabBarIcon: ({ color, size }) => <Text style={{ color, fontSize: size }}>👤</Text>,
         }}
       />
       <Tab.Screen
         name={ROUTES.TABS.SETTINGS}
         component={SettingsScreen}
         options={{
-          tabBarLabel: 'Настройки',
-          tabBarIcon: ({ color, size }) => (
-            <Text style={{ color, fontSize: size }}>⚙️</Text>
-          ),
+          tabBarLabel: "Настройки",
+          tabBarIcon: ({ color, size }) => <Text style={{ color, fontSize: size }}>⚙️</Text>,
         }}
       />
     </Tab.Navigator>
@@ -71,7 +58,13 @@ function TabNavigator() {
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name={ROUTES.STACK.AUTH} component={AuthScreen} />
         <Stack.Screen name={ROUTES.STACK.MAIN} component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -80,9 +73,9 @@ export default function AppNavigator() {
 
 const styles = {
   tabBar: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopWidth: 1,
-    borderTopColor: '#ccc',
+    borderTopColor: "#ccc",
     height: 60,
   },
 };
