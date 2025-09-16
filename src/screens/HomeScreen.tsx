@@ -5,7 +5,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import { styles } from "./styles";
 
 import WelcomeComponent from "@/components/WelcomeComponent";
-import { ROUTES } from "@/navigation/routes";
+import type { ROUTES } from "@/navigation/routes";
 
 type RootStackParamList = {
   Home: undefined;
@@ -20,7 +20,7 @@ interface HomeScreenProps {
 }
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
- 
+
   return (
     <View style={styles.container}>
       <WelcomeComponent
