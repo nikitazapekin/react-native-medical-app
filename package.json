@@ -8,13 +8,13 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-     "lint": "eslint --config eslint.config.js src/**/*.{js,jsx,ts,tsx} --max-warnings 0",
+    "lint": "eslint --config eslint.config.js src/**/*.{js,jsx,ts,tsx} --max-warnings 0",
     "lint:fix": "eslint --config eslint.config.js src/**/*.{js,jsx,ts,tsx} --fix",
     "format": "prettier --write . && eslint --config eslint.config.js src/**/*.{js,jsx,ts,tsx} --fix",
     "prepare": "husky"
   },
   "dependencies": {
-    "expo": "~53.0.22",
+    "expo": "^54.0.7",
     "expo-status-bar": "~2.2.3",
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",

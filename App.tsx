@@ -6,7 +6,7 @@ import { COLORS } from './appStyles';
 import CustomButton from "@/components/shared/Button";
 
 export default function App() {
-  let test = ""
+ 
   return (
     <View style={styles.container}>
 
