@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import AppNavigator from '@/navigation/AppNavigator';
+
+export default function App() {
+  return <AppNavigator />;
+}
+/* import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
@@ -178,7 +184,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#ccc',
     height: 60,
   },
-});
+}); */
 /* import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
