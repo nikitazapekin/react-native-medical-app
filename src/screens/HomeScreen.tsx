@@ -1,71 +1,42 @@
-import React from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Image,  Text, View } from "react-native";
+import type { StackNavigationProp } from "@react-navigation/stack";
  
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { StatusBar } from "expo-status-bar";
 
-import { COLORS } from '../../appStyles';
+import { styles } from "./styles";
 
 import CustomButton from "@/components/shared/Button";
-import { ROUTES, TEXTS } from '@/navigation/routes';
+import { LogoImage } from "@/constants/icons";
+import { ROUTES } from "@/navigation/routes";
 
-type TabParamList = {
-  [ROUTES.TABS.HOME]: undefined;
-  [ROUTES.TABS.PROFILE]: undefined;
-  [ROUTES.TABS.SETTINGS]: undefined;
+type RootStackParamList = {
+  Home: undefined;
+  [ROUTES.STACK.AUTH]: undefined;
+  [ROUTES.STACK.MAIN]: undefined;
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<TabParamList, typeof ROUTES.TABS.HOME>;
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 interface HomeScreenProps {
   navigation: HomeScreenNavigationProp;
 }
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
+  const handleContinue = () => {
+    navigation.navigate(ROUTES.STACK.AUTH);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{TEXTS.HEADER.HOME}</Text>
-      </View>
-      <View style={styles.content}>
-        <Text>{TEXTS.CONTENT.HOME}</Text>
+      <View style={styles.centerContent}>
+        <Text style={styles.title}>Добро пожаловать</Text>
+        <Image source={LogoImage} style={styles.image} resizeMode="contain" />
         <CustomButton
-          text={TEXTS.BUTTONS.GO_TO_PROFILE}
-          handler={() => navigation.navigate(ROUTES.TABS.PROFILE)}
-          backgroundColor="blue"
+          handler={handleContinue}
+          text="Продолжить"
+          backgroundColor="#1280b2"
         />
-        <CustomButton
-          text={TEXTS.BUTTONS.GO_TO_SETTINGS}
-          handler={() => navigation.navigate(ROUTES.TABS.SETTINGS)}
-          backgroundColor="green"
-        />
-        <StatusBar style="auto" />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.BLACK
-  },
-  header: {
-    height: 60,
-    width: "100%",
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 20,
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-});
