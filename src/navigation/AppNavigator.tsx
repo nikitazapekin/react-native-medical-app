@@ -9,11 +9,15 @@ import type { RootStackParamList } from "./types";
 
 import { ROUTES } from "@/navigation/routes";
 import AuthScreen from "@/screens/AuthScreen";
+import CatalogScreen from "@/screens/CatalogScreen";
+import ChatScreen from "@/screens/ChatScreen";
 import HomeScreen from "@/screens/HomeScreen";
+import MedScreen from "@/screens/MedScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
- 
+import TubeScreen from "@/screens/TubeScreen";
+
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
   [ROUTES.TABS.SETTINGS]: undefined;
@@ -63,8 +67,12 @@ export default function AppNavigator() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name={ROUTES.STACK.AUTH} component={AuthScreen} />
         <Stack.Screen name={ROUTES.STACK.REGISTER} component={RegisterScreen} />
-        <Stack.Screen name={ROUTES.STACK.PROFILE} component={ProfileScreen} />
+        <Stack.Screen name={ROUTES.STACK.HOMEPAGE} component={ProfileScreen} />
         <Stack.Screen name={ROUTES.STACK.MAIN} component={TabNavigator} />
+        <Stack.Screen name={ROUTES.STACK.CATALOG} component={CatalogScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHAT} component={ChatScreen} />
+        <Stack.Screen name={ROUTES.STACK.MED} component={MedScreen} />
+        <Stack.Screen name={ROUTES.STACK.TUBE} component={TubeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

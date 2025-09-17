@@ -5,10 +5,10 @@ import Tube from "@assets/tabBar/tube.png"
 import Med from "@assets/tabBar/med.png"
 
   export const tabIcons = [
-  {id: 1, icon: Home, type: "home" },
-  {id: 2, icon: Chat, type: "chat" },
-  {id: 3, icon: Category, type: "category" }, 
-  {id: 4, icon: Tube, type: "tube" },
-  {id: 5, icon: Med, type: "med" }
+  {id: 1, icon: Home, type: "home", stack: "HOMEPAGE"  as const  },
+  {id: 2, icon: Chat, type: "chat", stack: "CHAT" },
+  {id: 3, icon: Category, type: "category", stack: "CATALOG"  as const  }, 
+  {id: 4, icon: Tube, type: "tube" , stack: "MED"  as const },
+  {id: 5, icon: Med, type: "med" , stack: "TUBE"  as const }
 ]
- 
+  

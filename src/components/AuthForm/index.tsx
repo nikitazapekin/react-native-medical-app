@@ -18,7 +18,7 @@ const AuthForm = () => {
     navigation.navigate(ROUTES.STACK.REGISTER);
   };
   const handleLogin = () => {
-    navigation.navigate(ROUTES.STACK.PROFILE);
+    navigation.navigate(ROUTES.STACK.HOMEPAGE);
   };
 
   return (

@@ -7,6 +7,10 @@ export type RootStackParamList = {
   [ROUTES.STACK.MAIN]: undefined;
   [ROUTES.STACK.AUTH]: undefined;
   [ROUTES.STACK.REGISTER]: undefined;
-  [ROUTES.STACK.PROFILE]: undefined;
+  [ROUTES.STACK.HOMEPAGE]: undefined;
+  [ROUTES.STACK.CATALOG]: undefined;
+  [ROUTES.STACK.CHAT]: undefined;
+  [ROUTES.STACK.MED]: undefined;
+  [ROUTES.STACK.TUBE]: undefined;
 };
-export type  FormNavigationProp = StackNavigationProp<RootStackParamList>;
+export type FormNavigationProp = StackNavigationProp<RootStackParamList>;

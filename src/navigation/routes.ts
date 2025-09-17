@@ -3,7 +3,11 @@ export const ROUTES = {
     MAIN: "Main",
     AUTH: "Auth",
     REGISTER: "Register",
-    PROFILE: "Profile",
+    HOMEPAGE: "Homepage",
+    CATALOG: "Catalog",
+    CHAT: "Chat",
+    MED: "Med",
+    TUBE: "Tube",
   },
   TABS: {
     HOME: "HomeTab",
