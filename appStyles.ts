@@ -8,6 +8,7 @@ export const COLORS = {
   ACCENT: '#41C5FF',       
    
   GRAY_LIGHT: '#D1D5DB',    
+  GRAY_BORDER: '#e5e7eb',
   GRAY_DARK: '#6B7280',   
   WHITE: '#fff',
   BLACK: '#000',
