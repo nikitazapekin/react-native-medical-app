@@ -9,8 +9,8 @@ import { ROUTES } from "@/navigation/routes";
 import AuthScreen from "@/screens/AuthScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
-import SettingsScreen from "@/screens/SettingsScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
+import SettingsScreen from "@/screens/SettingsScreen";
 
 type RootStackParamList = {
   [ROUTES.STACK.MAIN]: undefined;
