@@ -1,7 +1,8 @@
 export const ROUTES = {
   STACK: {
     MAIN: 'Main',
-    AUTH: 'Auth'
+    AUTH: 'Auth',
+    REGISTER: "Register"
   },
   TABS: {
     HOME: 'HomeTab',
