@@ -1,6 +1,7 @@
-//import { useState } from "react";
+ 
 import { Image, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 
 import { styles } from "./styled";
 
@@ -10,15 +11,27 @@ import type { FormNavigationProp } from "@/navigation/types";
 
 const Footer = () => {
   const navigation = useNavigation<FormNavigationProp>();
-  //  const [activeTab, setActiveTab] = useState("home");
-  const handleNavigate = (route: string, type: string) => {
+  const route = useRoute();
+  const [activeTab, setActiveTab] = useState("home");
+ 
+  useEffect(() => {
+    const currentRouteName = route.name;
+     
+    const activeTabItem = tabIcons.find(item => 
+      ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
+    );
+    
+    if (activeTabItem) {
+      setActiveTab(activeTabItem.type);
+    }
+  }, [route.name]);
+
+  const handleNavigate = (routeName: string, type: string) => {
     const validRoutes = ["HOMEPAGE", "CATALOG", "CHAT", "MED", "TUBE"];
 
-    console.log(type);
-
-    if (validRoutes.includes(route)) {
-
-      navigation.navigate(ROUTES.STACK[route as keyof typeof ROUTES.STACK]);
+    if (validRoutes.includes(routeName)) {
+      setActiveTab(type);
+      navigation.navigate(ROUTES.STACK[routeName as keyof typeof ROUTES.STACK]);
     }
   };
 
@@ -29,7 +42,10 @@ const Footer = () => {
           <View
             onTouchEnd={() => handleNavigate(item.stack, item.type)}
             key={item.id}
-            style={[styles.wrapper, item.type == "home" && styles.activeWrapper]}
+            style={[
+              styles.wrapper, 
+              item.type === activeTab && styles.activeWrapper
+            ]}
           >
             <Image source={item.icon} style={styles.image} resizeMode="contain" />
           </View>
@@ -39,4 +55,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer; 
