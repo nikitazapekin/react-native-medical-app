@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Text, TouchableOpacity,View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+ 
 
 import CustomButton from "../shared/Button";
 import FormInput from "../shared/FormInput";
@@ -10,20 +10,16 @@ import { styles } from "./styled";
 
 import { AUTH_CONSTANTS } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
-
-export type RootStackParamList = {
-  Home: undefined;
-  [ROUTES.STACK.MAIN]: undefined;
-  [ROUTES.STACK.AUTH]: undefined;
-  [ROUTES.STACK.REGISTER]: undefined;
-};
-type AuthFormNavigationProp = StackNavigationProp<RootStackParamList>;
+import type { FormNavigationProp } from "@/navigation/types";
 
 const AuthForm = () => {
-  const navigation = useNavigation<AuthFormNavigationProp>();
+  const navigation = useNavigation<FormNavigationProp>();
   const [isChecked, setIsChecked] = useState(false);
   const handleRegister = () => {
     navigation.navigate(ROUTES.STACK.REGISTER);
+  };
+  const handleLogin = () => {
+    navigation.navigate(ROUTES.STACK.PROFILE);
   };
 
   return (
@@ -56,7 +52,7 @@ const AuthForm = () => {
           </View>
         </View>
         <View style={styles.btns}>
-          <CustomButton text="Войти" handler={() => {}} backgroundColor="#1280b2" />
+          <CustomButton text="Войти" handler={handleLogin} backgroundColor="#1280b2" />
           <CustomButton
             text="Зарегистрироваться"
             handler={handleRegister}
