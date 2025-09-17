@@ -6,11 +6,25 @@ import FormInput from "../shared/FormInput";
 
 import { styles } from "./styled";
 
+import { useNavigation } from "@react-navigation/native";
 import { AUTH_CONSTANTS } from "@/constants";
+import { ROUTES } from "@/navigation/routes";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+export type RootStackParamList = {
+  Home: undefined;
+  [ROUTES.STACK.MAIN]: undefined;
+  [ROUTES.STACK.AUTH]: undefined;
+  [ROUTES.STACK.REGISTER]: undefined;
+};
+type AuthFormNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const AuthForm = () => {
+    const navigation = useNavigation<AuthFormNavigationProp>();
   const [isChecked, setIsChecked] = useState(false);
-
+    const handleRegister = () => {
+    navigation.navigate(ROUTES.STACK.REGISTER);
+  };
   return (
     <View style={styles.centerContent}>
       <View style={styles.form}>
@@ -43,7 +57,7 @@ const AuthForm = () => {
           <CustomButton text="Войти" handler={() => {}} backgroundColor="#1280b2" />
           <CustomButton
             text="Зарегистрироваться"
-            handler={() => {}}
+            handler={handleRegister}
             backgroundColor="#D1D5DB"
             color="#000"
           />

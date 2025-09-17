@@ -18,12 +18,4 @@ const FormInput = ({ placeholder, handler, label }: FormInputProps) => {
 };
 
 export default FormInput;
-/*
-export interface FormInputProps {
-  placeholder: string,
-  handler: () => void
-  label: string,
-  type?: string
-}
-
-*/
+ 

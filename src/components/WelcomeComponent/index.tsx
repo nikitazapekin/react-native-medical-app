@@ -11,6 +11,7 @@ import { ROUTES } from "@/navigation/routes";
 type RootStackParamList = {
   Home: undefined;
   [ROUTES.STACK.AUTH]: undefined;
+   [ROUTES.STACK.REGISTER]: undefined;
   [ROUTES.STACK.MAIN]: undefined;
 };
 

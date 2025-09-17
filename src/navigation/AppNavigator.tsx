@@ -10,10 +10,12 @@ import AuthScreen from "@/screens/AuthScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
+import RegisterScreen from "@/screens/RegisterScreen";
 
 type RootStackParamList = {
   [ROUTES.STACK.MAIN]: undefined;
   [ROUTES.STACK.AUTH]: undefined;
+  [ROUTES.STACK.REGISTER]: undefined;
   Home: undefined;
 };
 
@@ -65,6 +67,7 @@ export default function AppNavigator() {
       >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name={ROUTES.STACK.AUTH} component={AuthScreen} />
+        <Stack.Screen name={ROUTES.STACK.REGISTER} component={RegisterScreen} />
         <Stack.Screen name={ROUTES.STACK.MAIN} component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
