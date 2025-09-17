@@ -1,37 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from "react-native";
- 
+import {   View } from "react-native";
+
+import { styles } from "./styles";
+
+import AuthForm from '@/components/AuthForm';
 
 export default function HomeScreen( ) {
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Auth</Text>
+      <AuthForm />
 
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "red"
-  },
-  header: {
-    height: 60,
-    width: "100%",
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 20,
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-});
