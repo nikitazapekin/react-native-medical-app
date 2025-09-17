@@ -13,14 +13,7 @@ import HomeScreen from "@/screens/HomeScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
-
-/* type RootStackParamList = {
-  [ROUTES.STACK.MAIN]: undefined;
-  [ROUTES.STACK.AUTH]: undefined;
-  [ROUTES.STACK.REGISTER]: undefined;
-  Home: undefined;
-};
- */
+ 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
   [ROUTES.TABS.SETTINGS]: undefined;

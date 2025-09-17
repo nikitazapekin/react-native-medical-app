@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     zIndex: 1000,
     elevation: 5,
-
   },
   content: {
     width: "100%",
@@ -29,12 +28,28 @@ export const styles = StyleSheet.create({
     paddingBottom: 47,
   },
   wrapper: {
-    width: 64,
-    height: 64,
+    width: 54,
+    height: 54,
+    
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     width: 44,
     height: 44,
-    //padding: 5,
+    
   },
+
+  activeWrapper: {
+    backgroundColor: COLORS.BLUE_MEDIUM,  
+    borderRadius: 100, 
+    shadowColor: "#000", 
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,  
+    justifyContent: "center",
+    alignContent: "center",
+    
+  }, 
 });
