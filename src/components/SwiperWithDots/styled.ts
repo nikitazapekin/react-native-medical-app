@@ -1,31 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 import { COLORS } from "appStyles";
- 
+
+const CARD_WIDTH = 356;
+const CARD_MARGIN = 16;
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.TURQUOISE_LIGHT
-  },
-
-  content: {
-    flex: 1,
-    marginTop: 60,
-    marginBottom: 80,
-  },
-  contentContainer: {
-    padding: 16,
-    paddingBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 10,
-    color: "black"
-  },
-
-  /*  swiperContainer: {
+  swiperContainer: {
     height: 200,
     marginBottom: 20,
   },
@@ -79,5 +59,5 @@ export const styles = StyleSheet.create({
   },
   inactiveDot: {
     backgroundColor: COLORS.GRAY_LIGHT,
-  }, */
+  },
 });
