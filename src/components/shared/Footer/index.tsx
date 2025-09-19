@@ -1,7 +1,7 @@
- 
+
+import { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useEffect, useState } from "react";
 
 import { styles } from "./styled";
 
@@ -13,14 +13,14 @@ const Footer = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const route = useRoute();
   const [activeTab, setActiveTab] = useState("home");
- 
+
   useEffect(() => {
     const currentRouteName = route.name;
-     
-    const activeTabItem = tabIcons.find(item => 
+
+    const activeTabItem = tabIcons.find(item =>
       ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
     );
-    
+
     if (activeTabItem) {
       setActiveTab(activeTabItem.type);
     }
@@ -43,7 +43,7 @@ const Footer = () => {
             onTouchEnd={() => handleNavigate(item.stack, item.type)}
             key={item.id}
             style={[
-              styles.wrapper, 
+              styles.wrapper,
               item.type === activeTab && styles.activeWrapper
             ]}
           >
@@ -55,4 +55,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
