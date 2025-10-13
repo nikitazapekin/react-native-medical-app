@@ -7,19 +7,22 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
+import DoctorSwiper from "@/components/DoctorSwiper";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import SwiperWithDots from "@/components/SwiperWithDots";
- 
+
 export default function ProfileScreen() {
-   return (
+
+  return (
     <View style={styles.container}>
       <Header />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Личная информация</Text>
 
         <SwiperWithDots />
-        </ScrollView>
+        <DoctorSwiper />
+      </ScrollView>
 
       <Footer />
       <StatusBar style="auto" />

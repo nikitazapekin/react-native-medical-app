@@ -13,7 +13,7 @@ export default function ChatScreen( ) {
 
       <Header />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.sectionTitle}>Chat</Text>
+        <Text style={styles.sectionTitle}>Список чатов</Text>
 
       </ScrollView>
 
