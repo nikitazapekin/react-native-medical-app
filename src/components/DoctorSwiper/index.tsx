@@ -1,4 +1,4 @@
- 
+
 import React, { useRef,useState } from 'react';
 import type {
   ImageSourcePropType,
@@ -8,7 +8,6 @@ import {
   Dimensions,
   FlatList,
   Image,
- 
   Text,
   View,
 } from 'react-native';

@@ -1,5 +1,5 @@
 import { useRef,useState } from "react";
-import { Dimensions, FlatList, StyleSheet,Text, View } from "react-native";
+import { Dimensions, FlatList, StyleSheet,Text, View , NativeScrollEvent, NativeSyntheticEvent} from "react-native";
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -13,10 +13,9 @@ interface SwiperItem {
 const CustomSwiper = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
-
-  // Фиксированная ширина карточки
+ 
   const CARD_WIDTH = 356;
-  // Вычисляем отступы для центрирования
+ 
   const CARD_MARGIN = (SCREEN_WIDTH - CARD_WIDTH) / 2;
 
   const swiperData: SwiperItem[] = [
@@ -40,7 +39,7 @@ const CustomSwiper = () => {
     }
   ];
 
-  const handleScroll = (event: any) => {
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffset = event.nativeEvent.contentOffset.x;
     const index = Math.round(contentOffset / (CARD_WIDTH + CARD_MARGIN * 2));
 
