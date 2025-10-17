@@ -22,8 +22,8 @@ type AuthFormNavigationProp = StackNavigationProp<RootStackParamList>;
 const RegisterForm = () => {
   const navigation = useNavigation<AuthFormNavigationProp>();
 
-  const handleRegister = () => {
-    navigation.navigate(ROUTES.STACK.REGISTER);
+  const handleLogin = () => {
+    navigation.navigate(ROUTES.STACK.AUTH);
   };
 
   return (
@@ -49,7 +49,7 @@ const RegisterForm = () => {
           <CustomButton text="Зарегистрироваться" handler={() => {}} backgroundColor="#1280b2" />
           <CustomButton
             text="Войти"
-            handler={handleRegister}
+            handler={handleLogin}
             backgroundColor="#D1D5DB"
             color="#000"
           />

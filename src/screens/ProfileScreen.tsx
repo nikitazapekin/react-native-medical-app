@@ -1,71 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, View } from "react-native";
-import type { StackNavigationProp } from '@react-navigation/stack';
+import React  from "react";
+import {
+  ScrollView,
+  Text,
+  View} from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import { COLORS } from '../../appStyles';
+import { styles } from "./styles";
 
-import CustomButton from "@/components/shared/Button";
-import type { ROUTES} from '@/navigation/routes';
-import { TEXTS } from '@/navigation/routes';
+import DoctorSwiper from "@/components/DoctorSwiper";
+import Footer from "@/components/shared/Footer";
+import Header from "@/components/shared/Header";
+import SwiperWithDots from "@/components/SwiperWithDots";
 
-type TabParamList = {
-  [ROUTES.TABS.HOME]: undefined;
-  [ROUTES.TABS.PROFILE]: undefined;
-  [ROUTES.TABS.SETTINGS]: undefined;
-};
+export default function ProfileScreen() {
 
-type ProfileScreenNavigationProp = StackNavigationProp<TabParamList, typeof ROUTES.TABS.PROFILE>;
-
-interface ProfileScreenProps {
-  navigation: ProfileScreenNavigationProp;
-}
-
-export default function ProfileScreen({ navigation }: ProfileScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{TEXTS.HEADER.PROFILE}</Text>
-      </View>
-      <View style={styles.content}>
-        <Text>{TEXTS.CONTENT.PROFILE}</Text>
-        <CustomButton
-          text={TEXTS.BUTTONS.EDIT_PROFILE}
-          handler={() => {}}
-          backgroundColor="green"
-        />
-        <CustomButton
-          text={TEXTS.BUTTONS.BACK}
-          handler={() => navigation.goBack()}
-          backgroundColor="gray"
-        />
-        <StatusBar style="auto" />
-      </View>
+      <Header />
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.sectionTitle}>Личная информация</Text>
+
+        <SwiperWithDots />
+        <DoctorSwiper />
+      </ScrollView>
+
+      <Footer />
+      <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.BLACK
-  },
-  header: {
-    height: 60,
-    width: "100%",
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 20,
-  },
-  headerText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-});

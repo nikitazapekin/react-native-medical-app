@@ -5,19 +5,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { COLORS } from "appStyles";
 
+import type { RootStackParamList } from "./types";
+
 import { ROUTES } from "@/navigation/routes";
 import AuthScreen from "@/screens/AuthScreen";
+import CatalogScreen from "@/screens/CatalogScreen";
+import ChatScreen from "@/screens/ChatScreen";
 import HomeScreen from "@/screens/HomeScreen";
+import MedScreen from "@/screens/MedScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
-
-type RootStackParamList = {
-  [ROUTES.STACK.MAIN]: undefined;
-  [ROUTES.STACK.AUTH]: undefined;
-  [ROUTES.STACK.REGISTER]: undefined;
-  Home: undefined;
-};
+import TubeScreen from "@/screens/TubeScreen";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
@@ -68,7 +67,12 @@ export default function AppNavigator() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name={ROUTES.STACK.AUTH} component={AuthScreen} />
         <Stack.Screen name={ROUTES.STACK.REGISTER} component={RegisterScreen} />
+        <Stack.Screen name={ROUTES.STACK.HOMEPAGE} component={ProfileScreen} />
         <Stack.Screen name={ROUTES.STACK.MAIN} component={TabNavigator} />
+        <Stack.Screen name={ROUTES.STACK.CATALOG} component={CatalogScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHAT} component={ChatScreen} />
+        <Stack.Screen name={ROUTES.STACK.MED} component={MedScreen} />
+        <Stack.Screen name={ROUTES.STACK.TUBE} component={TubeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

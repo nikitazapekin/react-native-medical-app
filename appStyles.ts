@@ -6,7 +6,6 @@ export const COLORS = {
   PRIMARY: '#1280b2',        
   SECONDARY: '#993B4A',    
   ACCENT: '#41C5FF',       
-   
   GRAY_LIGHT: '#D1D5DB',    
   GRAY_BORDER: '#e5e7eb',
   GRAY_DARK: '#6B7280',   
@@ -18,6 +17,7 @@ export const COLORS = {
    
   BLUE_LIGHT: '#B4E8FF',    
   BLUE_DARK: '#41C5FF',   
+  BLUE_MEDIUM: "#54C3F5",
    
   GREEN_LIGHT: '#4FE7A5',  
  
