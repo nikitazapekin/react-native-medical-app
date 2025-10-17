@@ -21,6 +21,7 @@ export const TEXTS = {
     HOME: "Главная",
     PROFILE: "Профиль",
     SETTINGS: "Настройки",
+      CHAT: "Чат",
   },
   BUTTONS: {
     GO_TO_PROFILE: "Перейти в профиль",

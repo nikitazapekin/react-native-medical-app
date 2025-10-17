@@ -12,6 +12,7 @@ import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import SwiperWithDots from "@/components/SwiperWithDots";
 import { TEXTS } from "@/navigation/routes";
+
 export default function ProfileScreen() {
 
   return (
