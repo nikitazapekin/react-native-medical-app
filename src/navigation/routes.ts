@@ -8,6 +8,7 @@ export const ROUTES = {
     CHAT: "Chat",
     MED: "Med",
     TUBE: "Tube",
+    CABINET: "Cabinet",
   },
   TABS: {
     HOME: "HomeTab",

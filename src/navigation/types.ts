@@ -12,5 +12,6 @@ export type RootStackParamList = {
   [ROUTES.STACK.CHAT]: undefined;
   [ROUTES.STACK.MED]: undefined;
   [ROUTES.STACK.TUBE]: undefined;
+    [ROUTES.STACK.CABINET]: undefined;
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;

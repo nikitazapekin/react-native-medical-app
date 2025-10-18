@@ -9,6 +9,7 @@ import type { RootStackParamList } from "./types";
 
 import { ROUTES } from "@/navigation/routes";
 import AuthScreen from "@/screens/AuthScreen";
+import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import HomeScreen from "@/screens/HomeScreen";
@@ -73,6 +74,8 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHAT} component={ChatScreen} />
         <Stack.Screen name={ROUTES.STACK.MED} component={MedScreen} />
         <Stack.Screen name={ROUTES.STACK.TUBE} component={TubeScreen} />
+
+        <Stack.Screen name={ROUTES.STACK.CABINET} component={CabinetScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
