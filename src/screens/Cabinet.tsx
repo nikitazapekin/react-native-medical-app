@@ -1,28 +1,30 @@
 import React from 'react';
-import {   ScrollView,Text, View } from "react-native";
+import {  View } from "react-native";
+import {   ScrollView,  } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
+import CabinetInfo from "@/components/CabinetInfo";
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
+import CabinetOptions from '@/components/CabinetOptions';
 
-export default function TubeScreen( ) {
-  return (
+const CabinetScreen = () => {
+  return ( <>
     <View style={styles.container}>
 
-      <Header
-        isAuthenticated={true}
-        title='Test'
-      />
+      <Header title='Чат' isAuthenticated={true} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.sectionTitle}>Tube</Text>
-
+        <CabinetInfo />
+        <CabinetOptions />
       </ScrollView>
 
       <Footer />
 
       <StatusBar style="auto" />
     </View>
-  );
-}
+  </> );
+};
+
+export default CabinetScreen;
