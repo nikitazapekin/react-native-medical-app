@@ -17,7 +17,9 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <Header title={TEXTS.HEADER.HOME} />
+      <Header title={TEXTS.HEADER.HOME}
+        isAuthenticated={true}
+      />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Личная информация</Text>
 

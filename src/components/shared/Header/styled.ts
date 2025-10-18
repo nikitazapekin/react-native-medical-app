@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    height: 60,
+    height: 72,
     backgroundColor: COLORS.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,5 +22,15 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+
+  circle: {
+    position: 'absolute',
+    left: 37,
+    width: 57,
+    height: 57,
+    borderRadius: 28.5,
+    backgroundColor: 'white',
+    alignSelf: 'center',
   },
 });

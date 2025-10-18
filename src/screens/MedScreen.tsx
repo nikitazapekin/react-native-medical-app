@@ -11,7 +11,10 @@ export default function MedScreen( ) {
   return (
     <View style={styles.container}>
 
-      <Header />
+      <Header
+        title="Лекарства"
+        isAuthenticated={true}
+      />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Med</Text>
 

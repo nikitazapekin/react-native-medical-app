@@ -11,7 +11,7 @@ export default function ChatScreen( ) {
   return (
     <View style={styles.container}>
 
-      <Header />
+      <Header title='Чат' isAuthenticated={true} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Список чатов</Text>
 
