@@ -6,9 +6,9 @@ import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 
 import CabinetInfo from "@/components/CabinetInfo";
+import CabinetOptions from '@/components/CabinetOptions';
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
-import CabinetOptions from '@/components/CabinetOptions';
 
 const CabinetScreen = () => {
   return ( <>
