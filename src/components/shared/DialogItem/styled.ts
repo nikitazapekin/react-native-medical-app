@@ -10,14 +10,14 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   card: {
-    maxWidth: 336,
+    maxWidth: 376,
     backgroundColor: COLORS.WHITE,
     width: "100%",
     boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
     borderRadius: 8,
     paddingTop: 7,
     paddingRight: 11,
-    paddingBottom: 21,
+    paddingBottom: 6,
     paddingLeft: 7,
   },
   myCard: {
@@ -43,6 +43,12 @@ export const styles = StyleSheet.create({
   text: {
     fontWeight: "400",
     fontSize: 14,
+    color: COLORS.GRAY_TEXT,
+  },
+
+  status: {
+    fontWeight: "400",
+    fontSize: 16,
     color: COLORS.GRAY_TEXT,
   },
   time: {

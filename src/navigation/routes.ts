@@ -6,6 +6,7 @@ export const ROUTES = {
     HOMEPAGE: "Homepage",
     CATALOG: "Catalog",
     CHAT: "Chat",
+    CHATS: "Chats",
     MED: "Med",
     TUBE: "Tube",
     CABINET: "Cabinet",

@@ -12,6 +12,7 @@ import AuthScreen from "@/screens/AuthScreen";
 import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
+import ChatsScreen from "@/screens/ChatsScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import MedScreen from "@/screens/MedScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
@@ -74,7 +75,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHAT} component={ChatScreen} />
         <Stack.Screen name={ROUTES.STACK.MED} component={MedScreen} />
         <Stack.Screen name={ROUTES.STACK.TUBE} component={TubeScreen} />
-
+        <Stack.Screen name={ROUTES.STACK.CHATS} component={ChatsScreen} />
         <Stack.Screen name={ROUTES.STACK.CABINET} component={CabinetScreen} />
       </Stack.Navigator>
     </NavigationContainer>

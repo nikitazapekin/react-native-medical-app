@@ -27,7 +27,7 @@ const Footer = () => {
   }, [route.name]);
 
   const handleNavigate = (routeName: string, type: string) => {
-    const validRoutes = ["HOMEPAGE", "CATALOG", "CHAT", "MED", "TUBE"];
+    const validRoutes = ["HOMEPAGE", "CATALOG", "CHATS", "MED", "CHAT", "TUBE"];
 
     if (validRoutes.includes(routeName)) {
       setActiveTab(type);
