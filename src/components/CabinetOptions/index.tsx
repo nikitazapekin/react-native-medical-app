@@ -1,7 +1,10 @@
-import { profileOptions } from "@/constants";
-import { View, Image, Text } from "react-native";
+import { Image, Text,View } from "react-native";
+
 import { styles } from "./styled";
-import { ListItemProps } from "./types";
+import type { ListItemProps } from "./types";
+
+import { profileOptions } from "@/constants";
+
 const ListItem = ({ item }: ListItemProps) => {
   return (
     <View style={styles.item}>
@@ -14,14 +17,14 @@ const ListItem = ({ item }: ListItemProps) => {
 const CabinetOptions = () => {
   return (
     <View style={styles.wrapper}>
-<Text style={styles.text}>
+      <Text style={styles.text}>
   Категории
-</Text>
-    <View style={styles.list}>
-      {profileOptions.map((item) => (
-        <ListItem key={item.id} item={item} />
-      ))}
-    </View>
+      </Text>
+      <View style={styles.list}>
+        {profileOptions.map((item) => (
+          <ListItem key={item.id} item={item} />
+        ))}
+      </View>
     </View>
   );
 };

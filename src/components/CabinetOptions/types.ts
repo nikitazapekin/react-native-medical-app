@@ -1,12 +1,12 @@
-import { ImageSourcePropType } from "react-native"
+import type { ImageSourcePropType } from "react-native";
 
 export interface ListItemProps {
   item: {
 
-    text: string, 
-    icon: ImageSourcePropType, 
-    alt: string, 
+    text: string,
+    icon: ImageSourcePropType,
+    alt: string,
     id: number
-  
+
   }
 }
