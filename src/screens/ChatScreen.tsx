@@ -4,7 +4,8 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-import Footer from '@/components/shared/Footer';
+import ChatKeypad from '@/components/ChatKeypad';
+ 
 import Header from '@/components/shared/Header';
 
 export default function ChatScreen( ) {
@@ -17,7 +18,7 @@ export default function ChatScreen( ) {
 
       </ScrollView>
 
-      <Footer />
+      <ChatKeypad />
 
       <StatusBar style="auto" />
     </View>
