@@ -1,8 +1,9 @@
-import { Image, Text, View, Pressable } from "react-native";
+import { Image, Pressable,Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 import type { ListItemProps } from "./types";
-import { useNavigation } from "@react-navigation/native";
+
 import { profileOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";

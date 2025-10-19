@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { FlatList, Image,Text, TouchableOpacity, View } from "react-native";
+import Arrow from "@assets/dropdown/arrow.png";
+
 import { styles } from "./styled";
+import type { SortOptions } from "./types";
 
-const DroppableList = () => {
+interface ListItem {
+  id: string;
+  label: string;
+  type?: string;
+}
+
+const DroppableList = ({ sortOptions }: SortOptions) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<{id: string, label: string}>({id: "", label: ""});
+  const [selectedValue, setSelectedValue] = useState<ListItem>({ id: "", label: "" });
 
-  const items = [
-    { id: "1", label: "По рейтингу" },
-    { id: "2", label: "По Стоимости" },
-    { id: "3", label: "По дате выхода" },
-  ];
-
-  const handleSelect = (item: {id: string, label: string}) => {
+  const handleSelect = (item: ListItem) => {
     setSelectedValue(item);
     setIsVisible(false);
   };
@@ -26,12 +29,19 @@ const DroppableList = () => {
         <Text style={styles.buttonText}>
           {selectedValue.label || "Select an option"}
         </Text>
+        <Image
+          source={Arrow}
+          style={[
+            styles.arrow,
+            isVisible && styles.arrowRotated
+          ]}
+        />
       </TouchableOpacity>
 
       {isVisible && (
         <View style={styles.dropdownList}>
           <FlatList
-            data={items}
+            data={sortOptions}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity
@@ -53,19 +63,21 @@ const DroppableList = () => {
 
 export default DroppableList;
 /* import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styled";
-const DroppableList = () => {
+import { SortOptions } from "./types";
+import Arrow from "@assets/dropdown/arrow.png"
+interface ListItem {
+  id: string;
+  label: string;
+  type?: string;
+}
+
+const DroppableList = ({ sortOptions }: SortOptions) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<{id: string, label: string}>({id: "", label: ""});
+  const [selectedValue, setSelectedValue] = useState<ListItem>({ id: "", label: "" });
 
-  const items = [
-    { id: "1", label: "Option 1" },
-    { id: "2", label: "Option 2" },
-    { id: "3", label: "Option 3" },
-  ];
-
-  const handleSelect = (item: {id: string, label: string}) => {
+  const handleSelect = (item: ListItem) => {
     setSelectedValue(item);
     setIsVisible(false);
   };
@@ -74,37 +86,34 @@ const DroppableList = () => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.dropdownButton}
-        onPress={() => setIsVisible(true)}
+        onPress={() => setIsVisible(!isVisible)}
       >
         <Text style={styles.buttonText}>
-          {selectedValue ? selectedValue.label : "Select an option"}
+          {selectedValue.label || "Select an option"}
         </Text>
       </TouchableOpacity>
 
-      <Modal visible={isVisible} transparent animationType="fade">
-        <TouchableOpacity
-          style={styles.modalOverlay}
-          onPress={() => setIsVisible(false)}
-        >
-          <View style={styles.dropdownList}>
-            <FlatList
-              data={items}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.listItem}
-                  onPress={() => handleSelect(item)}
-                >
-                  <Text style={styles.itemText}>{item.label}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        </TouchableOpacity>
-      </Modal>
+      {isVisible && (
+        <View style={styles.dropdownList}>
+          <FlatList
+            data={sortOptions}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[
+                  styles.listItem,
+                  selectedValue.id === item.id && styles.selectedItem
+                ]}
+                onPress={() => handleSelect(item)}
+              >
+                <Text style={styles.itemText}>{item.label}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      )}
     </View>
   );
 };
- 
-export default DroppableList; 
- */
+
+export default DroppableList;  */
