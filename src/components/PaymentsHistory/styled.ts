@@ -15,8 +15,9 @@ export const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   wrapper: {
-    width: "100%",
+    width: 376,
     flexDirection: "column",
     gap: 10,
+
   },
 });
