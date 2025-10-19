@@ -1,9 +1,40 @@
-import { Text,View } from "react-native";
+import { View } from "react-native";
+import { Text,  } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
-import PaymentItem from "../shared/PaymentItem";
 
 import { styles } from "./styled";
+
+const sortOptions = [
+  { id: "1", label: "По возрасту", type: "age" },
+  { id: "2", label: "По имени", type: "name" },
+
+];
+
+const ChildrensList  = () => {
+  return (
+    <View style={styles.content}>
+      <DroppableList sortOptions={sortOptions} />
+
+      <Text style={styles.title}>Список детей</Text>
+      <View style={styles.wrapper}>
+        {/*     {paymentItems.map((item) => (
+          <PaymentItem item={item} key={item.id} />
+        ))} */}
+      </View>
+    </View>
+  );
+};
+
+export default ChildrensList ;
+
+/*
+import { View, Text } from "react-native";
+
+import DroppableList from "../shared/DroppableList";
+
+import { styles } from "./styled";
+import PaymentItem from "../shared/PaymentItem";
 
 const sortOptions = [
   { id: "1", label: "По рейтингу", type: "rate" },
@@ -41,3 +72,5 @@ const PaymentsHistory = () => {
 };
 
 export default PaymentsHistory;
+
+*/

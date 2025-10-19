@@ -13,6 +13,7 @@ import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
+import ChildrensScreen from "@/screens/ChildrensScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
@@ -79,6 +80,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHATS} component={ChatsScreen} />
         <Stack.Screen name={ROUTES.STACK.CABINET} component={CabinetScreen} />
         <Stack.Screen name={ROUTES.STACK.PAYMENTS} component={PaymentScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

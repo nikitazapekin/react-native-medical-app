@@ -10,7 +10,8 @@ export const ROUTES = {
     MED: "Med",
     TUBE: "Tube",
     CABINET: "Cabinet",
-    PAYMENTS: "Payments"
+    PAYMENTS: "Payments",
+    CHILDRENS: "Childrens"
   },
   TABS: {
     HOME: "HomeTab",
