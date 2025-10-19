@@ -15,11 +15,11 @@ import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import MedScreen from "@/screens/MedScreen";
+import PaymentScreen from "@/screens/PaymentsScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
 import TubeScreen from "@/screens/TubeScreen";
-import PaymentScreen from "@/screens/PaymentsScreen";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
