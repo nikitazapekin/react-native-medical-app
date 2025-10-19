@@ -19,6 +19,7 @@ import ProfileScreen from "@/screens/ProfileScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
 import TubeScreen from "@/screens/TubeScreen";
+import PaymentScreen from "@/screens/PaymentsScreen";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
@@ -77,6 +78,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.TUBE} component={TubeScreen} />
         <Stack.Screen name={ROUTES.STACK.CHATS} component={ChatsScreen} />
         <Stack.Screen name={ROUTES.STACK.CABINET} component={CabinetScreen} />
+        <Stack.Screen name={ROUTES.STACK.PAYMENTS} component={PaymentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
