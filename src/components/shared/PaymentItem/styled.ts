@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     fontWeight: 400,
     fontSize: 13,
   },
-  
+
   price: {
     alignSelf: "center",
     fontSize: 15,
