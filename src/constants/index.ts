@@ -5,3 +5,4 @@ export * from "./footerTabs";
 export * from "./profileIcons";
 export * from "./chat";
 export * from "./childrenOptions"
+export * from "./medicalCardButtons"

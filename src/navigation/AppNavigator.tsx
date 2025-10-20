@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { COLORS } from "appStyles";
 
 import type { RootStackParamList } from "./types";
- 
+
 import { ROUTES } from "@/navigation/routes";
 import AuthScreen from "@/screens/AuthScreen";
 import CabinetScreen from "@/screens/Cabinet";

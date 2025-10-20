@@ -26,4 +26,19 @@ export const styles = StyleSheet.create({
     paddingTop: 16,
     paddingLeft: 36,
   },
+  subtitle: {
+    fontSize: 16,
+    fontWeight: 400,
+    textAlign: "left",
+    paddingTop: 16,
+    paddingLeft: 36,
+    alignSelf: "flex-start",
+  },
+  buttons: {
+    marginTop: 10,
+    flexDirection: "column",
+    rowGap: 10,
+    paddingBottom: 65,
+    justifyContent: "center",
+  },
 });
