@@ -1,84 +1,81 @@
 import { Text, View } from "react-native";
 import Avatar from "@assets/mockPhotos/Avatar.png";
 
-import DialogItem from "../shared/DialogItem";
+import DialogItem from "../../shared/DialogItem";
+import { styles } from "../ChatDoctors/styled";
 
-import { styles } from "./styled";
-
-const mockMessages = [
+const mockMessagesDoctor = [
   {
     id: 1,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
+    name: "Пациент Иванов А.С.",
+    text: "Здравствуйте, беспокоит боль в горле",
+    status: "Новое сообщение",
     time: "12:45",
     avatar: Avatar,
   },
   {
     id: 2,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Петрова М.К.",
+    text: "Спасибо за консультацию!",
+    status: "Прочитано",
+    time: "11:30",
     avatar: Avatar,
   },
   {
     id: 3,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Сидоров В.П.",
+    text: "Можно ли принимать это лекарство?",
+    status: "Новое сообщение",
+    time: "10:15",
     avatar: Avatar,
   },
-
   {
     id: 4,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Козлова Е.И.",
+    text: "Записался на прием на завтра",
+    status: "Прочитано",
+    time: "09:20",
     avatar: Avatar,
   },
   {
     id: 5,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Николаев Д.О.",
+    text: "Результаты анализов готовы?",
+    status: "Новое сообщение",
+    time: "08:45",
     avatar: Avatar,
   },
   {
     id: 6,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Волкова С.М.",
+    text: "Боль прошла, спасибо!",
+    status: "Прочитано",
+    time: "14:10",
     avatar: Avatar,
   },
-
   {
     id: 7,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Орлов П.Т.",
+    text: "Нужна повторная консультация",
+    status: "Новое сообщение",
+    time: "13:25",
     avatar: Avatar,
   },
   {
     id: 8,
-    name: "Доктор Боярова В.А.",
-    text: "Как проявляется боль?",
-    status: "Терапевт",
-    time: "12:45",
+    name: "Пациент Лебедева А.В.",
+    text: "Когда будет следующий осмотр?",
+    status: "Прочитано",
+    time: "15:40",
     avatar: Avatar,
   },
 ];
-const Chats = () => {
+const ChatsDoctor = () => {
   return (
     <View style={styles.content}>
       <Text style={styles.title}>Список чатов</Text>
       <View style={styles.wrapper}>
-        {mockMessages.map((item) => (
+        {mockMessagesDoctor.map((item) => (
           <DialogItem key={item.id} item={item} />
         ))}
       </View>
@@ -86,7 +83,7 @@ const Chats = () => {
   );
 };
 
-export default Chats;
+export default ChatsDoctor;
 
 /*
 

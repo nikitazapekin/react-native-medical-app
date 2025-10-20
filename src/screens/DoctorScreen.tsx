@@ -1,22 +1,25 @@
 import React from "react";
-import { View} from "react-native";
-
+import {  View} from "react-native";
 import { StatusBar } from 'expo-status-bar';
 
 import { styles } from "./styles";
 
 import FooterDoctor from "@/components/shared/FooterDoctor";
-
+import Header from '@/components/shared/Header';
 
 //type DoctorScreenNavigationProp = StackNavigationProp<RootStackParamList, typeof ROUTES.STACK.DOCTOR>;
-
-
 
 const DoctorScreen = () => {
   return (
     <View style={styles.container}>
 
-      <FooterDoctor></FooterDoctor>
+      <Header
+        title="Главная"
+        isAuthenticated={true} >
+
+      </Header>
+
+      <FooterDoctor/>
       <StatusBar style="auto" />
     </View>
   );

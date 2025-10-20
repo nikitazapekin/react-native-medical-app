@@ -5,10 +5,16 @@ import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 
 import FooterDoctor from "@/components/shared/FooterDoctor";
+import Header from "@/components/shared/Header";
 
 const DoctorAppointmentsScreen = () => {
   return (
     <View style={styles.container}>
+
+      <Header
+        title="Записи"
+        isAuthenticated={true} >
+      </Header>
 
       <FooterDoctor></FooterDoctor>
       <StatusBar style="auto" />
