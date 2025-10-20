@@ -6,12 +6,21 @@ import { styles } from "./styles";
 
 import FooterDoctor from "@/components/shared/FooterDoctor";
 import Header from "@/components/shared/Header";
+import TodayDoctorRecords from "@/components/DoctorRecords";
 
 const DoctorAppointmentsScreen = () => {
   return (
     <View style={styles.container}>
       <Header title="Записи" isAuthenticated={true} DoctorLogin={true}></Header>
 
+
+
+<View style={{
+        flex: 1, marginTop: 60,
+        padding: 16,
+      }}>
+       < TodayDoctorRecords/>
+      </View>
       <FooterDoctor></FooterDoctor>
       <StatusBar style="auto" />
     </View>

@@ -1,25 +1,34 @@
 import React from "react";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from 'expo-status-bar';
 
 import { styles } from "./styles";
 
 import DoctorCabinetInfo from "@/components/DoctorCabinetInfo";
 import FooterDoctor from "@/components/shared/FooterDoctor";
-import Header from "@/components/shared/Header";
+import Header from '@/components/shared/Header';
 import TodayDoctorRecords from "@/components/shared/Recorditem";
 
 //type DoctorScreenNavigationProp = StackNavigationProp<RootStackParamList, typeof ROUTES.STACK.DOCTOR>;
 
 const DoctorScreen = () => {
   return (
-    <View style={styles.container}>
-      <Header title="Профиль" isAuthenticated={true} DoctorLogin={true} />
 
-      <View style={{ flex: 1, marginTop: 60, padding: 16 }}>
+    <View style={styles.container}>
+
+      <Header title='Профиль' isAuthenticated={true} DoctorLogin={true} />
+
+      <View style={{
+        flex: 1, marginTop: 60,
+        padding: 16,
+      }}>
         <DoctorCabinetInfo />
-        <TodayDoctorRecords />
+                        <TodayDoctorRecords />
       </View>
+
+
+
+
 
       <FooterDoctor />
 
