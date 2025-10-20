@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, Image } from "react-native";
-import Med from "@assets/mockPhotos/Vector.png"; 
-
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import Med from "@assets/mockPhotos/Vector.png";
 
 interface Record {
   id: string;
@@ -10,7 +9,7 @@ interface Record {
   patient: string;
 }
 
-const Record: Record[] = [
+const Records: Record[] = [
   { id: "1", record: "Запись 1", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
   { id: "2", record: "Запись 2", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
   { id: "3", record: "Запись 3", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
@@ -18,7 +17,7 @@ const Record: Record[] = [
   { id: "5", record: "Запись 5", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
   { id: "6", record: "Запись 6", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
   { id: "7", record: "Запись 7", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-   { id: "8", record: "Запись 8", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
+  { id: "8", record: "Запись 8", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
   { id: "9", record: "Запись 9", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
   { id: "10", record: "Запись 10", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
 ];
@@ -27,11 +26,7 @@ const TodayDoctorRecords = () => {
   const renderAppointment = ({ item }: { item: Record }) => (
     <View style={styles.appointmentItem}>
       {}
-      <Image
-        source={Med} 
-        style={styles.icon}
-        resizeMode="contain"
-      />
+      <Image source={Med} style={styles.icon} resizeMode="contain" />
 
       {}
       <View style={{ flex: 1 }}>
@@ -48,15 +43,12 @@ const TodayDoctorRecords = () => {
     <View style={[styles.container, { flex: 1 }]}>
       <Text style={styles.title}>Записи на сегодня</Text>
       <FlatList
-  data={Record}
-  renderItem={renderAppointment}
-  keyExtractor={(item) => item.id}
-  showsVerticalScrollIndicator={false}
-  contentContainerStyle={{ paddingBottom: 100}}
-  
-   
-/>
-
+        data={Records}
+        renderItem={renderAppointment}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 100 }}
+      />
     </View>
   );
 };
@@ -65,11 +57,8 @@ export default TodayDoctorRecords;
 
 const styles = StyleSheet.create({
   container: {
-    
-    backgroundColor: "#E6F7FF", 
+    backgroundColor: "#E6F7FF",
     paddingHorizontal: 16,
-    
-    
   },
   title: {
     marginTop: 20,

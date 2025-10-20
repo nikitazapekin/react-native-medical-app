@@ -1,4 +1,3 @@
-
 import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -35,16 +34,9 @@ const DoctorEditForm = () => {
               key={item.id}
             />
           ))}
-
         </View>
         <View style={styles.btns}>
-
-          <CustomButton
-            text="Сохранить"
-            handler={handleDoctorCabinet}
-            backgroundColor="#1280b2"
-
-          />
+          <CustomButton text="Сохранить" handler={handleDoctorCabinet} backgroundColor="#1280b2" />
         </View>
       </View>
     </View>

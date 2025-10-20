@@ -1,5 +1,5 @@
 import React from "react";
-import {  View } from "react-native";
+import { View } from "react-native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import { styles } from "./styles";
@@ -15,20 +15,16 @@ type RootStackParamList = {
   [ROUTES.STACK.DOCTOR]: undefined;
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 interface HomeScreenProps {
   navigation: HomeScreenNavigationProp;
 }
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
-
   return (
     <View style={styles.container}>
-      <WelcomeComponent
-        navigation={navigation}
-      />
-
+      <WelcomeComponent navigation={navigation} />
     </View>
   );
 }

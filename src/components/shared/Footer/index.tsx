@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -17,8 +16,8 @@ const Footer = () => {
   useEffect(() => {
     const currentRouteName = route.name;
 
-    const activeTabItem = tabIcons.find(item =>
-      ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
+    const activeTabItem = tabIcons.find(
+      (item) => ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
     );
 
     if (activeTabItem) {
@@ -42,10 +41,7 @@ const Footer = () => {
           <View
             onTouchEnd={() => handleNavigate(item.stack, item.type)}
             key={item.id}
-            style={[
-              styles.wrapper,
-              item.type === activeTab && styles.activeWrapper
-            ]}
+            style={[styles.wrapper, item.type === activeTab && styles.activeWrapper]}
           >
             <Image source={item.icon} style={styles.image} resizeMode="contain" />
           </View>

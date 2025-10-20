@@ -10,13 +10,7 @@ import Header from "@/components/shared/Header";
 const DoctorAppointmentsScreen = () => {
   return (
     <View style={styles.container}>
-
-      <Header
-        title="Записи"
-        isAuthenticated={true}
-        DoctorLogin={true}>
-
-      </Header>
+      <Header title="Записи" isAuthenticated={true} DoctorLogin={true}></Header>
 
       <FooterDoctor></FooterDoctor>
       <StatusBar style="auto" />

@@ -4,7 +4,6 @@ import { styles } from "./styled";
 import type { FormInputProps } from "./types";
 
 const FormInput = ({ placeholder, handler, label, type }: FormInputProps) => {
-
   const isPasswordVisible = false;
   const isPasswordField = type === "password";
   const secureTextEntry = isPasswordField && !isPasswordVisible;
@@ -19,7 +18,6 @@ const FormInput = ({ placeholder, handler, label, type }: FormInputProps) => {
         secureTextEntry={secureTextEntry}
         autoCapitalize={isPasswordField ? "none" : "sentences"}
         autoCorrect={!isPasswordField}
-
       />
     </View>
   );

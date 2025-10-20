@@ -1,4 +1,4 @@
-import { Image, Pressable,Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
@@ -12,8 +12,7 @@ const ListItem = ({ item }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if(item.text.toLocaleLowerCase().includes("история")) {
-
+    if (item.text.toLocaleLowerCase().includes("история")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS);
     }
   };

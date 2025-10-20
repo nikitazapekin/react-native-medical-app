@@ -1,4 +1,4 @@
-import { Image,Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import CustomButton from "../shared/Button";

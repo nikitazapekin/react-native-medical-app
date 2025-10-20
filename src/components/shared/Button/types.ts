@@ -3,5 +3,5 @@ export interface CustomButtonProps {
   handler: () => void;
   backgroundColor?: string;
   disabled?: boolean;
-  color?: string
+  color?: string;
 }

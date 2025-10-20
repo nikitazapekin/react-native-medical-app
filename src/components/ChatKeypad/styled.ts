@@ -18,14 +18,14 @@ export const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 5,
     backgroundColor: COLORS.WHITE,
-    height: 35
+    height: 35,
   },
   input: {
-    width: 576- 68,
+    width: 576 - 68,
     paddingLeft: 15,
 
     fontSize: 14,
-    fontWeight: 400
+    fontWeight: 400,
   },
   smileyWrapper: {
     position: "absolute",
@@ -33,8 +33,8 @@ export const styles = StyleSheet.create({
     gap: 3,
     paddingRight: 15,
 
-    top:5,
-    flexDirection: "row"
+    top: 5,
+    flexDirection: "row",
   },
   smiley: {},
 });

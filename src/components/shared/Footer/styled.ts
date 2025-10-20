@@ -37,7 +37,6 @@ export const styles = StyleSheet.create({
   image: {
     width: 44,
     height: 44,
-
   },
 
   activeWrapper: {
@@ -50,6 +49,5 @@ export const styles = StyleSheet.create({
     elevation: 4,
     justifyContent: "center",
     alignContent: "center",
-
   },
 });

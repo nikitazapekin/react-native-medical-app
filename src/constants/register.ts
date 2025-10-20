@@ -5,4 +5,3 @@ export const REGISTER_CONSTANTS = [
   { id: 4, label: "Почта", type: "email", placeholder: "Почта" },
   { id: 5, label: "Пароль", type: "password", placeholder: "Пароль" },
 ];
- 

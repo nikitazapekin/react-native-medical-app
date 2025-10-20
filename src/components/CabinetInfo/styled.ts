@@ -11,26 +11,26 @@ export const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 36,
     width: "100%",
-    borderRadius: 13
+    borderRadius: 13,
   },
 
   preview: {
     justifyContent: "space-between",
     flexDirection: "row",
 
-    alignItems: "center"
+    alignItems: "center",
   },
 
   main: {
     flex: 1,
     flexDirection: "row",
-    gap: 7
+    gap: 7,
   },
 
   info: {
     flex: 1,
     rowGap: 4,
-    flexDirection: "column"
+    flexDirection: "column",
   },
 
   image: {
@@ -41,40 +41,40 @@ export const styles = StyleSheet.create({
   title: {
     fontWeight: 500,
     fontSize: 16,
-    color: COLORS.BLACK
+    color: COLORS.BLACK,
   },
 
   registration: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
 
   registrationRegular: {
     fontWeight: 300,
     fontSize: 12,
-    color: COLORS.BLACK
+    color: COLORS.BLACK,
   },
 
   registrationBold: {
     fontWeight: 500,
     fontSize: 12,
-    color: COLORS.BLACK
+    color: COLORS.BLACK,
   },
 
   location: {
     fontWeight: 300,
     fontSize: 12,
-    color: COLORS.BLACK
+    color: COLORS.BLACK,
   },
 
   tel: {
     fontWeight: 300,
     fontSize: 12,
-    color: COLORS.BLACK
+    color: COLORS.BLACK,
   },
 
   dots: {
     flexDirection: "row",
-    gap: 6
+    gap: 6,
   },
 
   dot: {
@@ -82,11 +82,11 @@ export const styles = StyleSheet.create({
     height: 6,
     borderRadius: 20,
     backgroundColor: COLORS.BLACK,
-  } ,
+  },
   citate: {
     fontWeight: 300,
     fontSize: 12,
     color: COLORS.BLACK,
     marginTop: 11,
-  }
+  },
 });

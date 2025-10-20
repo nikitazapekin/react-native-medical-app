@@ -1,4 +1,4 @@
-import {   View } from "react-native";
+import { View } from "react-native";
 
 import MessageItem from "../shared/MessageItem";
 
@@ -8,7 +8,6 @@ import type { MessagesTypes } from "./types";
 const Chat = ({ messages }: MessagesTypes) => {
   return (
     <View style={styles.wrapper}>
-
       {messages.map((item) => (
         <MessageItem item={item} />
       ))}

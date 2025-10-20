@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 7,
   },
   myCard: {
-    backgroundColor:COLORS.GREEN_LIGHT,
+    backgroundColor: COLORS.GREEN_LIGHT,
   },
   main: {
     flexDirection: "row",
@@ -57,5 +57,5 @@ export const styles = StyleSheet.create({
     color: COLORS.GRAY_TEXT,
     alignSelf: "flex-start",
     marginTop: 4,
-  }
+  },
 });

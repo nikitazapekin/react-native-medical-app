@@ -1,4 +1,4 @@
-import { Image,Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import MockImage from "@assets/profile/doctor.jpg";
 import RatingStar from "@assets/profile/star.png";
 
@@ -28,16 +28,14 @@ const DoctorCabinetInfo = () => {
           <View style={styles.dots}>
             <View style={styles.dot} />
             <View style={styles.dot} />
-            <View style={styles.dot}/>
+            <View style={styles.dot} />
           </View>
         </View>
       </View>
-      <Text
-        style={styles.citate}
-      >Клинические идиоты должны держаться группами! По одному вы пропадете.</Text>
-
+      <Text style={styles.citate}>
+        Клинические идиоты должны держаться группами! По одному вы пропадете.
+      </Text>
     </View>
-
   );
 };
 
