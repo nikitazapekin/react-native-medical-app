@@ -1,7 +1,7 @@
-import { Text, View, Image } from "react-native";
+import { Image,Text, View } from "react-native";
 
 import { styles } from "./styled";
-import { ChildrenItemProps } from "./types";
+import type { ChildrenItemProps } from "./types";
 
 const ChildrenItem = ({ item }: ChildrenItemProps) => {
   return (

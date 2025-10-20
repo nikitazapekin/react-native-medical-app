@@ -1,4 +1,5 @@
 import type { ImageSourcePropType } from "react-native";
+
 export interface ChildrenItemProps {
   item: {
     id: string;
