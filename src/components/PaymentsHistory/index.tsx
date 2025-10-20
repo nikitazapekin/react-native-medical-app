@@ -23,7 +23,7 @@ const paymentItems = [
   { id: 9, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
   { id: 10, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
   { id: 11, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
- 
+
 ];
 const PaymentsHistory = () => {
   return (
