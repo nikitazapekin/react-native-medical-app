@@ -10,7 +10,11 @@ export const ROUTES = {
     MED: "Med",
     TUBE: "Tube",
     CABINET: "Cabinet",
-    PAYMENTS: "Payments"
+    PAYMENTS: "Payments",
+    DOCTOR: "Doctor",
+    DOCTOR_PROFILE: "DoctorProfile",
+    DOCTOR_CHAT: "DoctorChat",
+    DOCTOR_APPOINTMENTS: "DoctorAppointments"
   },
   TABS: {
     HOME: "HomeTab",

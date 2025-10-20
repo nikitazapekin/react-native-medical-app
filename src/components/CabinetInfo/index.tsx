@@ -15,7 +15,7 @@ const CabinetInfo = () => {
 
             <View style={styles.registration}>
               <Text style={styles.registrationRegular}>Зарегистрирован(а):</Text>
-              <Text style={styles.registrationBold}>28 дней</Text>
+              <Text style={styles.registrationBold}>29 дней</Text>
             </View>
 
             <Text style={styles.location}>Беларусь, Минск</Text>

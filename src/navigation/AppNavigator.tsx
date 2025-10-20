@@ -13,6 +13,10 @@ import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
+import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
+import DoctorChatScreen from "@/screens/DoctorChatScreen";
+import DoctorProfileScreen from "@/screens/DoctorProfileScreen";
+import DoctorScreen from "@/screens/DoctorScreen";
 import HomeScreen from "@/screens/HomeScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
@@ -79,6 +83,10 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHATS} component={ChatsScreen} />
         <Stack.Screen name={ROUTES.STACK.CABINET} component={CabinetScreen} />
         <Stack.Screen name={ROUTES.STACK.PAYMENTS} component={PaymentScreen} />
+        <Stack.Screen name={ROUTES.STACK.DOCTOR} component={DoctorScreen} />
+        <Stack.Screen name={ROUTES.STACK.DOCTOR_PROFILE} component={DoctorProfileScreen} />
+        <Stack.Screen name={ROUTES.STACK.DOCTOR_CHAT} component={DoctorChatScreen} />
+        <Stack.Screen name={ROUTES.STACK.DOCTOR_APPOINTMENTS} component={DoctorAppointmentsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

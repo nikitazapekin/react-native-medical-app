@@ -11,7 +11,8 @@ type RootStackParamList = {
   Home: undefined;
   [ROUTES.STACK.AUTH]: undefined;
   [ROUTES.STACK.MAIN]: undefined;
-    [ROUTES.STACK.REGISTER]: undefined;
+  [ROUTES.STACK.REGISTER]: undefined;
+  [ROUTES.STACK.DOCTOR]: undefined;
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
