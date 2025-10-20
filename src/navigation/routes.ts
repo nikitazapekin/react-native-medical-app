@@ -16,7 +16,9 @@ export const ROUTES = {
     DOCTOR_CABINET_EDIT: "DoctorCabinetEdit",
     DOCTOR_CHAT: "DoctorChat",
     DOCTOR_APPOINTMENTS: "DoctorAppointments",
-    CHILDRENS: "Childrens"
+    CHILDRENS: "Childrens",
+    CHILDREN: "Children",
+    SPISOKSOVETOV: "SpisokSovetov"
   },
   TABS: {
     HOME: "HomeTab",

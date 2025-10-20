@@ -1,3 +1,4 @@
+
 import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,6 +20,11 @@ const ListItem = ({ item }: ListItemProps) => {
     if(item.text.toLocaleLowerCase().includes("дети")) {
 
       navigation.navigate(ROUTES.STACK.CHILDRENS);
+    }
+
+    if(item.text.toLocaleLowerCase().includes("советов")) {
+
+      navigation.navigate(ROUTES.STACK.SPISOKSOVETOV);
     }
 
   };
