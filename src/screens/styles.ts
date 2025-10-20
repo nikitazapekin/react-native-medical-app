@@ -11,6 +11,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginTop: 60,
     marginBottom: 80,
+    
+  },
+  doctorContent: {
+    flex: 1,
+    marginTop: 60,
+    marginBottom: 10,
   },
   contentContainer: {
     padding: 16,

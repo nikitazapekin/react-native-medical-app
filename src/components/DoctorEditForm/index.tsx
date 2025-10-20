@@ -1,19 +1,15 @@
 
 import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 
 import CustomButton from "../shared/Button";
 import FormInput from "../shared/FormInput";
 
 import { styles } from "./styled";
 
-
-import { ROUTES } from "@/navigation/routes";
-import { FormNavigationProp } from "@/navigation/types";
 import { DOCTOR_EDIT_CONSTANTS } from "@/constants/doctorEdit";
-
-
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const DoctorEditForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
@@ -42,12 +38,12 @@ const DoctorEditForm = () => {
 
         </View>
         <View style={styles.btns}>
-          
+
           <CustomButton
             text="Сохранить"
             handler={handleDoctorCabinet}
             backgroundColor="#1280b2"
-            
+
           />
         </View>
       </View>

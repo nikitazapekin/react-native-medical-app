@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 30,
     borderBottomColor: COLORS.GRAY_BORDER,
     borderBottomWidth: 1,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   fields: {
     width: "100%",
