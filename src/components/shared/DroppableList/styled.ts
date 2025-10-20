@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
     zIndex: 10,
     flexDirection: "row",
     alignItems: "center",
-
   },
   buttonText: {
     fontSize: 16,
@@ -44,7 +43,7 @@ export const styles = StyleSheet.create({
     marginTop: -10,
     zIndex: 9,
     elevation: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

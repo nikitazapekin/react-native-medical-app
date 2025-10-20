@@ -11,13 +11,7 @@ import Header from "@/components/shared/Header";
 const DOCTOR_CHAT = () => {
   return (
     <View style={styles.container}>
-
-      <Header
-        title="Чаты"
-        isAuthenticated={true}
-        DoctorLogin={true}>
-
-      </Header>
+      <Header title="Чаты" isAuthenticated={true} DoctorLogin={true}></Header>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <ChatsDoctor />

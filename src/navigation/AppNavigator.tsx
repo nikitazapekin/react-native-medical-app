@@ -87,7 +87,10 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.DOCTOR} component={DoctorScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CABINET} component={DoctorCabinetScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CHAT} component={DoctorChatScreen} />
-        <Stack.Screen name={ROUTES.STACK.DOCTOR_APPOINTMENTS} component={DoctorAppointmentsScreen} />
+        <Stack.Screen
+          name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
+          component={DoctorAppointmentsScreen}
+        />
 
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CABINET_EDIT} component={DoctorEditCabinet} />
       </Stack.Navigator>

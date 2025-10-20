@@ -1,4 +1,3 @@
-
 import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
@@ -43,16 +42,10 @@ const RegisterForm = () => {
               key={item.id}
             />
           ))}
-
         </View>
         <View style={styles.btns}>
           <CustomButton text="Зарегистрироваться" handler={() => {}} backgroundColor="#1280b2" />
-          <CustomButton
-            text="Войти"
-            handler={handleLogin}
-            backgroundColor="#D1D5DB"
-            color="#000"
-          />
+          <CustomButton text="Войти" handler={handleLogin} backgroundColor="#D1D5DB" color="#000" />
         </View>
       </View>
     </View>

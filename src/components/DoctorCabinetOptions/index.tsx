@@ -1,4 +1,4 @@
-import { Text,View } from "react-native";
+import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import CustomButton from "../shared/Button";
@@ -9,7 +9,6 @@ import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const DoctorCabinetOptions = () => {
-
   const navigation = useNavigation<FormNavigationProp>();
   const handleDoctorScreen = () => {
     navigation.navigate(ROUTES.STACK.DOCTOR_CABINET_EDIT);
@@ -17,7 +16,6 @@ const DoctorCabinetOptions = () => {
 
   return (
     <View style={styles.mainWrapper}>
-
       <View style={styles.wrapper}>
         <Text style={styles.title}>Информация о враче</Text>
 
@@ -41,7 +39,8 @@ const DoctorCabinetOptions = () => {
             <View style={styles.infoColumn}>
               <Text style={styles.label}>Достижения:</Text>
               <Text style={styles.valueMultiline}>
-            Автор 10 научных публикаций в области малоинвазивной хирургии. Защитил диссертацию в области хирургии.
+                Автор 10 научных публикаций в области малоинвазивной хирургии. Защитил диссертацию в
+                области хирургии.
               </Text>
             </View>
           </View>
@@ -50,19 +49,20 @@ const DoctorCabinetOptions = () => {
             <View style={styles.infoColumn}>
               <Text style={styles.label}>Повышение квалификации:</Text>
               <Text style={styles.valueMultiline}>
-            Повышение квалификации по лапароскопической хирургии, 2020
+                Повышение квалификации по лапароскопической хирургии, 2020
               </Text>
             </View>
           </View>
         </View>
-
       </View>
 
       <View style={styles.gap} />
-      <CustomButton handler={handleDoctorScreen} text="Редактировать профиль" backgroundColor="#1280b2" />
-
+      <CustomButton
+        handler={handleDoctorScreen}
+        text="Редактировать профиль"
+        backgroundColor="#1280b2"
+      />
     </View>
-
   );
 };
 

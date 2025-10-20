@@ -1,4 +1,4 @@
-import { Image,Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import MockImage from "@assets/mockPhotos/Avatar.png";
 
 import { styles } from "./styled";
@@ -26,13 +26,13 @@ const CabinetInfo = () => {
           <View style={styles.dots}>
             <View style={styles.dot} />
             <View style={styles.dot} />
-            <View style={styles.dot}/>
+            <View style={styles.dot} />
           </View>
         </View>
       </View>
-      <Text
-        style={styles.citate}
-      >Считаю, что залог хорошего здоровья - правильный уход и дисциплина</Text>
+      <Text style={styles.citate}>
+        Считаю, что залог хорошего здоровья - правильный уход и дисциплина
+      </Text>
     </View>
   );
 };

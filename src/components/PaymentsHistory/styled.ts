@@ -18,6 +18,5 @@ export const styles = StyleSheet.create({
     width: 376,
     flexDirection: "column",
     gap: 10,
-
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, Image,Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import Arrow from "@assets/dropdown/arrow.png";
 
 import { styles } from "./styled";
@@ -22,20 +22,9 @@ const DroppableList = ({ sortOptions }: SortOptions) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.dropdownButton}
-        onPress={() => setIsVisible(!isVisible)}
-      >
-        <Text style={styles.buttonText}>
-          {selectedValue.label || "Select an option"}
-        </Text>
-        <Image
-          source={Arrow}
-          style={[
-            styles.arrow,
-            isVisible && styles.arrowRotated
-          ]}
-        />
+      <TouchableOpacity style={styles.dropdownButton} onPress={() => setIsVisible(!isVisible)}>
+        <Text style={styles.buttonText}>{selectedValue.label || "Select an option"}</Text>
+        <Image source={Arrow} style={[styles.arrow, isVisible && styles.arrowRotated]} />
       </TouchableOpacity>
 
       {isVisible && (
@@ -45,10 +34,7 @@ const DroppableList = ({ sortOptions }: SortOptions) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity
-                style={[
-                  styles.listItem,
-                  selectedValue.id === item.id && styles.selectedItem
-                ]}
+                style={[styles.listItem, selectedValue.id === item.id && styles.selectedItem]}
                 onPress={() => handleSelect(item)}
               >
                 <Text style={styles.itemText}>{item.label}</Text>

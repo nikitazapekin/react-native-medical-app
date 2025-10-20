@@ -15,13 +15,13 @@ export const styles = StyleSheet.create({
   slide: {
     width: CARD_WIDTH,
     height: 180,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 12,
     padding: 16,
     marginHorizontal: CARD_MARGIN,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -32,19 +32,19 @@ export const styles = StyleSheet.create({
   },
   slideTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
     color: COLORS.BLACK,
   },
   slideContent: {
     fontSize: 14,
     color: "orange",
-    textAlign: 'center',
+    textAlign: "center",
   },
   pagination: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 10,
   },
   dot: {

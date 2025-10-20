@@ -1,8 +1,8 @@
-import { useRef,useState } from "react";
-import type { NativeScrollEvent, NativeSyntheticEvent} from "react-native";
-import { Dimensions, FlatList,StyleSheet,Text, View } from "react-native";
+import { useRef, useState } from "react";
+import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
+import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 interface SwiperItem {
   id: string;
@@ -21,23 +21,23 @@ const CustomSwiper = () => {
 
   const swiperData: SwiperItem[] = [
     {
-      id: '1',
-      title: 'Основная информация',
-      content: 'Здесь будет основная информация пользователя',
-      icon: '📋'
+      id: "1",
+      title: "Основная информация",
+      content: "Здесь будет основная информация пользователя",
+      icon: "📋",
     },
     {
-      id: '2',
-      title: 'Достижения',
-      content: 'Ваши достижения и награды',
-      icon: '🏆'
+      id: "2",
+      title: "Достижения",
+      content: "Ваши достижения и награды",
+      icon: "🏆",
     },
     {
-      id: '3',
-      title: 'Статистика',
-      content: 'Статистика активности и прогресс',
-      icon: '📊'
-    }
+      id: "3",
+      title: "Статистика",
+      content: "Статистика активности и прогресс",
+      icon: "📊",
+    },
   ];
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -75,10 +75,7 @@ const CustomSwiper = () => {
       {swiperData.map((_, index) => (
         <View
           key={index}
-          style={[
-            styles.dot,
-            index === activeIndex ? styles.activeDot : styles.inactiveDot,
-          ]}
+          style={[styles.dot, index === activeIndex ? styles.activeDot : styles.inactiveDot]}
           onTouchEnd={() => scrollToIndex(index)}
         />
       ))}
@@ -91,11 +88,9 @@ const CustomSwiper = () => {
         ref={flatListRef}
         data={swiperData}
         renderItem={({ item }) => (
-          <View style={{ marginHorizontal: CARD_MARGIN }}>
-            {renderCard(item)}
-          </View>
+          <View style={{ marginHorizontal: CARD_MARGIN }}>{renderCard(item)}</View>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
@@ -106,7 +101,6 @@ const CustomSwiper = () => {
         snapToAlignment="center"
         decelerationRate="fast"
         contentContainerStyle={styles.flatListContent}
-
         disableIntervalMomentum={true}
         alwaysBounceHorizontal={false}
       />
@@ -128,17 +122,16 @@ const styles = StyleSheet.create({
     height: 220,
   },
   flatListContent: {
-
     paddingHorizontal: 0,
   },
   card: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 12,
     padding: 16,
     height: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -153,20 +146,20 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
-    color: '#000',
-    textAlign: 'center',
+    color: "#000",
+    textAlign: "center",
   },
   cardContent: {
     fontSize: 14,
-    color: 'orange',
-    textAlign: 'center',
+    color: "orange",
+    textAlign: "center",
   },
   pagination: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 16,
   },
   dot: {
@@ -176,20 +169,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
     width: 12,
   },
   inactiveDot: {
-    backgroundColor: '#E2E8F0',
+    backgroundColor: "#E2E8F0",
   },
   positionIndicator: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 8,
   },
   positionText: {
     fontSize: 14,
-    color: '#718096',
-    fontWeight: '500',
+    color: "#718096",
+    fontWeight: "500",
   },
 });
 

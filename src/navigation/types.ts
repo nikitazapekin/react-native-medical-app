@@ -15,11 +15,10 @@ export type RootStackParamList = {
   [ROUTES.STACK.TUBE]: undefined;
   [ROUTES.STACK.CABINET]: undefined;
   [ROUTES.STACK.PAYMENTS]: undefined;
-  [ROUTES.STACK.DOCTOR]: undefined;//главная страница доктора
-  [ROUTES.STACK.DOCTOR_CHAT]: undefined;//страница чата доктора
-  [ROUTES.STACK.DOCTOR_CABINET]: undefined;//страница профиля доктора
-  [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined;//страница записей доктора
-   [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined;//страница htlf htlfr редактирования инфы доктора
-
+  [ROUTES.STACK.DOCTOR]: undefined; //главная страница доктора
+  [ROUTES.STACK.DOCTOR_CHAT]: undefined; //страница чата доктора
+  [ROUTES.STACK.DOCTOR_CABINET]: undefined; //страница профиля доктора
+  [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined; //страница записей доктора
+  [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; //страница htlf htlfr редактирования инфы доктора
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;

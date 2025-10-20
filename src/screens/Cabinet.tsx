@@ -1,30 +1,31 @@
-import React from 'react';
-import {  View } from "react-native";
-import {   ScrollView,  } from "react-native";
+import React from "react";
+import { View } from "react-native";
+import { ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
 import CabinetInfo from "@/components/CabinetInfo";
-import CabinetOptions from '@/components/CabinetOptions';
-import Footer from '@/components/shared/Footer';
-import Header from '@/components/shared/Header';
+import CabinetOptions from "@/components/CabinetOptions";
+import Footer from "@/components/shared/Footer";
+import Header from "@/components/shared/Header";
 
 const CabinetScreen = () => {
-  return ( <>
-    <View style={styles.container}>
+  return (
+    <>
+      <View style={styles.container}>
+        <Header title="Чат" isAuthenticated={true} />
+        <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+          <CabinetInfo />
+          <CabinetOptions />
+        </ScrollView>
 
-      <Header title='Чат' isAuthenticated={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <CabinetInfo />
-        <CabinetOptions />
-      </ScrollView>
+        <Footer />
 
-      <Footer />
-
-      <StatusBar style="auto" />
-    </View>
-  </> );
+        <StatusBar style="auto" />
+      </View>
+    </>
+  );
 };
 
 export default CabinetScreen;

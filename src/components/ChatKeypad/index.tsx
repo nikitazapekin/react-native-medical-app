@@ -1,4 +1,4 @@
-import { Image,TextInput, View } from "react-native";
+import { Image, TextInput, View } from "react-native";
 
 import { styles } from "./styled";
 
@@ -15,9 +15,7 @@ const ChatKeypad = () => {
         />
         <View style={styles.smileyWrapper}>
           {chatIcons.map((item) => (
-            <Image
-              key={item.id}
-              source={item.icon} alt={item.alt} />
+            <Image key={item.id} source={item.icon} alt={item.alt} />
           ))}
         </View>
       </View>

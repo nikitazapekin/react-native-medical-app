@@ -6,4 +6,3 @@ export const DOCTOR_EDIT_CONSTANTS = [
   { id: 5, label: "Образование", type: "Education", placeholder: "Образование" },
   { id: 6, label: "Квалификация", type: "Qualification", placeholder: "Квалификация" },
 ];
- 

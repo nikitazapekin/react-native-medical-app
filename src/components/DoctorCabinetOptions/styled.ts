@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
-  mainWrapper:{
+  mainWrapper: {
     alignItems: "center",
   },
   wrapper: {
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   title: {
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 18,
     color: COLORS.BLACK,
     textAlign: "center",
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
   },
   label: {
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 14,
     color: COLORS.BLACK,
     marginBottom: 4,

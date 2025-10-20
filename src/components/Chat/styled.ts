@@ -4,8 +4,6 @@ export const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
     flexDirection: "column",
-    gap: 10
-
+    gap: 10,
   },
-
 });
