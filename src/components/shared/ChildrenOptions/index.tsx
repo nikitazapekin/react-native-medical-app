@@ -9,7 +9,7 @@ import { profileOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
-const ListItem = ({ item }: ListItemProps) => {
+const ChildrenItem = ({ item }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
@@ -37,20 +37,20 @@ const ListItem = ({ item }: ListItemProps) => {
   );
 };
 
-const CabinetOptions = () => {
+const ChildrenOptions = () => {
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.text}>Категории</Text>
+
       <View style={styles.list}>
         {profileOptions.map((item) => (
-          <ListItem key={item.id} item={item} />
+          <ChildrenItem key={item.id} item={item} />
         ))}
       </View>
     </View>
   );
 };
 
-export default CabinetOptions;
+export default ChildrenOptions;
 
 /*
 import { Pressable,Text, View } from "react-native";

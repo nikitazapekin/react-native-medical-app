@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import CustomButton from "@components/shared/Button";
 import { useNavigation } from "@react-navigation/native";
 
-import CustomButton from "../shared/Button";
 import FormInput from "../shared/FormInput";
 
 import { styles } from "./styled";

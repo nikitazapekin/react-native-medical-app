@@ -6,6 +6,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.TURQUOISE_LIGHT,
   },
+  containerWhite: {
+    flex: 1,
+    backgroundColor: COLORS.WHITE,
+  },
 
   content: {
     flex: 1,

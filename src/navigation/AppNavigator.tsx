@@ -13,6 +13,7 @@ import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
+import ChildrenScreen from "@/screens/ChildrenScreen";
 import ChildrensScreen from "@/screens/ChildrensScreen";
 import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
 import DoctorCabinetScreen from "@/screens/DoctorCabinetScreen";
@@ -25,6 +26,7 @@ import PaymentScreen from "@/screens/PaymentsScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
+import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
 
 type TabParamList = {
@@ -89,12 +91,14 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CABINET} component={DoctorCabinetScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CHAT} component={DoctorChatScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}
         />
 
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CABINET_EDIT} component={DoctorEditCabinet} />
+        <Stack.Screen name={ROUTES.STACK.SPISOKSOVETOV} component={SpisokSovetov} />
       </Stack.Navigator>
     </NavigationContainer>
   );

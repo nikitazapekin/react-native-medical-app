@@ -1,11 +1,16 @@
-import { Image,Pressable,Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 import type { ChildrenItemProps } from "./types";
 
-const ChildrenItem = ({ item }: ChildrenItemProps) => {
-  const handleNavigate = ()=> {
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
+const ChildrenItem = ({ item }: ChildrenItemProps) => {
+  const navigation = useNavigation<FormNavigationProp>();
+  const handleNavigate = () => {
+    navigation.navigate(ROUTES.STACK.CHILDREN);
   };
 
   return (
@@ -21,3 +26,31 @@ const ChildrenItem = ({ item }: ChildrenItemProps) => {
 };
 
 export default ChildrenItem;
+
+/*
+
+import { Image, Pressable, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { styles } from "./styled";
+import type { ListItemProps } from "./types";
+
+import { profileOptions } from "@/constants";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
+
+  const navigation = useNavigation<FormNavigationProp>();
+
+  const handleNavigate = () => {
+    if (item.text.toLocaleLowerCase().includes("история")) {
+      navigation.navigate(ROUTES.STACK.PAYMENTS);
+    }
+
+    if(item.text.toLocaleLowerCase().includes("дети")) {
+
+      navigation.navigate(ROUTES.STACK.CHILDRENS);
+    }
+
+  };
+
+  */
