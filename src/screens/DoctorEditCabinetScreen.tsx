@@ -12,12 +12,12 @@ const DoctorEditCabinet = () => {
     <View style={styles.container}>
 
       <Header
-        title="Профиль"
+        title="Редактировать профиль"
         isAuthenticated={true}
         DoctorLogin={true}>
 
       </Header>
-      <DoctorEditForm/>
+  <DoctorEditForm/>
       
 
       <FooterDoctor></FooterDoctor>

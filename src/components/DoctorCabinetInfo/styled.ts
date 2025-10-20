@@ -7,11 +7,14 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     marginTop: 10,
     paddingTop: 10,
-    paddingLeft: 10,
+    paddingLeft: 15,
     paddingRight: 10,
     paddingBottom: 36,
     width: "100%",
-    borderRadius: 13
+    borderRadius: 13,
+    alignContent: "center",
+
+    
   },
 
   icon:{

@@ -21,6 +21,5 @@ export type RootStackParamList = {
   [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined;//страница записей доктора
    [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined;//страница htlf htlfr редактирования инфы доктора
 
-
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;
