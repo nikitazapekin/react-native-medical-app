@@ -15,6 +15,11 @@ const ListItem = ({ item }: ListItemProps) => {
     if (item.text.toLocaleLowerCase().includes("история")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS);
     }
+      if(item.text.toLocaleLowerCase().includes("дети")) {
+
+      navigation.navigate(ROUTES.STACK.CHILDRENS);
+    }
+
   };
 
   return (
