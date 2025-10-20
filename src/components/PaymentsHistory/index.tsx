@@ -1,9 +1,9 @@
-import { View, Text } from "react-native";
+import { Text,View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
+import PaymentItem from "../shared/PaymentItem";
 
 import { styles } from "./styled";
-import PaymentItem from "../shared/PaymentItem";
 
 const sortOptions = [
   { id: "1", label: "По рейтингу", type: "rate" },

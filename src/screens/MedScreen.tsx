@@ -14,6 +14,7 @@ export default function MedScreen( ) {
       <Header
         title="Лекарства"
         isAuthenticated={true}
+        DoctorLogin={false}
       />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Med</Text>

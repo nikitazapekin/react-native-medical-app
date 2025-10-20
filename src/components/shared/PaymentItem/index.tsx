@@ -1,6 +1,8 @@
 import { Text, View } from "react-native";
+
 import { styles } from "./styled";
-import { PriceItem } from "./types";
+import type { PriceItem } from "./types";
+
 const PaymentItem = ({ item }: PriceItem) => {
   return (
     <View style={styles.wrapper}>

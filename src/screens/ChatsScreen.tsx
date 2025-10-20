@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-import Chats from '@/components/Chats';
+import Chats from '@/components/Chats/ChatDoctors';
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
 

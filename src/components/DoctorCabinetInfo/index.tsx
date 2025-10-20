@@ -1,9 +1,10 @@
 import { Image,Text, View } from "react-native";
-import MockImage from "@assets/mockPhotos/Avatar.png";
+import MockImage from "@assets/profile/doctor.jpg";
+import RatingStar from "@assets/profile/star.png";
 
 import { styles } from "./styled";
 
-const CabinetInfo = () => {
+const DoctorCabinetInfo = () => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.preview}>
@@ -11,14 +12,15 @@ const CabinetInfo = () => {
           <Image style={styles.image} source={MockImage} alt="Image" resizeMode="contain" />
 
           <View style={styles.info}>
-            <Text style={styles.title}>Ирина Власова</Text>
+            <Text style={styles.title}>Андрей Быков</Text>
 
             <View style={styles.registration}>
-              <Text style={styles.registrationRegular}>Зарегистрирован(а):</Text>
-              <Text style={styles.registrationBold}>29 дней</Text>
+              <Text style={styles.registrationRegular}>Рейтинг:</Text>
+              <Text style={styles.registrationBold}> 5.00</Text>
+              <Image style={styles.icon} source={RatingStar} alt="Image" resizeMode="contain" />
             </View>
 
-            <Text style={styles.location}>Беларусь, Минск</Text>
+            <Text style={styles.location}>Заведующий отделением</Text>
 
             <Text style={styles.tel}>+375297542229</Text>
           </View>
@@ -32,9 +34,11 @@ const CabinetInfo = () => {
       </View>
       <Text
         style={styles.citate}
-      >Считаю, что залог хорошего здоровья - правильный уход и дисциплина</Text>
+      >Клинические идиоты должны держаться группами! По одному вы пропадете.</Text>
+
     </View>
+
   );
 };
 
-export default CabinetInfo;
+export default DoctorCabinetInfo;
