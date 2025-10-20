@@ -1,10 +1,11 @@
 import { Text, View } from "react-native";
 
 import Calendar from "../shared/Calendar";
+import MedicalCardButton from "../shared/MedicalCardButton";
 
 import { styles } from "./styled";
+
 import { medicalCardButtons } from "@/constants";
-import MedicalCardButton from "../shared/MedicalCardButton";
 
 const MedicalCardComponent = () => {
   return (
