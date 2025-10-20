@@ -37,11 +37,10 @@ const ChildrensList = () => {
             item={item}
           />
         ))}
-       
+
       </View>
     </View>
   );
 };
 
 export default ChildrensList;
- 

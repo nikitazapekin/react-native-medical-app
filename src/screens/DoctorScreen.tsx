@@ -23,12 +23,8 @@ const DoctorScreen = () => {
         padding: 16,
       }}>
         <DoctorCabinetInfo />
-                        <TodayDoctorRecords />
+        <TodayDoctorRecords />
       </View>
-
-
-
-
 
       <FooterDoctor />
 

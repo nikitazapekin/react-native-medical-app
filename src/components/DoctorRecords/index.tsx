@@ -1,5 +1,5 @@
 import React from "react";
-import { SectionList, StyleSheet, Text, View, Image } from "react-native";
+import { Image,SectionList, StyleSheet, Text, View } from "react-native";
 import Med from "@assets/mockPhotos/Vector.png";
 
 interface Record {
@@ -35,7 +35,7 @@ const sections: Section[] = [
     data: [
       { id: "6", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
       { id: "7", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
-    { id: "8", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
+      { id: "8", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
     ],
   },
   {
@@ -43,7 +43,7 @@ const sections: Section[] = [
     data: [
       { id: "9", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
       { id: "10", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
-    { id: "11", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
+      { id: "11", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
     ],
   },
 ];
@@ -62,14 +62,13 @@ const TodayDoctorRecords = () => {
 
   const renderSectionHeader = ({ section }: { section: Section }) => (
     <View>
-<View style={styles.sectionHeader}>
-      <Text style={styles.sectionHeaderText}>{section.title}</Text>
-      
-      
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionHeaderText}>{section.title}</Text>
+
+      </View>
+
     </View>
-    
-    </View>
-    
+
   );
 
   return (
