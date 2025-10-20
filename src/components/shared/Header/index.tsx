@@ -1,4 +1,4 @@
-import { Pressable,Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
@@ -8,7 +8,7 @@ import type { FormNavigationProp } from "@/navigation/types";
 
 interface HeaderProps {
   title: string;
-  isAuthenticated?: boolean
+  isAuthenticated?: boolean;
 }
 
 const Header = ({ title, isAuthenticated }: HeaderProps) => {
@@ -20,12 +20,7 @@ const Header = ({ title, isAuthenticated }: HeaderProps) => {
 
   return (
     <View style={styles.header}>
-      {isAuthenticated && (
-        <Pressable
-          style={styles.circle}
-          onPress={handleNavigate}
-        />
-      )}
+      {isAuthenticated && <Pressable style={styles.circle} onPress={handleNavigate} />}
       <Text style={styles.headerTitle}>{title}</Text>
     </View>
   );

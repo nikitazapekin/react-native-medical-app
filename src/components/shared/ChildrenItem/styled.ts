@@ -11,28 +11,29 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     borderRadius: 8,
     boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
-
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     flexDirection: "row",
+    gap: 15,
+    alignItems: "center"
   },
 
   content: {
     flexDirection: "column",
-    gap: 10,
+    gap: 5,
   },
   title: {
     fontSize: 16,
     fontWeight: 600,
     color: COLORS.BLACK,
   },
-  description: {
+  age: {
     fontWeight: 400,
-    fontSize: 13,
+    fontSize: 14,
+    color: COLORS.GRAY_TEXT
   },
-
-  price: {
-    alignSelf: "center",
-    fontSize: 15,
-    fontWeight: 500,
+  gender: {
+    fontWeight: 400,
+    fontSize: 14,
+    color: COLORS.GRAY_TEXT
   },
 });
