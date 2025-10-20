@@ -15,7 +15,7 @@ const DoctorScreen = () => {
 
       <Header
         title="Главная"
-        isAuthenticated={true} >
+        isAuthenticated={true} DoctorLogin={true}>
 
       </Header>
 

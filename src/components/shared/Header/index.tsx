@@ -9,13 +9,18 @@ import type { FormNavigationProp } from "@/navigation/types";
 interface HeaderProps {
   title: string;
   isAuthenticated?: boolean
+  DoctorLogin?: boolean
 }
 
-const Header = ({ title, isAuthenticated }: HeaderProps) => {
+const Header = ({ title, isAuthenticated,DoctorLogin }: HeaderProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    navigation.navigate(ROUTES.STACK.CABINET);
+    if (DoctorLogin) {
+      navigation.navigate(ROUTES.STACK.DOCTOR_CABINET);
+    } else {
+      navigation.navigate(ROUTES.STACK.CABINET);
+    }
   };
 
   return (

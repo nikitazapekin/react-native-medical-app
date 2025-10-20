@@ -13,7 +13,9 @@ const DoctorAppointmentsScreen = () => {
 
       <Header
         title="Записи"
-        isAuthenticated={true} >
+        isAuthenticated={true}
+        DoctorLogin={true}>
+
       </Header>
 
       <FooterDoctor></FooterDoctor>

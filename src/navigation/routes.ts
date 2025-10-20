@@ -12,7 +12,7 @@ export const ROUTES = {
     CABINET: "Cabinet",
     PAYMENTS: "Payments",
     DOCTOR: "Doctor",
-    DOCTOR_PROFILE: "DoctorProfile",
+    DOCTOR_CABINET: "DoctorCabinet",
     DOCTOR_CHAT: "DoctorChat",
     DOCTOR_APPOINTMENTS: "DoctorAppointments"
   },

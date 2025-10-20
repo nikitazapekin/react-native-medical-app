@@ -13,8 +13,7 @@ export default function TubeScreen( ) {
 
       <Header
         isAuthenticated={true}
-        title='Test'
-      />
+        title='Test' DoctorLogin={false}      />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <Text style={styles.sectionTitle}>Tube</Text>
 

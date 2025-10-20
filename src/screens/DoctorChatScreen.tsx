@@ -4,7 +4,6 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-
 import ChatsDoctor from "@/components/Chats/ChatPatients";
 import FooterDoctor from "@/components/shared/FooterDoctor";
 import Header from "@/components/shared/Header";
@@ -15,7 +14,8 @@ const DOCTOR_CHAT = () => {
 
       <Header
         title="Чаты"
-        isAuthenticated={true} >
+        isAuthenticated={true}
+        DoctorLogin={true}>
 
       </Header>
 
