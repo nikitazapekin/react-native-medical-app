@@ -13,6 +13,7 @@ export const ROUTES = {
     PAYMENTS: "Payments",
     DOCTOR: "Doctor",
     DOCTOR_CABINET: "DoctorCabinet",
+    DOCTOR_CABINET_EDIT: "DoctorCabinetEdit",
     DOCTOR_CHAT: "DoctorChat",
     DOCTOR_APPOINTMENTS: "DoctorAppointments"
   },

@@ -12,7 +12,7 @@ const DoctorCabinetOptions = () => {
 
   const navigation = useNavigation<FormNavigationProp>();
   const handleDoctorScreen = () => {
-    navigation.navigate(ROUTES.STACK.DOCTOR_APPOINTMENTS);
+    navigation.navigate(ROUTES.STACK.DOCTOR_CABINET_EDIT);
   };
 
   return (

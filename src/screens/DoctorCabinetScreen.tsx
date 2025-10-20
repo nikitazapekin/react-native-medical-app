@@ -5,10 +5,8 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-
 import DoctorCabinetInfo from '@/components/DoctorCabinetInfo';
 import DoctorCabinetOptions from '@/components/DoctorCabinetOptions';
-
 import FooterDoctor from '@/components/shared/FooterDoctor';
 import Header from '@/components/shared/Header';
 
