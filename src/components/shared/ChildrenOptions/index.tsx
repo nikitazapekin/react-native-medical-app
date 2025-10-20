@@ -1,11 +1,10 @@
-
 import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 import type { ListItemProps } from "./types";
 
-import { profileOptions } from "@/constants";
+import { childrenOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -13,20 +12,9 @@ const ChildrenItem = ({ item }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история")) {
-      navigation.navigate(ROUTES.STACK.PAYMENTS);
+    if (item.text.toLocaleLowerCase().includes("медицинская")) {
+      navigation.navigate(ROUTES.STACK.MEDICALCARD);
     }
-
-    if(item.text.toLocaleLowerCase().includes("дети")) {
-
-      navigation.navigate(ROUTES.STACK.CHILDRENS);
-    }
-
-    if(item.text.toLocaleLowerCase().includes("советов")) {
-
-      navigation.navigate(ROUTES.STACK.SPISOKSOVETOV);
-    }
-
   };
 
   return (
@@ -40,9 +28,8 @@ const ChildrenItem = ({ item }: ListItemProps) => {
 const ChildrenOptions = () => {
   return (
     <View style={styles.wrapper}>
-
       <View style={styles.list}>
-        {profileOptions.map((item) => (
+        {childrenOptions.map((item) => (
           <ChildrenItem key={item.id} item={item} />
         ))}
       </View>

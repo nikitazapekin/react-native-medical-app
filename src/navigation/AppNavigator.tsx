@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { COLORS } from "appStyles";
 
 import type { RootStackParamList } from "./types";
-
+ 
 import { ROUTES } from "@/navigation/routes";
 import AuthScreen from "@/screens/AuthScreen";
 import CabinetScreen from "@/screens/Cabinet";
@@ -21,6 +21,7 @@ import DoctorChatScreen from "@/screens/DoctorChatScreen";
 import DoctorEditCabinet from "@/screens/DoctorEditCabinetScreen";
 import DoctorScreen from "@/screens/DoctorScreen";
 import HomeScreen from "@/screens/HomeScreen";
+import MedicalCardScreen from "@/screens/MedicalCardScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
@@ -92,6 +93,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CHAT} component={DoctorChatScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
+        <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}

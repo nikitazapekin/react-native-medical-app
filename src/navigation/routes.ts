@@ -18,7 +18,8 @@ export const ROUTES = {
     DOCTOR_APPOINTMENTS: "DoctorAppointments",
     CHILDRENS: "Childrens",
     CHILDREN: "Children",
-    SPISOKSOVETOV: "SpisokSovetov"
+    SPISOKSOVETOV: "SpisokSovetov",
+    MEDICALCARD: "MedicalCard"
   },
   TABS: {
     HOME: "HomeTab",
