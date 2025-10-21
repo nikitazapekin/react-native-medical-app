@@ -1,9 +1,13 @@
-import {  Text, TextInput, View } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
 
 import { styles } from "./styled";
+
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = [
   { id: "1", label: "По названию", type: "name" },
@@ -11,7 +15,16 @@ const sortOptions = [
   { id: "3", label: "По типу", type: "type" },
 ];
 
-const medicationItems = [
+interface Drugs {
+  id: number;
+    title: string;
+    description: string;
+    price: number;
+    type : string;
+    dosage: string;
+}
+
+const medicationItems: Drugs[] = [
   {
     id: 1,
     title: "Парацетамол",
@@ -88,9 +101,19 @@ const medicationItems = [
 ];
 
 const MedScreenDrugs = () => {
-  return (
-    <View style={styles.content}>
 
+  const navigation = useNavigation<FormNavigationProp>();
+
+  const handleDrugPress = (item: Drugs) => {
+
+    navigation.navigate(ROUTES.STACK.USER_DRUG_DETAIL_SCREEN , {
+      drug: item
+    });
+  };
+
+  return (
+
+    <View style={styles.content}>
       <DroppableList sortOptions={sortOptions} />
       <View style={styles.searchWrapper}>
         <TextInput
@@ -98,12 +121,18 @@ const MedScreenDrugs = () => {
           placeholder="Найти..."
           placeholderTextColor="#B0B0B0"
         />
-
       </View>
       <Text style={styles.title}>Список лекарств</Text>
+
       <View style={styles.listWrapper}>
         {medicationItems.map((item) => (
-          <DrugsItem item={item} key={item.id} />
+          <TouchableOpacity
+            key={item.id}
+            onPress={() => handleDrugPress(item)}
+            style={ { zIndex: 1 }}
+          >
+            <DrugsItem item={item} />
+          </TouchableOpacity>
         ))}
       </View>
     </View>

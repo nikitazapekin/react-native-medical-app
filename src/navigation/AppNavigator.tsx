@@ -33,10 +33,11 @@ import SettingsScreen from "@/screens/SettingsScreen";
 import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
 import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
+import UserCatalogDrugDetail from "@/screens/UserCatalogDrugDetailScreen";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
-import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
+import UserOprosScreen from "@/screens/UserOprosScreen";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
@@ -108,6 +109,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_FAVOURITE_DRUGS} component={UserFavouritesDrugsScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_ANALYZE_HISTORY} component={UserAnalyzeScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_ISTORIA_PRIEMOV} component={UserIstoriaPriemovScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_DRUG_DETAIL_SCREEN} component={UserCatalogDrugDetail} />
         <Stack.Screen name={ROUTES.STACK.USER_SPISOK_SOVETOV} component={UserSpisokSovetovScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_OPROS} component={UserOprosScreen} />
         <Stack.Screen

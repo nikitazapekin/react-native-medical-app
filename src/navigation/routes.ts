@@ -27,6 +27,8 @@ export const ROUTES = {
     USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",
     USER_ANALYZE_HISTORY: "UserAnalyzeHistory",
     USER_ISTORIA_PRIEMOV: "UserPriemiHistory",
+
+    USER_DRUG_DETAIL_SCREEN: "UserDrugDetailScreen",
     USER_SPISOK_SOVETOV: "UserSpisokSovetov",
     USER_OPROS: "UserOpros",
   },

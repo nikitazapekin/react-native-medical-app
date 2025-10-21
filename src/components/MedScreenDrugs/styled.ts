@@ -26,8 +26,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   searchIcon: {
-    width: 20, // Размер иконки
-    height: 20, // Размер иконки
+    width: 20,
+    height: 20,
     marginLeft: 10,
 
   },
@@ -47,5 +47,21 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     maxWidth: 376,
+  },
+  appointmentItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E9ECEF",
+
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
 });
