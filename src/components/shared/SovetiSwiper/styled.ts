@@ -36,8 +36,8 @@ export const styles = StyleSheet.create({
   cardText: {
     padding: 8,
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '500',
-    color: '#333',
+ 
   },
 });
