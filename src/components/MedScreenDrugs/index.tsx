@@ -1,12 +1,13 @@
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
 
 import { styles } from "./styled";
-import { useNavigation } from "@react-navigation/native";
-import { FormNavigationProp } from "@/navigation/types";
+
 import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = [
   { id: "1", label: "По названию", type: "name" },
@@ -23,7 +24,7 @@ interface Drugs {
     dosage: string;
 }
 
- const medicationItems: Drugs[] = [
+const medicationItems: Drugs[] = [
   {
     id: 1,
     title: "Парацетамол",
@@ -99,20 +100,9 @@ interface Drugs {
 
 ];
 
-
-
-
-
-
-
-
-
-
 const MedScreenDrugs = () => {
 
-
-const navigation = useNavigation<FormNavigationProp>();
-
+  const navigation = useNavigation<FormNavigationProp>();
 
   const handleDrugPress = (item: Drugs) => {
 
@@ -122,7 +112,7 @@ const navigation = useNavigation<FormNavigationProp>();
   };
 
   return (
-    
+
     <View style={styles.content}>
       <DroppableList sortOptions={sortOptions} />
       <View style={styles.searchWrapper}>
@@ -137,8 +127,8 @@ const navigation = useNavigation<FormNavigationProp>();
       <View style={styles.listWrapper}>
         {medicationItems.map((item) => (
           <TouchableOpacity
-            key={item.id} 
-            onPress={() => handleDrugPress(item)} 
+            key={item.id}
+            onPress={() => handleDrugPress(item)}
             style={ { zIndex: 1 }}
           >
             <DrugsItem item={item} />

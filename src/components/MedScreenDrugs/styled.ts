@@ -8,11 +8,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   searchWrapper: {
-    width: "100%", 
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#ffffffff", 
+    backgroundColor: "#ffffffff",
     borderRadius: 30,
     marginTop: 20,
     padding: 5,
@@ -26,10 +26,10 @@ export const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   searchIcon: {
-    width: 20, 
+    width: 20,
     height: 20,
     marginLeft: 10,
-    
+
   },
   title: {
     color: COLORS.BLACK,

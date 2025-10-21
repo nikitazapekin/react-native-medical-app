@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
-
 interface Drugs {
   id: number;
   title: string;
@@ -11,7 +10,6 @@ interface Drugs {
   type: string;
   dosage: string;
 }
-
 
 interface RouteParams {
   drug: Drugs;
