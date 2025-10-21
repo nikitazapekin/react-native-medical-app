@@ -26,6 +26,7 @@ const ListItem = ({ item }: ListItemProps) => {
 
       navigation.navigate(ROUTES.STACK.SPISOKSOVETOV);
     }
+
     if(item.text.toLocaleLowerCase().includes("избранное")) {
 
       navigation.navigate(ROUTES.STACK.USER_FAVOURITE_DRUGS);

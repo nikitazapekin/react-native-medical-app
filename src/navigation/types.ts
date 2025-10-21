@@ -34,5 +34,6 @@ export type RootStackParamList = {
       service: string;
     }
   };
+    [ROUTES.STACK.ISTORIABOLEZNEI]: undefined;
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;

@@ -3,8 +3,7 @@ import { ScrollView, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
-
-import PaymentsHistory from "@/components/PaymentsHistory";
+ 
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import UserFavouritesDrugs from "@/components/UserFavouriteDrugs";

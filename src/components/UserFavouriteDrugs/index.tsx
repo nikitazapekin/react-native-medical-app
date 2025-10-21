@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
-import PaymentItem from "../shared/PaymentItem";
+import DrugsItem from "../shared/DrugsItem";
+ 
 
 import { styles } from "./styled";
-import DrugsItem from "../shared/DrugsItem";
 
 const sortOptions = [
   { id: "1", label: "По названию", type: "name" },
@@ -13,42 +13,40 @@ const sortOptions = [
 ];
 
 const medicationItems = [
-  { 
-    id: 1, 
-    title: "Парацетамол", 
-    price: 150, 
+  {
+    id: 1,
+    title: "Парацетамол",
+    price: 150,
     type: "Обезболивающее",
     description: "Жаропонижающее и обезболивающее средство",
     dosage: "500 мг"
   },
-  { 
-    id: 2, 
-    title: "Пропиздин", 
-    price: 160, 
+  {
+    id: 2,
+    title: "Пропиздин",
+    price: 160,
     type: "Обезболивающее",
     description: "Кайфовое средство",
     dosage: "500 мг"
   },
-  { 
-    id: 3, 
-    title: "Спайс", 
-    price: 999, 
+  {
+    id: 3,
+    title: "Спайс",
+    price: 999,
     type: "Обезболивающее",
     description: "Нелегальное средство",
     dosage: "500 мг"
   },
-  { 
-    id: 4, 
-    title: "Постгрестол", 
-    price: 200, 
+  {
+    id: 4,
+    title: "Постгрестол",
+    price: 200,
     type: "Обезболивающее",
     description: "Средство избавляющее от MySQLWorkbench",
     dosage: "500 мг"
   },
-  
+
 ];
-
-
 
 const UserFavouritesDrugs = () => {
   return (

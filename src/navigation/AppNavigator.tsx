@@ -13,6 +13,7 @@ import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
+import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
 import ChildrenScreen from "@/screens/ChildrenScreen";
 import ChildrensScreen from "@/screens/ChildrensScreen";
 import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
@@ -21,6 +22,7 @@ import DoctorChatScreen from "@/screens/DoctorChatScreen";
 import DoctorEditCabinet from "@/screens/DoctorEditCabinetScreen";
 import DoctorScreen from "@/screens/DoctorScreen";
 import HomeScreen from "@/screens/HomeScreen";
+import IstoriaBolezneiScreen from "@/screens/IstoriaBolezneiScreen";
 import MedicalCardScreen from "@/screens/MedicalCardScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
@@ -30,8 +32,6 @@ import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
 import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
-import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
-import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
@@ -99,7 +99,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_RECORD_DETAIL} component={RecordDetailScreen } />
         <Stack.Screen name={ROUTES.STACK.CHILDREN_HEALTH_STATUS} component={ChildrenHealthStatus } />
-        <Stack.Screen name={ROUTES.STACK.USER_FAVOURITE_DRUGS} component={UserFavouritesDrugsScreen } />
+        <Stack.Screen name={ROUTES.STACK.ISTORIABOLEZNEI} component={IstoriaBolezneiScreen} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}
