@@ -36,8 +36,8 @@ import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
 import UserCatalogDrugDetail from "@/screens/UserCatalogDrugDetailScreen";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
-import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
 import UserOprosScreen from "@/screens/UserOprosScreen";
+import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
