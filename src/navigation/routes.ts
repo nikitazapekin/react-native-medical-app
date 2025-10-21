@@ -21,9 +21,10 @@ export const ROUTES = {
     SPISOKSOVETOV: "SpisokSovetov",
     MEDICALCARD: "MedicalCard",
     DOCTOR_RECORD_DETAIL: "DoctorRecordDetail",
-    CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
 
     ISTORIABOLEZNEI: "IstoriaBoleznei",
+    CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
+    USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",
   },
   TABS: {
     HOME: "HomeTab",
