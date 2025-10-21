@@ -4,16 +4,15 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
+import MedScreenDrugs from "@/components/MedScreenDrugs";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
-
-import MedScreenDrugs from "@/components/MedScreenDrugs";
 
 export default function MedScreen() {
   return (
     <View style={styles.container}>
       <Header title="Лекарства" isAuthenticated={true} />
-      
+
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <MedScreenDrugs />
       </ScrollView>
