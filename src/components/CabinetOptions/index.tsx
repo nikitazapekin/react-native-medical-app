@@ -24,7 +24,7 @@ const ListItem = ({ item }: ListItemProps) => {
 
     if(item.text.toLocaleLowerCase().includes("советов")) {
 
-      navigation.navigate(ROUTES.STACK.SPISOKSOVETOV);
+      navigation.navigate(ROUTES.STACK.USER_SPISOK_SOVETOV);
     }
 
     if(item.text.toLocaleLowerCase().includes("избранное")) {
