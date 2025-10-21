@@ -1,9 +1,13 @@
 
 import React from 'react';
-import { Image, ScrollView,Text, View,   } from "react-native";
+import { Image, Pressable,ScrollView,Text, View   } from "react-native";
 import MockSwiper from "@assets/mockPhotos/Soveti.png";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
+
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const cardData = [
   {
@@ -38,6 +42,14 @@ const CARD_WIDTH = 162;
 const CARD_MARGIN = 9;
 
 const SovetiSwiper = () => {
+  const navigation = useNavigation<FormNavigationProp>();
+
+  const handleNavigate = () => {
+    console.log(1111);
+    navigation.navigate(ROUTES.STACK.USER_OPROS);
+
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -49,14 +61,14 @@ const SovetiSwiper = () => {
         contentContainerStyle={styles.scrollContent}
       >
         {cardData.map((item) => (
-          <View key={item.id} style={styles.card}>
+          <Pressable onPress={handleNavigate} key={item.id} style={styles.card}>
             <Image
               source={item.image}
               style={styles.cardImage}
               resizeMode="cover"
             />
             <Text style={styles.cardText}>{item.text}</Text>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
     </View>
@@ -64,14 +76,25 @@ const SovetiSwiper = () => {
 };
 
 export default SovetiSwiper;
-/* import { View } from "react-native";
 
-const SovetiSwiper = () => {
-  return (
-  <View>
+/*
 
-  </View> );
-}
+import { Image, Pressable, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default SovetiSwiper;
- */
+import { styles } from "./styled";
+import type { ListItemProps } from "./types";
+
+import { profileOptions } from "@/constants";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
+
+const ListItem = ({ item }: ListItemProps) => {
+  const navigation = useNavigation<FormNavigationProp>();
+
+  const handleNavigate = () => {
+    if (item.text.toLocaleLowerCase().includes("история")) {
+      navigation.navigate(ROUTES.STACK.PAYMENTS);
+    }
+
+    */

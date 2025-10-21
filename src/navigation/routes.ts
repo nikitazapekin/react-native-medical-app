@@ -28,6 +28,7 @@ export const ROUTES = {
     USER_ANALYZE_HISTORY: "UserAnalyzeHistory",
     USER_ISTORIA_PRIEMOV: "UserPriemiHistory",
     USER_SPISOK_SOVETOV: "UserSpisokSovetov",
+    USER_OPROS: "UserOpros",
   },
   TABS: {
     HOME: "HomeTab",

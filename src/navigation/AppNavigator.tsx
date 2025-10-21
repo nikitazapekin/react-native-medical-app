@@ -35,6 +35,7 @@ import TubeScreen from "@/screens/TubeScreen";
 import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
+import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
 
 type TabParamList = {
@@ -108,6 +109,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_ANALYZE_HISTORY} component={UserAnalyzeScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_ISTORIA_PRIEMOV} component={UserIstoriaPriemovScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_SPISOK_SOVETOV} component={UserSpisokSovetovScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_OPROS} component={UserOprosScreen} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}

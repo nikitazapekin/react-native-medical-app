@@ -29,6 +29,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_ANALYZE_HISTORY]: undefined;
   [ROUTES.STACK.USER_ISTORIA_PRIEMOV]: undefined;
   [ROUTES.STACK.USER_SPISOK_SOVETOV]: undefined;
+    [ROUTES.STACK.USER_OPROS]: undefined;
   [ROUTES.STACK.DOCTOR_RECORD_DETAIL]: {
     record: {
       id: string;

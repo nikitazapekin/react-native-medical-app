@@ -1,4 +1,4 @@
-import { Text, TextInput, View, Image } from "react-native";
+import {  Text, TextInput, View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
@@ -90,15 +90,15 @@ const medicationItems = [
 const MedScreenDrugs = () => {
   return (
     <View style={styles.content}>
-      
+
       <DroppableList sortOptions={sortOptions} />
       <View style={styles.searchWrapper}>
-        <TextInput 
-          style={styles.searchInput} 
-          placeholder="Найти..." 
-          placeholderTextColor="#B0B0B0" 
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Найти..."
+          placeholderTextColor="#B0B0B0"
         />
-        
+
       </View>
       <Text style={styles.title}>Список лекарств</Text>
       <View style={styles.listWrapper}>
@@ -110,21 +110,4 @@ const MedScreenDrugs = () => {
   );
 };
 
-export default MedScreenDrugs;
-/* const UserFavouritesDrugs = () => {
-  return (
-    <View style={styles.content}>
-      <DroppableList sortOptions={sortOptions} />
-
-      <Text style={styles.title}>Ваши лекарства</Text>
-      <View style={styles.wrapper}>
-        {medicationItems.map((item) => (
-          <DrugsItem item={item} key={item.id} />
-        ))}
-      </View>
-    </View>
-  );
-};
-
-export default UserFavouritesDrugs;
- */
+export default MedScreenDrugs; 

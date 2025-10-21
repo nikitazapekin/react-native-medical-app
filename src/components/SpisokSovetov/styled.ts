@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
     marginTop: 15,
   },
 });
+
 /* import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
