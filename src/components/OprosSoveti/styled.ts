@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 15,
   },
   content: {
+    marginTop: 15,
     width: 376,
     backgroundColor: COLORS.WHITE,
     flexDirection: "column",
@@ -24,11 +25,11 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 600,
-    textAlign: "center"
+    textAlign: "center",
   },
   question: {
     textAlign: "left",
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
   },
   image: {
     width: 340,
@@ -38,10 +39,10 @@ export const styles = StyleSheet.create({
   list: {
     width: 356,
     flexDirection: "column",
-    rowGap: 15
+    rowGap: 15,
   },
   buttonsContainer: {
     flexDirection: "column",
-    rowGap: 15
-  }
+    rowGap: 15,
+  },
 });

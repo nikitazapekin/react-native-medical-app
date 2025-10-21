@@ -81,7 +81,7 @@ const OprosSoveti = () => {
   const navigation = useNavigation<FormNavigationProp>();
 
   if (isFinished) {
-    navigation.navigate(ROUTES.STACK.PAYMENTS);
+    navigation.navigate(ROUTES.STACK.USER_RECOMMENDATIONS);
 
   }
 
