@@ -1,32 +1,21 @@
 import React from "react";
-import { 
-  Image, 
-  SectionList, 
-  StyleSheet, 
-  Text, 
-  View, 
-  TouchableOpacity  
-} from "react-native";
+import {
+  Image,
+  SectionList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View} from "react-native";
 import Med from "@assets/mockPhotos/Vector.png";
 import { useNavigation } from "@react-navigation/native";
+
 import { ROUTES } from "@/navigation/routes";
-import { FormNavigationProp } from "@/navigation/types";
-
-
-
-
-
-
+import type { FormNavigationProp } from "@/navigation/types";
 
 // type DoctorRecordsNavigationProp = StackNavigationProp<
 //   RootStackParamList,
 //   typeof ROUTES.STACK.DOCTOR_RECORD_DETAIL
 // >;
-
-
-
-
-
 
 interface Record {
   id: string;
@@ -78,14 +67,14 @@ const TodayDoctorRecords = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const handleRecordPress = (item: Record) => {
 
-    navigation.navigate(ROUTES.STACK.DOCTOR_RECORD_DETAIL , { 
-      record: item 
+    navigation.navigate(ROUTES.STACK.DOCTOR_RECORD_DETAIL , {
+      record: item
     });
   };
 
   const renderItem = ({ item }: { item: Record }) => (
-  
-    <TouchableOpacity 
+
+    <TouchableOpacity
       onPress={() => handleRecordPress(item)}
       style={[styles.appointmentItem, { zIndex: 1 }]}
     >

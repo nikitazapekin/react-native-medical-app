@@ -25,11 +25,12 @@ import MedicalCardScreen from "@/screens/MedicalCardScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
+import RecordDetailScreen from "@/screens/RecordDetailScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
 import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
-import RecordDetailScreen from "@/screens/RecordDetailScreen";
+import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
 
 type TabParamList = {
   [ROUTES.TABS.PROFILE]: undefined;
@@ -96,6 +97,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
         <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_RECORD_DETAIL} component={RecordDetailScreen } />
+        <Stack.Screen name={ROUTES.STACK.CHILDREN_HEALTH_STATUS} component={ChildrenHealthStatus } />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}
