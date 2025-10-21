@@ -8,11 +8,8 @@ import MedicalCardButton from "../shared/MedicalCardButton";
 import { styles } from "./styled";
 
 import { medicalCardButtons } from "@/constants";
- 
 import type { RootStackParamList } from "@/navigation/types";
- 
 
- 
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 const MedicalCardComponent = () => {
