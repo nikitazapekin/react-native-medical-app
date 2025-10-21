@@ -21,6 +21,7 @@ import DoctorChatScreen from "@/screens/DoctorChatScreen";
 import DoctorEditCabinet from "@/screens/DoctorEditCabinetScreen";
 import DoctorScreen from "@/screens/DoctorScreen";
 import HomeScreen from "@/screens/HomeScreen";
+import IstoriaBolezneiScreen from "@/screens/IstoriaBolezneiScreen";
 import MedicalCardScreen from "@/screens/MedicalCardScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
@@ -94,6 +95,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
         <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
+        <Stack.Screen name={ROUTES.STACK.ISTORIABOLEZNEI} component={IstoriaBolezneiScreen} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}
