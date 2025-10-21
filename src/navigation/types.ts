@@ -38,6 +38,7 @@ export type RootStackParamList = {
     dosage: string;
         }
       };
+  [ROUTES.STACK.USER_SPISOK_SOVETOV]: undefined;
   [ROUTES.STACK.DOCTOR_RECORD_DETAIL]: {
     record: {
       id: string;

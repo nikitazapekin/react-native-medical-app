@@ -31,6 +31,7 @@ export const ROUTES = {
 
 
     USER_DRUG_DETAIL_SCREEN: "UserDrugDetailScreen",
+    USER_SPISOK_SOVETOV: "UserSpisokSovetov",
   },
   TABS: {
     HOME: "HomeTab",
