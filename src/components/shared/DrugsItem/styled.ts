@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     borderRadius: 8,
     boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
- 
 
     justifyContent: "space-between",
     flexDirection: "row",

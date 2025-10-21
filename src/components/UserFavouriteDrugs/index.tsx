@@ -52,7 +52,7 @@ const UserFavouritesDrugs = () => {
     <View style={styles.content}>
       <DroppableList sortOptions={sortOptions} />
       <Text style={styles.title}>Ваши лекарства</Text>
-      <View style={styles.listWrapper}>  
+      <View style={styles.listWrapper}>
         {medicationItems.map((item) => (
           <DrugsItem item={item} key={item.id} />
         ))}
@@ -60,6 +60,7 @@ const UserFavouritesDrugs = () => {
     </View>
   );
 };
+
 export default UserFavouritesDrugs;
 /* const UserFavouritesDrugs = () => {
   return (

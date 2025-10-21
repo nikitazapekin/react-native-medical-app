@@ -1,10 +1,11 @@
- import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { COLORS } from "appStyles";
+
 export const styles = StyleSheet.create({
   content: {
     width: "100%",
     height: "100%",
-    alignItems: "center", 
+    alignItems: "center",
   },
   title: {
     color: COLORS.BLACK,
@@ -12,16 +13,16 @@ export const styles = StyleSheet.create({
     fontWeight: 700,
     paddingTop: 15,
     paddingBottom: 15,
-    textAlign: "center", 
+    textAlign: "center",
     width: "100%",
   },
-  listWrapper: { 
+  listWrapper: {
     width: "100%",
     flexDirection: "column",
     gap: 10,
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
-    maxWidth: 376, 
+    maxWidth: 376,
   },
 });
 /* import { StyleSheet } from "react-native";
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
     width: 376,
     flexDirection: "column",
     gap: 10,
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center"
     //paddingLeft: 5,
   },
