@@ -1,13 +1,14 @@
- 
+
 import React from 'react';
-import { View, Text, Image, ScrollView,  } from "react-native";
+import { Image, ScrollView,Text, View,   } from "react-native";
+import MockSwiper from "@assets/mockPhotos/Soveti.png";
+
 import { styles } from "./styled";
-import MockSwiper from "@assets/mockPhotos/Soveti.png"
- 
+
 const cardData = [
   {
     id: 1,
-    image:MockSwiper, 
+    image:MockSwiper,
     text: "Совет 1"
   },
   {
@@ -49,8 +50,8 @@ const SovetiSwiper = () => {
       >
         {cardData.map((item) => (
           <View key={item.id} style={styles.card}>
-            <Image 
-              source={item.image} 
+            <Image
+              source={item.image}
               style={styles.cardImage}
               resizeMode="cover"
             />
@@ -60,17 +61,17 @@ const SovetiSwiper = () => {
       </ScrollView>
     </View>
   );
-}
+};
 
 export default SovetiSwiper;
 /* import { View } from "react-native";
 
 const SovetiSwiper = () => {
-  return ( 
+  return (
   <View>
 
   </View> );
 }
- 
+
 export default SovetiSwiper;
  */
