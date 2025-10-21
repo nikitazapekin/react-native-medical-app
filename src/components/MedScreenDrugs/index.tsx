@@ -110,4 +110,4 @@ const MedScreenDrugs = () => {
   );
 };
 
-export default MedScreenDrugs; 
+export default MedScreenDrugs;

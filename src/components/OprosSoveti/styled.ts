@@ -40,4 +40,8 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     rowGap: 15
   },
+  buttonsContainer: {
+    flexDirection: "column",
+    rowGap: 15
+  }
 });
