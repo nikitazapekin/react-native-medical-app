@@ -5,8 +5,8 @@ import type { OprosButtonTypes } from "./types";
 
 const OprosButton = ({ id, text, handler, isSelected = false }: OprosButtonTypes) => {
   return (
-    <Pressable 
-      onPress={handler} 
+    <Pressable
+      onPress={handler}
       style={[
         styles.wrapper,
         isSelected && styles.selectedWrapper
@@ -23,4 +23,3 @@ const OprosButton = ({ id, text, handler, isSelected = false }: OprosButtonTypes
 };
 
 export default OprosButton;
- 

@@ -1,14 +1,16 @@
+import { useState } from "react";
 import { Image, Text, View } from "react-native";
 import MockImage from "@assets/mockPhotos/picture.jpg";
+import { useNavigation } from "@react-navigation/native";
 
 import CustomButton from "../shared/Button";
 import OprosButton from "../shared/OprosButton";
 
 import { styles } from "./styled";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
+
 const test = [
   {
     id: 1,
@@ -77,11 +79,12 @@ const OprosSoveti = () => {
   };
 
   const navigation = useNavigation<FormNavigationProp>();
+
   if (isFinished) {
     navigation.navigate(ROUTES.STACK.PAYMENTS);
- 
+
   }
- 
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
@@ -131,7 +134,6 @@ import CustomButton from "../shared/Button";
 import OprosButton from "../shared/OprosButton";
 
 import { styles } from "./styled";
- 
 
 const test = [
   {
