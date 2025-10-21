@@ -26,6 +26,7 @@ export const ROUTES = {
     CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
     USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",
     USER_ANALYZE_HISTORY: "UserAnalyzeHistory",
+    USER_ISTORIA_PRIEMOV: "UserPriemiHistory",
   },
   TABS: {
     HOME: "HomeTab",
