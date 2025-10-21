@@ -5,12 +5,9 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-import DoctorCabinetInfo from "@/components/DoctorCabinetInfo";
-import DoctorCabinetOptions from "@/components/DoctorCabinetOptions";
-
-import Header from "@/components/shared/Header";
-import Footer from "@/components/shared/Footer";
 import ChildrenHealthStatusComponent from "@/components/ChildrenHealthStatus";
+import Footer from "@/components/shared/Footer";
+import Header from "@/components/shared/Header";
 
 const ChildrenHealthStatus = () => {
   return (
@@ -19,7 +16,7 @@ const ChildrenHealthStatus = () => {
         <Header title="Состояние ребенка" isAuthenticated={true} DoctorLogin={false} />
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <ChildrenHealthStatusComponent />
-          
+
         </ScrollView>
 
         <Footer />

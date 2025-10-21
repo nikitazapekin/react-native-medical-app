@@ -3,7 +3,7 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   outerWrapper: {
-    backgroundColor: "#D9F0FF", 
+    backgroundColor: "#D9F0FF",
     padding: 10,
     borderRadius: 10,
     alignItems: "center",

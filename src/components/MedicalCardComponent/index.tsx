@@ -1,4 +1,6 @@
 import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 import Calendar from "../shared/Calendar";
 import MedicalCardButton from "../shared/MedicalCardButton";
@@ -6,19 +8,13 @@ import MedicalCardButton from "../shared/MedicalCardButton";
 import { styles } from "./styled";
 
 import { medicalCardButtons } from "@/constants";
-import { useNavigation } from "@react-navigation/native";
-import { ROUTES } from "@/navigation/routes";
-import { FormNavigationProp, RootStackParamList } from "@/navigation/types";
-import { StackNavigationProp } from "@react-navigation/stack";
+import type { RootStackParamList } from "@/navigation/types";
 
-
-
-// 👇 Это ключевая строчка
 type NavigationProp = StackNavigationProp<RootStackParamList>;
 
-
 const MedicalCardComponent = () => {
- const navigation = useNavigation<NavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
@@ -29,9 +25,9 @@ const MedicalCardComponent = () => {
         </Text>
         <View style={styles.buttons}>
           {medicalCardButtons.map((item) => (
-            
+
             <MedicalCardButton key={item.id} item={item}  onPress={() => navigation.navigate(item.screen)}
- />
+            />
           ))}
         </View>
       </View>
