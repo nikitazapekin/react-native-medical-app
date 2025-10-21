@@ -1,15 +1,14 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { styles } from "./styled";
 import type { MedicalCardButtonProps } from "./types";
 
-const MedicalCardButton = ({ item }: MedicalCardButtonProps) => {
+const MedicalCardButton = ({ item, onPress }: MedicalCardButtonProps) => {
   return (
     <View style={styles.wrapper}>
-
-      <View style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={onPress} activeOpacity={0.7}>
         <Text style={styles.text}>{item.text}</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
