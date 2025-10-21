@@ -7,18 +7,16 @@ import { styles } from "./styled";
 
 import { medicalCardButtons } from "@/constants";
 import { useNavigation } from "@react-navigation/native";
-import { ROUTES } from "@/navigation/routes";
+
 import { FormNavigationProp, RootStackParamList } from "@/navigation/types";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 
 
-// 👇 Это ключевая строчка
-type NavigationProp = StackNavigationProp<RootStackParamList>;
+
 
 
 const MedicalCardComponent = () => {
- const navigation = useNavigation<NavigationProp>();
+ const navigation = useNavigation<FormNavigationProp>();
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>

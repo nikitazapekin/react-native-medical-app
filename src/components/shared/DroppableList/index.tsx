@@ -23,7 +23,7 @@ const DroppableList = ({ sortOptions }: SortOptions) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.dropdownButton} onPress={() => setIsVisible(!isVisible)}>
-        <Text style={styles.buttonText}>{selectedValue.label || "Select an option"}</Text>
+        <Text style={styles.buttonText}>{selectedValue.label || "Выберите опцию"}</Text>
         <Image source={Arrow} style={[styles.arrow, isVisible && styles.arrowRotated]} />
       </TouchableOpacity>
 
