@@ -11,7 +11,7 @@ import Header from "@/components/shared/Header";
 export default function MedicalCardScreen() {
   return (
     <View style={styles.container}>
-      <Header title="Лекарства" isAuthenticated={true} DoctorLogin={false} />
+      <Header title="Медицинская карта" isAuthenticated={true} DoctorLogin={false} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <MedicalCardComponent />
       </ScrollView>

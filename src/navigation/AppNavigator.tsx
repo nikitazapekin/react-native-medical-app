@@ -13,6 +13,7 @@ import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
+import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
 import ChildrenScreen from "@/screens/ChildrenScreen";
 import ChildrensScreen from "@/screens/ChildrensScreen";
 import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
@@ -26,6 +27,7 @@ import MedicalCardScreen from "@/screens/MedicalCardScreen";
 import MedScreen from "@/screens/MedScreen";
 import PaymentScreen from "@/screens/PaymentsScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
+import RecordDetailScreen from "@/screens/RecordDetailScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SettingsScreen from "@/screens/SettingsScreen";
 import SpisokSovetov from "@/screens/SpisokSovetov";
@@ -95,6 +97,8 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
         <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
+        <Stack.Screen name={ROUTES.STACK.DOCTOR_RECORD_DETAIL} component={RecordDetailScreen } />
+        <Stack.Screen name={ROUTES.STACK.CHILDREN_HEALTH_STATUS} component={ChildrenHealthStatus } />
         <Stack.Screen name={ROUTES.STACK.ISTORIABOLEZNEI} component={IstoriaBolezneiScreen} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}

@@ -23,7 +23,16 @@ export type RootStackParamList = {
   [ROUTES.STACK.CHILDRENS]: undefined;
   [ROUTES.STACK.CHILDREN]: undefined;
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
+  [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
   [ROUTES.STACK.MEDICALCARD]: undefined;
+  [ROUTES.STACK.DOCTOR_RECORD_DETAIL]: {
+    record: {
+      id: string;
+      time: string;
+      patient: string;
+      service: string;
+    }
+  };
     [ROUTES.STACK.ISTORIABOLEZNEI]: undefined;
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;

@@ -1,64 +1,16 @@
-import { Pressable,Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { styles } from "./styled";
 import type { MedicalCardButtonProps } from "./types";
 
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
-
-const MedicalCardButton = ({ item }: MedicalCardButtonProps) => {
-
-  const navigation = useNavigation<FormNavigationProp>();
-
-  const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("болезней")) {
-      navigation.navigate(ROUTES.STACK.ISTORIABOLEZNEI);
-    }
-
-  };
-
+const MedicalCardButton = ({ item, onPress }: MedicalCardButtonProps) => {
   return (
-    <Pressable onPress={handleNavigate} style={styles.wrapper}>
-
-      <View style={styles.button}>
+    <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.button} onPress={onPress} activeOpacity={0.7}>
         <Text style={styles.text}>{item.text}</Text>
-      </View>
-    </Pressable>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 export default MedicalCardButton;
-
-/*
-
-import { Image, Pressable, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-import { styles } from "./styled";
-import type { ListItemProps } from "./types";
-
-import { profileOptions } from "@/constants";
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
-
-const ListItem = ({ item }: ListItemProps) => {
-  const navigation = useNavigation<FormNavigationProp>();
-
-  const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история")) {
-      navigation.navigate(ROUTES.STACK.PAYMENTS);
-    }
-
-    if(item.text.toLocaleLowerCase().includes("дети")) {
-
-      navigation.navigate(ROUTES.STACK.CHILDRENS);
-    }
-
-    if(item.text.toLocaleLowerCase().includes("советов")) {
-
-      navigation.navigate(ROUTES.STACK.SPISOKSOVETOV);
-    }
-
-  };
-  */
