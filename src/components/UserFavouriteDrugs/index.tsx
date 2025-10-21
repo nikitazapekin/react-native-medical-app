@@ -2,7 +2,6 @@ import { Text, View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
- 
 
 import { styles } from "./styled";
 
@@ -23,7 +22,7 @@ const medicationItems = [
   },
   {
     id: 2,
-    title: "Пропиздин",
+    title: "Парацетамол",
     price: 160,
     type: "Обезболивающее",
     description: "Кайфовое средство",
@@ -31,7 +30,7 @@ const medicationItems = [
   },
   {
     id: 3,
-    title: "Спайс",
+    title: "Парацетамол",
     price: 999,
     type: "Обезболивающее",
     description: "Нелегальное средство",
@@ -52,6 +51,20 @@ const UserFavouritesDrugs = () => {
   return (
     <View style={styles.content}>
       <DroppableList sortOptions={sortOptions} />
+      <Text style={styles.title}>Ваши лекарства</Text>
+      <View style={styles.listWrapper}>  
+        {medicationItems.map((item) => (
+          <DrugsItem item={item} key={item.id} />
+        ))}
+      </View>
+    </View>
+  );
+};
+export default UserFavouritesDrugs;
+/* const UserFavouritesDrugs = () => {
+  return (
+    <View style={styles.content}>
+      <DroppableList sortOptions={sortOptions} />
 
       <Text style={styles.title}>Ваши лекарства</Text>
       <View style={styles.wrapper}>
@@ -64,3 +77,4 @@ const UserFavouritesDrugs = () => {
 };
 
 export default UserFavouritesDrugs;
+ */

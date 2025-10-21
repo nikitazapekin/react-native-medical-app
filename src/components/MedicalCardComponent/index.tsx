@@ -1,6 +1,5 @@
 import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
- 
 
 import Calendar from "../shared/Calendar";
 import MedicalCardButton from "../shared/MedicalCardButton";

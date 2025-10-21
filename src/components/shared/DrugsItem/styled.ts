@@ -3,7 +3,7 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   wrapper: {
-    width: 374,
+    width: 376,
     paddingTop: 16,
     paddingBottom: 16,
     paddingLeft: 14,
@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     borderRadius: 8,
     boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
+ 
 
     justifyContent: "space-between",
     flexDirection: "row",
