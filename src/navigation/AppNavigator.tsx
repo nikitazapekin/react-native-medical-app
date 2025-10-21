@@ -1,8 +1,7 @@
 import React from "react";
- 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
- 
+
 import type { RootStackParamList } from "./types";
 
 import { ROUTES } from "@/navigation/routes";
@@ -27,7 +26,6 @@ import PaymentScreen from "@/screens/PaymentsScreen";
 import ProfileScreen from "@/screens/ProfileScreen";
 import RecordDetailScreen from "@/screens/RecordDetailScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
- 
 import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
 import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
