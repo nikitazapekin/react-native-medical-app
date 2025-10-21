@@ -56,4 +56,3 @@ const IstoriaBoleznei = () => {
 };
 
 export default IstoriaBoleznei;
- 

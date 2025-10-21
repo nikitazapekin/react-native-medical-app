@@ -19,4 +19,4 @@ export default function IstoriaBolezneiScreen() {
       <StatusBar style="auto" />
     </View>
   );
-} 
+}

@@ -30,9 +30,9 @@ const bolezni: BoleznItem[] = [
   { id: 4, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
   { id: 5, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
   { id: 6, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
-    { id: 7, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
-      { id: 8, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
-        { id: 9, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
+  { id: 7, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
+  { id: 8, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
+  { id: 9, name: "Лор", description: "Полное обследование", date: "22.12.2024" },
 ];
 
 const IstoriaAnalyze = () => {
