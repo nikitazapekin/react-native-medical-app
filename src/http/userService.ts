@@ -56,7 +56,7 @@ class UserService {
       return null;
     }
   }
-/* 
+/*
   static async updateUserProfile(userData: any): Promise<Patient | Doctor> {
     try {
       const userType = await this.getUserType();

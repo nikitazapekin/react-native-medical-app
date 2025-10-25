@@ -54,7 +54,7 @@ class PersonInfoService {
 
       return response.data;
     } catch   {
-    
+
       throw new Error(  'Failed to get patients list');
     }
   }
