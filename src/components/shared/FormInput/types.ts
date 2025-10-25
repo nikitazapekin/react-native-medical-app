@@ -1,6 +1,8 @@
 export interface FormInputProps {
   placeholder: string;
-  handler: () => void;
+
+  handler: (value: string) => void;
   label: string;
   type?: string;
+    value: string;
 }
