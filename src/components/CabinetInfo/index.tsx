@@ -48,6 +48,8 @@ const CabinetInfo = () => {
 
         setPatient(userData);
 
+        await AsyncStorage.setItem('id', String(userData.id));
+
       } catch {
         navigation.navigate(ROUTES.STACK.AUTH);
       }

@@ -18,7 +18,11 @@ const ListItem = ({ item }: ListItemProps) => {
     }
 
     if(item.text.toLocaleLowerCase().includes("дети")) {
-
+      /*
+ navigation.navigate(ROUTES.STACK.USER_DRUG_DETAIL_SCREEN , {
+      drug: item
+    });
+    */
       navigation.navigate(ROUTES.STACK.CHILDRENS);
     }
 

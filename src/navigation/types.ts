@@ -1,3 +1,4 @@
+import type { RouteProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import type { ROUTES } from "./routes";
@@ -28,20 +29,22 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_FAVOURITE_DRUGS]: undefined;
   [ROUTES.STACK.USER_ANALYZE_HISTORY]: undefined;
   [ROUTES.STACK.USER_ISTORIA_PRIEMOV]: undefined;
-    [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
-        [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
+  [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
+  [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
+
+  [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
-   drug: {
-   id: number;
-    title: string;
-    description: string;
-    price: number;
-    type : string;
-    dosage: string;
-        }
-      };
+    drug: {
+      id: number;
+      title: string;
+      description: string;
+      price: number;
+      type: string;
+      dosage: string;
+    };
+  };
   [ROUTES.STACK.USER_SPISOK_SOVETOV]: undefined;
-    [ROUTES.STACK.USER_OPROS]: undefined;
+  [ROUTES.STACK.USER_OPROS]: undefined;
   [ROUTES.STACK.DOCTOR_RECORD_DETAIL]: {
     record: {
       id: string;
@@ -53,3 +56,5 @@ export type RootStackParamList = {
   [ROUTES.STACK.ISTORIABOLEZNEI]: undefined;
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;
+
+export type UserEditChildrenRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_EDIT_CHILDRESN>;

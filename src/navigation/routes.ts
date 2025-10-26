@@ -33,7 +33,8 @@ export const ROUTES = {
     USER_OPROS: "UserOpros",
     USER_RECOMMENDATIONS: "UserRecomendations",
 
-    USER_EDIT_PROFILE: "UserEditProfile"
+    USER_EDIT_PROFILE: "UserEditProfile",
+    USER_EDIT_CHILDRESN: "USER_EDIT_CHILDRESN"
   },
   TABS: {
     HOME: "HomeTab",

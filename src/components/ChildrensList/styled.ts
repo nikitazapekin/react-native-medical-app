@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   content: {
     width: "100%",
     height: "100%",
+    paddingBottom: 40
   },
 
   title: {
@@ -18,6 +19,7 @@ export const styles = StyleSheet.create({
     width: 376,
     flexDirection: "column",
     gap: 10,
+    marginBottom: 15
 
   },
 });
