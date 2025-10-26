@@ -16,38 +16,22 @@ const UserEditChildrenComponent = ({id}: UserEditChildrenProps) => {
   const [editingChild, setEditingChild] = useState<Child | null>(null);
 
   const [saving, setSaving] = useState(false);
-
- /*  useEffect(() => {
-    loadCurrentPatientAndChildren().catch(()=>console.log("error"))
-  }, []);
-
-  const loadCurrentPatientAndChildren = async () => {
-    try {
-
-      const childrenData = await ChildrenService.getChildrenByParentId(Number(id));
-
-      setChildren(childrenData);
-    } catch (error) {
-      console.error('Error loading patient and children:', error);
-      Alert.alert('Ошибка', 'Не удалось загрузить данные');
-    }
-  };
- */
-
+ 
 
   useEffect(() => {
-  const loadCurrentPatientAndChildren = async () => {
-    try {
-      const childrenData = await ChildrenService.getChildrenByParentId(Number(id));
-      setChildren(childrenData);
-    } catch (error) {
-      console.error('Error loading patient and children:', error);
-      Alert.alert('Ошибка', 'Не удалось загрузить данные');
-    }
-  };
+    const loadCurrentPatientAndChildren = async () => {
+      try {
+        const childrenData = await ChildrenService.getChildrenByParentId(Number(id));
 
-  loadCurrentPatientAndChildren().catch(() => console.log("error"));
-}, [id]);  
+        setChildren(childrenData);
+      } catch  {
+     
+        Alert.alert('Ошибка', 'Не удалось загрузить данные');
+      }
+    };
+
+    loadCurrentPatientAndChildren().catch(() => console.log("error"));
+  }, [id]);
 
   const handleAddChild = () => {
     setEditingChild(null);

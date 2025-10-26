@@ -1,4 +1,4 @@
-// types.ts
+ 
 export interface UserEditChildrenProps {
   id: string;
 }
