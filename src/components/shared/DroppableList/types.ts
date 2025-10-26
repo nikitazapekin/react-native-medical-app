@@ -1,4 +1,4 @@
-export interface ListItem {
+/* export interface ListItem {
   id: string;
   label: string;
   type?: string;
@@ -7,12 +7,15 @@ export interface ListItem {
 export interface SortOptions {
   sortOptions: ListItem[];
 }
-/* export interface SortOptions  {
-  sortOptions: {
-
-    id: string,
-    type: string,
-  label: string
+  */
+ interface ListItem {
+  id: string;
+  label: string;
+  type?: string;
 }
-  }
- */
+export interface SortOptions {
+  sortOptions: ListItem[];
+}
+export interface DroppableListProps extends SortOptions {
+  handler?: (item: ListItem) => void;
+}

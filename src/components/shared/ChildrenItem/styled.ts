@@ -36,4 +36,9 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.GRAY_TEXT
   },
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 60
+  }
 });

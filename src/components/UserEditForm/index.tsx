@@ -32,29 +32,6 @@ const UserEditForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [initialData, setInitialData] = useState<FormData | null>(null);
 
-  /*   useEffect(() => {
-    loadCurrentUserData();
-  }, []);
-
-  const loadCurrentUserData = async () => {
-    try {
-      const userData = await PersonInfoService.getCurrentPatient();
-      const initialFormData = {
-        firstName: userData.firstName || "",
-        lastName: userData.lastName || "",
-        region: userData.region || "",
-        phoneNumber: userData.phoneNumber || "",
-        citate: userData.citate || "",
-      };
-
-      setFormData(initialFormData);
-      setInitialData(initialFormData);
-    } catch (error) {
-      console.error('Error loading user data:', error);
-      Alert.alert('Ошибка', 'Не удалось загрузить данные профиля');
-    }
-  }; */
-
   useEffect(() => {
     const loadCurrentUserData = async () => {
       try {
@@ -75,7 +52,7 @@ const UserEditForm = () => {
       }
     };
 
-    loadCurrentUserData().catch(()=>console.log("err"))
+    loadCurrentUserData().catch(()=>console.log("err"));
   }, []);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
