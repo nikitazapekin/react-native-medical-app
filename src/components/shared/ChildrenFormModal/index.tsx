@@ -13,15 +13,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 
 import { styles } from './styled';
-/*
-interface ChildFormModalProps {
-  visible: boolean;
-  child?: any;
-  onSave: (childData: any) => void;
-  onDelete?: () => void;
-  onClose: () => void;
-  saving?: boolean;
-} */
+ 
 
 export interface ChildData {
   id?: number;
