@@ -40,7 +40,6 @@ const ChildrensList = () => {
 
       </View>
 
-      
     </View>
   );
 };

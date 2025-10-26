@@ -75,7 +75,7 @@ const UserEditForm = () => {
       }
     };
 
-    loadCurrentUserData().catch(()=>console.log("err"))
+    loadCurrentUserData().catch(()=>console.log("err"));
   }, []);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
