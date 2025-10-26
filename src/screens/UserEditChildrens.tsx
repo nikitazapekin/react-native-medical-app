@@ -8,7 +8,7 @@ import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import UserEditChildrenComponent from "@/components/UserEditChildren";
 import type { RootStackParamList } from "@/navigation/types";
- 
+
 interface UserEditChildrenProps {
   route: RouteProp<RootStackParamList, 'USER_EDIT_CHILDRESN'>;
 

@@ -13,7 +13,6 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 
 import { styles } from './styled';
- 
 
 export interface ChildData {
   id?: number;
