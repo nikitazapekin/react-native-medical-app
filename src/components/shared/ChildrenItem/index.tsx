@@ -43,4 +43,3 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
 };
 
 export default ChildrenItem;
- 
