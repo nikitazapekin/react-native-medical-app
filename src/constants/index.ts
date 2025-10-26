@@ -6,3 +6,4 @@ export * from "./profileIcons";
 export * from "./chat";
 export * from "./childrenOptions"
 export * from "./medicalCardButtons"
+export * from "./userEdit"

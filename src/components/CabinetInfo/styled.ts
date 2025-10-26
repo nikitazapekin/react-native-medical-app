@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
   preview: {
     justifyContent: "space-between",
     flexDirection: "row",
-
     alignItems: "center",
   },
 
@@ -75,6 +74,7 @@ export const styles = StyleSheet.create({
   dots: {
     flexDirection: "row",
     gap: 6,
+    padding: 5,
   },
 
   dot: {
@@ -83,10 +83,42 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: COLORS.BLACK,
   },
+
   citate: {
     fontWeight: 300,
     fontSize: 12,
     color: COLORS.BLACK,
     marginTop: 11,
+  },
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  },
+
+  tooltip: {
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 8,
+    padding: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    minWidth: 120,
+  },
+
+  tooltipItem: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+
+  tooltipText: {
+    fontSize: 14,
+    color: COLORS.BLACK,
+    fontWeight: '400',
   },
 });

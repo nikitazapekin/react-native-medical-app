@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Modal,NativeSyntheticEvent,NativeTouchEvent,Text, TouchableOpacity, View } from "react-native";
 import MockImage from "@assets/mockPhotos/Avatar.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -7,14 +7,16 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styled";
 import type { Patient } from "./types";
 
+import { getDaysSinceRegistration } from "@/helpers/dateFormat";
 import AuthService from "@/http/auth";
 import UserService from "@/http/userService";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
-import { getDaysSinceRegistration } from "@/helpers/dateFormat";
-
+type TouchEvent = NativeSyntheticEvent<NativeTouchEvent>;
 const CabinetInfo = () => {
   const [patient, setPatiens] = useState<Patient>();
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const navigation = useNavigation<FormNavigationProp>();
 
   useEffect(() => {
@@ -22,10 +24,7 @@ const CabinetInfo = () => {
       try {
         const token = await AsyncStorage.getItem('accessToken');
 
-        console.log("🔑 Current token:", token);
-
         if (!token) {
-
           navigation.navigate(ROUTES.STACK.AUTH);
 
           return;
@@ -34,7 +33,6 @@ const CabinetInfo = () => {
         const t = await AuthService.validateToken();
 
         if (t.accessToken !== "Token is valid") {
-
           navigation.navigate(ROUTES.STACK.AUTH);
 
           return;
@@ -44,8 +42,7 @@ const CabinetInfo = () => {
 
         setPatiens(userData);
 
-      } catch   {
-
+      } catch {
         navigation.navigate(ROUTES.STACK.AUTH);
       }
     }
@@ -54,6 +51,24 @@ const CabinetInfo = () => {
       navigation.navigate(ROUTES.STACK.AUTH);
     });
   }, [navigation]);
+
+  const handleDotsPress = (event: TouchEvent) => {
+
+    const { pageX, pageY } = event.nativeEvent;
+
+    setTooltipPosition({ x: pageX -  110, y: pageY -15 });
+    setShowTooltip(true);
+  };
+
+  const handleEdit = () => {
+    setShowTooltip(false);
+
+    navigation.navigate(ROUTES.STACK.USER_EDIT_PROFILE);
+  };
+
+  const closeTooltip = () => {
+    setShowTooltip(false);
+  };
 
   return (
     <View style={styles.wrapper}>
@@ -76,13 +91,42 @@ const CabinetInfo = () => {
             <Text style={styles.tel}>{patient?.phoneNumber}</Text>
           </View>
 
-          <View style={styles.dots}>
+          <TouchableOpacity style={styles.dots} onPress={handleDotsPress}>
             <View style={styles.dot} />
             <View style={styles.dot} />
             <View style={styles.dot} />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
+
+      <Modal
+        visible={showTooltip}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={closeTooltip}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={closeTooltip}
+        >
+          <View
+            style={[
+              styles.tooltip,
+              {
+                position: 'absolute',
+                top: tooltipPosition.y,
+                left: tooltipPosition.x
+              }
+            ]}
+          >
+            <TouchableOpacity style={styles.tooltipItem} onPress={handleEdit}>
+              <Text style={styles.tooltipText}>Редактировать</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
       <Text style={styles.citate}>
         Считаю, что залог хорошего здоровья - правильный уход и дисциплина
       </Text>
@@ -90,4 +134,4 @@ const CabinetInfo = () => {
   );
 };
 
-export default CabinetInfo; 
+export default CabinetInfo;

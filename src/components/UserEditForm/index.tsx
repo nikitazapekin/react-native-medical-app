@@ -6,11 +6,12 @@ import FormInput from "../shared/FormInput";
 
 import { styles } from "./styled";
 
-import { DOCTOR_EDIT_CONSTANTS } from "@/constants/doctorEdit";
+import { USER_EDIT_CONSTANTS } from "@/constants";
+ 
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
-const DoctorEditForm = () => {
+const UserEditForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleDoctorCabinet = () => {
@@ -25,7 +26,7 @@ const DoctorEditForm = () => {
         </View>
 
         <View style={styles.fields}>
-          {DOCTOR_EDIT_CONSTANTS.map((item) => (
+          {USER_EDIT_CONSTANTS.map((item) => (
             <FormInput
               label={item.label}
               handler={() => {}}
@@ -44,4 +45,4 @@ const DoctorEditForm = () => {
   );
 };
 
-export default DoctorEditForm;
+export default UserEditForm;

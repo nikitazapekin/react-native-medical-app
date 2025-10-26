@@ -36,7 +36,7 @@ const processQueue = (error: Error | null, token: string | null = null) => {
 
 $api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
- 
+
     if (config.url !== '/auth/refresh') {
       const token = await AsyncStorage.getItem('accessToken');
 

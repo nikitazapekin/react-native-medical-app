@@ -29,6 +29,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_ANALYZE_HISTORY]: undefined;
   [ROUTES.STACK.USER_ISTORIA_PRIEMOV]: undefined;
     [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
+        [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
    drug: {
    id: number;
