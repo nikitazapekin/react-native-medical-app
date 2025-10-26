@@ -39,6 +39,8 @@ const ChildrensList = () => {
         ))}
 
       </View>
+
+      
     </View>
   );
 };
