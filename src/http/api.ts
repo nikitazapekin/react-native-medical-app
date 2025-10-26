@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import AuthService from './auth';
 
-const BASE_URL = 'http://192.168.1.14:9081/api';
+const BASE_URL = 'http://192.168.1.14:9082/api';
 
 const $api = axios.create({
   baseURL: BASE_URL,
@@ -36,8 +36,7 @@ const processQueue = (error: Error | null, token: string | null = null) => {
 
 $api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-    console.log(`🚀 Making request to: ${config.url}`);
-
+ 
     if (config.url !== '/auth/refresh') {
       const token = await AsyncStorage.getItem('accessToken');
 

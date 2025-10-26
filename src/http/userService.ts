@@ -56,20 +56,7 @@ class UserService {
       return null;
     }
   }
-/*
-  static async updateUserProfile(userData: any): Promise<Patient | Doctor> {
-    try {
-      const userType = await this.getUserType();
-
-      if (userType === "DOCTOR") {
-        return await DoctorInfoService.updateDoctor(userData);
-      } else {
-        return await PersonInfoService.updatePatient(userData);
-      }
-    } catch {
-      throw new Error("Failed to update profile");
-    }
-  } */
+ 
 }
 
 export default UserService;
