@@ -15,6 +15,19 @@ class PersonInfoService {
     }
   }
 
+  static async updatePatientAvatar(avatarUrl: string): Promise<Patient> {
+    try {
+      const response = await $api.put<Patient>('/patients/updateAvatar', {
+        avatar: avatarUrl
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error('Error updating avatar:', error);
+      throw new Error('Failed to update avatar');
+    }
+  }
+
   static async getPatientById(id: number): Promise<Patient> {
     try {
       const response = await $api.get<Patient>(`/patients/${id}`);
@@ -28,23 +41,15 @@ class PersonInfoService {
 
   static async updatePatient(patientData: Partial<Patient>): Promise<Patient> {
     try {
+      console.log('Updating patient with data:', patientData);
       const response = await $api.put<Patient>('/patients/me', patientData);
 
-      return response.data;
-    } catch   {
-
-      throw new Error( 'Failed to update patient information');
-    }
-  }
-
-  static async updatePatientAvatar(avatarUrl: string): Promise<Patient> {
-    try {
-      const response = await $api.patch<Patient>('/patients/me/avatar', { avatar: avatarUrl });
+      console.log('Patient update successful');
 
       return response.data;
-    } catch   {
+    } catch  {
 
-      throw new Error(  'Failed to update avatar');
+      throw new Error('Failed to update patient information');
     }
   }
 
