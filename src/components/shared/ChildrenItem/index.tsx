@@ -17,8 +17,7 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
       navigation.navigate(ROUTES.STACK.CHILDREN);
     }
   };
-
-  // Функция для обработки base64 изображений
+ 
   const getImageSource = () => {
     if (typeof item.img === 'string') {
       return { uri: item.img };
@@ -32,7 +31,7 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
       <Image
         source={getImageSource()}
         alt={item.alt}
-        style={styles.image} // Добавьте стили для изображения
+        style={styles.image} 
       />
       <View style={styles.content}>
         <Text style={styles.title}>{item.name}</Text>
