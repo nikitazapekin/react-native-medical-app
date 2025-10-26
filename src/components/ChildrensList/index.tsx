@@ -45,6 +45,7 @@ const ChildrensList = () => {
         const childrenData = await ChildrenService.getChildrenByParentId(Number(id));
 
         setChildren(childrenData);
+        setSortedChildren(childrenData);
       } catch  {
 
         Alert.alert('Ошибка', 'Не удалось загрузить данные');
@@ -54,14 +55,53 @@ const ChildrensList = () => {
     loadCurrentPatientAndChildren().catch(() => console.log("error"));
   }, [id]);
 
+  const sortChildren = (childrenList: Child[], sortBy: string) => {
+    const sorted = [...childrenList];
+
+    switch (sortBy) {
+      case "age":
+        return sorted.sort((a, b) => parseInt(String(a.age)) - parseInt(String(b.age)));
+
+      case "name":
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+
+      default:
+        return sorted;
+    }
+  };
+
+  const [sortedChildren, setSortedChildren] = useState<Child[]>([]);
+
+  const [sortType, setSortType] = useState<string>("");
+  const handleSortChange = (selectedOption: { id: string; label: string; type?: string }) => {
+    if (selectedOption.type) {
+      setSortType(selectedOption.type);
+      const sorted = sortChildren(children, selectedOption.type);
+
+      setSortedChildren(sorted);
+    }
+  };
+
+  useEffect(() => {
+    if (sortType) {
+      const sorted = sortChildren(children, sortType);
+
+      setSortedChildren(sorted);
+    } else {
+      setSortedChildren(children);
+    }
+  }, [children, sortType]);
+
   return (
     <View style={styles.content}>
-      <DroppableList sortOptions={sortOptions} />
+      <DroppableList sortOptions={sortOptions}
+        handler={handleSortChange}
+      />
 
       <Text style={styles.title}>Список детей</Text>
       <View style={styles.wrapper}>
 
-        {children.map((child) => (
+        {sortedChildren.map((child) => (
           <ChildrenItem
             key={child.id}
             item={{
