@@ -7,7 +7,6 @@ import FormInput from "../shared/FormInput";
 import { styles } from "./styled";
 
 import { USER_EDIT_CONSTANTS } from "@/constants";
- 
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Image, Modal,NativeSyntheticEvent,NativeTouchEvent,Text, TouchableOpacity, View } from "react-native";
+import type {NativeSyntheticEvent,NativeTouchEvent} from "react-native";
+import { Image, Modal,Text, TouchableOpacity, View } from "react-native";
 import MockImage from "@assets/mockPhotos/Avatar.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +13,7 @@ import AuthService from "@/http/auth";
 import UserService from "@/http/userService";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
+
 type TouchEvent = NativeSyntheticEvent<NativeTouchEvent>;
 const CabinetInfo = () => {
   const [patient, setPatiens] = useState<Patient>();
