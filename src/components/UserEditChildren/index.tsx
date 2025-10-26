@@ -16,7 +16,6 @@ const UserEditChildrenComponent = ({id}: UserEditChildrenProps) => {
   const [editingChild, setEditingChild] = useState<Child | null>(null);
 
   const [saving, setSaving] = useState(false);
- 
 
   useEffect(() => {
     const loadCurrentPatientAndChildren = async () => {
@@ -25,7 +24,7 @@ const UserEditChildrenComponent = ({id}: UserEditChildrenProps) => {
 
         setChildren(childrenData);
       } catch  {
-     
+
         Alert.alert('Ошибка', 'Не удалось загрузить данные');
       }
     };

@@ -13,7 +13,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 
 import { styles } from './styled';
-/* 
+/*
 interface ChildFormModalProps {
   visible: boolean;
   child?: any;
@@ -23,7 +23,6 @@ interface ChildFormModalProps {
   saving?: boolean;
 } */
 
-  
 export interface ChildData {
   id?: number;
   name: string;
@@ -283,4 +282,3 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({
 };
 
 export default ChildFormModal;
- 
