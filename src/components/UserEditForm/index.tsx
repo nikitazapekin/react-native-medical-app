@@ -14,7 +14,7 @@ const UserEditForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleDoctorCabinet = () => {
-    navigation.navigate(ROUTES.STACK.DOCTOR_CABINET);
+    navigation.navigate(ROUTES.STACK.CABINET);
   };
 
   return (
