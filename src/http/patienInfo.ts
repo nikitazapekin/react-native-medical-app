@@ -41,12 +41,15 @@ class PersonInfoService {
 
   static async updatePatient(patientData: Partial<Patient>): Promise<Patient> {
     try {
+      console.log('Updating patient with data:', patientData);
       const response = await $api.put<Patient>('/patients/me', patientData);
 
-      return response.data;
-    } catch   {
+      console.log('Patient update successful');
 
-      throw new Error( 'Failed to update patient information');
+      return response.data;
+    } catch  {
+
+      throw new Error('Failed to update patient information');
     }
   }
 
