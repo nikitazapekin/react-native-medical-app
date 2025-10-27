@@ -13,21 +13,19 @@ import type { ChildFull } from "@/http/types/childFull";
 
 const ChildrenComponent = ({ id }: ChildrenComponentTypes) => {
   const [children, setChildren] = useState<ChildFull>();
-  const handleGetInfo = async () => {
-    console.log("IDDD", id);
-    try {
-
-      const resp = await ChildrenService.getFullInfo(id);
-
-      setChildren(resp);
-    } catch {
-      Alert.alert("Error");
-    }
-  };
-
   useEffect(() => {
-    handleGetInfo().catch(()=> Alert.alert("Something went wrong"));
-  }, [id]);
+    const handleGetInfo = async () => {
+      console.log("IDDD", id);
+      try {
+        const resp = await ChildrenService.getFullInfo(id);
+        setChildren(resp);
+      } catch {
+        Alert.alert("Error");
+      }
+    };
+
+    handleGetInfo().catch(() => Alert.alert("Something went wrong"));
+  }, [id]); 
 
   return (
     <View style={styles.wrapper}>

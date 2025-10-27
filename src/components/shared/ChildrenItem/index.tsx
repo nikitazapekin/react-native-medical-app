@@ -1,6 +1,5 @@
- 
+
 import { Image, Pressable, Text, View } from "react-native";
- 
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
