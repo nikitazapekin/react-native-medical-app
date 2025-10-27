@@ -1,3 +1,4 @@
+
 import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -14,12 +15,12 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
     if (openModal) {
       openModal();
     } else {
-      navigation.navigate(ROUTES.STACK.CHILDREN);
+      navigation.navigate(ROUTES.STACK.CHILDREN, { id: Number(item.id) });
     }
   };
 
   const getImageSource = () => {
-    if (typeof item.img === 'string') {
+    if (typeof item.img === "string") {
       return { uri: item.img };
     }
 
@@ -28,11 +29,7 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
 
   return (
     <Pressable onPress={handlePress} style={styles.wrapper}>
-      <Image
-        source={getImageSource()}
-        alt={item.alt}
-        style={styles.image}
-      />
+      <Image source={getImageSource()} alt={item.alt} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.title}>{item.name}</Text>
         <Text style={styles.age}>Возраст: {item.age}</Text>
@@ -43,3 +40,19 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
 };
 
 export default ChildrenItem;
+
+/*
+
+  const [id, setId] = useState<string>("");
+  const handleNavigate = () => {
+    navigation.navigate(ROUTES.STACK.USER_EDIT_CHILDRESN, { id: Number(id) });
+  };
+  const handleLoadId = async () => {
+    const id = await AsyncStorage.getItem("id");
+
+    if (typeof id == "string") {
+      setId(id);
+    }
+  };
+
+  */

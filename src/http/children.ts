@@ -1,3 +1,4 @@
+import type { ChildFull } from './types/childFull';
 import $api from './api';
 
 export interface Child {
@@ -61,6 +62,17 @@ class ChildrenService {
   static async updateChild(id: number, childData: UpdateChildRequest): Promise<Child> {
     try {
       const response = await $api.put<Child>(`/children/${id}`, childData);
+
+      return response.data;
+    } catch (error) {
+      console.error('Error updating child:', error);
+      throw new Error('Failed to update child information');
+    }
+  }
+
+  static async getFullInfo(id: number ): Promise<ChildFull> {
+    try {
+      const response = await $api.get<ChildFull>(`/children/${id}/full`);
 
       return response.data;
     } catch (error) {

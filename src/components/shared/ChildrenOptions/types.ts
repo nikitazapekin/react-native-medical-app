@@ -1,5 +1,7 @@
 import type { ImageSourcePropType } from "react-native";
 
+import type { ChildFull } from "@/http/types/childFull";
+
 export interface ListItemProps {
   item: {
     text: string;
@@ -7,4 +9,8 @@ export interface ListItemProps {
     alt: string;
     id: number;
   };
+}
+
+export interface ChildrenOptionsProps {
+  children: ChildFull
 }
