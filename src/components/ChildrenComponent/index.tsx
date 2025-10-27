@@ -16,7 +16,7 @@ const ChildrenComponent = ({ id }: ChildrenComponentTypes) => {
 
   useEffect(() => {
     const handleGetInfo = async () => {
- 
+
       try {
         const resp = await ChildrenService.getFullInfo(id);
 
