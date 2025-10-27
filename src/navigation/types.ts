@@ -22,7 +22,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined; //страница записей доктора
   [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; //страница htlf htlfr редактирования инфы доктора
   [ROUTES.STACK.CHILDRENS]: undefined;
-  [ROUTES.STACK.CHILDREN]: undefined;
+  [ROUTES.STACK.CHILDREN]:  { id: number };
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
   [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
   [ROUTES.STACK.MEDICALCARD]: undefined;
