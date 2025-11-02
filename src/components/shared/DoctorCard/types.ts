@@ -6,4 +6,3 @@ export interface DoctorCardProps {
   availability: string;
   avatar: ImageSourcePropType;
 }
-

@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
-
 import PillIcon from "@assets/tabBar/booking.png";
 
 import { styles } from "./styled";
@@ -29,4 +28,3 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ name, spec, availability, avata
 };
 
 export default DoctorCard;
-

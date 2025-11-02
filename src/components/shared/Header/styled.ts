@@ -33,4 +33,16 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     alignSelf: "center",
   },
+  backButton: {
+    position: "absolute",
+    left: 18,
+    width: 45,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backButtonIcon: {
+    width: 45,
+    height: 48,
+  },
 });

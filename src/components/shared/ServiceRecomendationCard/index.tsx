@@ -17,4 +17,3 @@ const ServiceRecomendationCard: React.FC<ServiceRecomendationCardProps> = ({ tit
 };
 
 export default ServiceRecomendationCard;
-
