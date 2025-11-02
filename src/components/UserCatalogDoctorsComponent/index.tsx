@@ -1,26 +1,16 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import AvatarImg from "@assets/mockPhotos/AvatarDoctorCatalog.png";
+
+import { styles } from "./styled";
 
 import DoctorCard from "@/components/shared/DoctorCard";
 import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
-
-import { styles } from "./styled";
-
-interface Doctor {
-  id: number;
-  name: string;
-  spec: string;
-  availability: string;
-  avatar: typeof AvatarImg;
-  experience: string; // Опыт работы
-  education: string; // Образование
-  specialization: string; // Специализация
-  achievements: string[]; // Достижения
-  qualificationImprovement: string[]; // Повышение квалификации
-}
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
+import type { Doctor } from "./types";
 
 const sortOptions = [
   { id: "1", label: "По имени", type: "name" },
@@ -48,6 +38,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по эстетической стоматологии (2023)",
       "Повышение квалификации по эндодонтии (2024)"
     ],
+    rating: 4.85,
   },
   {
     id: 2,
@@ -68,6 +59,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по современным методам диагностики аритмий (2023)",
       "Повышение квалификации по сердечной недостаточности (2024)"
     ],
+    rating: 5.0,
   },
   {
     id: 3,
@@ -88,6 +80,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по гастроэнтерологии (2022)",
       "Повышение квалификации по терапии (2024)"
     ],
+    rating: 4.92,
   },
   {
     id: 4,
@@ -108,6 +101,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по эпилептологии (2022)",
       "Повышение квалификации по детской неврологии (2024)"
     ],
+    rating: 4.78,
   },
   {
     id: 5,
@@ -128,6 +122,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по роботической хирургии (2022)",
       "Повышение квалификации по абдоминальной хирургии (2024)"
     ],
+    rating: 4.95,
   },
   {
     id: 6,
@@ -148,6 +143,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по лечению катаракты (2023)",
       "Повышение квалификации по детской офтальмологии (2024)"
     ],
+    rating: 4.65,
   },
   {
     id: 7,
@@ -168,6 +164,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по слухопротезированию (2023)",
       "Повышение квалификации по детской отоларингологии (2024)"
     ],
+    rating: 4.88,
   },
   {
     id: 8,
@@ -188,6 +185,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по гинекологической эндокринологии (2022)",
       "Повышение квалификации по УЗИ в гинекологии (2024)"
     ],
+    rating: 4.72,
   },
   {
     id: 9,
@@ -209,6 +207,7 @@ const mockDoctors: Doctor[] = [
       "Семинар по урологической онкологии (2023)",
       "Повышение квалификации по андрологии (2024)"
     ],
+    rating: 4.90,
   },
   {
     id: 10,
@@ -230,19 +229,25 @@ const mockDoctors: Doctor[] = [
       "Семинар по детской кардиологии (2022)",
       "Повышение квалификации по вакцинопрофилактике (2024)"
     ],
+    rating: 4.98,
   },
 ];
 
 const UserCatalogDoctorsComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigation = useNavigation<FormNavigationProp>();
 
   const handleSort = () => {
+  };
+
+  const handleDoctorPress = (doctor: Doctor) => {
+    navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor });
   };
 
   return (
     <View style={styles.content}>
 
-    <DroppableList sortOptions={sortOptions} handler={handleSort} />
+      <DroppableList sortOptions={sortOptions} handler={handleSort} />
 
       <SearchInput
         value={searchQuery}
@@ -254,7 +259,11 @@ const UserCatalogDoctorsComponent = () => {
 
       <View style={styles.listWrapper}>
         {mockDoctors.map((doctor) => (
-          <TouchableOpacity key={doctor.id} style={styles.cardTouchable}>
+          <TouchableOpacity
+            key={doctor.id}
+            style={styles.cardTouchable}
+            onPress={() => handleDoctorPress(doctor)}
+          >
             <DoctorCard
               name={doctor.name}
               spec={doctor.spec}
@@ -270,4 +279,3 @@ const UserCatalogDoctorsComponent = () => {
 };
 
 export default UserCatalogDoctorsComponent;
-
