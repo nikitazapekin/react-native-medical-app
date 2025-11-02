@@ -1,75 +1,53 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-
-import { COLORS } from "appStyles";
+import { Image, Text, View } from "react-native";
 import AvatarImg from "@assets/mockPhotos/AvatarDoctorCatalog.png";
-import MedicalServiceImg from "@assets/mockPhotos/IconCatalog.png"
-import PillIcon from "@assets/tabBar/booking.png";
-import CustomButton from "@/components/shared/Button";
+import MedicalServiceImg from "@assets/mockPhotos/IconCatalog.png";
+import { COLORS } from "appStyles";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
+import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styled";
 
+import CustomButton from "@/components/shared/Button";
+import DoctorCard from "@/components/shared/DoctorCard";
+import ServiceRecomendationCard from "@/components/shared/ServiceRecomendationCard";
+
 const CatalogComponent = () => {
+
+  const navigation = useNavigation<FormNavigationProp>();
+
+  const handleViewAllDoctors = () => {
+    navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS);
+  };
+
   return (
     <View style={styles.container}>
 
       <Text style={styles.sectionTitle}>Популярные врачи</Text>
 
-      <View style={styles.cardShadowWrapper}>
-        <View style={styles.doctorCard}>
-          <View style={styles.avatarWrapper}>
-            <Image source={AvatarImg} style={styles.avatarImage} resizeMode="contain" />
-          </View>
+      <DoctorCard
+        name="Незнамов Петр Петрович"
+        spec="Стоматолог"
+        availability="Сегодня с 9:00 до 17:00"
+        avatar={AvatarImg}
+      />
 
-          <View style={styles.doctorTextBlock}>
-            <Text style={styles.doctorName}>Незнамов Петр Петрович</Text>
-            <Text style={styles.doctorSpec}>Стоматолог</Text>
-
-            <View style={styles.availabilityPill}>
-              <Image source={PillIcon} style={styles.pillIcon} resizeMode="contain" />
-              <Text style={styles.pillText}>Сегодня с 9:00 до 17:00</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.cardShadowWrapper}>
-        <View style={styles.doctorCard}>
-          <View style={styles.avatarWrapper}>
-            <Image source={AvatarImg} style={styles.avatarImage} resizeMode="contain" />
-          </View>
-
-          <View style={styles.doctorTextBlock}>
-            <Text style={styles.doctorName}>Незнамов Петр Петрович</Text>
-            <Text style={styles.doctorSpec}>Стоматолог</Text>
-            <View style={styles.availabilityPill}>
-              <Image source={PillIcon} style={styles.pillIcon} resizeMode="contain" />
-              <Text style={styles.pillText}>Сегодня с 9:00 до 17:00</Text>
-            </View>
-          </View>
-        </View>
-      </View>
+      <DoctorCard
+        name="Незнамов Петр Петрович"
+        spec="Стоматолог"
+        availability="Сегодня с 9:00 до 17:00"
+        avatar={AvatarImg}
+      />
 
       <View style={styles.primaryButtonWrapper}>
-        <CustomButton text="Редактировать профиль" handler={() => {}} backgroundColor={COLORS.PRIMARY} />
+        <CustomButton text="Посмотреть всех популярных врачей" handler={handleViewAllDoctors} backgroundColor={COLORS.PRIMARY} />
       </View>
 
       <Text style={styles.sectionTitle}>Спектр услуг</Text>
 
-      <View style={styles.cardShadowWrapper}>
-        <View style={styles.serviceCard}>
-          <View style={styles.serviceIconHalo} />
-          <Image source={MedicalServiceImg} style={styles.serviceIcon} resizeMode="contain"/>
-          <Text style={styles.serviceText}>Стоматология</Text>
-        </View>
-      </View>
+      <ServiceRecomendationCard title="Стоматология" icon={MedicalServiceImg} />
 
-      <View style={styles.cardShadowWrapper}>
-        <View style={styles.serviceCard}>
-          <View style={styles.serviceIconHalo} />
-          <Image source={MedicalServiceImg} style={styles.serviceIcon} resizeMode="contain"/>
-          <Text style={styles.serviceText}>Кардиология</Text>
-        </View>
-      </View>
+      <ServiceRecomendationCard title="Кардиология" icon={MedicalServiceImg} />
 
       <View style={styles.primaryButtonWrapper}>
         <CustomButton text="Посмотреть все услуги" handler={() => {}} backgroundColor={COLORS.PRIMARY} />
@@ -77,27 +55,15 @@ const CatalogComponent = () => {
 
       <Text style={styles.sectionTitle}>Рекомендации</Text>
 
-      <View style={styles.cardShadowWrapper}>
-        <View style={styles.serviceCard}>
-          <View style={styles.serviceIconHalo} />
-          <Image source={MedicalServiceImg} style={styles.serviceIcon} resizeMode="contain"/>
-          <Text style={styles.serviceText}>Физические упражнения</Text>
-        </View>
-      </View>
+      <ServiceRecomendationCard title="Физические упражнения" icon={MedicalServiceImg} />
 
-      <View style={styles.cardShadowWrapper}>
-        <View style={styles.serviceCard}>
-          <View style={styles.serviceIconHalo} />
-          <Image source={MedicalServiceImg} style={styles.serviceIcon} resizeMode="contain"/>
-          <Text style={styles.serviceText}>Подготовка к сезону простуд</Text>
-        </View>
-      </View>
+      <ServiceRecomendationCard title="Подготовка к сезону простуд" icon={MedicalServiceImg} />
 
       <View style={styles.primaryButtonWrapper}>
         <CustomButton text="Посмотреть все рекомендации" handler={() => {}} backgroundColor={COLORS.PRIMARY} />
       </View>
     </View>
   );
-}
+};
 
 export default CatalogComponent;

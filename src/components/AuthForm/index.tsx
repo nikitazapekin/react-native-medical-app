@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Alert,Text, TouchableOpacity, View } from "react-native";
+// import { Alert,Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import CustomButton from "@components/shared/Button";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 
 import FormInput from "../shared/FormInput";
@@ -9,14 +10,15 @@ import FormInput from "../shared/FormInput";
 import { styles } from "./styled";
 import type { LoginFormData } from "./types";
 
-import AuthService from "@/http/auth";
+// import AuthService from "@/http/auth";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const AuthForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const [isChecked, setIsChecked] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: ""

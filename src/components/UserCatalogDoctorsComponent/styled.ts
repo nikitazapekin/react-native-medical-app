@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   title: {
     color: COLORS.BLACK,
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: "700",
     paddingTop: 15,
     paddingBottom: 15,
     textAlign: "center",
@@ -18,27 +18,15 @@ export const styles = StyleSheet.create({
   },
   listWrapper: {
     width: "100%",
-    flexDirection: "column",
+    maxWidth: 376,
+    marginTop: 10,
     gap: 10,
     alignItems: "center",
-    justifyContent: "center",
-    maxWidth: 376,
     paddingBottom: 25,
   },
-  appointmentItem: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#E9ECEF",
-
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+  cardTouchable: {
+    width: "100%",
+    zIndex: 1,
   },
 });
+
