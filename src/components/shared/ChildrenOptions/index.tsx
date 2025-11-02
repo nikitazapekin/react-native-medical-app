@@ -2,7 +2,7 @@ import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
-import type { ListItemProps } from "./types";
+import type {  ListItemProps } from "./types";
 
 import { childrenOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
@@ -25,7 +25,7 @@ const ChildrenItem = ({ item }: ListItemProps) => {
   );
 };
 
-const ChildrenOptions = () => {
+const ChildrenOptions = ( ) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.list}>

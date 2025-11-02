@@ -31,7 +31,10 @@ export const ROUTES = {
     USER_DRUG_DETAIL_SCREEN: "UserDrugDetailScreen",
     USER_SPISOK_SOVETOV: "UserSpisokSovetov",
     USER_OPROS: "UserOpros",
-    USER_RECOMMENDATIONS: "UserRecomendations"
+    USER_RECOMMENDATIONS: "UserRecomendations",
+
+    USER_EDIT_PROFILE: "UserEditProfile",
+    USER_EDIT_CHILDRESN: "USER_EDIT_CHILDRESN"
   },
   TABS: {
     HOME: "HomeTab",
@@ -46,6 +49,7 @@ export const TEXTS = {
     PROFILE: "Профиль",
     SETTINGS: "Настройки",
     CHAT: "Чат",
+    CATALOG: "Каталог",
   },
   BUTTONS: {
     GO_TO_PROFILE: "Перейти в профиль",

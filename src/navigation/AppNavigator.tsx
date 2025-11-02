@@ -30,6 +30,8 @@ import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
 import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
 import UserCatalogDrugDetail from "@/screens/UserCatalogDrugDetailScreen";
+import UserEditChildren from "@/screens/UserEditChildrens";
+import UserEditCabinet from "@/screens/UserEditProfile";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
@@ -74,6 +76,8 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_SPISOK_SOVETOV} component={UserSpisokSovetovScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_OPROS} component={UserOprosScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_RECOMMENDATIONS} component={UserRecommendations} />
+        <Stack.Screen name={ROUTES.STACK.USER_EDIT_PROFILE} component={UserEditCabinet} />
+        <Stack.Screen name={ROUTES.STACK.USER_EDIT_CHILDRESN} component={UserEditChildren} />
         <Stack.Screen
           name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
           component={DoctorAppointmentsScreen}

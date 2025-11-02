@@ -32,6 +32,7 @@ const DoctorEditForm = () => {
               placeholder={item.placeholder}
               type={item.type}
               key={item.id}
+              value={""}
             />
           ))}
         </View>

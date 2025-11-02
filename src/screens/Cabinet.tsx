@@ -14,7 +14,7 @@ const CabinetScreen = () => {
   return (
     <>
       <View style={styles.container}>
-        <Header title="Чат" isAuthenticated={true} />
+        <Header title="Профиль" isAuthenticated={true} />
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <CabinetInfo />
           <CabinetOptions />

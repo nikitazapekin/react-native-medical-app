@@ -1,24 +1,69 @@
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert,Text, TouchableOpacity, View } from "react-native";
 import CustomButton from "@components/shared/Button";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 
 import FormInput from "../shared/FormInput";
 
 import { styles } from "./styled";
+import type { LoginFormData } from "./types";
 
-import { AUTH_CONSTANTS } from "@/constants";
+import AuthService from "@/http/auth";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const AuthForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: "",
+    password: ""
+  });
+
   const handleRegister = () => {
     navigation.navigate(ROUTES.STACK.REGISTER);
   };
-  const handleLogin = () => {
+
+  const handleLogin = async () => {
     navigation.navigate(ROUTES.STACK.HOMEPAGE);
+    // if (!formData.email || !formData.password) {
+    //   Alert.alert("Ошибка", "Пожалуйста, заполните все поля");
+
+    //   return;
+    // }
+
+    // setLoading(true);
+
+    // try {
+    //   await AuthService.login(formData);
+
+    //   const userRole = await AsyncStorage.getItem('userRole');
+
+    //   Alert.alert("Успех", "Вход выполнен успешно!");
+
+    //   if (userRole === 'DOCTOR') {
+
+    //     navigation.navigate(ROUTES.STACK.DOCTOR);
+    //   } else {
+
+    //     navigation.navigate(ROUTES.STACK.HOMEPAGE);
+    //   }
+
+    // } catch{
+
+    //   Alert.alert("Ошибка входа");
+    // } finally {
+    //   setLoading(false);
+    // }
+  };
+
+  const handleInputChange = (field: keyof LoginFormData, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
   return (
@@ -29,15 +74,20 @@ const AuthForm = () => {
         </View>
 
         <View style={styles.fields}>
-          {AUTH_CONSTANTS.map((item) => (
-            <FormInput
-              label={item.label}
-              handler={() => {}}
-              type={item.type}
-              placeholder={item.placeholder}
-              key={item.id}
-            />
-          ))}
+          <FormInput
+            label="Почта"
+            handler={(value) => handleInputChange('email', value)}
+            type="email"
+            placeholder="Почта"
+            value={formData.email}
+          />
+          <FormInput
+            label="Пароль"
+            handler={(value) => handleInputChange('password', value)}
+            type="password"
+            placeholder="Пароль"
+            value={formData.password}
+          />
           <View style={styles.checkboxWrapper}>
             <TouchableOpacity
               style={styles.checkboxContainer}
@@ -51,12 +101,18 @@ const AuthForm = () => {
           </View>
         </View>
         <View style={styles.btns}>
-          <CustomButton text="Войти" handler={handleLogin} backgroundColor="#1280b2" />
+          <CustomButton
+            text={loading ? "Вход..." : "Войти"}
+            handler={handleLogin}
+            backgroundColor="#1280b2"
+            disabled={loading}
+          />
           <CustomButton
             text="Зарегистрироваться"
             handler={handleRegister}
             backgroundColor="#D1D5DB"
             color="#000"
+            disabled={loading}
           />
         </View>
       </View>
