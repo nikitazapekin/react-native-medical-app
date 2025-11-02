@@ -4,18 +4,17 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-import CatalogComponent from "@/components/CatalogComponent";
+import UserCatalogDoctorsComponent from "@/components/UserCatalogDoctorsComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
-import { TEXTS } from "@/navigation/routes";
 
-export default function CatalogScreen() {
+export default function UserCatalogDoctorsScreen() {
   return (
     <View style={styles.container}>
-      <Header title={TEXTS.HEADER.CATALOG} isAuthenticated={true}/>
+      <Header title="Популярные врачи" isAuthenticated={true} />
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <CatalogComponent/>
+        <UserCatalogDoctorsComponent />
       </ScrollView>
 
       <Footer />
