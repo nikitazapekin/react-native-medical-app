@@ -7,12 +7,12 @@ import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
 import DoctorCard from "@/components/shared/DoctorCard";
-import ServiceComponent from "@/components/shared/ServiceComponent";
 import RecomendationCard from "@/components/shared/RecomendationCard";
+import ServiceComponent from "@/components/shared/ServiceComponent";
 import { doctorsCatalog } from "@/constants/doctorsCatalog";
+import { recommendationCatalog } from "@/constants/recommendationCatalog";
 import { servicesCatalog } from "@/constants/servicesCatalog";
 import { ROUTES } from "@/navigation/routes";
-import { recommendationCatalog } from "@/constants/recommendationCatalog";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const CatalogComponent = () => {
@@ -61,7 +61,9 @@ const CatalogComponent = () => {
       <Text style={styles.sectionTitle}>Рекомендации</Text>
 
       {recommendationCatalog.slice(0, 3).map((r) => (
-        <RecomendationCard key={r.id} category={r.category} title={r.title} date={r.date} />
+        <TouchableOpacity key={r.id} activeOpacity={0.7} onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION, { recommendationId: r.id })}>
+          <RecomendationCard category={r.category} title={r.title} date={r.date} />
+        </TouchableOpacity>
       ))}
 
       <View style={styles.primaryButtonWrapper}>
