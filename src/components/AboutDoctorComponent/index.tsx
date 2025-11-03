@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import RatingStar from "@assets/profile/star.png";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import type { RouteProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import { styles } from "./styled";
@@ -15,10 +16,14 @@ interface AboutDoctorComponentProps {
   doctor: Doctor;
 }
 
+type AboutRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_ABOUT_DOCTOR>;
+
 const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const route = useRoute<AboutRouteProp>();
+  const serviceName = route.params?.serviceName;
   const handleAppointment = () => {
-    navigation.navigate(ROUTES.STACK.USER_REGISTRATION_AT_CLINIC, { doctor });
+    navigation.navigate(ROUTES.STACK.USER_REGISTRATION_AT_CLINIC, { doctor, serviceName });
   };
 
   return (
@@ -36,11 +41,6 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
               </View>
               <Text style={styles.doctorPosition}>{doctor.spec}</Text>
             </View>
-          </View>
-          <View style={styles.threeDots}>
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
           </View>
         </View>
         <Text style={styles.doctorDescription}>

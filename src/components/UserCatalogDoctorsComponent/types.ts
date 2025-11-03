@@ -11,5 +11,9 @@ export interface Doctor {
   specialization: string;
   achievements: string[];
   qualificationImprovement: string[];
-  rating: number; // Рейтинг врача
+  rating: number;
+}
+
+export interface UserCatalogDoctorsProps {
+  serviceName?: string;
 }
