@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo } from "react";
-import { Animated, Easing, Text, TouchableOpacity, ViewStyle } from "react-native";
-import { PRIMARY } from "@/constants/colors";
+import type { ViewStyle } from "react-native";
+import { Animated, Easing, TouchableOpacity } from "react-native";
 
 import { styles } from "./styled";
+
+import { PRIMARY } from "@/constants/colors";
 
 type Props = {
   text: string;
@@ -44,5 +46,3 @@ const TimeSlot: React.FC<Props> = ({ text, onPress, style, selected = false, pri
 };
 
 export default TimeSlot;
-
-

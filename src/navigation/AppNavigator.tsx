@@ -38,8 +38,9 @@ import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserRecommendations from "@/screens/UserRecommendations";
-import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
 import UserRegistrationAtClinic from "@/screens/UserRegistrationAtClinic";
+import UserRegistrationSummaryScreen from "@/screens/UserRegistrationSummaryScreen";
+import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -86,6 +87,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_DOCTORS} component={UserCatalogDoctorsScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_ABOUT_DOCTOR} component={UserAboutDoctorScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_AT_CLINIC} component={UserRegistrationAtClinic} />
+        <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_SUMMARY} component={UserRegistrationSummaryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

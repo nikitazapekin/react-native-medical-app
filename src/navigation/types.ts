@@ -41,6 +41,11 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_REGISTRATION_AT_CLINIC]: {
     doctor: Doctor;
   };
+  [ROUTES.STACK.USER_REGISTRATION_SUMMARY]: {
+    doctor: Doctor;
+    selectedDate: string | null;
+    selectedTime: string | null;
+  };
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
     drug: {
       id: number;
