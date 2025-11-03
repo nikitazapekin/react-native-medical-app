@@ -22,6 +22,7 @@ export const ROUTES = {
     MEDICALCARD: "MedicalCard",
     DOCTOR_RECORD_DETAIL: "DoctorRecordDetail",
     USER_CATALOG_DOCTORS: "UserCatalogDoctors",
+    USER_CATALOG_SERVICES: "UserCatalogServices",
     ISTORIABOLEZNEI: "IstoriaBoleznei",
     CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
     USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",

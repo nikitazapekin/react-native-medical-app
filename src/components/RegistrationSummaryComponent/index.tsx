@@ -10,10 +10,11 @@ type Props = {
   doctor: Doctor;
   selectedDate: string | null;
   selectedTime: string | null;
+  serviceName?: string;
   onCancel: () => void;
 };
 
-const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, onCancel }) => {
+const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, onCancel }) => {
   const formattedDate = selectedDate ? new Intl.DateTimeFormat("ru-RU").format(new Date(selectedDate)) : "—";
   const time = selectedTime ?? "—";
 
@@ -23,6 +24,9 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
         <Text style={styles.title}>Детали записи</Text>
         <View style={styles.row}><Text style={styles.label}>Врач:</Text><Text style={styles.value}>{doctor.name}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Специальность:</Text><Text style={styles.value}>{doctor.spec}</Text></View>
+        {serviceName ? (
+          <View style={styles.row}><Text style={styles.label}>Услуга:</Text><Text style={styles.value}>{serviceName}</Text></View>
+        ) : null}
         <View style={styles.row}><Text style={styles.label}>Дата:</Text><Text style={styles.value}>{formattedDate}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Время:</Text><Text style={styles.value}>{time}</Text></View>
       </View>
