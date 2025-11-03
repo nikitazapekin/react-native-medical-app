@@ -31,8 +31,9 @@ import TubeScreen from "@/screens/TubeScreen";
 import UserAboutDoctorScreen from "@/screens/UserAboutDoctorScreen";
 import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
 import UserCatalogDoctorsScreen from "@/screens/UserCatalogDoctorsScreen";
-import UserCatalogServicesScreen from "@/screens/UserCatalogServicesScreen";
 import UserCatalogDrugDetail from "@/screens/UserCatalogDrugDetailScreen";
+import UserCatalogServicesScreen from "@/screens/UserCatalogServicesScreen";
+import UserCatalogRecomendatonsScreen from "@/screens/UserCatalogRecomendatonsScreen";
 import UserEditChildren from "@/screens/UserEditChildrens";
 import UserEditCabinet from "@/screens/UserEditProfile";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
@@ -87,6 +88,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.SPISOKSOVETOV} component={SpisokSovetov} />
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_DOCTORS} component={UserCatalogDoctorsScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_SERVICES} component={UserCatalogServicesScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS} component={UserCatalogRecomendatonsScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_ABOUT_DOCTOR} component={UserAboutDoctorScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_AT_CLINIC} component={UserRegistrationAtClinic} />
         <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_SUMMARY} component={UserRegistrationSummaryScreen} />

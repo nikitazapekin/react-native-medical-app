@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import RatingStar from "@assets/profile/star.png";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import type { RouteProp } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import { styles } from "./styled";

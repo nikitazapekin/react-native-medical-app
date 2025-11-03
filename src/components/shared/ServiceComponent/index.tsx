@@ -18,5 +18,3 @@ const ServiceComponent: React.FC<Props> = ({ title, subtitle }) => {
 };
 
 export default ServiceComponent;
-
-

@@ -6,9 +6,9 @@ import { styles } from "./styled";
 
 import DroppableList from "@/components/shared/DroppableList";
 import ServiceComponent from "@/components/shared/ServiceComponent";
+import { servicesCatalog, servicesSortOptions } from "@/constants/servicesCatalog";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
-import { servicesCatalog, servicesSortOptions } from "@/constants/servicesCatalog";
 
 const sortOptions = servicesSortOptions;
 const services = servicesCatalog;
@@ -35,5 +35,3 @@ const CatalogServicesComponent = () => {
 };
 
 export default CatalogServicesComponent;
-
-
