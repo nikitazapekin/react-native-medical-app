@@ -36,5 +36,3 @@ export const styles = StyleSheet.create({
     marginVertical: 16,
   },
 });
-
-
