@@ -1,15 +1,16 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
+import type { RouteProp} from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { RouteProp, useRoute } from "@react-navigation/native";
 
 import { styles } from "./styles";
 
 import AboutDoctorComponent from "@/components/AboutDoctorComponent";
 import Footer from "@/components/shared/Footer";
-import type { RootStackParamList } from "@/navigation/types";
-import { ROUTES } from "@/navigation/routes";
 import Header from "@/components/shared/Header";
+import type { ROUTES } from "@/navigation/routes";
+import type { RootStackParamList } from "@/navigation/types";
 
 type UserAboutDoctorRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_ABOUT_DOCTOR>;
 

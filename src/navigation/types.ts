@@ -2,6 +2,7 @@ import type { RouteProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import type { ROUTES } from "./routes";
+
 import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
 
 export type RootStackParamList = {
@@ -35,6 +36,9 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_CATALOG_DOCTORS]: undefined;
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
+    doctor: Doctor;
+  };
+  [ROUTES.STACK.USER_REGISTRATION_AT_CLINIC]: {
     doctor: Doctor;
   };
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import AvatarImg from "@assets/mockPhotos/AvatarDoctorCatalog.png";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
+import type { Doctor } from "./types";
 
 import DoctorCard from "@/components/shared/DoctorCard";
 import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
-import type { Doctor } from "./types";
 
 const sortOptions = [
   { id: "1", label: "По имени", type: "name" },

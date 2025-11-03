@@ -13,4 +13,3 @@ export interface Doctor {
   qualificationImprovement: string[];
   rating: number; // Рейтинг врача
 }
-
