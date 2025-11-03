@@ -16,7 +16,9 @@ const Footer = () => {
   useEffect(() => {
     const currentRouteName = route.name;
 
-    if (currentRouteName === ROUTES.STACK.USER_CATALOG_DOCTORS) {
+    if (currentRouteName === ROUTES.STACK.USER_CATALOG_DOCTORS || currentRouteName === ROUTES.STACK.USER_ABOUT_DOCTOR
+      || currentRouteName === ROUTES.STACK.USER_REGISTRATION_AT_CLINIC
+    ) {
       const catalogTab = tabIcons.find((item) => item.type === "category");
 
       if (catalogTab) {

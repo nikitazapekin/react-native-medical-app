@@ -5,6 +5,10 @@ import RatingStar from "@assets/profile/star.png";
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { ROUTES } from "@/navigation/routes";
+import type { RootStackParamList } from "@/navigation/types";
 import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
 
 interface AboutDoctorComponentProps {
@@ -12,8 +16,9 @@ interface AboutDoctorComponentProps {
 }
 
 const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const handleAppointment = () => {
-    console.log("Запись на консультацию к врачу:", doctor.name);
+    navigation.navigate(ROUTES.STACK.USER_REGISTRATION_AT_CLINIC, { doctor });
   };
 
   return (
@@ -80,4 +85,3 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
 };
 
 export default AboutDoctorComponent;
-
