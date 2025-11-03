@@ -8,8 +8,8 @@ import type { Doctor, UserCatalogDoctorsProps } from "./types";
 import DoctorCard from "@/components/shared/DoctorCard";
 import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
-import { ROUTES } from "@/navigation/routes";
 import { doctorsCatalog, doctorsSortOptions } from "@/constants/doctorsCatalog";
+import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = doctorsSortOptions;
@@ -28,7 +28,9 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
 
   const filteredDoctors = useMemo(() => {
     if (!serviceName) return mockDoctors;
+
     const q = serviceName.toLowerCase();
+
     return mockDoctors.filter((d) => d.specialization.toLowerCase().includes(q));
   }, [serviceName]);
 

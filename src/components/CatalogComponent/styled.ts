@@ -3,7 +3,6 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 16,
     paddingBottom: 32,
     rowGap: 15,
   },

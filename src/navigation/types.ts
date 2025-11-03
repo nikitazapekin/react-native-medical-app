@@ -35,6 +35,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
   [ROUTES.STACK.USER_CATALOG_DOCTORS]: { serviceName?: string } | undefined;
   [ROUTES.STACK.USER_CATALOG_SERVICES]: undefined;
+  [ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
     doctor: Doctor;

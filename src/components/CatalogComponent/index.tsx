@@ -8,12 +8,12 @@ import { styles } from "./styled";
 import CustomButton from "@/components/shared/Button";
 import DoctorCard from "@/components/shared/DoctorCard";
 import ServiceComponent from "@/components/shared/ServiceComponent";
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
+import RecomendationCard from "@/components/shared/RecomendationCard";
 import { doctorsCatalog } from "@/constants/doctorsCatalog";
 import { servicesCatalog } from "@/constants/servicesCatalog";
-import ServiceRecomendationCard from "@/components/shared/ServiceRecomendationCard";
-import MedicalServiceImg from "@assets/mockPhotos/IconCatalog.png";
+import { ROUTES } from "@/navigation/routes";
+import { recommendationCatalog } from "@/constants/recommendationCatalog";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const CatalogComponent = () => {
 
@@ -25,6 +25,10 @@ const CatalogComponent = () => {
 
   const handleViewAllServices = () => {
     navigation.navigate(ROUTES.STACK.USER_CATALOG_SERVICES);
+  };
+
+  const handleViewAllRecommendations = () => {
+    navigation.navigate(ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS);
   };
 
   return (
@@ -56,12 +60,12 @@ const CatalogComponent = () => {
 
       <Text style={styles.sectionTitle}>Рекомендации</Text>
 
-      <ServiceRecomendationCard title="Физические упражнения" icon={MedicalServiceImg} />
-
-      <ServiceRecomendationCard title="Подготовка к сезону простуд" icon={MedicalServiceImg} />
+      {recommendationCatalog.slice(0, 3).map((r) => (
+        <RecomendationCard key={r.id} category={r.category} title={r.title} date={r.date} />
+      ))}
 
       <View style={styles.primaryButtonWrapper}>
-        <CustomButton text="Посмотреть все рекомендации" handler={() => {}} backgroundColor={COLORS.PRIMARY} />
+        <CustomButton text="Посмотреть все рекомендации" handler={handleViewAllRecommendations} backgroundColor={COLORS.PRIMARY} />
       </View>
     </View>
   );
