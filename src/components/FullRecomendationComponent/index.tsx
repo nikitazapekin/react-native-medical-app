@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, ImageSourcePropType, Text, View } from "react-native";
+import type { ImageSourcePropType} from "react-native";
+import { Image, Text, View } from "react-native";
 
 import { styles } from "./styled";
 
@@ -35,5 +36,3 @@ const FullRecomendationComponent: React.FC<Props> = ({ recommendation }) => {
 };
 
 export default FullRecomendationComponent;
-
-
