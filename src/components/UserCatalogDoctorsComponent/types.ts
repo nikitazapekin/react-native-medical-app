@@ -16,4 +16,5 @@ export interface Doctor {
 
 export interface UserCatalogDoctorsProps {
   serviceName?: string;
+  childId?: number;
 }
