@@ -20,7 +20,7 @@ export default function ChildrenDoctorsScreen() {
 
   return (
     <View style={styles.container}>
-      <Header title="Врачи ребенка" isAuthenticated={true} showBackButton={true}/>
+      <Header title="Консультировавшие врачи" isAuthenticated={true} showBackButton={true}/>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <UserCatalogDoctorsComponent childId={childId} />

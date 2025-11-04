@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#fff",
-    borderRadius: 8,
-    padding: 16,
+    borderRadius: 10,
+    padding: 20,
     borderColor: "#E5E7EB",
     borderWidth: 1,
     gap: 8,
@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
     width: "100%",
+    maxWidth: 377,
   },
   title: {
     fontSize: 18,
@@ -36,11 +37,25 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
   },
   value: {
-    color: "#000",
+    color: "#111827",
     fontWeight: "600",
   },
-  buttonWrapper: {
-    marginTop: 16,
+  clinicImage: {
     width: "100%",
+    height: 165,
+    borderRadius: 6,
+    marginVertical: 10,
+    resizeMode: "cover",
+  },
+  address: {
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  buttonWrapper: {
+    width: "100%",
+    maxWidth: 356,
   },
 });
+

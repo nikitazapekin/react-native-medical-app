@@ -12,6 +12,7 @@ import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
 import ChildrenDoctorsScreen from "@/screens/ChildrenDoctorsScreen";
 import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
+import ChildrenInformationAboutClinicScreen from "@/screens/ChildrenInformationAboutClinicScreen";
 import ChildrenScreen from "@/screens/ChildrenScreen";
 import ChildrensScreen from "@/screens/ChildrensScreen";
 import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
@@ -38,9 +39,9 @@ import UserCatalogRecomendatonsScreen from "@/screens/UserCatalogRecomendatonsSc
 import UserCatalogServicesScreen from "@/screens/UserCatalogServicesScreen";
 import UserConsultationHistory from "@/screens/UserConsultationHistory";
 import UserEditChildren from "@/screens/UserEditChildrens";
-import UserFullConsultationScreen from "@/screens/UserFullConsultationScreen";
 import UserEditCabinet from "@/screens/UserEditProfile";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
+import UserFullConsultationScreen from "@/screens/UserFullConsultationScreen";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserRecommendations from "@/screens/UserRecommendations";
@@ -75,6 +76,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDREN_DOCTORS} component={ChildrenDoctorsScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC} component={ChildrenInformationAboutClinicScreen} />
         <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_RECORD_DETAIL} component={RecordDetailScreen } />
         <Stack.Screen name={ROUTES.STACK.CHILDREN_HEALTH_STATUS} component={ChildrenHealthStatus } />

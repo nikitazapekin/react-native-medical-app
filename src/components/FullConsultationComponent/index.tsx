@@ -51,4 +51,3 @@ const FullConsultationComponent: React.FC<Props> = ({ consultation, doctor, onRe
 };
 
 export default FullConsultationComponent;
-

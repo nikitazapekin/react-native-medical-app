@@ -12,7 +12,7 @@ import Header from "@/components/shared/Header";
 import { doctorsCatalog } from "@/constants/doctorsCatalog";
 import { historyConsultation } from "@/constants/historyConsultation";
 import { ROUTES } from "@/navigation/routes";
-import type { RootStackParamList, FormNavigationProp } from "@/navigation/types";
+import type { FormNavigationProp,RootStackParamList } from "@/navigation/types";
 
 type FullConsultationRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_FULL_CONSULTATION>;
 
@@ -27,6 +27,7 @@ export default function UserFullConsultationScreen() {
 
   const doctor = useMemo(() => {
     if (!consultation) return null;
+
     return doctorsCatalog.find((d) => d.id === consultation.doctorId);
   }, [consultation]);
 
@@ -51,4 +52,3 @@ export default function UserFullConsultationScreen() {
     </View>
   );
 }
-
