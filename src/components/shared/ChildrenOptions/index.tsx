@@ -16,6 +16,8 @@ const ChildrenItem = ({ item, childId }: ListItemProps & { childId?: number }) =
       navigation.navigate(ROUTES.STACK.MEDICALCARD);
     } else if (item.text.toLocaleLowerCase().includes("список консультировавших врачей") && childId) {
       navigation.navigate(ROUTES.STACK.CHILDREN_DOCTORS, { childId });
+    } else if (item.text.toLocaleLowerCase().includes("поликлиника") && childId) {
+      navigation.navigate(ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC, { childId });
     }
   };
 
