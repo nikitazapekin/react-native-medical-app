@@ -1,8 +1,8 @@
 import { useState } from "react";
-// import { Alert,Text, TouchableOpacity, View } from "react-native";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert,Text, TouchableOpacity, View } from "react-native";
+// import { Text, TouchableOpacity, View } from "react-native";
 import CustomButton from "@components/shared/Button";
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 
 import FormInput from "../shared/FormInput";
@@ -10,15 +10,15 @@ import FormInput from "../shared/FormInput";
 import { styles } from "./styled";
 import type { LoginFormData } from "./types";
 
-// import AuthService from "@/http/auth";
+import AuthService from "@/http/auth";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const AuthForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const [isChecked, setIsChecked] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  // const [loading] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: ""
@@ -29,36 +29,36 @@ const AuthForm = () => {
   };
 
   const handleLogin = async () => {
-    navigation.navigate(ROUTES.STACK.HOMEPAGE);
-    // if (!formData.email || !formData.password) {
-    //   Alert.alert("Ошибка", "Пожалуйста, заполните все поля");
+    // navigation.navigate(ROUTES.STACK.HOMEPAGE);
+    if (!formData.email || !formData.password) {
+      Alert.alert("Ошибка", "Пожалуйста, заполните все поля");
 
-    //   return;
-    // }
+      return;
+    }
 
-    // setLoading(true);
+    setLoading(true);
 
-    // try {
-    //   await AuthService.login(formData);
+    try {
+      await AuthService.login(formData);
 
-    //   const userRole = await AsyncStorage.getItem('userRole');
+      const userRole = await AsyncStorage.getItem('userRole');
 
-    //   Alert.alert("Успех", "Вход выполнен успешно!");
+      Alert.alert("Успех", "Вход выполнен успешно!");
 
-    //   if (userRole === 'DOCTOR') {
+      if (userRole === 'DOCTOR') {
 
-    //     navigation.navigate(ROUTES.STACK.DOCTOR);
-    //   } else {
+        navigation.navigate(ROUTES.STACK.DOCTOR);
+      } else {
 
-    //     navigation.navigate(ROUTES.STACK.HOMEPAGE);
-    //   }
+        navigation.navigate(ROUTES.STACK.HOMEPAGE);
+      }
 
-    // } catch{
+    } catch{
 
-    //   Alert.alert("Ошибка входа");
-    // } finally {
-    //   setLoading(false);
-    // }
+      Alert.alert("Ошибка входа");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleInputChange = (field: keyof LoginFormData, value: string) => {

@@ -22,5 +22,3 @@ const ConsultationCard: React.FC<Props> = ({ category, title, date }) => {
 };
 
 export default ConsultationCard;
-
-

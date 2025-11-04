@@ -8,18 +8,26 @@ import type { Doctor, UserCatalogDoctorsProps } from "./types";
 import DoctorCard from "@/components/shared/DoctorCard";
 import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
-import { doctorsCatalog, doctorsSortOptions } from "@/constants/doctorsCatalog";
+import { doctorsCatalog, doctorsSortOptions, doctorOptions } from "@/constants/doctorsCatalog";
+import { historyConsultation } from "@/constants/historyConsultation";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = doctorsSortOptions;
 const mockDoctors: Doctor[] = doctorsCatalog;
 
-const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName }) => {
+const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, childId }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedSpecialization, setSelectedSpecialization] = useState<string>("");
+  const [sortType, setSortType] = useState<string>("");
   const navigation = useNavigation<FormNavigationProp>();
 
-  const handleSort = () => {
+  const handleSort = (item: { id: string; label: string; type?: string }) => {
+    setSortType(item.type || "");
+  };
+
+  const handleSpecializationSelect = (item: { id: string; label: string; type?: string }) => {
+    setSelectedSpecialization(item.type || "");
   };
 
   const handleDoctorPress = (doctor: Doctor) => {
@@ -27,18 +35,47 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
   };
 
   const filteredDoctors = useMemo(() => {
-    if (!serviceName) return mockDoctors;
+    let filtered = mockDoctors;
 
-    const q = serviceName.toLowerCase();
+    if (childId) {
+      const childConsultations = historyConsultation.filter((c) => c.childId === childId);
+      const doctorIds = [...new Set(childConsultations.map((c) => c.doctorId))];
+      filtered = filtered.filter((d) => doctorIds.includes(d.id));
+    }
 
-    return mockDoctors.filter((d) => d.specialization.toLowerCase().includes(q));
-  }, [serviceName]);
+    if (serviceName) {
+      const q = serviceName.toLowerCase();
+      filtered = filtered.filter((d) => d.specialization.toLowerCase().includes(q));
+    }
+
+    if (selectedSpecialization) {
+      filtered = filtered.filter((d) => d.spec === selectedSpecialization);
+    }
+
+    if (sortType) {
+      filtered = [...filtered].sort((a, b) => {
+        switch (sortType) {
+          case "name":
+            return a.name.localeCompare(b.name, "ru");
+          case "specialization":
+            return a.spec.localeCompare(b.spec, "ru");
+          case "rating":
+            return b.rating - a.rating;
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return filtered;
+  }, [childId, serviceName, selectedSpecialization, sortType]);
 
   const hasNoDoctors = filteredDoctors.length === 0;
 
   return (
     <View style={styles.content}>
 
+      <DroppableList sortOptions={doctorOptions} handler={handleSpecializationSelect} placeholder="Специализация" />
       <DroppableList sortOptions={sortOptions} handler={handleSort} placeholder="Сортировать" />
 
       <SearchInput

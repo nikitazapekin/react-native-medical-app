@@ -15,8 +15,10 @@ const ListItem = ({ item }: ListItemProps) => {
   const handleNavigate = () => {
     if (item.text.toLocaleLowerCase().includes("история консультаций")) {
       navigation.navigate(ROUTES.STACK.USER_CONSULTATION_HISTORY);
+
       return;
     }
+
     if (item.text.toLocaleLowerCase().includes("история платежей")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS);
     }
