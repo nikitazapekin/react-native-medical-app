@@ -8,7 +8,7 @@ import type { Doctor, UserCatalogDoctorsProps } from "./types";
 import DoctorCard from "@/components/shared/DoctorCard";
 import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
-import { doctorsCatalog, doctorsSortOptions, doctorOptions } from "@/constants/doctorsCatalog";
+import { doctorOptions,doctorsCatalog, doctorsSortOptions } from "@/constants/doctorsCatalog";
 import { historyConsultation } from "@/constants/historyConsultation";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
@@ -40,11 +40,13 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     if (childId) {
       const childConsultations = historyConsultation.filter((c) => c.childId === childId);
       const doctorIds = [...new Set(childConsultations.map((c) => c.doctorId))];
+
       filtered = filtered.filter((d) => doctorIds.includes(d.id));
     }
 
     if (serviceName) {
       const q = serviceName.toLowerCase();
+
       filtered = filtered.filter((d) => d.specialization.toLowerCase().includes(q));
     }
 
@@ -57,10 +59,13 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         switch (sortType) {
           case "name":
             return a.name.localeCompare(b.name, "ru");
+
           case "specialization":
             return a.spec.localeCompare(b.spec, "ru");
+
           case "rating":
             return b.rating - a.rating;
+
           default:
             return 0;
         }
