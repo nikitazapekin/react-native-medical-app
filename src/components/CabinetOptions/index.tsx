@@ -13,7 +13,11 @@ const ListItem = ({ item }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история")) {
+    if (item.text.toLocaleLowerCase().includes("история консультаций")) {
+      navigation.navigate(ROUTES.STACK.USER_CONSULTATION_HISTORY);
+      return;
+    }
+    if (item.text.toLocaleLowerCase().includes("история платежей")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS);
     }
 

@@ -25,6 +25,7 @@ export const ROUTES = {
     USER_CATALOG_SERVICES: "UserCatalogServices",
     USER_CATALOG_RECOMMENDATIONS: "UserCatalogRecommendations",
     USER_CATALOG_FULL_RECOMENDATION: "UserCatalogFullRecomendation",
+    USER_CONSULTATION_HISTORY: "UserConsultationHistory",
     ISTORIABOLEZNEI: "IstoriaBoleznei",
     CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
     USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",
