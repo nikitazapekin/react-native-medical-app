@@ -17,6 +17,7 @@ export function getDaysSinceRegistration(dateString: string): string {
   const lastTwoDigits = daysDiff % 100;
 
   let daysWord: string;
+
   if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
     daysWord = 'дней';
   } else if (lastDigit === 1) {

@@ -2,7 +2,7 @@ import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
-import type { ListItemProps, ChildrenOptionsProps } from "./types";
+import type { ChildrenOptionsProps,ListItemProps } from "./types";
 
 import { childrenOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";

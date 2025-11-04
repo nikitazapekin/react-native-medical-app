@@ -41,6 +41,7 @@ export type RootStackParamList = {
     recommendationId: string;
   };
   [ROUTES.STACK.USER_CONSULTATION_HISTORY]: undefined;
+  [ROUTES.STACK.USER_FULL_CONSULTATION]: { consultationId: string };
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
     doctor: Doctor;

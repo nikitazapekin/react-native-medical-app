@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 
@@ -7,8 +8,11 @@ import ConsultationCard from "@/components/ConsultationCard";
 import DroppableList from "@/components/shared/DroppableList";
 import { historyConsultation } from "@/constants/historyConsultation";
 import { optionsConsultation, yearConsultationOptions } from "@/constants/optionsConsultation";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const ConsultationHistoryComponent = () => {
+  const navigation = useNavigation<FormNavigationProp>();
   const [selectedYear, setSelectedYear] = useState<string>("all");
   const [selectedSort, setSelectedSort] = useState<string>("date_desc");
 
@@ -60,7 +64,11 @@ const ConsultationHistoryComponent = () => {
 
       <View style={styles.listWrapper}>
         {filtered.map((c) => (
-          <TouchableOpacity key={c.id} activeOpacity={0.7}>
+          <TouchableOpacity
+            key={c.id}
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate(ROUTES.STACK.USER_FULL_CONSULTATION, { consultationId: c.id })}
+          >
             <ConsultationCard category={c.category} title={c.title} date={c.date} />
           </TouchableOpacity>
         ))}

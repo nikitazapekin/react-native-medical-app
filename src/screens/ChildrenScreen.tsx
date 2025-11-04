@@ -17,6 +17,7 @@ interface UserEditChildrenProps {
 
 export default function ChildrenScreen({ route }: UserEditChildrenProps) {
   const { id } = route.params || {};
+
   return (
     <View style={styles.containerWhite}>
       <Header title={"Ребенок"} isAuthenticated={true} />
