@@ -1,6 +1,5 @@
 import type { RouteProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
-import type { ImageSourcePropType } from "react-native";
 
 import type { ROUTES } from "./routes";
 
