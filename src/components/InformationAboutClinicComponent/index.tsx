@@ -43,4 +43,3 @@ const InformationAboutClinicComponent: React.FC<Props> = ({ clinic, childName, o
 };
 
 export default InformationAboutClinicComponent;
-

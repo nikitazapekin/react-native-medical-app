@@ -9,10 +9,10 @@ import { styles } from "./styles";
 import InformationAboutClinicComponent from "@/components/InformationAboutClinicComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
+import { clinicList } from "@/constants/clinicList";
 import ChildrenService from "@/http/children";
 import type { ChildFull } from "@/http/types/childFull";
-import { clinicList } from "@/constants/clinicList";
-import { ROUTES } from "@/navigation/routes";
+import type { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 
 type ClinicRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC>;
@@ -30,20 +30,22 @@ export default function ChildrenInformationAboutClinicScreen() {
     const loadChild = async () => {
       try {
         const childData = await ChildrenService.getFullInfo(childId);
+
         setChild(childData);
-      } catch (error) {
+      } catch (_error) {
         Alert.alert("Ошибка", "Не удалось загрузить данные ребенка");
       }
     };
 
     if (childId) {
-      loadChild();
+      void loadChild();
     }
   }, [childId]);
 
   const handleViewMap = async () => {
     if (!clinic?.coordinates) {
       Alert.alert("Ошибка", "Координаты поликлиники не найдены");
+
       return;
     }
 
@@ -52,12 +54,13 @@ export default function ChildrenInformationAboutClinicScreen() {
 
     try {
       const canOpen = await Linking.canOpenURL(url);
+
       if (canOpen) {
         await Linking.openURL(url);
       } else {
         Alert.alert("Ошибка", "Не удалось открыть карты");
       }
-    } catch (error) {
+    } catch (_error) {
       Alert.alert("Ошибка", "Не удалось открыть карты");
     }
   };
@@ -77,4 +80,3 @@ export default function ChildrenInformationAboutClinicScreen() {
     </View>
   );
 }
-

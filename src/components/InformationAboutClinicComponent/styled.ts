@@ -58,4 +58,3 @@ export const styles = StyleSheet.create({
     maxWidth: 356,
   },
 });
-
