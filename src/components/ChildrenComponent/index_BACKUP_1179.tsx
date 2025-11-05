@@ -35,7 +35,11 @@ const ChildrenComponent = ({ id }: ChildrenComponentTypes) => {
 
       <Text style={styles.title}>О ребенке </Text>
 
+<<<<<<< HEAD
+      <ChildrenOptions children={children} />
+=======
       <ChildrenOptions  id={String(id)}  />
+>>>>>>> 8575d3a1512b51905eb69a4eafdd37536ffdd36a
 
       <CustomButton handler={() => {}} color="#fff" text="Удалить профиль ребенка" />
     </View>

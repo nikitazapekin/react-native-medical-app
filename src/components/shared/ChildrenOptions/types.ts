@@ -9,6 +9,7 @@ export interface ListItemProps {
     alt: string;
     id: number;
   };
+  id: string
 }
 
 export interface ChildrenOptionsProps {

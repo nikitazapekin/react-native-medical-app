@@ -12,6 +12,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     rowGap: 10,
-
   },
+  emptyText: {},
 });
