@@ -67,17 +67,6 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.BLACK,
   },
-  threeDots: {
-    flexDirection: "row",
-    gap: 5.2,
-    alignItems: "flex-start",
-  },
-  dot: {
-    width: 5.2,
-    height: 5,
-    borderRadius: 2.5,
-    backgroundColor: "#202020",
-  },
   doctorDescription: {
     fontSize: 14,
     color: COLORS.BLACK,

@@ -11,7 +11,7 @@ interface ListItem {
   type?: string;
 }
 
-const DroppableList = ({ sortOptions, handler }: DroppableListProps) => {
+const DroppableList = ({ sortOptions, handler, placeholder }: DroppableListProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState<ListItem>({ id: "", label: "" });
 
@@ -27,7 +27,7 @@ const DroppableList = ({ sortOptions, handler }: DroppableListProps) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.dropdownButton} onPress={() => setIsVisible(!isVisible)}>
-        <Text style={styles.buttonText}>{selectedValue.label || "Выберите опцию"}</Text>
+        <Text style={styles.buttonText}>{selectedValue.label || placeholder || "Выберите опцию"}</Text>
         <Image source={Arrow} style={[styles.arrow, isVisible && styles.arrowRotated]} />
       </TouchableOpacity>
 
@@ -52,43 +52,3 @@ const DroppableList = ({ sortOptions, handler }: DroppableListProps) => {
 };
 
 export default DroppableList;
-
-/*
-const DroppableList = ({ sortOptions }: SortOptions) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<ListItem>({ id: "", label: "" });
-
-  const handleSelect = (item: ListItem) => {
-    setSelectedValue(item);
-    setIsVisible(false);
-  };
-
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.dropdownButton} onPress={() => setIsVisible(!isVisible)}>
-        <Text style={styles.buttonText}>{selectedValue.label || "Выберите опцию"}</Text>
-        <Image source={Arrow} style={[styles.arrow, isVisible && styles.arrowRotated]} />
-      </TouchableOpacity>
-
-      {isVisible && (
-        <View style={styles.dropdownList}>
-          <FlatList
-            data={sortOptions}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={[styles.listItem, selectedValue.id === item.id && styles.selectedItem]}
-                onPress={() => handleSelect(item)}
-              >
-                <Text style={styles.itemText}>{item.label}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      )}
-    </View>
-  );
-};
-
-export default DroppableList;
- */

@@ -34,18 +34,22 @@ export type RootStackParamList = {
   [ROUTES.STACK.ISTORIABOLEZNEI]:  { id: number };
   [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
-  [ROUTES.STACK.USER_CATALOG_DOCTORS]: undefined;
+  [ROUTES.STACK.USER_CATALOG_DOCTORS]: { serviceName?: string } | undefined;
+  [ROUTES.STACK.USER_CATALOG_SERVICES]: undefined;
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
     doctor: Doctor;
+    serviceName?: string;
   };
   [ROUTES.STACK.USER_REGISTRATION_AT_CLINIC]: {
     doctor: Doctor;
+    serviceName?: string;
   };
   [ROUTES.STACK.USER_REGISTRATION_SUMMARY]: {
     doctor: Doctor;
     selectedDate: string | null;
     selectedTime: string | null;
+    serviceName?: string;
   };
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
     drug: {

@@ -19,6 +19,7 @@ const Footer = () => {
     if (currentRouteName === ROUTES.STACK.USER_CATALOG_DOCTORS || currentRouteName === ROUTES.STACK.USER_ABOUT_DOCTOR
       || currentRouteName === ROUTES.STACK.USER_REGISTRATION_AT_CLINIC
       || currentRouteName === ROUTES.STACK.USER_REGISTRATION_SUMMARY
+      || currentRouteName === ROUTES.STACK.USER_CATALOG_SERVICES
     ) {
       const catalogTab = tabIcons.find((item) => item.type === "category");
 
