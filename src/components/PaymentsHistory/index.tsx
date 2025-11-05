@@ -32,7 +32,7 @@ const PaymentsHistory = ({ id }: PaymentHistoryProps) => {
       }
     };
 
-    handleGet().catch(()=> Alert.alert("Error"))
+    handleGet().catch(()=> Alert.alert("Error"));
   }, [id]);
 
   const renderItem = ({ item }: { item: PaymentHistory }) => (
