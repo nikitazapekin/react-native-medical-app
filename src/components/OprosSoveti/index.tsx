@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Image, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, Image, Text, View } from "react-native";
 import MockImage from "@assets/mockPhotos/picture.jpg";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,7 +7,10 @@ import CustomButton from "../shared/Button";
 import OprosButton from "../shared/OprosButton";
 
 import { styles } from "./styled";
+import type { OprosSovetiProps } from "./types";
 
+import QuestionService from "@/http/question";
+ 
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -45,7 +48,7 @@ const test = [
   },
 ];
 
-const OprosSoveti = () => {
+const OprosSoveti = ({id}: OprosSovetiProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [isFinished, setIsFinished] = useState(false);
@@ -82,8 +85,21 @@ const OprosSoveti = () => {
 
   if (isFinished) {
     navigation.navigate(ROUTES.STACK.USER_RECOMMENDATIONS);
-
   }
+
+  useEffect(() => {
+    const handleGet = async () => {
+      try {
+        const resp = await QuestionService.getQuestionsBySurveyId(Number(id));
+
+        console.log("RESP", resp);
+      } catch {
+        Alert.alert("Error");
+      }
+    };
+
+    handleGet().catch(()=> Alert.alert("Error"))
+  }, []);
 
   return (
     <View style={styles.wrapper}>
