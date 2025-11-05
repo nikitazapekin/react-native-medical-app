@@ -1,7 +1,6 @@
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
 import ArrowBack from "@assets/mockPhotos/ArrowBack.png";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 
@@ -33,8 +32,8 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
   return (
     <View style={styles.header}>
       {showBackButton && (
-        <TouchableOpacity 
-          onPress={handleBack} 
+        <TouchableOpacity
+          onPress={handleBack}
           style={styles.backButton}
           hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         >
