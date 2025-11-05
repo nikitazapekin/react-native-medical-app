@@ -20,6 +20,8 @@ const Footer = () => {
       || currentRouteName === ROUTES.STACK.USER_REGISTRATION_AT_CLINIC
       || currentRouteName === ROUTES.STACK.USER_REGISTRATION_SUMMARY
       || currentRouteName === ROUTES.STACK.USER_CATALOG_SERVICES
+      || currentRouteName === ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS
+      || currentRouteName === ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION
     ) {
       const catalogTab = tabIcons.find((item) => item.type === "category");
 

@@ -11,6 +11,7 @@ import type { FormNavigationProp } from "@/navigation/types";
 
 const CatalogRecomendationComponent = () => {
   const navigation = useNavigation<FormNavigationProp>();
+
   return (
     <View style={styles.content}>
       <Text style={styles.title}>Ваши рекомендации</Text>
