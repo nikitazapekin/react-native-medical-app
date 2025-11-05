@@ -33,21 +33,20 @@ const OprosSoveti = ({ id }: OprosSovetiProps) => {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [isFinished, setIsFinished] = useState(false);
   const [questions, setQuestions] = useState<QuestionResponse[]>([]);
- 
 
   const navigation = useNavigation<FormNavigationProp>();
 
   useEffect(() => {
     const handleGet = async () => {
       try {
-       
+
         const resp = await QuestionService.getQuestionsBySurveyId(Number(id));
 
         setQuestions(resp);
       } catch (error) {
         console.error("Error fetching questions:", error);
         Alert.alert("Ошибка", "Не удалось загрузить вопросы опроса");
-      }  
+      }
     };
 
     handleGet().catch(()=> Alert.alert("Error"));
