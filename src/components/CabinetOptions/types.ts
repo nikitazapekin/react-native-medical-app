@@ -7,4 +7,9 @@ export interface ListItemProps {
     alt: string;
     id: number;
   };
+  id: number | undefined
+}
+
+export interface CabinetProps {
+  id: number | undefined
 }

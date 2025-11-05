@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 
 export interface Patient {
   id: number;
@@ -11,4 +12,9 @@ export interface Patient {
   createdAt?: string;
   email: string;
   role: string;
+}
+
+export   interface CabinetInfoProps {
+  patient: Patient | undefined;
+  setPatient: Dispatch<SetStateAction<Patient | undefined>>;
 }

@@ -3,18 +3,18 @@ import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
-import type { ListItemProps } from "./types";
+import type { CabinetProps, ListItemProps } from "./types";
 
 import { profileOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
-const ListItem = ({ item }: ListItemProps) => {
+const ListItem = ({ item , id }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
     if (item.text.toLocaleLowerCase().includes("история")) {
-      navigation.navigate(ROUTES.STACK.PAYMENTS);
+      navigation.navigate(ROUTES.STACK.PAYMENTS, {id: Number(id)});
     }
 
     if(item.text.toLocaleLowerCase().includes("дети")) {
@@ -46,13 +46,13 @@ const ListItem = ({ item }: ListItemProps) => {
   );
 };
 
-const CabinetOptions = () => {
+const CabinetOptions = ({id}: CabinetProps) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>Категории</Text>
       <View style={styles.list}>
         {profileOptions.map((item) => (
-          <ListItem key={item.id} item={item} />
+          <ListItem key={item.id} item={item} id={id} />
         ))}
       </View>
     </View>
