@@ -1,6 +1,6 @@
 export interface PaymentHistory {
   id: number;
-  date: string; 
+  date: string;
   title: string;
   description?: string;
   price: number;
