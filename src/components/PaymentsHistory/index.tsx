@@ -1,9 +1,14 @@
-import { Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, FlatList,Text, View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
 import PaymentItem from "../shared/PaymentItem";
 
 import { styles } from "./styled";
+import type { PaymentHistoryProps } from "./types";
+
+import PaymentService from "@/http/payment";
+import type { PaymentHistory } from "@/http/types/payment";
 
 const sortOptions = [
   { id: "1", label: "По рейтингу", type: "rate" },
@@ -11,30 +16,55 @@ const sortOptions = [
   { id: "3", label: "По дате выхода", type: "relise" },
 ];
 
-const paymentItems = [
-  { id: 1, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 2, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 3, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 4, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 5, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 6, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 7, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 8, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 9, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 10, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 11, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-  { id: 12, title: "Консультация 1", description: "Врач: Федоровна Н А", price: 123 },
-];
-const PaymentsHistory = () => {
+const PaymentsHistory = ({ id }: PaymentHistoryProps) => {
+  const [payments, setPayments] = useState<PaymentHistory[]>([]);
+
+  useEffect(() => {
+    const handleGet = async () => {
+      try {
+
+        const resp = await PaymentService.getPaymentsByPatientId(Number(id));
+
+        setPayments(resp || []);
+      } catch (error) {
+        console.error("Error fetching payments:", error);
+        Alert.alert("Ошибка", "Не удалось загрузить историю платежей");
+      }
+    };
+
+    handleGet().catch(()=> Alert.alert("Error"));
+  }, [id]);
+
+  const renderItem = ({ item }: { item: PaymentHistory }) => (
+    <PaymentItem
+      item={{
+        id: item.id,
+        title: item.title || "Услуга",
+        description: item.description || `Врач: ${item.doctor || "Не указан"}`,
+        price: item.price || 0,
+
+      }}
+    />
+  );
+
   return (
     <View style={styles.content}>
       <DroppableList sortOptions={sortOptions} />
 
-      <Text style={styles.title}>История платежей</Text>
+      <Text style={styles.title}>История платежей {id}</Text>
+
       <View style={styles.wrapper}>
-        {paymentItems.map((item) => (
-          <PaymentItem item={item} key={item.id} />
-        ))}
+        {payments.length === 0 ? (
+          <Text >Платежи не найдены</Text>
+        ) : (
+          <FlatList
+            data={payments}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+            showsVerticalScrollIndicator={false}
+
+          />
+        )}
       </View>
     </View>
   );

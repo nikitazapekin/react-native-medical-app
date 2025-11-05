@@ -1,16 +1,14 @@
-import { FlatList,View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, FlatList, Text,View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
 import ElementBolezni from "../shared/ElementBolezni";
 
 import { styles } from "./styled";
+import type { IstoriaBolezneiProps } from "./types";
 
-type BoleznItem = {
-  id: number;
-  name: string;
-  description: string;
-  date: string;
-};
+import DiseaseHistoryService from "@/http/diseaseHistory";
+import type { DiseaseHistory } from "@/http/types/medical";
 
 const sortOptions = [
   { id: "1", label: "Грипп", type: "Gripp" },
@@ -23,20 +21,38 @@ const sortOptions1 = [
   { id: "2", label: "По алфавиту", type: "Alphabite" },
 ];
 
-const bolezni: BoleznItem[] = [
-  { id: 1, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-  { id: 2, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-  { id: 3, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-  { id: 4, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-  { id: 5, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-  { id: 6, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-  { id: 7, name: "Простуда", description: "Болезнь перенесена в легкой форме", date: "22.12.2024" },
-];
+function formatDate(isoDateString: string): string {
+  return isoDateString.split('T')[0];
+}
 
-const IstoriaBoleznei = () => {
+const IstoriaBoleznei = ({ id }: IstoriaBolezneiProps) => {
+  const [bolezni, setBolezni] = useState<DiseaseHistory[]>([]);
 
-  const renderItem = ({ item }: { item: BoleznItem }) => (
-    <ElementBolezni item={item} />
+  useEffect(() => {
+    const handleGet = async () => {
+      try {
+
+        const resp = await DiseaseHistoryService.getDiseaseHistories(Number(id));
+
+        setBolezni(resp || []);
+      } catch (error) {
+        console.error("Error fetching disease histories:", error);
+        Alert.alert("Ошибка", "Не удалось загрузить историю болезней");
+      }
+    };
+
+    handleGet().catch(()=> Alert.alert("Error"));
+  }, [id]);
+
+  const renderItem = ({ item }: { item: DiseaseHistory }) => (
+    <ElementBolezni
+      item={{
+        id: item.id,
+        name: item.diseaseName || "Болезнь",
+        description: item.description || "Описание отсутствует",
+        date: item.startDate ? formatDate(item.startDate) : "Дата не указана"
+      }}
+    />
   );
 
   return (
@@ -44,13 +60,19 @@ const IstoriaBoleznei = () => {
       <DroppableList sortOptions={sortOptions} />
       <DroppableList sortOptions={sortOptions1} />
 
-      <FlatList
-        data={bolezni}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-        contentContainerStyle={styles.list}
-        showsVerticalScrollIndicator={false}
-      />
+      {bolezni.length === 0 ? (
+        <View  >
+          <Text>История болезней не найдена</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={bolezni}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.list}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 };

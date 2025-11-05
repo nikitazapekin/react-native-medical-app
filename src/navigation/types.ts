@@ -17,7 +17,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.MED]: undefined;
   [ROUTES.STACK.TUBE]: undefined;
   [ROUTES.STACK.CABINET]: undefined;
-  [ROUTES.STACK.PAYMENTS]: undefined;
+  [ROUTES.STACK.PAYMENTS]: { id: number };
   [ROUTES.STACK.DOCTOR]: undefined; //главная страница доктора
   [ROUTES.STACK.DOCTOR_CHAT]: undefined; //страница чата доктора
   [ROUTES.STACK.DOCTOR_CABINET]: undefined; //страница профиля доктора
