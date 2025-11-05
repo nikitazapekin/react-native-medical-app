@@ -4,4 +4,3 @@ export interface ServiceRecomendationCardProps {
   title: string;
   icon: ImageSourcePropType;
 }
-

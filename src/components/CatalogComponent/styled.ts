@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "appStyles";
 
-const CARD_RADIUS = 10;
-
 export const styles = StyleSheet.create({
   container: {
     padding: 16,

@@ -1,16 +1,17 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import AvatarImg from "@assets/mockPhotos/AvatarDoctorCatalog.png";
 import MedicalServiceImg from "@assets/mockPhotos/IconCatalog.png";
-import { COLORS } from "appStyles";
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "appStyles";
+
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
 import DoctorCard from "@/components/shared/DoctorCard";
 import ServiceRecomendationCard from "@/components/shared/ServiceRecomendationCard";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const CatalogComponent = () => {
 

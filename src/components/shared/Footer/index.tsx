@@ -18,8 +18,10 @@ const Footer = () => {
 
     if (currentRouteName === ROUTES.STACK.USER_CATALOG_DOCTORS) {
       const catalogTab = tabIcons.find((item) => item.type === "category");
+
       if (catalogTab) {
         setActiveTab(catalogTab.type);
+
         return;
       }
     }
@@ -39,6 +41,7 @@ const Footer = () => {
     if (validRoutes.includes(routeName)) {
       setActiveTab(type);
       const routeKey = routeName as keyof typeof ROUTES.STACK;
+
       navigation.navigate(ROUTES.STACK[routeKey] as any);
     }
   };

@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
