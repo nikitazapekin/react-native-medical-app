@@ -22,7 +22,7 @@ const Recommendations = () => {
       }
     };
 
-    handleGet().catch(()=>Alert.alert("Error"))
+    handleGet().catch(()=>Alert.alert("Error"));
   }, []);
 
   const parseAdviceItems = (itemsJson: string) => {
