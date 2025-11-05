@@ -2,7 +2,6 @@ export function getDaysSinceRegistration(dateString: string): string {
   const registrationDate = new Date(dateString);
   const currentDate = new Date();
 
-  // Если дата некорректная, возвращаем 0 дней
   if (isNaN(registrationDate.getTime())) {
     return '0 дней';
   }
