@@ -1,8 +1,10 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
+import SearchInput from "../shared/SearchInput";
 
 import { styles } from "./styled";
 
@@ -101,6 +103,7 @@ const medicationItems: Drugs[] = [
 ];
 
 const MedScreenDrugs = () => {
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigation = useNavigation<FormNavigationProp>();
 
@@ -115,13 +118,7 @@ const MedScreenDrugs = () => {
 
     <View style={styles.content}>
       <DroppableList sortOptions={sortOptions} />
-      <View style={styles.searchWrapper}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Найти..."
-          placeholderTextColor="#B0B0B0"
-        />
-      </View>
+      <SearchInput value={searchQuery} onChangeText={setSearchQuery} />
       <Text style={styles.title}>Список лекарств</Text>
 
       <View style={styles.listWrapper}>

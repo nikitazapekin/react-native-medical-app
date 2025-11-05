@@ -13,5 +13,5 @@ export interface ListItemProps {
 }
 
 export interface ChildrenOptionsProps {
-  children: ChildFull
+  children?: ChildFull;
 }

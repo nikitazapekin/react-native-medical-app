@@ -18,4 +18,5 @@ export interface SortOptions {
 }
 export interface DroppableListProps extends SortOptions {
   handler?: (item: ListItem) => void;
+  placeholder?: string;
 }

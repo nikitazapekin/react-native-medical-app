@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import type { NativeSyntheticEvent, NativeTouchEvent } from "react-native";
 import { Alert, Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import MockImage from "@assets/mockPhotos/Avatar.png";

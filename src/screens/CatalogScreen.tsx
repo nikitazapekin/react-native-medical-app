@@ -1,9 +1,10 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
+import CatalogComponent from "@/components/CatalogComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import { TEXTS } from "@/navigation/routes";
@@ -11,9 +12,10 @@ import { TEXTS } from "@/navigation/routes";
 export default function CatalogScreen() {
   return (
     <View style={styles.container}>
-      <Header title={TEXTS.HEADER.PROFILE} />
+      <Header title={TEXTS.HEADER.CATALOG} isAuthenticated={true}/>
+
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.sectionTitle}>Catalog</Text>
+        <CatalogComponent/>
       </ScrollView>
 
       <Footer />

@@ -3,6 +3,8 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 
 import type { ROUTES } from "./routes";
 
+import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
+
 export type RootStackParamList = {
   Home: undefined;
   [ROUTES.STACK.MAIN]: undefined;
@@ -23,6 +25,8 @@ export type RootStackParamList = {
   [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; //страница htlf htlfr редактирования инфы доктора
   [ROUTES.STACK.CHILDRENS]: undefined;
   [ROUTES.STACK.CHILDREN]:  { id: number };
+  [ROUTES.STACK.CHILDREN_DOCTORS]: { childId: number };
+  [ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC]: { childId: number };
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
   [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
   [ROUTES.STACK.MEDICALCARD]: { id: number };
@@ -32,8 +36,29 @@ export type RootStackParamList = {
   [ROUTES.STACK.ISTORIABOLEZNEI]:  { id: number };
   [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
-
+  [ROUTES.STACK.USER_CATALOG_DOCTORS]: { serviceName?: string } | undefined;
+  [ROUTES.STACK.USER_CATALOG_SERVICES]: undefined;
+  [ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS]: undefined;
+  [ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION]: {
+    recommendationId: string;
+  };
+  [ROUTES.STACK.USER_CONSULTATION_HISTORY]: undefined;
+  [ROUTES.STACK.USER_FULL_CONSULTATION]: { consultationId: string };
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
+  [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
+    doctor: Doctor;
+    serviceName?: string;
+  };
+  [ROUTES.STACK.USER_REGISTRATION_AT_CLINIC]: {
+    doctor: Doctor;
+    serviceName?: string;
+  };
+  [ROUTES.STACK.USER_REGISTRATION_SUMMARY]: {
+    doctor: Doctor;
+    selectedDate: string | null;
+    selectedTime: string | null;
+    serviceName?: string;
+  };
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
     drug: {
       id: number;

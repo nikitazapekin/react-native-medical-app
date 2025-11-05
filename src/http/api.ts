@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import AuthService from './auth';
 
-const BASE_URL = 'http://192.168.1.14:9081/api';
+const BASE_URL = 'http://192.168.0.104:9081/api';
 
 const $api = axios.create({
   baseURL: BASE_URL,

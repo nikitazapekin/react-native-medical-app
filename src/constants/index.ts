@@ -7,3 +7,5 @@ export * from "./chat";
 export * from "./childrenOptions"
 export * from "./medicalCardButtons"
 export * from "./userEdit"
+export * from "./optionsConsultation"
+export * from "./historyConsultation"
