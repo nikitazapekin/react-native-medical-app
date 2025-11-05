@@ -22,5 +22,3 @@ const RecomendationCard: React.FC<Props> = ({ category, title, date }) => {
 };
 
 export default RecomendationCard;
-
-
