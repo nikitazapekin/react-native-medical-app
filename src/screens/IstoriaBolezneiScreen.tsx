@@ -24,7 +24,7 @@ export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) 
     <View style={styles.container}>
       <Header title={"История болезней"} isAuthenticated={true} />
       <View style={styles.content}>
-        <IstoriaBoleznei />
+        <IstoriaBoleznei id={String(id)} />
       </View>
       <Footer />
       <StatusBar style="auto" />
