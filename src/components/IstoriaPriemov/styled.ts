@@ -14,4 +14,5 @@ export const styles = StyleSheet.create({
     rowGap: 10,
 
   },
+
 });

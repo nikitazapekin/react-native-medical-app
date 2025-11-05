@@ -173,7 +173,7 @@ const ChildFormModal: React.FC<ChildFormModalProps> = ({
           </Text>
 
           <ScrollView style={styles.form}>
-            {/* Блок аватара */}
+
             <View style={styles.avatarSection}>
               <Text style={styles.label}>Аватар</Text>
               <TouchableOpacity

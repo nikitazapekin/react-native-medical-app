@@ -2,22 +2,18 @@ import { Image, Pressable, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
-import type { ChildrenOptionsProps,ListItemProps } from "./types";
+import type { ListItemProps } from "./types";
 
 import { childrenOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
-const ChildrenItem = ({ item, childId }: ListItemProps & { childId?: number }) => {
+const ChildrenItem = ({ item, id }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
     if (item.text.toLocaleLowerCase().includes("медицинская")) {
-      navigation.navigate(ROUTES.STACK.MEDICALCARD);
-    } else if (item.text.toLocaleLowerCase().includes("список консультировавших врачей") && childId) {
-      navigation.navigate(ROUTES.STACK.CHILDREN_DOCTORS, { childId });
-    } else if (item.text.toLocaleLowerCase().includes("поликлиника") && childId) {
-      navigation.navigate(ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC, { childId });
+      navigation.navigate(ROUTES.STACK.MEDICALCARD, { id: Number(id) });
     }
   };
 
@@ -29,12 +25,15 @@ const ChildrenItem = ({ item, childId }: ListItemProps & { childId?: number }) =
   );
 };
 
-const ChildrenOptions = ({ children }: ChildrenOptionsProps) => {
+interface Props {
+  id: string;
+}
+const ChildrenOptions = ({ id }: Props) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.list}>
         {childrenOptions.map((item) => (
-          <ChildrenItem key={item.id} item={item} childId={children?.id} />
+          <ChildrenItem key={item.id} item={item} id={id} />
         ))}
       </View>
     </View>
@@ -42,26 +41,3 @@ const ChildrenOptions = ({ children }: ChildrenOptionsProps) => {
 };
 
 export default ChildrenOptions;
-
-/*
-import { Pressable,Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-import { styles } from "./styled";
-
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
-
-interface HeaderProps {
-  title: string;
-  isAuthenticated?: boolean
-}
-
-const Header = ({ title, isAuthenticated }: HeaderProps) => {
-  const navigation = useNavigation<FormNavigationProp>();
-
-  const handleNavigate = () => {
-    navigation.navigate(ROUTES.STACK.CABINET);
-  };
-
-  */

@@ -35,7 +35,7 @@ const ChildrenComponent = ({ id }: ChildrenComponentTypes) => {
 
       <Text style={styles.title}>О ребенке </Text>
 
-      <ChildrenOptions  id={String(id)}  />
+      <ChildrenOptions children={children} />
 
       <CustomButton handler={() => {}} color="#fff" text="Удалить профиль ребенка" />
     </View>
