@@ -19,6 +19,7 @@ export const ROUTES = {
     CHILDRENS: "Childrens",
     CHILDREN: "Children",
     CHILDREN_DOCTORS: "ChildrenDoctors",
+    CHILDREN_INFORMATION_ABOUT_CLINIC: "ChildrenInformationAboutClinic",
     SPISOKSOVETOV: "SpisokSovetov",
     MEDICALCARD: "MedicalCard",
     DOCTOR_RECORD_DETAIL: "DoctorRecordDetail",

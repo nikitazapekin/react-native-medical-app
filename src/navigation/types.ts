@@ -26,6 +26,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.CHILDRENS]: undefined;
   [ROUTES.STACK.CHILDREN]:  { id: number };
   [ROUTES.STACK.CHILDREN_DOCTORS]: { childId: number };
+  [ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC]: { childId: number };
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
   [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
   [ROUTES.STACK.MEDICALCARD]: { id: number };
