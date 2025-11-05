@@ -30,8 +30,8 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
       }
     };
 
-    handleGetInfo().catch(()=> Alert.alert("Error"))
-  }, []);
+    handleGetInfo().catch(()=> Alert.alert("Error"));
+  }, [id]);
 
   //info?.id - id медицинской карты
   const handleNavigate = (

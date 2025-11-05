@@ -53,8 +53,8 @@ const IstoriaAnalyze = ({ id }: IstoriaAnalyzovProps) => {
     };
 
     handleGet().catch(()=> {
-      Alert.alert("Error")
-    })
+      Alert.alert("Error");
+    });
   }, [id]);
 
   if (loading) {

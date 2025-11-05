@@ -17,7 +17,9 @@ interface UserEditChildrenProps {
 
 export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) {
   const { id } = route.params || {};
-console.log("id", id)
+
+  console.log("id", id);
+
   return (
     <View style={styles.container}>
       <Header title={"История болезней"} isAuthenticated={true} />
