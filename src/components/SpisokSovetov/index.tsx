@@ -24,7 +24,7 @@ const SpisokSovetov = () => {
       }
     };
 
-    handleGet().catch(()=> Alert.alert("Error"))
+    handleGet().catch(()=> Alert.alert("Error"));
   }, []);
 
   const groupedSurveys = oprosi.reduce((acc, survey) => {

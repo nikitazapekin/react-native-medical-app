@@ -10,7 +10,6 @@ import { styles } from "./styled";
 import type { OprosSovetiProps } from "./types";
 
 import QuestionService from "@/http/question";
- 
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -98,7 +97,7 @@ const OprosSoveti = ({id}: OprosSovetiProps) => {
       }
     };
 
-    handleGet().catch(()=> Alert.alert("Error"))
+    handleGet().catch(()=> Alert.alert("Error"));
   }, []);
 
   return (
