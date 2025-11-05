@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useState } from "react";
 import type {NativeSyntheticEvent,NativeTouchEvent} from "react-native";
 import { Alert,Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import MockImage from "@assets/mockPhotos/Avatar.png";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from 'expo-image-picker';
 
@@ -10,9 +11,9 @@ import { styles } from "./styled";
 import type { Patient } from "./types";
 
 import { getDaysSinceRegistration } from "@/helpers/dateFormat";
-import AuthService from "@/http/auth";
+// import AuthService from "@/http/auth";
 import PersonInfoService from "@/http/patienInfo";
-import UserService from "@/http/userService";
+// import UserService from "@/http/userService";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 

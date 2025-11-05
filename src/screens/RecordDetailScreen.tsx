@@ -7,7 +7,7 @@ interface Record {
   time: string;
   patient: string;
   service: string;
-} 
+}
 
 interface RouteParams {
   record: Record;

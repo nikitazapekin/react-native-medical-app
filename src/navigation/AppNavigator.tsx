@@ -37,6 +37,7 @@ import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserRecommendations from "@/screens/UserRecommendations";
 import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
+import UserCatalogDoctorsScreen from "@/screens/UserCatalogDoctorsScreen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -52,7 +53,6 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.AUTH} component={AuthScreen} />
         <Stack.Screen name={ROUTES.STACK.REGISTER} component={RegisterScreen} />
         <Stack.Screen name={ROUTES.STACK.HOMEPAGE} component={ProfileScreen} />
-
         <Stack.Screen name={ROUTES.STACK.CATALOG} component={CatalogScreen} />
         <Stack.Screen name={ROUTES.STACK.CHAT} component={ChatScreen} />
         <Stack.Screen name={ROUTES.STACK.MED} component={MedScreen} />
@@ -78,13 +78,10 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_RECOMMENDATIONS} component={UserRecommendations} />
         <Stack.Screen name={ROUTES.STACK.USER_EDIT_PROFILE} component={UserEditCabinet} />
         <Stack.Screen name={ROUTES.STACK.USER_EDIT_CHILDRESN} component={UserEditChildren} />
-        <Stack.Screen
-          name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
-          component={DoctorAppointmentsScreen}
-        />
-
+        <Stack.Screen name={ROUTES.STACK.DOCTOR_APPOINTMENTS} component={DoctorAppointmentsScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CABINET_EDIT} component={DoctorEditCabinet} />
         <Stack.Screen name={ROUTES.STACK.SPISOKSOVETOV} component={SpisokSovetov} />
+        <Stack.Screen name={ROUTES.STACK.USER_CATALOG_DOCTORS} component={UserCatalogDoctorsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
