@@ -49,6 +49,7 @@ export const TEXTS = {
     PROFILE: "Профиль",
     SETTINGS: "Настройки",
     CHAT: "Чат",
+    CATALOG: "Каталог",
   },
   BUTTONS: {
     GO_TO_PROFILE: "Перейти в профиль",

@@ -27,35 +27,36 @@ const AuthForm = () => {
   };
 
   const handleLogin = async () => {
-    if (!formData.email || !formData.password) {
-      Alert.alert("Ошибка", "Пожалуйста, заполните все поля");
+    navigation.navigate(ROUTES.STACK.HOMEPAGE);
+    // if (!formData.email || !formData.password) {
+    //   Alert.alert("Ошибка", "Пожалуйста, заполните все поля");
 
-      return;
-    }
+    //   return;
+    // }
 
-    setLoading(true);
+    // setLoading(true);
 
-    try {
-      await AuthService.login(formData);
+    // try {
+    //   await AuthService.login(formData);
 
-      const userRole = await AsyncStorage.getItem('userRole');
+    //   const userRole = await AsyncStorage.getItem('userRole');
 
-      Alert.alert("Успех", "Вход выполнен успешно!");
+    //   Alert.alert("Успех", "Вход выполнен успешно!");
 
-      if (userRole === 'DOCTOR') {
+    //   if (userRole === 'DOCTOR') {
 
-        navigation.navigate(ROUTES.STACK.DOCTOR);
-      } else {
+    //     navigation.navigate(ROUTES.STACK.DOCTOR);
+    //   } else {
 
-        navigation.navigate(ROUTES.STACK.HOMEPAGE);
-      }
+    //     navigation.navigate(ROUTES.STACK.HOMEPAGE);
+    //   }
 
-    } catch{
+    // } catch{
 
-      Alert.alert("Ошибка входа");
-    } finally {
-      setLoading(false);
-    }
+    //   Alert.alert("Ошибка входа");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   const handleInputChange = (field: keyof LoginFormData, value: string) => {
