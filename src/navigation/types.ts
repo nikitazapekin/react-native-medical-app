@@ -25,10 +25,11 @@ export type RootStackParamList = {
   [ROUTES.STACK.CHILDREN]:  { id: number };
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
   [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
-  [ROUTES.STACK.MEDICALCARD]: undefined;
-  [ROUTES.STACK.USER_FAVOURITE_DRUGS]: undefined;
-  [ROUTES.STACK.USER_ANALYZE_HISTORY]: undefined;
-  [ROUTES.STACK.USER_ISTORIA_PRIEMOV]: undefined;
+  [ROUTES.STACK.MEDICALCARD]: { id: number };
+  [ROUTES.STACK.USER_FAVOURITE_DRUGS]: { id: number };
+  [ROUTES.STACK.USER_ANALYZE_HISTORY]:  { id: number };
+  [ROUTES.STACK.USER_ISTORIA_PRIEMOV]:  { id: number };
+  [ROUTES.STACK.ISTORIABOLEZNEI]:  { id: number };
   [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
 
@@ -53,7 +54,6 @@ export type RootStackParamList = {
       service: string;
     };
   };
-  [ROUTES.STACK.ISTORIABOLEZNEI]: undefined;
 };
 export type FormNavigationProp = StackNavigationProp<RootStackParamList>;
 

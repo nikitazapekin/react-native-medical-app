@@ -3,6 +3,8 @@ export interface MedicalCardButtonProps  {
 id: number,
     text: string,
     screen:string,
+
   };
+  id: string
   onPress: () => void;
 }
