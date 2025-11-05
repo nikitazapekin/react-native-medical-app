@@ -28,7 +28,6 @@ function formatDate(isoDateString: string): string {
 
 const IstoriaPriemov = ({ id }: IstoriaPriemovProps) => {
   const [priemi, setPriemi] = useState<MedicalTest[]>([]);
- 
 
   const renderItem = ({ item }: { item: MedicalTest }) => (
     <ElementBolezni
@@ -44,17 +43,17 @@ const IstoriaPriemov = ({ id }: IstoriaPriemovProps) => {
   useEffect(() => {
     const handleGet = async () => {
       try {
-       
+
         const resp = await MedicalTestService.getMedicalTests(Number(id));
 
         setPriemi(resp || []);
       } catch   {
-       
+
         Alert.alert("Ошибка", "Не удалось загрузить данные приемов");
-      }  
+      }
     };
 
-    handleGet().catch(()=> Alert.alert("Error"))
+    handleGet().catch(()=> Alert.alert("Error"));
   }, [id]);
 
   return (

@@ -38,9 +38,9 @@ import UserCatalogRecomendatonsScreen from "@/screens/UserCatalogRecomendatonsSc
 import UserCatalogServicesScreen from "@/screens/UserCatalogServicesScreen";
 import UserConsultationHistory from "@/screens/UserConsultationHistory";
 import UserEditChildren from "@/screens/UserEditChildrens";
-import UserFullConsultationScreen from "@/screens/UserFullConsultationScreen";
 import UserEditCabinet from "@/screens/UserEditProfile";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
+import UserFullConsultationScreen from "@/screens/UserFullConsultationScreen";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserRecommendations from "@/screens/UserRecommendations";
