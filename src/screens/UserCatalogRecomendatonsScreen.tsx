@@ -4,17 +4,17 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-import CatalogServicesComponent from "@/components/CatalogServicesComponent";
+import CatalogRecomendationComponent from "@/components/CatalogRecomendationComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 
-export default function UserCatalogServicesScreen() {
+export default function UserCatalogRecomendatonsScreen() {
   return (
     <View style={styles.container}>
-      <Header title="Услуги" isAuthenticated={true} showBackButton={true}/>
+      <Header title="Рекомендации" isAuthenticated={true} showBackButton={true}/>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <CatalogServicesComponent />
+        <CatalogRecomendationComponent />
       </ScrollView>
 
       <Footer />
@@ -23,3 +23,5 @@ export default function UserCatalogServicesScreen() {
     </View>
   );
 }
+
+
