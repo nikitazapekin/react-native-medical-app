@@ -16,6 +16,22 @@ const Footer = () => {
   useEffect(() => {
     const currentRouteName = route.name;
 
+    if (currentRouteName === ROUTES.STACK.USER_CATALOG_DOCTORS || currentRouteName === ROUTES.STACK.USER_ABOUT_DOCTOR
+      || currentRouteName === ROUTES.STACK.USER_REGISTRATION_AT_CLINIC
+      || currentRouteName === ROUTES.STACK.USER_REGISTRATION_SUMMARY
+      || currentRouteName === ROUTES.STACK.USER_CATALOG_SERVICES
+      || currentRouteName === ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS
+      || currentRouteName === ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION
+    ) {
+      const catalogTab = tabIcons.find((item) => item.type === "category");
+
+      if (catalogTab) {
+        setActiveTab(catalogTab.type);
+
+        return;
+      }
+    }
+
     const activeTabItem = tabIcons.find(
       (item) => ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
     );
@@ -30,7 +46,9 @@ const Footer = () => {
 
     if (validRoutes.includes(routeName)) {
       setActiveTab(type);
-      navigation.navigate(ROUTES.STACK[routeName as keyof typeof ROUTES.STACK]);
+      const routeKey = routeName as keyof typeof ROUTES.STACK;
+
+      navigation.navigate(ROUTES.STACK[routeKey] as any);
     }
   };
 

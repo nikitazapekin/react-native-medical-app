@@ -10,7 +10,9 @@ import CabinetScreen from "@/screens/Cabinet";
 import CatalogScreen from "@/screens/CatalogScreen";
 import ChatScreen from "@/screens/ChatScreen";
 import ChatsScreen from "@/screens/ChatsScreen";
+import ChildrenDoctorsScreen from "@/screens/ChildrenDoctorsScreen";
 import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
+import ChildrenInformationAboutClinicScreen from "@/screens/ChildrenInformationAboutClinicScreen";
 import ChildrenScreen from "@/screens/ChildrenScreen";
 import ChildrensScreen from "@/screens/ChildrensScreen";
 import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
@@ -28,14 +30,23 @@ import RecordDetailScreen from "@/screens/RecordDetailScreen";
 import RegisterScreen from "@/screens/RegisterScreen";
 import SpisokSovetov from "@/screens/SpisokSovetov";
 import TubeScreen from "@/screens/TubeScreen";
+import UserAboutDoctorScreen from "@/screens/UserAboutDoctorScreen";
 import UserAnalyzeScreen from "@/screens/UserAnalyzeScreen";
+import UserCatalogDoctorsScreen from "@/screens/UserCatalogDoctorsScreen";
 import UserCatalogDrugDetail from "@/screens/UserCatalogDrugDetailScreen";
+import UserCatalogFullRecomendationScreen from "@/screens/UserCatalogFullRecomendationScreen";
+import UserCatalogRecomendatonsScreen from "@/screens/UserCatalogRecomendatonsScreen";
+import UserCatalogServicesScreen from "@/screens/UserCatalogServicesScreen";
+import UserConsultationHistory from "@/screens/UserConsultationHistory";
 import UserEditChildren from "@/screens/UserEditChildrens";
 import UserEditCabinet from "@/screens/UserEditProfile";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
+import UserFullConsultationScreen from "@/screens/UserFullConsultationScreen";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserRecommendations from "@/screens/UserRecommendations";
+import UserRegistrationAtClinic from "@/screens/UserRegistrationAtClinic";
+import UserRegistrationSummaryScreen from "@/screens/UserRegistrationSummaryScreen";
 import UserSpisokSovetovScreen from "@/screens/UserSpisokSovetov";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -52,7 +63,6 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.AUTH} component={AuthScreen} />
         <Stack.Screen name={ROUTES.STACK.REGISTER} component={RegisterScreen} />
         <Stack.Screen name={ROUTES.STACK.HOMEPAGE} component={ProfileScreen} />
-
         <Stack.Screen name={ROUTES.STACK.CATALOG} component={CatalogScreen} />
         <Stack.Screen name={ROUTES.STACK.CHAT} component={ChatScreen} />
         <Stack.Screen name={ROUTES.STACK.MED} component={MedScreen} />
@@ -65,6 +75,8 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CHAT} component={DoctorChatScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDRENS} component={ChildrensScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILDREN} component={ChildrenScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHILDREN_DOCTORS} component={ChildrenDoctorsScreen} />
+        <Stack.Screen name={ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC} component={ChildrenInformationAboutClinicScreen} />
         <Stack.Screen name={ROUTES.STACK.MEDICALCARD} component={MedicalCardScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_RECORD_DETAIL} component={RecordDetailScreen } />
         <Stack.Screen name={ROUTES.STACK.CHILDREN_HEALTH_STATUS} component={ChildrenHealthStatus } />
@@ -78,13 +90,18 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_RECOMMENDATIONS} component={UserRecommendations} />
         <Stack.Screen name={ROUTES.STACK.USER_EDIT_PROFILE} component={UserEditCabinet} />
         <Stack.Screen name={ROUTES.STACK.USER_EDIT_CHILDRESN} component={UserEditChildren} />
-        <Stack.Screen
-          name={ROUTES.STACK.DOCTOR_APPOINTMENTS}
-          component={DoctorAppointmentsScreen}
-        />
-
+        <Stack.Screen name={ROUTES.STACK.DOCTOR_APPOINTMENTS} component={DoctorAppointmentsScreen} />
         <Stack.Screen name={ROUTES.STACK.DOCTOR_CABINET_EDIT} component={DoctorEditCabinet} />
         <Stack.Screen name={ROUTES.STACK.SPISOKSOVETOV} component={SpisokSovetov} />
+        <Stack.Screen name={ROUTES.STACK.USER_CATALOG_DOCTORS} component={UserCatalogDoctorsScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_CATALOG_SERVICES} component={UserCatalogServicesScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS} component={UserCatalogRecomendatonsScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_CONSULTATION_HISTORY} component={UserConsultationHistory} />
+        <Stack.Screen name={ROUTES.STACK.USER_FULL_CONSULTATION} component={UserFullConsultationScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION} component={UserCatalogFullRecomendationScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_ABOUT_DOCTOR} component={UserAboutDoctorScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_AT_CLINIC} component={UserRegistrationAtClinic} />
+        <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_SUMMARY} component={UserRegistrationSummaryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

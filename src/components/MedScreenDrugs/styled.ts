@@ -7,30 +7,6 @@ export const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
   },
-  searchWrapper: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#ffffffff",
-    borderRadius: 30,
-    marginTop: 20,
-    padding: 5,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: "#000",
-    paddingLeft: 20,
-    paddingVertical: 10,
-    backgroundColor: "transparent",
-  },
-  searchIcon: {
-    width: 20,
-    height: 20,
-    marginLeft: 10,
-
-  },
   title: {
     color: COLORS.BLACK,
     fontSize: 24,
@@ -47,6 +23,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     maxWidth: 376,
+    paddingBottom: 25,
   },
   appointmentItem: {
     flexDirection: "row",

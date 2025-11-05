@@ -18,10 +18,17 @@ export const ROUTES = {
     DOCTOR_APPOINTMENTS: "DoctorAppointments",
     CHILDRENS: "Childrens",
     CHILDREN: "Children",
+    CHILDREN_DOCTORS: "ChildrenDoctors",
+    CHILDREN_INFORMATION_ABOUT_CLINIC: "ChildrenInformationAboutClinic",
     SPISOKSOVETOV: "SpisokSovetov",
     MEDICALCARD: "MedicalCard",
     DOCTOR_RECORD_DETAIL: "DoctorRecordDetail",
-
+    USER_CATALOG_DOCTORS: "UserCatalogDoctors",
+    USER_CATALOG_SERVICES: "UserCatalogServices",
+    USER_CATALOG_RECOMMENDATIONS: "UserCatalogRecommendations",
+    USER_CATALOG_FULL_RECOMENDATION: "UserCatalogFullRecomendation",
+    USER_CONSULTATION_HISTORY: "UserConsultationHistory",
+    USER_FULL_CONSULTATION: "UserFullConsultation",
     ISTORIABOLEZNEI: "IstoriaBoleznei",
     CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
     USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",
@@ -34,7 +41,10 @@ export const ROUTES = {
     USER_RECOMMENDATIONS: "UserRecomendations",
 
     USER_EDIT_PROFILE: "UserEditProfile",
-    USER_EDIT_CHILDRESN: "USER_EDIT_CHILDRESN"
+    USER_EDIT_CHILDRESN: "USER_EDIT_CHILDRESN",
+    USER_ABOUT_DOCTOR: "UserAboutDoctor",
+    USER_REGISTRATION_AT_CLINIC: "UserRegistrationAtClinic",
+    USER_REGISTRATION_SUMMARY: "UserRegistrationSummary"
   },
   TABS: {
     HOME: "HomeTab",
@@ -49,6 +59,7 @@ export const TEXTS = {
     PROFILE: "Профиль",
     SETTINGS: "Настройки",
     CHAT: "Чат",
+    CATALOG: "Каталог",
   },
   BUTTONS: {
     GO_TO_PROFILE: "Перейти в профиль",
