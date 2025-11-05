@@ -1,17 +1,24 @@
 export function getDaysSinceRegistration(dateString: string): string {
-
   const registrationDate = new Date(dateString);
   const currentDate = new Date();
 
+  // Если дата некорректная, возвращаем 0 дней
+  if (isNaN(registrationDate.getTime())) {
+    return '0 дней';
+  }
+
+  const msInDay = 1000 * 60 * 60 * 24;
   const timeDiff = currentDate.getTime() - registrationDate.getTime();
 
-  const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const rawDays = Math.floor(timeDiff / msInDay);
+  const daysDiff = Math.max(0, rawDays);
 
-  let daysWord: string;
   const lastDigit = daysDiff % 10;
   const lastTwoDigits = daysDiff % 100;
 
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+  let daysWord: string;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
     daysWord = 'дней';
   } else if (lastDigit === 1) {
     daysWord = 'день';

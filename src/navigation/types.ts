@@ -25,6 +25,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; //страница htlf htlfr редактирования инфы доктора
   [ROUTES.STACK.CHILDRENS]: undefined;
   [ROUTES.STACK.CHILDREN]:  { id: number };
+  [ROUTES.STACK.CHILDREN_DOCTORS]: { childId: number };
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
   [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
   [ROUTES.STACK.MEDICALCARD]: { id: number };
@@ -41,6 +42,7 @@ export type RootStackParamList = {
     recommendationId: string;
   };
   [ROUTES.STACK.USER_CONSULTATION_HISTORY]: undefined;
+  [ROUTES.STACK.USER_FULL_CONSULTATION]: { consultationId: string };
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
     doctor: Doctor;

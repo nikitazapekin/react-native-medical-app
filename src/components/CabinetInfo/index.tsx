@@ -1,9 +1,9 @@
-// import { useEffect, useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { useState } from "react";
 import type {NativeSyntheticEvent,NativeTouchEvent} from "react-native";
 import { Alert,Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import MockImage from "@assets/mockPhotos/Avatar.png";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from 'expo-image-picker';
 
@@ -11,9 +11,9 @@ import { styles } from "./styled";
 import type { Patient } from "./types";
 
 import { getDaysSinceRegistration } from "@/helpers/dateFormat";
-// import AuthService from "@/http/auth";
+import AuthService from "@/http/auth";
 import PersonInfoService from "@/http/patienInfo";
-// import UserService from "@/http/userService";
+import UserService from "@/http/userService";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -26,40 +26,40 @@ const CabinetInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<FormNavigationProp>();
 
-  // useEffect(() => {
-  //   async function checkAuthAndGetUser() {
-  //     try {
-  //       const token = await AsyncStorage.getItem('accessToken');
+  useEffect(() => {
+    async function checkAuthAndGetUser() {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
 
-  //       if (!token) {
-  //         navigation.navigate(ROUTES.STACK.AUTH);
+        if (!token) {
+          navigation.navigate(ROUTES.STACK.AUTH);
 
-  //         return;
-  //       }
+          return;
+        }
 
-  //       const t = await AuthService.validateToken();
+        const t = await AuthService.validateToken();
 
-  //       if (t.accessToken !== "Token is valid") {
-  //         navigation.navigate(ROUTES.STACK.AUTH);
+        if (t.accessToken !== "Token is valid") {
+          navigation.navigate(ROUTES.STACK.AUTH);
 
-  //         return;
-  //       }
+          return;
+        }
 
-  //       const userData = await UserService.getCurrentUser();
+        const userData = await UserService.getCurrentUser();
 
-  //       setPatient(userData);
+        setPatient(userData);
 
-  //       await AsyncStorage.setItem('id', String(userData.id));
+        await AsyncStorage.setItem('id', String(userData.id));
 
-  //     } catch {
-  //       navigation.navigate(ROUTES.STACK.AUTH);
-  //     }
-  //   }
+      } catch {
+        navigation.navigate(ROUTES.STACK.AUTH);
+      }
+    }
 
-  //   checkAuthAndGetUser().catch(()=> {
-  //     navigation.navigate(ROUTES.STACK.AUTH);
-  //   });
-  // }, [navigation]);
+    checkAuthAndGetUser().catch(()=> {
+      navigation.navigate(ROUTES.STACK.AUTH);
+    });
+  }, [navigation]);
 
   const handleDotsPress = (event: TouchEvent) => {
     const { pageX, pageY } = event.nativeEvent;

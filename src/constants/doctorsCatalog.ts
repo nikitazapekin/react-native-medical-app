@@ -8,6 +8,20 @@ export const doctorsSortOptions = [
   { id: "3", label: "По рейтингу", type: "rating" },
 ];
 
+export const doctorOptions = [
+  { id: "0", label: "Все специализации", type: "" },
+  { id: "1", label: "Стоматолог", type: "Стоматолог" },
+  { id: "2", label: "Кардиолог", type: "Кардиолог" },
+  { id: "3", label: "Терапевт", type: "Терапевт" },
+  { id: "4", label: "Невролог", type: "Невролог" },
+  { id: "5", label: "Хирург", type: "Хирург" },
+  { id: "6", label: "Офтальмолог", type: "Офтальмолог" },
+  { id: "7", label: "Отоларинголог", type: "Отоларинголог" },
+  { id: "8", label: "Гинеколог", type: "Гинеколог" },
+  { id: "9", label: "Уролог", type: "Уролог" },
+  { id: "10", label: "Педиатр", type: "Педиатр" },
+];
+
 export const doctorsCatalog: Doctor[] = [
   {
     id: 1,

@@ -6,6 +6,6 @@ import Menu from  "../assets/childrenProfile/menu.png"
 export const childrenOptions = [
   { id: 1, icon: Card, alt: "Card", text: "Медицинская карта" },
   { id: 2, icon: Analyze, alt: "Card", text: "Общие рекомендации врачей" },
-  { id: 3, icon: Menu, alt: "Card", text: "Общий список консультаций" },
+  { id: 3, icon: Menu, alt: "Card", text: "Список консультировавших врачей" },
   { id: 5, icon: Hospital, alt: "Card", text: "Поликлиника" },
 ];

@@ -28,9 +28,9 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
         <View style={styles.row}><Text style={styles.label}>Услуга:</Text><Text style={styles.value}>{displayedService}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Дата:</Text><Text style={styles.value}>{formattedDate}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Время:</Text><Text style={styles.value}>{time}</Text></View>
-      </View>
-      <View style={styles.buttonWrapper}>
-        <CustomButton text="Отмена" handler={onCancel} fullWidth/>
+        <View style={styles.buttonWrapper}>
+          <CustomButton text="Отмена" handler={onCancel} fullWidth/>
+        </View>
       </View>
     </View>
   );
