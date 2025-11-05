@@ -1,54 +1,47 @@
-
-import React from 'react';
-import { Image, Pressable,ScrollView,Text, View   } from "react-native";
-import MockSwiper from "@assets/mockPhotos/Soveti.png";
+import React from "react";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 
+import type { SurveyResponse } from "@/http/types/survey";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
-const cardData = [
-  {
-    id: 1,
-    image:MockSwiper,
-    text: "Совет 1"
-  },
-  {
-    id: 2,
-    image:MockSwiper,
-    text: "Совет 2"
-  },
-  {
-    id: 3,
-    image: MockSwiper,
-    text: "Совет 3"
-  },
-  {
-    id: 4,
-    image: MockSwiper,
-    text: "Совет 4"
-  },
-  {
-    id: 5,
-    image:MockSwiper,
-    text: "Совет 5"
-  },
-];
+interface SovetiSwiperProps {
+  surveys?: SurveyResponse[];
+}
 
 const CARD_WIDTH = 162;
-//const CARD_HEIGHT = 201;
 const CARD_MARGIN = 9;
 
-const SovetiSwiper = () => {
+const DefaultSurveyImage = require("@assets/mockPhotos/Soveti.png");
+
+const SovetiSwiper: React.FC<SovetiSwiperProps> = ({ surveys = [] }) => {
   const navigation = useNavigation<FormNavigationProp>();
 
-  const handleNavigate = () => {
-    console.log(1111);
-    navigation.navigate(ROUTES.STACK.USER_OPROS);
-
+  const handleNavigate = (surveyId: number) => {
+    navigation.navigate(ROUTES.STACK.USER_OPROS, { id: surveyId });
   };
+
+  if (!surveys || surveys.length === 0) {
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          decelerationRate="fast"
+          snapToInterval={CARD_WIDTH + CARD_MARGIN}
+          snapToAlignment="start"
+          contentContainerStyle={styles.scrollContent}
+        >
+          <View>
+            <Text>Нет доступных опросов</Text>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -60,14 +53,17 @@ const SovetiSwiper = () => {
         snapToAlignment="start"
         contentContainerStyle={styles.scrollContent}
       >
-        {cardData.map((item) => (
-          <Pressable onPress={handleNavigate} key={item.id} style={styles.card}>
+        {surveys.map((survey) => (
+          <Pressable key={survey.id} style={styles.card} onPress={() => handleNavigate(survey.id)}>
             <Image
-              source={item.image}
+              source={survey.image ? { uri: survey.image } : DefaultSurveyImage}
               style={styles.cardImage}
               resizeMode="cover"
+              defaultSource={DefaultSurveyImage}
             />
-            <Text style={styles.cardText}>{item.text}</Text>
+            <Text style={styles.cardText} numberOfLines={2}>
+              {survey.title}
+            </Text>
           </Pressable>
         ))}
       </ScrollView>
@@ -76,25 +72,3 @@ const SovetiSwiper = () => {
 };
 
 export default SovetiSwiper;
-
-/*
-
-import { Image, Pressable, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-import { styles } from "./styled";
-import type { ListItemProps } from "./types";
-
-import { profileOptions } from "@/constants";
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
-
-const ListItem = ({ item }: ListItemProps) => {
-  const navigation = useNavigation<FormNavigationProp>();
-
-  const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история")) {
-      navigation.navigate(ROUTES.STACK.PAYMENTS);
-    }
-
-    */

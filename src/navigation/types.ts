@@ -70,7 +70,7 @@ export type RootStackParamList = {
     };
   };
   [ROUTES.STACK.USER_SPISOK_SOVETOV]: undefined;
-  [ROUTES.STACK.USER_OPROS]: undefined;
+  [ROUTES.STACK.USER_OPROS]:  { id: number };
   [ROUTES.STACK.DOCTOR_RECORD_DETAIL]: {
     record: {
       id: string;
