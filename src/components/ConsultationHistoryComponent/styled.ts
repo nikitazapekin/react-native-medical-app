@@ -9,7 +9,9 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
   },
   listWrapper: {
-    gap: 11,
     paddingBottom: 25,
+    gap: 11,
   },
 });
+
+
