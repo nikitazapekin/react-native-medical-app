@@ -1,15 +1,15 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import RatingStar from "@assets/profile/star.png";
+import { useNavigation } from "@react-navigation/native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
-import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
+import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
 import { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
-import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
 
 interface AboutDoctorComponentProps {
   doctor: Doctor;

@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Animated, Easing, Text, TouchableOpacity, View } from "react-native";
-import { PRIMARY } from "@/constants/colors";
 
 import { styles } from "./styled";
+
+import { PRIMARY } from "@/constants/colors";
 
 type CalendarProps = {
   initialDate?: Date;
@@ -64,6 +65,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
 
   const isSameDay = (a: Date | null, b: Date | null): boolean => {
     if (!a || !b) return false;
+
     return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
   };
 
@@ -81,6 +83,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
 
   const handleSelectDay = (day: number) => {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+
     setInternalSelectedDate(date);
     onSelectDate?.(date);
     animateSelect();
@@ -118,6 +121,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
             : null;
           const selected = isSameDay(date, internalSelectedDate);
           const scale = selected ? selectedDayScale.interpolate({ inputRange: [0, 1], outputRange: [0.8, 1] }) : 1;
+
           return (
             <TouchableOpacity
               key={index}
@@ -152,4 +156,3 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
 };
 
 export default Calendar;
-

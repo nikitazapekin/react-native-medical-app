@@ -1,21 +1,20 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
-
-import Calendar from "@/components/shared/Calendar";
-import CustomButton from "@/components/shared/Button";
-import TimeSlot from "@/components/shared/TimeSlot";
-import { timeSlots } from "@/constants/timeSlots";
-import { PRIMARY } from "@/constants/colors";
-import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
 
 import { styles } from "./styled";
 
+import CustomButton from "@/components/shared/Button";
+import Calendar from "@/components/shared/Calendar";
+import TimeSlot from "@/components/shared/TimeSlot";
+import { PRIMARY } from "@/constants/colors";
+import { timeSlots } from "@/constants/timeSlots";
+
 type Props = {
-  doctor: Doctor;
   onSelectionChange?: (payload: { date: Date | null; time: string | null }) => void;
+  onSubmit?: (payload: { date: Date | null; time: string | null }) => void;
 };
 
-const RegistrationAtClinicComponent: React.FC<Props> = ({ doctor, onSelectionChange }) => {
+const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onSubmit }) => {
   const primaryColor = PRIMARY;
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -31,7 +30,7 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ doctor, onSelectionCha
   };
 
   const handleSubmit = () => {
-    console.log("Confirm registration for:", doctor.name, selectedDate, selectedTime);
+    onSubmit?.({ date: selectedDate, time: selectedTime });
   };
 
   return (
@@ -73,5 +72,3 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ doctor, onSelectionCha
 };
 
 export default RegistrationAtClinicComponent;
-
-

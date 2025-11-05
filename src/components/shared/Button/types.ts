@@ -4,4 +4,5 @@ export interface CustomButtonProps {
   backgroundColor?: string;
   disabled?: boolean;
   color?: string;
+  fullWidth?: boolean;
 }
