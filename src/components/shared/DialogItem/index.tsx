@@ -12,7 +12,7 @@ import type { FormNavigationProp } from "@/navigation/types";
 const DialogItem = ({ item }: DialogTypes) => {
   const navigation = useNavigation<FormNavigationProp>();
   const handleNavigate = () => {
-    navigation.navigate(ROUTES.STACK.CHAT);
+    navigation.navigate(ROUTES.STACK.CHAT, {id: item.id});
   };
 
   return (
@@ -21,7 +21,7 @@ const DialogItem = ({ item }: DialogTypes) => {
         <View style={styles.main}>
           <Image source={MockImage} resizeMode="contain" />
           <View style={styles.content}>
-            <Text style={styles.author}>{item.name}</Text>
+            <Text style={styles.author}>{item.id} {item.name}</Text>
             <Text style={styles.status}>{item.status}</Text>
             <Text style={styles.text}>{item.text}</Text>
           </View>

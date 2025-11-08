@@ -12,14 +12,14 @@ export type RootStackParamList = {
   [ROUTES.STACK.REGISTER]: undefined;
   [ROUTES.STACK.HOMEPAGE]: undefined;
   [ROUTES.STACK.CATALOG]: undefined;
-  [ROUTES.STACK.CHAT]: undefined;
+  [ROUTES.STACK.CHAT]: { id: number };
   [ROUTES.STACK.CHATS]: undefined;
   [ROUTES.STACK.MED]: undefined;
   [ROUTES.STACK.TUBE]: undefined;
   [ROUTES.STACK.CABINET]: undefined;
   [ROUTES.STACK.PAYMENTS]: { id: number };
   [ROUTES.STACK.DOCTOR]: undefined; //главная страница доктора
-  [ROUTES.STACK.DOCTOR_CHAT]: undefined; //страница чата доктора
+  [ROUTES.STACK.DOCTOR_CHAT]: { id: number }; //страница чата доктора
   [ROUTES.STACK.DOCTOR_CABINET]: undefined; //страница профиля доктора
   [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined; //страница записей доктора
   [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; //страница htlf htlfr редактирования инфы доктора

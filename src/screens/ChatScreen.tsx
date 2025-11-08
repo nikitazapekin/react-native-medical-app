@@ -9,6 +9,8 @@ import { styles } from "./styles";
 import Chat from "@/components/Chat";
 import ChatKeypad from "@/components/ChatKeypad";
 import Header from "@/components/shared/Header";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "@/navigation/types";
 
 const mockMessages = [
   { id: 1, from: "me", to: "user", text: "Как проявляется боль?", time: "12:45", avatar: Avatar },
@@ -52,7 +54,18 @@ const mockMessages = [
   },
 ];
 
-export default function ChatScreen() {
+
+interface UserEditChildrenProps {
+  route: RouteProp<RootStackParamList, 'Chat'>;
+
+}
+
+export default function ChatScreen({ route }: UserEditChildrenProps) {
+
+    const { id } = route.params || {};
+
+  console.log("id chat", id);
+
   return (
     <View style={styles.container}>
       <Header title="Чат" isAuthenticated={true} />
@@ -66,3 +79,13 @@ export default function ChatScreen() {
     </View>
   );
 }
+
+
+/*
+export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) {
+  const { id } = route.params || {};
+
+  console.log("id", id);
+
+  return (
+  */
