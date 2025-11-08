@@ -25,4 +25,3 @@ const MessageItem = ({ item , currentUserId}: MessageTypes) => {
 };
 
 export default MessageItem;
- 
