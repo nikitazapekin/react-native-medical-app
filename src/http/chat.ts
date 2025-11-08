@@ -11,6 +11,18 @@ export interface ChatDTO {
   participantName?: string;
 }
 
+ export interface MessageDTO {
+  id: number;
+  message: string;
+  from: string;
+  senderId: number;
+  time: string;
+  isRead: boolean;
+  chatId: number;
+  type: string;
+}
+
+
 class ChatService {
   static async startChat(patientId: number, doctorId: number): Promise<number> {
     try {
@@ -125,6 +137,35 @@ class ChatService {
       }
     }
   }
+
+
+    static async getChatHistory(chatId: number, userRole: string): Promise<MessageDTO[]> {
+    try {
+      console.log('Getting chat history for chatId:', chatId, 'role:', userRole);
+
+      let response;
+      if (userRole === 'DOCTOR') {
+        response = await $api.get<MessageDTO[]>(`/chat/doctor/${chatId}/messages`);
+      } else {
+        response = await $api.get<MessageDTO[]>(`/chat/user/${chatId}/messages`);
+      }
+      
+      console.log('Chat history retrieved successfully, count:', response.data.length);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error getting chat history:', error);
+      
+      if (error.name === 'SESSION_EXPIRED') {
+        throw new Error('SESSION_EXPIRED');
+      } else if (error.response?.status === 401) {
+        throw new Error('Authentication failed. Please login again.');
+      } else {
+        throw new Error('Failed to get chat history');
+      }
+    }
+  }
+
+
 
 }
 

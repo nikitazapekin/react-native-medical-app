@@ -157,7 +157,7 @@ const Chats = () => {
   const displayData = isSearching ? searchResults : userChats.map(transformChatToSearchItem);
 
   useEffect(() => {
-    loadUserChats().catch(()=> Alert.alert("err"))
+    loadUserChats().catch(()=> Alert.alert("err"));
   }, []);
 
   return (
