@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
+import type { RouteProp } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import Avatar from "../assets/mockPhotos/Avatar.png";
@@ -9,8 +10,7 @@ import { styles } from "./styles";
 import Chat from "@/components/Chat";
 import ChatKeypad from "@/components/ChatKeypad";
 import Header from "@/components/shared/Header";
-import { RouteProp } from "@react-navigation/native";
-import { RootStackParamList } from "@/navigation/types";
+import type { RootStackParamList } from "@/navigation/types";
 
 const mockMessages = [
   { id: 1, from: "me", to: "user", text: "Как проявляется боль?", time: "12:45", avatar: Avatar },
@@ -54,7 +54,6 @@ const mockMessages = [
   },
 ];
 
-
 interface UserEditChildrenProps {
   route: RouteProp<RootStackParamList, 'Chat'>;
 
@@ -62,7 +61,7 @@ interface UserEditChildrenProps {
 
 export default function ChatScreen({ route }: UserEditChildrenProps) {
 
-    const { id } = route.params || {};
+  const { id } = route.params || {};
 
   console.log("id chat", id);
 
@@ -79,7 +78,6 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     </View>
   );
 }
-
 
 /*
 export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) {
