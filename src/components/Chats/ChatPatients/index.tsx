@@ -7,7 +7,6 @@ import DialogItem from "../../shared/DialogItem";
 import { styles } from "../ChatDoctors/styled";
 
 import SearchService from "@/http/search";
- 
 
 const mockPatients = [
   {
