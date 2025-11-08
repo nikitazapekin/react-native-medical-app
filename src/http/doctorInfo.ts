@@ -9,6 +9,7 @@ class DoctorInfoService {
       const response = await $api.get<Doctor>('/doctors/me');
 
       return response.data;
+
     } catch {
 
       throw new Error(  'Failed to get doctor information');

@@ -10,6 +10,7 @@ export interface AuthResponse {
   role: string;
   email: string;
   message?: string;
+  userId: number
 }
 
 export interface LoginRequest {
