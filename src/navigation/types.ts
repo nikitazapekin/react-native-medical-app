@@ -12,7 +12,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.REGISTER]: undefined;
   [ROUTES.STACK.HOMEPAGE]: undefined;
   [ROUTES.STACK.CATALOG]: undefined;
-  [ROUTES.STACK.CHAT]: { id: number };
+  [ROUTES.STACK.CHAT]: { id: number, chatId: number };
   [ROUTES.STACK.CHATS]: undefined;
   [ROUTES.STACK.MED]: undefined;
   [ROUTES.STACK.TUBE]: undefined;

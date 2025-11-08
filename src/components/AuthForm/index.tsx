@@ -86,7 +86,7 @@ const AuthForm = () => {
           <FormInput
             label="Пароль"
             handler={(value) => handleInputChange('password', value)}
-            type="password"
+            //   type="password"
             placeholder="Пароль"
             value={formData.password}
           />

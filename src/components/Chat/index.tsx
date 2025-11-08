@@ -5,11 +5,11 @@ import MessageItem from "../shared/MessageItem";
 import { styles } from "./styled";
 import type { MessagesTypes } from "./types";
 
-const Chat = ({ messages }: MessagesTypes) => {
+const Chat = ({ messages , currentUserId }: MessagesTypes) => {
   return (
     <View style={styles.wrapper}>
       {messages.map((item) => (
-        <MessageItem item={item} />
+        <MessageItem item={item} currentUserId={currentUserId} />
       ))}
     </View>
   );

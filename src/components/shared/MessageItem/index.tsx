@@ -3,8 +3,8 @@ import { Image, Text, View } from "react-native";
 import { styles } from "./styled";
 import type { MessageTypes } from "./types";
 
-const MessageItem = ({ item }: MessageTypes) => {
-  const isMyMessage = item.from === "me";
+const MessageItem = ({ item , currentUserId}: MessageTypes) => {
+  const isMyMessage = String(item.from) === currentUserId;
 
   return (
     <View style={[styles.wrapper, isMyMessage && styles.myWrapper]}>
