@@ -94,8 +94,7 @@ const Chats = () => {
       setLoading(false);
     }
   };
-
-  // Дебаунс поиска - 300ms
+ 
   const debouncedSearch = useCallback(
     debounce((searchTerm: string) => {
       searchDoctorsByLastName(searchTerm).catch(()=>Alert.alert("err"));
