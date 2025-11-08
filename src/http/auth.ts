@@ -47,7 +47,9 @@ export default class AuthService {
     try {
       //const BASE_URL = 'http://192.168.0.104:9081/api';
       const refreshApi = axios.create({
-        baseURL: 'http://192.168.1.14:7081/api',
+        //   baseURL: 'http://192.168.1.14:7081/api',
+
+        baseURL: 'http://192.168.1.6:7081/api',
         withCredentials: true,
         timeout: 10000,
       });

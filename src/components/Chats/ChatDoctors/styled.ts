@@ -19,4 +19,14 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 10,
   },
+
+  input: {
+    width: "100%",
+    backgroundColor: COLORS.WHITE,
+    height: 50,
+    padding: 5,
+    borderRadius: 5,
+    marginBottom: 15,
+
+  },
 });
