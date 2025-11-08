@@ -1,8 +1,11 @@
-import { useCallback,  useState } from "react";
-import {  Alert, FlatList, Text, TextInput, View } from "react-native";
+
+import { useCallback, useEffect, useState } from "react";
+import { Alert, FlatList, Text, TextInput, View } from "react-native";
 import Avatar from "@assets/mockPhotos/Avatar.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { debounce } from "lodash";
 
+import ChatService, { type ChatDTO } from "../../../http/chat";
 import DialogItem from "../../shared/DialogItem";
 
 import { styles } from "./styled";
@@ -19,16 +22,78 @@ interface SearchDoctor {
   avatar: any;
 }
 
+interface UserData {
+  email: string | null;
+  id: string | null;
+  role: string | null;
+}
+
 const Chats = () => {
   const [lastName, setLastName] = useState<string>("");
   const [searchResults, setSearchResults] = useState<SearchDoctor[]>([]);
+  const [userChats, setUserChats] = useState<ChatDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [chatsLoading, setChatsLoading] = useState<boolean>(true);
+
   const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const getStoredUserData = async (): Promise<UserData> => {
+    try {
+      const email = await AsyncStorage.getItem('userEmail');
+      const id = await AsyncStorage.getItem('userId');
+      const role = await AsyncStorage.getItem('userRole');
+
+      console.log('Stored user data:', { email, id, role });
+
+      return { email, id, role };
+    } catch (error) {
+      console.error('Error getting user data:', error);
+
+      return { email: null, id: null, role: null };
+    }
+  };
+
+  const loadUserChats = async () => {
+    try {
+      setChatsLoading(true);
+
+      const userData = await getStoredUserData();
+
+      if (!userData.id || !userData.role) {
+        console.log('User not authenticated');
+
+        return;
+      }
+
+      console.log('Loading chats for user:', userData.id, 'role:', userData.role);
+
+      const chats = await ChatService.getMyChats(Number(userData.id), userData.role);
+
+      console.log('Loaded chats:', chats);
+
+      setUserChats(chats);
+    } catch (error: any) {
+      console.error('Error loading chats:', error);
+
+    } finally {
+      setChatsLoading(false);
+    }
+  };
+
+  const transformChatToSearchItem = (chat: ChatDTO): SearchDoctor => ({
+    id: chat.participantId,
+    name: chat.chatName,
+    text: chat.lastMessage || "Нет сообщений",
+    status: chat.participantName || "Участник",
+    time: chat.lastMessageTime
+      ? new Date(chat.lastMessageTime).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+      : new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+    avatar: chat.avatar ? { uri: chat.avatar } : Avatar,
+  });
 
   const transformDoctorToSearchItem = (doctor: Doctor): SearchDoctor => ({
     id: doctor.id,
-    name: `Доктор ${doctor.lastName} ${doctor.firstName.charAt(0)} `,
+    name: `Доктор ${doctor.lastName} ${doctor.firstName.charAt(0)}.`,
     text: doctor.specialization || "Специалист",
     status: doctor.specialization || "Врач",
     time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
@@ -44,7 +109,7 @@ const Chats = () => {
     }
 
     setLoading(true);
-    setError(null);
+
     setIsSearching(true);
 
     try {
@@ -52,7 +117,7 @@ const Chats = () => {
         lastName: searchTerm
       });
 
-      console.log("RES", result);
+      console.log("Search results:", result);
 
       if (result.data && result.data.length > 0) {
         const transformedDoctors = result.data.map(transformDoctorToSearchItem);
@@ -63,9 +128,8 @@ const Chats = () => {
       }
     } catch (err: any) {
       console.error('Search error:', err);
-      setError('Ошибка при поиске докторов');
-      setSearchResults([]);
 
+      setSearchResults([]);
     } finally {
       setLoading(false);
     }
@@ -73,7 +137,7 @@ const Chats = () => {
 
   const debouncedSearch = useCallback(
     debounce((searchTerm: string) => {
-      searchDoctorsByLastName(searchTerm).catch(()=>Alert.alert("err"));
+      searchDoctorsByLastName(searchTerm).catch(() => Alert.alert("Ошибка поиска"));
     }, 300),
     []
   );
@@ -86,11 +150,15 @@ const Chats = () => {
     } else {
       setSearchResults([]);
       setIsSearching(false);
-      setError(null);
+
     }
   };
 
-  const displayData =   searchResults;
+  const displayData = isSearching ? searchResults : userChats.map(transformChatToSearchItem);
+
+  useEffect(() => {
+    loadUserChats().catch(()=>Alert.alert("err"))
+  }, []);
 
   return (
     <View style={styles.content}>
@@ -98,23 +166,15 @@ const Chats = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Введите фамилию доктора"
+        placeholder="Введите фамилию доктора для поиска"
         value={lastName}
         onChangeText={handleInputLastName}
       />
 
-      {error && !loading && (
-
-        <Text  >{error}</Text>
-
-      )}
-
-      {isSearching && !loading && searchResults.length === 0 && lastName.trim() && (
-
-        <Text  >
-            Докторы с фамилией "{lastName}" не найдены
+      {!isSearching && !chatsLoading && userChats.length === 0 && (
+        <Text   >
+          У вас пока нет чатов. Найдите доктора чтобы начать общение.
         </Text>
-
       )}
 
       <View style={styles.wrapper}>
@@ -124,10 +184,12 @@ const Chats = () => {
           renderItem={({ item }) => <DialogItem key={item.id} item={item} />}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={
-            !isSearching && !loading ? (
+            !isSearching && !chatsLoading && !loading ? (
               <Text >Нет доступных чатов</Text>
             ) : null
           }
+          refreshing={chatsLoading}
+          onRefresh={loadUserChats}
         />
       </View>
     </View>

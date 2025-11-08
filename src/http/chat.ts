@@ -1,6 +1,16 @@
 
 import $api from './api';
 
+export interface ChatDTO {
+  id: number;
+  chatName: string;
+  lastMessage?: string;
+  lastMessageTime?: string;
+  avatar?: string;
+  participantId: number;
+  participantName?: string;
+}
+
 class ChatService {
   static async startChat(patientId: number, doctorId: number): Promise<number> {
     try {
@@ -91,6 +101,31 @@ class ChatService {
       throw new Error('Failed to get chat messages');
     }
   }
+
+  static async getMyChats(userId: number, userRole: string): Promise<ChatDTO[]> {
+    try {
+      console.log('Getting chats for userId:', userId, 'role:', userRole);
+
+      const response = await $api.get<ChatDTO[]>(
+        `/chat/my-chats?userId=${userId}&userRole=${userRole}`
+      );
+
+      console.log('Chats retrieved successfully, count:', response.data.length);
+
+      return response.data;
+    } catch (error: any) {
+      console.error('Error getting chats:', error);
+
+      if (error.name === 'SESSION_EXPIRED') {
+        throw new Error('SESSION_EXPIRED');
+      } else if (error.response?.status === 401) {
+        throw new Error('Authentication failed. Please login again.');
+      } else {
+        throw new Error('Failed to get chats');
+      }
+    }
+  }
+
 }
 
 export default ChatService;

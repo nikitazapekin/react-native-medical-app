@@ -1,4 +1,204 @@
-import { useCallback, useState } from "react";
+
+import { useCallback, useEffect, useState } from "react";
+import { Alert, FlatList, Text, TextInput, View } from "react-native";
+import Avatar from "@assets/mockPhotos/Avatar.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { debounce } from "lodash";
+
+import ChatService, { type ChatDTO } from "../../../http/chat";
+import DialogItem from "../../shared/DialogItem";
+
+import { styles } from "./styled";
+
+import SearchService from "@/http/search";
+import type { Doctor } from "@/http/types/personInfo";
+
+interface SearchDoctor {
+  id: number;
+  name: string;
+  text: string;
+  status: string;
+  time: string;
+  avatar: any;
+}
+
+interface UserData {
+  email: string | null;
+  id: string | null;
+  role: string | null;
+}
+
+const Chats = () => {
+  const [lastName, setLastName] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<SearchDoctor[]>([]);
+  const [userChats, setUserChats] = useState<ChatDTO[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [chatsLoading, setChatsLoading] = useState<boolean>(true);
+
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const getStoredUserData = async (): Promise<UserData> => {
+    try {
+      const email = await AsyncStorage.getItem('userEmail');
+      const id = await AsyncStorage.getItem('userId');
+      const role = await AsyncStorage.getItem('userRole');
+
+      console.log('Stored user data:', { email, id, role });
+
+      return { email, id, role };
+    } catch (error) {
+      console.error('Error getting user data:', error);
+
+      return { email: null, id: null, role: null };
+    }
+  };
+
+  const loadUserChats = async () => {
+    try {
+      setChatsLoading(true);
+
+      const userData = await getStoredUserData();
+
+      if (!userData.id || !userData.role) {
+        console.log('User not authenticated');
+
+        return;
+      }
+
+      console.log('Loading chats for user:', userData.id, 'role:', userData.role);
+
+      const chats = await ChatService.getMyChats(Number(userData.id), userData.role);
+
+      console.log('Loaded chats:', chats);
+
+      setUserChats(chats);
+    } catch (error: any) {
+      console.error('Error loading chats:', error);
+
+    } finally {
+      setChatsLoading(false);
+    }
+  };
+
+  const transformChatToSearchItem = (chat: ChatDTO): SearchDoctor => ({
+    id: chat.participantId,
+    name: chat.chatName,
+    text: chat.lastMessage || "Нет сообщений",
+    status: chat.participantName || "Участник",
+    time: chat.lastMessageTime
+      ? new Date(chat.lastMessageTime).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+      : new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+    avatar: chat.avatar ? { uri: chat.avatar } : Avatar,
+  });
+
+  const transformDoctorToSearchItem = (doctor: Doctor): SearchDoctor => ({
+    id: doctor.id,
+    name: `Доктор ${doctor.lastName} ${doctor.firstName.charAt(0)}.`,
+    text: doctor.specialization || "Специалист",
+    status: doctor.specialization || "Врач",
+    time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+    avatar: doctor.avatar ? { uri: doctor.avatar } : Avatar,
+  });
+
+  const searchDoctorsByLastName = async (searchTerm: string) => {
+    if (!searchTerm.trim()) {
+      setSearchResults([]);
+      setIsSearching(false);
+
+      return;
+    }
+
+    setLoading(true);
+
+    setIsSearching(true);
+
+    try {
+      const result = await SearchService.searchDoctors({
+        lastName: searchTerm
+      });
+
+      console.log("Search results:", result);
+
+      if (result.data && result.data.length > 0) {
+        const transformedDoctors = result.data.map(transformDoctorToSearchItem);
+
+        setSearchResults(transformedDoctors);
+      } else {
+        setSearchResults([]);
+      }
+    } catch (err: any) {
+      console.error('Search error:', err);
+
+      setSearchResults([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const debouncedSearch = useCallback(
+    debounce((searchTerm: string) => {
+      searchDoctorsByLastName(searchTerm).catch(() => Alert.alert("Ошибка поиска"));
+    }, 300),
+    []
+  );
+
+  const handleInputLastName = (value: string) => {
+    setLastName(value);
+
+    if (value.trim()) {
+      debouncedSearch(value);
+    } else {
+      setSearchResults([]);
+      setIsSearching(false);
+
+    }
+  };
+
+  const displayData = isSearching ? searchResults : userChats.map(transformChatToSearchItem);
+
+  useEffect(() => {
+    loadUserChats().catch(()=> Alert.alert("err"))
+  }, []);
+
+  return (
+    <View style={styles.content}>
+      <Text style={styles.title}>Список чатов</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Введите фамилию доктора для поиска"
+        value={lastName}
+        onChangeText={handleInputLastName}
+      />
+
+      {!isSearching && !chatsLoading && userChats.length === 0 && (
+        <Text   >
+          У вас пока нет чатов. Найдите доктора чтобы начать общение.
+        </Text>
+      )}
+
+      <View style={styles.wrapper}>
+        <FlatList
+          data={displayData}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <DialogItem key={item.id} item={item} />}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            !isSearching && !chatsLoading && !loading ? (
+              <Text >Нет доступных чатов</Text>
+            ) : null
+          }
+          refreshing={chatsLoading}
+          onRefresh={loadUserChats}
+        />
+      </View>
+    </View>
+  );
+};
+
+export default Chats;
+
+/* import { useCallback, useState } from "react";
 import {  Alert,FlatList, Text, TextInput, View } from "react-native";
 import Avatar from "@assets/mockPhotos/Avatar.png";
 import { debounce } from "lodash";
@@ -230,108 +430,6 @@ const ChatsDoctor = () => {
             ) : null
           }
         />
-      </View>
-    </View>
-  );
-};
-
-export default ChatsDoctor;
-
-/* import { Text, View, TextInput } from "react-native";
-import Avatar from "@assets/mockPhotos/Avatar.png";
-
-import DialogItem from "../../shared/DialogItem";
-import { styles } from "../ChatDoctors/styled";
-import { useState } from "react";
-
-const mockMessagesDoctor = [
-  {
-    id: 1,
-    name: "Пациент Иванов А.С.",
-    text: "Здравствуйте, беспокоит боль в горле",
-    status: "Новое сообщение",
-    time: "12:45",
-    avatar: Avatar,
-  },
-  {
-    id: 2,
-    name: "Пациент Петрова М.К.",
-    text: "Спасибо за консультацию!",
-    status: "Прочитано",
-    time: "11:30",
-    avatar: Avatar,
-  },
-  {
-    id: 3,
-    name: "Пациент Сидоров В.П.",
-    text: "Можно ли принимать это лекарство?",
-    status: "Новое сообщение",
-    time: "10:15",
-    avatar: Avatar,
-  },
-  {
-    id: 4,
-    name: "Пациент Козлова Е.И.",
-    text: "Записался на прием на завтра",
-    status: "Прочитано",
-    time: "09:20",
-    avatar: Avatar,
-  },
-  {
-    id: 5,
-    name: "Пациент Николаев Д.О.",
-    text: "Результаты анализов готовы?",
-    status: "Новое сообщение",
-    time: "08:45",
-    avatar: Avatar,
-  },
-  {
-    id: 6,
-    name: "Пациент Волкова С.М.",
-    text: "Боль прошла, спасибо!",
-    status: "Прочитано",
-    time: "14:10",
-    avatar: Avatar,
-  },
-  {
-    id: 7,
-    name: "Пациент Орлов П.Т.",
-    text: "Нужна повторная консультация",
-    status: "Новое сообщение",
-    time: "13:25",
-    avatar: Avatar,
-  },
-  {
-    id: 8,
-    name: "Пациент Лебедева А.В.",
-    text: "Когда будет следующий осмотр?",
-    status: "Прочитано",
-    time: "15:40",
-    avatar: Avatar,
-  },
-];
-const ChatsDoctor = () => {
-
-  const [username, setUsername] = useState<string>("")
-
- const handleInputUsername = (value: string) => {
-    setUsername(value);
-  };
-
-  return (
-    <View style={styles.content}>
-
-      <Text style={styles.title}>Список чатов</Text>
-    <TextInput
-      style={styles.input}
-     placeholder="Введите имя пользователя"
-        value={username}
-        onChangeText={handleInputUsername}
-    />
-      <View style={styles.wrapper}>
-        {mockMessagesDoctor.map((item) => (
-          <DialogItem key={item.id} item={item} />
-        ))}
       </View>
     </View>
   );
