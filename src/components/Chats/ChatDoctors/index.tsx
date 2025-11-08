@@ -94,7 +94,7 @@ const Chats = () => {
       setLoading(false);
     }
   };
- 
+
   const debouncedSearch = useCallback(
     debounce((searchTerm: string) => {
       searchDoctorsByLastName(searchTerm).catch(()=>Alert.alert("err"));
