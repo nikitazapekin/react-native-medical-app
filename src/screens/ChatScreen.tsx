@@ -1,7 +1,6 @@
 
-
 import React, { useEffect, useRef, useState } from "react";
-import { Alert, ScrollView, Text, View, ActivityIndicator } from "react-native";
+import { ActivityIndicator,Alert, ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { type RouteProp } from "@react-navigation/native";
 import { Client } from '@stomp/stompjs';
@@ -9,6 +8,7 @@ import { StatusBar } from "expo-status-bar";
 import SockJS from 'sockjs-client';
 
 import Avatar from "../assets/mockPhotos/Avatar.png";
+import ChatService, { type MessageDTO } from "../http/chat";
 
 import { styles } from "./styles";
 
@@ -16,7 +16,6 @@ import Chat from "@/components/Chat";
 import ChatKeypad from "@/components/ChatKeypad";
 import Header from "@/components/shared/Header";
 import type { RootStackParamList } from "@/navigation/types";
-import ChatService, { type MessageDTO } from "../http/chat";
 
 interface UserData {
   email: string | null;
@@ -68,17 +67,21 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       const email = await AsyncStorage.getItem('userEmail');
       const id = await AsyncStorage.getItem('userId');
       const role = await AsyncStorage.getItem('userRole');
+
       console.log('User data from storage:', { email, id, role });
+
       return { email, id, role };
     } catch (error) {
       console.error('Error getting user data:', error);
+
       return { email: null, id: null, role: null };
     }
   };
- 
+
   const loadChatHistory = async (userData: UserData) => {
     if (!chatId || !userData.role) {
       console.log('Cannot load history: missing chatId or role');
+
       return;
     }
 
@@ -87,8 +90,9 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       console.log('Loading chat history for chatId:', chatId, 'role:', userData.role);
 
       const history: MessageDTO[] = await ChatService.getChatHistory(chatId, userData.role);
+
       console.log('Raw history from API:', history);
-      
+
       const transformedMessages: Message[] = history.map(msg => ({
         id: msg.id,
         from: msg.senderId,
@@ -104,6 +108,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       setMessages(transformedMessages);
     } catch (error: any) {
       console.error('Error loading chat history:', error);
+
       if (error.message === 'SESSION_EXPIRED') {
         Alert.alert("Сессия истекла", "Пожалуйста, войдите в систему заново");
       } else {
@@ -126,29 +131,31 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       onConnect: () => {
         console.log('WebSocket connected successfully');
         setIsConnected(true);
- 
+
         client.subscribe('/user/queue/errors', (message: any) => {
           console.log('Received error message:', message.body);
           const error = JSON.parse(message.body);
+
           Alert.alert('Error', error.message);
         });
 
-     
         client.subscribe('/user/queue/messages', (msg: any) => {
           console.log('Received private message:', msg.body);
           const newMessage = JSON.parse(msg.body);
+
           handleIncomingMessage(newMessage);
         });
 
-      
         if (chatId && userData.role) {
           const chatType = userData.role === 'DOCTOR' ? 'doctor' : 'user';
           const messageDestination = `/topic/chat/${chatId}/${chatType}`;
+
           console.log('Subscribing to messages:', messageDestination);
 
           client.subscribe(messageDestination, (msg: any) => {
             console.log('Received new message in chat:', msg.body);
             const newMessage = JSON.parse(msg.body);
+
             handleIncomingMessage(newMessage);
           });
         }
@@ -171,15 +178,16 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
   const handleIncomingMessage = (messageData: any) => {
     console.log('Processing incoming message:', messageData);
- 
-    const isDuplicate = messages.some(msg => 
-      msg.id === messageData.id || 
-      (msg.text === messageData.message && 
+
+    const isDuplicate = messages.some(msg =>
+      msg.id === messageData.id ||
+      (msg.text === messageData.message &&
        Math.abs(new Date(msg.time).getTime() - new Date(messageData.time).getTime()) < 1000)
     );
 
     if (isDuplicate) {
       console.log('Duplicate message detected, skipping:', messageData);
+
       return;
     }
 
@@ -196,11 +204,12 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
     console.log('Adding incoming message to state:', newMessage);
     setMessages(prev => {
-      
+
       const filteredMessages = prev.filter(msg => !tempMessageIds.has(msg.id));
+
       return [...filteredMessages, newMessage];
     });
- 
+
     if (tempMessageIds.size > 0) {
       setTempMessageIds(new Set());
     }
@@ -215,21 +224,25 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
     if (!text.trim()) {
       Alert.alert('Error', 'Message cannot be empty');
+
       return;
     }
 
     if (!userData?.id) {
       Alert.alert('Error', 'User not identified');
+
       return;
     }
 
     if (!stompClient || !isConnected) {
       Alert.alert('Error', 'WebSocket not connected');
+
       return;
     }
 
     if (!chatId) {
       Alert.alert('Error', 'Chat ID not found');
+
       return;
     }
 
@@ -255,7 +268,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     };
 
     console.log('Publishing message to WebSocket:', message);
- 
+
     const tempMessageId = Date.now();
     const tempMessage: Message = {
       id: tempMessageId,
@@ -269,9 +282,9 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     };
 
     console.log('Adding temporary message to state:', tempMessage);
-   // setMessages(prev => [...prev, tempMessage]);
+    // setMessages(prev => [...prev, tempMessage]);
     setTempMessageIds(prev => new Set(prev).add(tempMessageId));
- 
+
     stompClient.publish({
       destination: '/app/chat.sendMessage',
       body: JSON.stringify(message)
@@ -286,6 +299,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     const loadUserData = async () => {
       try {
         const data = await getStoredUserData();
+
         setUserData(data);
         console.log('User data set:', data);
       } catch (error) {
@@ -368,5 +382,3 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     </View>
   );
 }
-
- 
