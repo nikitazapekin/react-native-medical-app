@@ -178,4 +178,4 @@ const OprosSoveti = ({ id }: OprosSovetiProps) => {
   );
 };
 
-export default OprosSoveti; 
+export default OprosSoveti;

@@ -59,4 +59,4 @@ const SpisokSovetov = () => {
   );
 };
 
-export default SpisokSovetov; 
+export default SpisokSovetov;

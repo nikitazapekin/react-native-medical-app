@@ -100,7 +100,6 @@ export default class AuthService {
       throw new Error("Token validation failed");
     }
   }
- 
 
   static async getCurrentUser() {
     try {

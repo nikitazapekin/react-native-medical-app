@@ -31,4 +31,3 @@ export default function ChildrenScreen({ route }: UserEditChildrenProps) {
     </View>
   );
 }
- 

@@ -20,7 +20,7 @@ const sortOptions1 = [
   { id: "1", label: "По дате", type: "Data" },
   { id: "2", label: "По алфавиту", type: "Alphabite" },
 ];
- 
+
 function formatDate(isoDateString: string): string {
   return isoDateString.split('T')[0];
 }
@@ -78,4 +78,3 @@ const IstoriaPriemov = ({ id }: IstoriaPriemovProps) => {
 };
 
 export default IstoriaPriemov;
- 

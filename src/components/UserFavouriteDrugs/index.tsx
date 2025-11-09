@@ -62,4 +62,3 @@ const UserFavouritesDrugs = () => {
 };
 
 export default UserFavouritesDrugs;
- 

@@ -169,4 +169,3 @@ const CabinetInfo = ({ setPatient, patient }: CabinetInfoProps) => {
 };
 
 export default CabinetInfo;
- 
