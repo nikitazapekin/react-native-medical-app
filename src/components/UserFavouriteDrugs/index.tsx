@@ -62,20 +62,4 @@ const UserFavouritesDrugs = () => {
 };
 
 export default UserFavouritesDrugs;
-/* const UserFavouritesDrugs = () => {
-  return (
-    <View style={styles.content}>
-      <DroppableList sortOptions={sortOptions} />
-
-      <Text style={styles.title}>Ваши лекарства</Text>
-      <View style={styles.wrapper}>
-        {medicationItems.map((item) => (
-          <DrugsItem item={item} key={item.id} />
-        ))}
-      </View>
-    </View>
-  );
-};
-
-export default UserFavouritesDrugs;
- */
+ 

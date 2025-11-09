@@ -31,12 +31,4 @@ export default function ChildrenScreen({ route }: UserEditChildrenProps) {
     </View>
   );
 }
-
-/*
-interface UserEditChildrenProps {
-  route: RouteProp<RootStackParamList, 'USER_EDIT_CHILDRESN'>;
-
-}
-const UserEditChildren = ({ route }: UserEditChildrenProps) => {
-  const { id } = route.params || {};
-  */
+ 

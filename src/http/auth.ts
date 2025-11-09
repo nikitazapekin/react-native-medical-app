@@ -100,28 +100,7 @@ export default class AuthService {
       throw new Error("Token validation failed");
     }
   }
-
-  /*  static async getCurrentUser() {
-    try {
-      const [token, role, email] = await Promise.all([
-        AsyncStorage.getItem("accessToken"),
-        AsyncStorage.getItem("userRole"),
-        AsyncStorage.getItem("userEmail"),
-      ]);
-
-      if (!token) {
-        return null;
-      }
-
-      return {
-        accessToken: token,
-        role,
-        email,
-      };
-    } catch {
-      return null;
-    }
-  } */
+ 
 
   static async getCurrentUser() {
     try {
