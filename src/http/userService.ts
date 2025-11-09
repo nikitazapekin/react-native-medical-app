@@ -13,12 +13,19 @@ class UserService {
       console.log("RO:E", userRole);
 
       if (userRole === "DOCTOR") {
-        return await DoctorInfoService.getCurrentDoctor();
+        console.log("GETTING");
+        const resp =  await DoctorInfoService.getCurrentDoctor();
+
+        console.log("GER CUR", resp );
+
+        return resp;
       } else {
+        console.log("elseee");
+
         return await PersonInfoService.getCurrentPatient();
       }
-    } catch   {
-
+    } catch (e)   {
+      console.log("GET CUR USER", e);
       throw new Error("Failed to get user information");
     }
   }

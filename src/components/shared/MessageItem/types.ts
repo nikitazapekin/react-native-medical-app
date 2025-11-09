@@ -3,11 +3,12 @@ import type { ImageSourcePropType } from "react-native";
 export interface MessageTypes {
   item: {
     id: number;
-    from: string;
-    to: string;
+    from: number;
+    to: number;
     text: string;
     time: string;
 
     avatar: ImageSourcePropType;
   };
+  currentUserId?: string | null;
 }
