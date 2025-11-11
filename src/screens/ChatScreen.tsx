@@ -279,7 +279,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       }
     };
 
-    loadUserData().catch(()=> Alert.alert("Error"))
+    loadUserData().catch(()=> Alert.alert("Error"));
   }, []);
 
   useEffect(() => {
@@ -301,7 +301,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     return () => {
       if (stompClient) {
         console.log('Cleaning up WebSocket connection');
-        stompClient.deactivate().catch(()=> Alert.alert("Error"))
+        stompClient.deactivate().catch(()=> Alert.alert("Error"));
       }
     };
   }, [userData, chatId]);
