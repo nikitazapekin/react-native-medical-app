@@ -8,6 +8,6 @@ export interface DialogItemType {
   text: string;
   time: string;
   status: string;
-  avatar: string | number | ImageURISource | { uri: string }; 
+  avatar: string | number | ImageURISource | { uri: string };
 }
-} 
+}

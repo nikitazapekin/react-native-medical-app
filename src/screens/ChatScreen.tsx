@@ -250,7 +250,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     };
 
     console.log('Adding temporary message to state:', tempMessage);
-    setMessages(prev => [...prev, tempMessage]);
+    //setMessages(prev => [...prev, tempMessage]);
     setTempMessageIds(prev => new Set(prev).add(tempMessageId));
 
     const message: WebSocketMessage = {

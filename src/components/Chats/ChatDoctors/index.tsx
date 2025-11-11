@@ -43,7 +43,7 @@ const Chats = () => {
       const role = await AsyncStorage.getItem("userRole");
 
       console.log("Stored user data:", { email, id, role });
- 
+
       if (role) {
         setCurrentUserRole(role);
       }
@@ -82,10 +82,11 @@ const Chats = () => {
 
   const getAvatarSource = (chat: ChatDTO, userRole: string | null) => {
     console.log(userRole);
+
     if (chat.avatar) {
       return { uri: chat.avatar };
     }
- 
+
     return Avatar;
   };
 
@@ -101,9 +102,9 @@ const Chats = () => {
       status: chat.participantName || "Участник",
       time: chat.lastMessageTime
         ? new Date(chat.lastMessageTime).toLocaleTimeString("ru-RU", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
+          hour: "2-digit",
+          minute: "2-digit",
+        })
         : new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" }),
       avatar: avatarSource,
     };
@@ -218,4 +219,3 @@ const Chats = () => {
 };
 
 export default Chats;
- 
