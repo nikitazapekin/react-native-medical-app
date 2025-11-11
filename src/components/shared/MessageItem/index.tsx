@@ -22,7 +22,7 @@ const MessageItem = ({ item, currentUserId }: MessageTypes) => {
       setUser(resp);
     };
 
-    handleGet().catch(()=>Alert.alert("err"))
+    handleGet().catch(()=>Alert.alert("err"));
   }, [item.from]);
 
   const getAvatarSource = (): ImageSourcePropType => {
