@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
     flexDirection: "row",
+    marginTop: 15
   },
   myWrapper: {
     justifyContent: "flex-end",
@@ -58,4 +59,9 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginTop: 4,
   },
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 100
+  }
 });

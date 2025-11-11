@@ -69,7 +69,7 @@ const Chats = () => {
 
       const chats = await ChatService.getMyChats(Number(userData.id), userData.role);
 
-      console.log('Loaded chats:', chats);
+      // console.log('Loaded chats:', chats);
 
       setUserChats(chats);
     } catch (error: any) {

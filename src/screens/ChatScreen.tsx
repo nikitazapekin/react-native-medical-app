@@ -43,9 +43,6 @@ interface WebSocketMessage {
   message?: string;
   senderId?: number;
   receiverId?: number;
-  patientId?: number;
-  doctorId?: number;
-  authorId?: number;
 }
 
 export default function ChatScreen({ route }: UserEditChildrenProps) {
@@ -80,6 +77,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
   const loadChatHistory = async () => {
     if (!chatId) {
       console.log('Cannot load history: missing chatId');
+      Alert.alert("Ошибка", "ID чата не найден");
 
       return;
     }
@@ -113,6 +111,12 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
   };
 
   const initializeWebSocket = () => {
+    if (!chatId) {
+      console.log('Cannot initialize WebSocket: missing chatId');
+
+      return;
+    }
+
     console.log('Initializing WebSocket connection with chatId:', chatId);
 
     const client = new Client({
@@ -129,21 +133,21 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
           console.log('Received error message:', message.body);
           const error = JSON.parse(message.body);
 
-          Alert.alert('Error', error.message);
+          Alert.alert('Ошибка', error.message);
         });
 
-        if (chatId) {
-          const messageDestination = `/topic/chat/${chatId}`;
+        const messageDestination = `/topic/chat/${chatId}`;
 
-          console.log('Subscribing to messages:', messageDestination);
+        console.log('Subscribing to messages:', messageDestination);
 
-          client.subscribe(messageDestination, (msg: any) => {
-            console.log('Received new message in chat:', msg.body);
-            const newMessage = JSON.parse(msg.body);
+        client.subscribe(messageDestination, (msg: any) => {
+          console.log('Received new message in chat:', msg.body);
+          const newMessage = JSON.parse(msg.body);
 
-            handleIncomingMessage(newMessage);
-          });
-        }
+          handleIncomingMessage(newMessage);
+        });
+
+        console.log('WebSocket subscriptions established');
       },
 
       onDisconnect: () => {
@@ -153,6 +157,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
       onStompError: (frame: any) => {
         console.error('WebSocket STOMP error:', frame);
+        Alert.alert('WebSocket Error', 'Connection error occurred');
       }
     });
 
@@ -167,7 +172,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     const isDuplicate = messages.some(msg =>
       msg.id === messageData.id ||
       (msg.text === messageData.message &&
-       Math.abs(new Date(msg.time).getTime() - new Date(messageData.time).getTime()) < 1000)
+       msg.from === messageData.senderId)
     );
 
     if (isDuplicate) {
@@ -187,6 +192,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     };
 
     console.log('Adding incoming message to state:', newMessage);
+
     setMessages(prev => {
       const filteredMessages = prev.filter(msg => !tempMessageIds.has(msg.id));
 
@@ -206,41 +212,31 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     console.log('Sending message:', text);
 
     if (!text.trim()) {
-      Alert.alert('Error', 'Message cannot be empty');
+      Alert.alert('Ошибка', 'Сообщение не может быть пустым');
 
       return;
     }
 
     if (!userData?.id) {
-      Alert.alert('Error', 'User not identified');
+      Alert.alert('Ошибка', 'Пользователь не идентифицирован');
 
       return;
     }
 
     if (!stompClient || !isConnected) {
-      Alert.alert('Error', 'WebSocket not connected');
+      Alert.alert('Ошибка', 'WebSocket не подключен');
 
       return;
     }
 
     if (!chatId) {
-      Alert.alert('Error', 'Chat ID not found');
+      Alert.alert('Ошибка', 'ID чата не найден');
 
       return;
     }
 
     const currentUserId = Number(userData.id);
     const recipientUserId = Number(recipientId);
-
-    const message: WebSocketMessage = {
-      type: 'chat_message',
-      chatId: chatId,
-      message: text.trim(),
-      senderId: currentUserId,
-      receiverId: recipientUserId
-    };
-
-    console.log('Publishing message to WebSocket:', message);
 
     const tempMessageId = Date.now();
     const tempMessage: Message = {
@@ -256,6 +252,16 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     console.log('Adding temporary message to state:', tempMessage);
     setMessages(prev => [...prev, tempMessage]);
     setTempMessageIds(prev => new Set(prev).add(tempMessageId));
+
+    const message: WebSocketMessage = {
+      type: 'chat_message',
+      chatId: chatId,
+      message: text.trim(),
+      senderId: currentUserId,
+      receiverId: recipientUserId
+    };
+
+    console.log('Publishing message to WebSocket:', message);
 
     stompClient.publish({
       destination: '/app/chat.sendMessage',
@@ -276,15 +282,17 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
         console.log('User data set:', data);
       } catch (error) {
         console.error("Failed to load user data:", error);
+        Alert.alert("Ошибка", "Не удалось загрузить данные пользователя");
       }
     };
 
-    loadUserData().catch(()=> Alert.alert("Error"));
+    loadUserData().catch(()=> Alert.alert("err"));
   }, []);
 
   useEffect(() => {
     if (userData?.id && chatId) {
       console.log('User data and chatId available, loading history and initializing WebSocket');
+
       loadChatHistory().then(() => {
         console.log('History loaded, initializing WebSocket');
         initializeWebSocket();
@@ -301,25 +309,25 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     return () => {
       if (stompClient) {
         console.log('Cleaning up WebSocket connection');
-        stompClient.deactivate().catch(()=> Alert.alert("Error"));
+        stompClient.deactivate().catch(()=> Alert.alert("error"));
       }
     };
   }, [userData, chatId]);
 
   return (
     <View style={styles.container}>
-      <Header title="Chat" isAuthenticated={true} />
+      <Header title="Чат" isAuthenticated={true} />
 
       <View style={{ padding: 10, backgroundColor: '#f5f5f5' }}>
         <Text style={{ color: isConnected ? 'green' : 'red', fontSize: 12 }}>
-          Status: {isConnected ? 'CONNECTED' : 'DISCONNECTED'}
-          {chatId ? ` | Chat ID: ${chatId}` : ' | No chat ID'}
+          Статус: {isConnected ? 'ПОДКЛЮЧЕНО' : 'ОТКЛЮЧЕНО'}
+          {chatId ? ` | ID чата: ${chatId}` : ' | Нет ID чата'}
         </Text>
         <Text style={{ fontSize: 10, color: 'blue' }}>
-          User ID: {userData?.id} | Role: {userData?.role} | Recipient: {recipientId}
+          ID пользователя: {userData?.id} | Роль: {userData?.role} | Получатель: {recipientId}
         </Text>
         <Text style={{ fontSize: 10, color: 'purple' }}>
-          Messages count: {messages.length} | Loading: {isLoadingHistory ? 'YES' : 'NO'}
+          Сообщений: {messages.length} | Загрузка: {isLoadingHistory ? 'ДА' : 'НЕТ'}
         </Text>
       </View>
 
@@ -334,7 +342,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
         {isLoadingHistory ? (
           <View style={{ padding: 20, alignItems: 'center' }}>
             <ActivityIndicator size="large" color="#0000ff" />
-            <Text>Loading messages...</Text>
+            <Text>Загрузка сообщений...</Text>
           </View>
         ) : (
           <Chat

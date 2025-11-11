@@ -6,6 +6,9 @@ import { styles } from "./styled";
 import type { MessagesTypes } from "./types";
 
 const Chat = ({ messages , currentUserId }: MessagesTypes) => {
+
+  console.log("MESSAGES" , messages);
+
   return (
     <View style={styles.wrapper}>
       {messages.map((item) => (
