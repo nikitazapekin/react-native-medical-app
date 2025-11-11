@@ -39,7 +39,7 @@ const DialogItem = ({ item }: DialogTypes) => {
     }
   };
 
-  const handleNavigate = async () => {
+  /*  const handleNavigate = async () => {
     try {
       setIsLoading(true);
 
@@ -82,6 +82,55 @@ const DialogItem = ({ item }: DialogTypes) => {
     } catch (error: any) {
       console.error("Error creating chat:", error);
 
+    } finally {
+      setIsLoading(false);
+    }
+  };
+ */
+
+  const handleNavigate = async () => {
+    try {
+      setIsLoading(true);
+
+      const userData = await getStoredUserData();
+
+      if (!userData.id) {
+        Alert.alert("Ошибка", "Пользователь не идентифицирован");
+
+        return;
+      }
+
+      const currentUserId = Number(userData.id);
+      const recipientId = Number(item.id);
+
+      if (!recipientId) {
+        Alert.alert("Ошибка", "ID получателя не указан");
+
+        return;
+      }
+
+      console.log("Creating chat between:", {
+        currentUserId,
+        recipientId,
+        userRole: userData.role
+      });
+
+      const isDoctor = userData.role === 'DOCTOR';
+      const patientId = isDoctor ? recipientId : currentUserId;
+      const doctorId = isDoctor ? currentUserId : recipientId;
+
+      console.log("Starting chat with:", { patientId, doctorId, authorId: currentUserId });
+
+      const chatId = await ChatService.startChat(patientId, doctorId, currentUserId);
+
+      navigation.navigate(ROUTES.STACK.CHAT, {
+        id: recipientId,
+        chatId: chatId
+      });
+
+    } catch (error: any) {
+      console.error("Error creating chat:", error);
+      Alert.alert("Ошибка", "Не удалось создать чат: " + error.message);
     } finally {
       setIsLoading(false);
     }

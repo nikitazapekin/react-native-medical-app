@@ -1,4 +1,3 @@
-
 import $api from './api';
 
 export interface ChatDTO {
@@ -9,26 +8,30 @@ export interface ChatDTO {
   avatar?: string;
   participantId: number;
   participantName?: string;
+  patientId: number;
+  doctorId: number;
+  authorId: number;
+  createdAt: string;
 }
 
 export interface MessageDTO {
   id: number;
   message: string;
-  from: string;
+  from?: string;
   senderId: number;
+  receiverId: number;
   time: string;
   isRead: boolean;
   chatId: number;
-  type: string;
+  type?: string;
 }
 
 class ChatService {
-  static async startChat(patientId: number, doctorId: number): Promise<number> {
+  static async startChat(patientId: number, doctorId: number, authorId: number): Promise<number> {
     try {
-      console.log('Starting chat with patientId:', patientId, 'doctorId:', doctorId);
-
+      console.log('Starting chat with patientId:', patientId, 'doctorId:', doctorId, 'authorId:', authorId);
       const response = await $api.post<number>(
-        `/chat/start?patientId=${patientId}&doctorId=${doctorId}`
+        `/chat/start?patientId=${patientId}&doctorId=${doctorId}&authorId=${authorId}`
       );
 
       console.log('Chat started successfully, chatId:', response.data);
@@ -36,80 +39,62 @@ class ChatService {
       return response.data;
     } catch (error: any) {
       console.error('Error starting chat:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      } else if (error.response?.status === 401) {
-        throw new Error('Authentication failed. Please login again.');
-      } else if (error.response?.status === 404) {
-        throw new Error('User not found');
-      } else {
-        throw new Error('Failed to start chat');
-      }
+      throw new Error(error.response?.data?.message || 'Failed to start chat');
     }
   }
 
-  static async getUserChats(patientId: number) {
+  static async getChatHistory(chatId: number): Promise<MessageDTO[]> {
     try {
-      const response = await $api.get(`/chat/user/${patientId}`);
+      console.log('Getting chat history for chatId:', chatId);
+      const response = await $api.get<MessageDTO[]>(`/chat/${chatId}/messages`);
 
-      return response.data;
+      console.log('Chat history retrieved successfully, count:', response.data.length);
+
+      const messages = response.data.map(msg => ({
+        ...msg,
+        time: new Date(msg.time).toISOString()
+      }));
+
+      return messages;
+    } catch (error: any) {
+      console.error('Error getting chat history:', error);
+      throw new Error(error.response?.data?.message || 'Failed to get chat history');
+    }
+  }
+
+  static async getUserChats(userId: number): Promise<ChatDTO[]> {
+    try {
+      console.log('Getting user chats for userId:', userId);
+      const response = await $api.get<ChatDTO[]>(`/chat/user/${userId}`);
+
+      const chats = response.data.map(chat => ({
+        ...chat,
+        lastMessageTime: chat.lastMessageTime ? new Date(chat.lastMessageTime).toISOString() : undefined,
+        createdAt: new Date(chat.createdAt).toISOString()
+      }));
+
+      return chats;
     } catch (error: any) {
       console.error('Error getting user chats:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      }
-
-      throw new Error('Failed to get user chats');
+      throw new Error(error.response?.data?.message || 'Failed to get user chats');
     }
   }
 
-  static async getDoctorChats(doctorId: number) {
+  static async getDoctorChats(doctorId: number): Promise<ChatDTO[]> {
     try {
-      const response = await $api.get(`/chat/doctor/${doctorId}`);
+      console.log('Getting doctor chats for doctorId:', doctorId);
+      const response = await $api.get<ChatDTO[]>(`/chat/doctor/${doctorId}`);
 
-      return response.data;
+      const chats = response.data.map(chat => ({
+        ...chat,
+        lastMessageTime: chat.lastMessageTime ? new Date(chat.lastMessageTime).toISOString() : undefined,
+        createdAt: new Date(chat.createdAt).toISOString()
+      }));
+
+      return chats;
     } catch (error: any) {
       console.error('Error getting doctor chats:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      }
-
-      throw new Error('Failed to get doctor chats');
-    }
-  }
-
-  static async getUserChatMessages(chatId: number) {
-    try {
-      const response = await $api.get(`/chat/user/${chatId}/messages`);
-
-      return response.data;
-    } catch (error: any) {
-      console.error('Error getting user chat messages:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      }
-
-      throw new Error('Failed to get chat messages');
-    }
-  }
-
-  static async getDoctorChatMessages(chatId: number) {
-    try {
-      const response = await $api.get(`/chat/doctor/${chatId}/messages`);
-
-      return response.data;
-    } catch (error: any) {
-      console.error('Error getting doctor chat messages:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      }
-
-      throw new Error('Failed to get chat messages');
+      throw new Error(error.response?.data?.message || 'Failed to get doctor chats');
     }
   }
 
@@ -117,54 +102,16 @@ class ChatService {
     try {
       console.log('Getting chats for userId:', userId, 'role:', userRole);
 
-      const response = await $api.get<ChatDTO[]>(
-        `/chat/my-chats?userId=${userId}&userRole=${userRole}`
-      );
-
-      console.log('Chats retrieved successfully, count:', response.data.length);
-
-      return response.data;
+      if (userRole === 'DOCTOR') {
+        return this.getDoctorChats(userId);
+      } else {
+        return this.getUserChats(userId);
+      }
     } catch (error: any) {
       console.error('Error getting chats:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      } else if (error.response?.status === 401) {
-        throw new Error('Authentication failed. Please login again.');
-      } else {
-        throw new Error('Failed to get chats');
-      }
+      throw new Error('Failed to get chats');
     }
   }
-
-  static async getChatHistory(chatId: number, userRole: string): Promise<MessageDTO[]> {
-    try {
-      console.log('Getting chat history for chatId:', chatId, 'role:', userRole);
-
-      let response;
-
-      if (userRole === 'DOCTOR') {
-        response = await $api.get<MessageDTO[]>(`/chat/doctor/${chatId}/messages`);
-      } else {
-        response = await $api.get<MessageDTO[]>(`/chat/user/${chatId}/messages`);
-      }
-
-      console.log('Chat history retrieved successfully, count:', response.data.length);
-
-      return response.data;
-    } catch (error: any) {
-      console.error('Error getting chat history:', error);
-
-      if (error.name === 'SESSION_EXPIRED') {
-        throw new Error('SESSION_EXPIRED');
-      } else if (error.response?.status === 401) {
-        throw new Error('Authentication failed. Please login again.');
-      } else {
-        throw new Error('Failed to get chat history');
-      }
-    }
-  }
-
 }
 
 export default ChatService;

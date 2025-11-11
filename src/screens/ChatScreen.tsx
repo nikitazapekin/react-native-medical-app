@@ -1,6 +1,5 @@
-
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator,Alert, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, Alert, ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { type RouteProp } from "@react-navigation/native";
 import { Client } from '@stomp/stompjs';
@@ -41,17 +40,19 @@ interface UserEditChildrenProps {
 interface WebSocketMessage {
   type: string;
   chatId?: number;
-  chatType?: string;
   message?: string;
-  from?: string;
   senderId?: number;
   receiverId?: number;
   patientId?: number;
   doctorId?: number;
+  authorId?: number;
 }
 
 export default function ChatScreen({ route }: UserEditChildrenProps) {
   const { id: recipientId, chatId } = route.params || {};
+
+  console.log("ChatScreen initialized with recipientId:", recipientId, "chatId:", chatId);
+
   const [userData, setUserData] = useState<UserData | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [stompClient, setStompClient] = useState<Client | null>(null);
@@ -59,8 +60,6 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const [tempMessageIds, setTempMessageIds] = useState<Set<number>>(new Set());
   const scrollViewRef = useRef<ScrollView>(null);
-
-  console.log("ChatScreen initialized with recipientId:", recipientId, "chatId:", chatId);
 
   const getStoredUserData = async (): Promise<UserData> => {
     try {
@@ -78,29 +77,28 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     }
   };
 
-  const loadChatHistory = async (userData: UserData) => {
-    if (!chatId || !userData.role) {
-      console.log('Cannot load history: missing chatId or role');
+  const loadChatHistory = async () => {
+    if (!chatId) {
+      console.log('Cannot load history: missing chatId');
 
       return;
     }
 
     try {
       setIsLoadingHistory(true);
-      console.log('Loading chat history for chatId:', chatId, 'role:', userData.role);
+      console.log('Loading chat history for chatId:', chatId);
 
-      const history: MessageDTO[] = await ChatService.getChatHistory(chatId, userData.role);
+      const history: MessageDTO[] = await ChatService.getChatHistory(chatId);
 
       console.log('Raw history from API:', history);
 
       const transformedMessages: Message[] = history.map(msg => ({
         id: msg.id,
         from: msg.senderId,
-        to: Number(userData.id),
+        to: msg.receiverId,
         text: msg.message,
         time: new Date(msg.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         avatar: Avatar,
-        sender: msg.from,
         isServerMessage: true
       }));
 
@@ -108,22 +106,17 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       setMessages(transformedMessages);
     } catch (error: any) {
       console.error('Error loading chat history:', error);
-
-      if (error.message === 'SESSION_EXPIRED') {
-        Alert.alert("Сессия истекла", "Пожалуйста, войдите в систему заново");
-      } else {
-        Alert.alert("Ошибка", "Не удалось загрузить историю сообщений: " + error.message);
-      }
+      Alert.alert("Ошибка", "Не удалось загрузить историю сообщений: " + error.message);
     } finally {
       setIsLoadingHistory(false);
     }
   };
 
-  const initializeWebSocket = (userData: UserData) => {
+  const initializeWebSocket = () => {
     console.log('Initializing WebSocket connection with chatId:', chatId);
 
     const client = new Client({
-      webSocketFactory: () => new SockJS('http://192.168.1.14:7081/ws-chat'),
+      webSocketFactory: () => new SockJS('http://192.168.1.14:7082/ws-chat'),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
@@ -139,16 +132,8 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
           Alert.alert('Error', error.message);
         });
 
-        client.subscribe('/user/queue/messages', (msg: any) => {
-          console.log('Received private message:', msg.body);
-          const newMessage = JSON.parse(msg.body);
-
-          handleIncomingMessage(newMessage);
-        });
-
-        if (chatId && userData.role) {
-          const chatType = userData.role === 'DOCTOR' ? 'doctor' : 'user';
-          const messageDestination = `/topic/chat/${chatId}/${chatType}`;
+        if (chatId) {
+          const messageDestination = `/topic/chat/${chatId}`;
 
           console.log('Subscribing to messages:', messageDestination);
 
@@ -194,17 +179,15 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     const newMessage: Message = {
       id: messageData.id || Date.now(),
       from: messageData.senderId,
-      to: Number(userData?.id),
+      to: messageData.receiverId,
       text: messageData.message,
       time: new Date(messageData.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       avatar: Avatar,
-      sender: messageData.from,
       isServerMessage: true
     };
 
     console.log('Adding incoming message to state:', newMessage);
     setMessages(prev => {
-
       const filteredMessages = prev.filter(msg => !tempMessageIds.has(msg.id));
 
       return [...filteredMessages, newMessage];
@@ -248,23 +231,13 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
     const currentUserId = Number(userData.id);
     const recipientUserId = Number(recipientId);
-    const isDoctor = userData.role === 'DOCTOR';
-
-    const patientId = isDoctor ? recipientUserId : currentUserId;
-    const doctorId = isDoctor ? currentUserId : recipientUserId;
-    const chatType = isDoctor ? 'doctor' : 'user';
-    const senderType = isDoctor ? 'doctor' : 'patient';
 
     const message: WebSocketMessage = {
       type: 'chat_message',
       chatId: chatId,
-      chatType: chatType,
       message: text.trim(),
-      from: senderType,
       senderId: currentUserId,
-      receiverId: recipientUserId,
-      patientId: patientId,
-      doctorId: doctorId
+      receiverId: recipientUserId
     };
 
     console.log('Publishing message to WebSocket:', message);
@@ -277,12 +250,11 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       text: text.trim(),
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       avatar: Avatar,
-      sender: senderType,
       isServerMessage: false
     };
 
     console.log('Adding temporary message to state:', tempMessage);
-    // setMessages(prev => [...prev, tempMessage]);
+    setMessages(prev => [...prev, tempMessage]);
     setTempMessageIds(prev => new Set(prev).add(tempMessageId));
 
     stompClient.publish({
@@ -307,15 +279,15 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       }
     };
 
-    loadUserData().catch(() => Alert.alert("Error loading user data"));
+    loadUserData().catch(()=> Alert.alert("Error"))
   }, []);
 
   useEffect(() => {
     if (userData?.id && chatId) {
       console.log('User data and chatId available, loading history and initializing WebSocket');
-      loadChatHistory(userData).then(() => {
+      loadChatHistory().then(() => {
         console.log('History loaded, initializing WebSocket');
-        initializeWebSocket(userData);
+        initializeWebSocket();
       }).catch(error => {
         console.error('Error in initialization sequence:', error);
       });
@@ -329,7 +301,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     return () => {
       if (stompClient) {
         console.log('Cleaning up WebSocket connection');
-        stompClient.deactivate().catch(() => console.log("Error deactivating WebSocket"));
+        stompClient.deactivate().catch(()=> Alert.alert("Error"))
       }
     };
   }, [userData, chatId]);
@@ -356,19 +328,18 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
         style={styles.content}
         contentContainerStyle={styles.contentContainer}
         onContentSizeChange={() => {
-          console.log('ScrollView content size changed');
           scrollViewRef.current?.scrollToEnd({ animated: true });
         }}
       >
         {isLoadingHistory ? (
-          <View  >
+          <View style={{ padding: 20, alignItems: 'center' }}>
             <ActivityIndicator size="large" color="#0000ff" />
             <Text>Loading messages...</Text>
           </View>
         ) : (
           <Chat
             messages={messages}
-            currentUserId={userData?.id}
+            currentUserId={userData?.id ? String(Number(userData.id)) : undefined}
           />
         )}
       </ScrollView>
