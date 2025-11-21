@@ -1,18 +1,13 @@
 import React from "react";
-import type { ImageSourcePropType} from "react-native";
 import { Image, Text, View } from "react-native";
 
 import { styles } from "./styled";
 
+import { getRecommendationImage } from "@/constants/recommendationImages";
+import type { RecommendationResponse } from "@/http/types/recommendation";
+
 type Props = {
-  recommendation: {
-    id: string;
-    category: string;
-    title: string;
-    date: string;
-    fullDescription: string;
-    imagePath: ImageSourcePropType;
-  };
+  recommendation: RecommendationResponse;
 };
 
 const FullRecomendationComponent: React.FC<Props> = ({ recommendation }) => {
@@ -26,8 +21,8 @@ const FullRecomendationComponent: React.FC<Props> = ({ recommendation }) => {
 
       <Image
         style={styles.image}
-        source={imagePath}
-        resizeMode="contain"
+        source={getRecommendationImage(imagePath)}
+        resizeMode="cover"
       />
 
       <Text style={styles.description}>{fullDescription}</Text>
