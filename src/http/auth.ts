@@ -48,11 +48,8 @@ export default class AuthService {
 
   static async refreshToken(): Promise<string> {
     try {
-      //const BASE_URL = 'http://192.168.0.104:9081/api';
       const refreshApi = axios.create({
-        //   baseURL: 'http://192.168.1.14:7081/api',
-
-        baseURL: "http://192.168.1.14:7082/api",
+        baseURL: "http://192.168.0.102:7081/api",
         withCredentials: true,
         timeout: 10000,
       });

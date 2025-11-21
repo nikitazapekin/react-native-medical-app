@@ -40,7 +40,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_CATALOG_SERVICES]: undefined;
   [ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION]: {
-    recommendationId: string;
+    recommendationId: number;
   };
   [ROUTES.STACK.USER_CONSULTATION_HISTORY]: undefined;
   [ROUTES.STACK.USER_FULL_CONSULTATION]: { consultationId: string };

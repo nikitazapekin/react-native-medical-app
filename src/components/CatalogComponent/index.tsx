@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "appStyles";
 
@@ -10,14 +10,34 @@ import DoctorCard from "@/components/shared/DoctorCard";
 import RecomendationCard from "@/components/shared/RecomendationCard";
 import ServiceComponent from "@/components/shared/ServiceComponent";
 import { doctorsCatalog } from "@/constants/doctorsCatalog";
-import { recommendationCatalog } from "@/constants/recommendationCatalog";
 import { servicesCatalog } from "@/constants/servicesCatalog";
+import RecommendationService from "@/http/recommendation";
+import type { RecommendationResponse } from "@/http/types/recommendation";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const CatalogComponent = () => {
 
   const navigation = useNavigation<FormNavigationProp>();
+  const [recommendations, setRecommendations] = useState<RecommendationResponse[]>([]);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(true);
+
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      try {
+        setLoadingRecommendations(true);
+        const data = await RecommendationService.getTop3Recommendations();
+
+        setRecommendations(data);
+      } catch (error) {
+        console.error("Error fetching recommendations:", error);
+      } finally {
+        setLoadingRecommendations(false);
+      }
+    };
+
+    void fetchRecommendations();
+  }, []);
 
   const handleViewAllDoctors = () => {
     navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS);
@@ -60,15 +80,23 @@ const CatalogComponent = () => {
 
       <Text style={styles.sectionTitle}>Рекомендации</Text>
 
-      {recommendationCatalog.slice(0, 3).map((r) => (
-        <TouchableOpacity key={r.id} activeOpacity={0.7} onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION, { recommendationId: r.id })}>
-          <RecomendationCard category={r.category} title={r.title} date={r.date} />
-        </TouchableOpacity>
-      ))}
+      {loadingRecommendations ? (
+        <ActivityIndicator size="large" color={COLORS.PRIMARY} />
+      ) : recommendations && recommendations.length > 0 ? (
+        <>
+          {recommendations.map((r) => (
+            <TouchableOpacity key={r.id} activeOpacity={0.7} onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION, { recommendationId: r.id })}>
+              <RecomendationCard category={r.category} title={r.title} date={r.date} />
+            </TouchableOpacity>
+          ))}
 
-      <View style={styles.primaryButtonWrapper}>
-        <CustomButton text="Посмотреть все рекомендации" handler={handleViewAllRecommendations} backgroundColor={COLORS.PRIMARY} />
-      </View>
+          <View style={styles.primaryButtonWrapper}>
+            <CustomButton text="Посмотреть все рекомендации" handler={handleViewAllRecommendations} backgroundColor={COLORS.PRIMARY} />
+          </View>
+        </>
+      ) : (
+        <Text>Рекомендации не найдены</Text>
+      )}
     </View>
   );
 };
