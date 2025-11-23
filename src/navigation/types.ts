@@ -4,6 +4,7 @@ import type { StackNavigationProp } from "@react-navigation/stack";
 import type { ROUTES } from "./routes";
 
 import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
+import type { DoctorResponse } from "@/http/types/doctor";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -18,11 +19,11 @@ export type RootStackParamList = {
   [ROUTES.STACK.TUBE]: undefined;
   [ROUTES.STACK.CABINET]: undefined;
   [ROUTES.STACK.PAYMENTS]: { id: number };
-  [ROUTES.STACK.DOCTOR]: undefined; //главная страница доктора
-  [ROUTES.STACK.DOCTOR_CHAT]: { id: number }; //страница чата доктора
-  [ROUTES.STACK.DOCTOR_CABINET]: undefined; //страница профиля доктора
-  [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined; //страница записей доктора
-  [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; //страница htlf htlfr редактирования инфы доктора
+  [ROUTES.STACK.DOCTOR]: undefined; 
+  [ROUTES.STACK.DOCTOR_CHAT]: { id: number }; 
+  [ROUTES.STACK.DOCTOR_CABINET]: undefined; 
+  [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined; 
+  [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; 
   [ROUTES.STACK.CHILDRENS]: undefined;
   [ROUTES.STACK.CHILDREN]:  { id: number };
   [ROUTES.STACK.CHILDREN_DOCTORS]: { childId: number };
@@ -46,11 +47,11 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_FULL_CONSULTATION]: { consultationId: string };
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
-    doctor: Doctor;
+    doctor: DoctorResponse | Doctor;
     serviceName?: string;
   };
   [ROUTES.STACK.USER_REGISTRATION_AT_CLINIC]: {
-    doctor: Doctor;
+    doctor: DoctorResponse | Doctor;
     serviceName?: string;
   };
   [ROUTES.STACK.USER_REGISTRATION_SUMMARY]: {
@@ -59,6 +60,7 @@ export type RootStackParamList = {
     selectedTime: string | null;
     serviceName?: string;
   };
+  [ROUTES.STACK.CHILD_SELECTION]: undefined;
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
     drug: {
       id: number;

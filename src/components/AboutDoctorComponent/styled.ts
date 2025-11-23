@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     color: COLORS.BLACK,
   },
   doctorDescription: {
-    fontSize: 14,
+    fontSize: 16,
     color: COLORS.BLACK,
     lineHeight: 18,
     marginTop: 10,
@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   infoItem: {
-    fontSize: 14,
+    fontSize: 16,
     color: COLORS.BLACK,
     marginBottom: 15,
     lineHeight: 20,

@@ -10,6 +10,7 @@ import { styles } from "./styles";
 import CabinetInfo from "@/components/CabinetInfo";
 import type { Patient } from "@/components/CabinetInfo/types";
 import CabinetOptions from "@/components/CabinetOptions";
+import ChildSelectorButton from "@/components/ChildSelectorButton";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import AuthService from "@/http/auth";
@@ -63,6 +64,9 @@ const CabinetScreen = () => {
         <Header title="Профиль" isAuthenticated={true} />
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <CabinetInfo patient={patient} setPatient={setPatient }/>
+          
+          <ChildSelectorButton />
+          
           <CabinetOptions id={patient?.id} />
         </ScrollView>
 
