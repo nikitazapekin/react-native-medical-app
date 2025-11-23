@@ -23,14 +23,14 @@ type RegistrationRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.U
 const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onSubmit }) => {
   const route = useRoute<RegistrationRouteProp>();
   const doctor = route.params?.doctor;
-  
+
   const primaryColor = PRIMARY;
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
   const availableSlots = useMemo(() => {
     const doctorStatus = (doctor as any)?.status;
-    
+
     if (!doctorStatus) {
       return { morning: timeSlots.morning, afternoon: timeSlots.afternoon, evening: timeSlots.evening };
     }
@@ -40,7 +40,7 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
     }
 
     const timeMatch = doctorStatus.match(/(\d{1,2}):00\s*до\s*(\d{1,2}):00/);
-    
+
     if (!timeMatch) {
       return { morning: timeSlots.morning, afternoon: timeSlots.afternoon, evening: timeSlots.evening };
     }
@@ -50,9 +50,11 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
 
     const isSlotAvailable = (slot: string): boolean => {
       const slotMatch = slot.match(/(\d{1,2}):00/);
+
       if (!slotMatch) return false;
-      
+
       const slotHour = parseInt(slotMatch[1]);
+
       return slotHour >= startHour && slotHour < endHour;
     };
 
@@ -93,12 +95,12 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
           <Text style={styles.sectionTitle}>Утро</Text>
           <View style={styles.slotsRow}>
             {availableSlots.morning.map((time) => (
-              <TimeSlot 
-                key={time} 
-                text={time} 
-                onPress={() => handleSelectTime(time)} 
-                selected={selectedTime === time} 
-                primaryColor={primaryColor} 
+              <TimeSlot
+                key={time}
+                text={time}
+                onPress={() => handleSelectTime(time)}
+                selected={selectedTime === time}
+                primaryColor={primaryColor}
               />
             ))}
           </View>
@@ -110,12 +112,12 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
           <Text style={styles.sectionTitle}>День</Text>
           <View style={styles.slotsRow}>
             {availableSlots.afternoon.map((time) => (
-              <TimeSlot 
-                key={time} 
-                text={time} 
-                onPress={() => handleSelectTime(time)} 
-                selected={selectedTime === time} 
-                primaryColor={primaryColor} 
+              <TimeSlot
+                key={time}
+                text={time}
+                onPress={() => handleSelectTime(time)}
+                selected={selectedTime === time}
+                primaryColor={primaryColor}
               />
             ))}
           </View>
@@ -127,12 +129,12 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
           <Text style={styles.sectionTitle}>Вечер</Text>
           <View style={styles.slotsRow}>
             {availableSlots.evening.map((time) => (
-              <TimeSlot 
-                key={time} 
-                text={time} 
-                onPress={() => handleSelectTime(time)} 
-                selected={selectedTime === time} 
-                primaryColor={primaryColor} 
+              <TimeSlot
+                key={time}
+                text={time}
+                onPress={() => handleSelectTime(time)}
+                selected={selectedTime === time}
+                primaryColor={primaryColor}
               />
             ))}
           </View>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import type { RouteProp} from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import { COLORS } from "appStyles";
+import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -20,7 +20,7 @@ type UserAboutDoctorRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STAC
 export default function UserAboutDoctorScreen() {
   const route = useRoute<UserAboutDoctorRouteProp>();
   const { doctor: doctorFromParams } = route.params;
-  
+
   const [doctor, setDoctor] = useState<DoctorResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,12 +30,13 @@ export default function UserAboutDoctorScreen() {
       try {
         setLoading(true);
         setError(null);
-        
+
         if (doctorFromParams && typeof doctorFromParams === 'object' && 'id' in doctorFromParams) {
           if ('email' in doctorFromParams && 'firstName' in doctorFromParams) {
             setDoctor(doctorFromParams as unknown as DoctorResponse);
           } else {
             const data = await DoctorService.getDoctorById((doctorFromParams as any).id);
+
             setDoctor(data);
           }
         }

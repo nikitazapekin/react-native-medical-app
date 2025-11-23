@@ -6,10 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
-import type { DoctorResponse } from "@/http/types/doctor";
 import MedicalAppointmentService from "@/http/medicalAppointment";
 import MedicalCardService from "@/http/medicalCard";
 import ServiceService from "@/http/service";
+import type { DoctorResponse } from "@/http/types/doctor";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -31,11 +31,11 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
   const formattedDate = selectedDate ? new Intl.DateTimeFormat("ru-RU").format(new Date(selectedDate)) : "—";
   const time = selectedTime ?? "—";
   const displayedService = serviceName ?? "Консультация";
-  
-  const fullName = doctor.firstName 
+
+  const fullName = doctor.firstName
     ? `${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()
     : doctor.name;
-  
+
   const spec = doctor.specialization || doctor.spec;
 
   useEffect(() => {
@@ -43,23 +43,28 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
       try {
         const services = await ServiceService.getAllServices();
         const consultation = services.find(s => s.title === "Консультация");
+
         if (consultation) {
           setDefaultServiceId(consultation.id);
         }
 
         const childIdStr = await AsyncStorage.getItem('childId');
+
         console.log('Child ID:', childIdStr);
+
         if (!childIdStr) {
           console.error('No childId found in storage');
           setMedicalCardId(1);
+
           return;
         }
 
         const childId = parseInt(childIdStr);
-        
+
         const medicalCard = await MedicalCardService.getMedicalCardByChildId(childId);
+
         setMedicalCardId(medicalCard.id);
-        
+
         console.log('Loaded medical card ID:', medicalCard.id);
       } catch (error) {
         console.error("Error loading data:", error);
@@ -73,12 +78,13 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
   const handleConfirm = async () => {
     if (!selectedDate || !selectedTime || !medicalCardId) {
       Alert.alert("Ошибка", "Пожалуйста, выберите дату и время");
+
       return;
     }
 
     try {
       setLoading(true);
-      
+
       const appointmentRequest = {
         medicalCardId,
         doctorId: doctor.id,
@@ -93,10 +99,11 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
       console.log('Creating appointment with data:', appointmentRequest);
 
       const result = await MedicalAppointmentService.createAppointment(appointmentRequest);
+
       setAppointmentId(result.id);
 
       Alert.alert(
-        "Успешно", 
+        "Успешно",
         "Запись создана",
         [
           {
@@ -108,6 +115,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
     } catch (error: any) {
       console.error("Error creating appointment:", error);
       const errorMessage = error?.response?.data?.message || error?.message || "Не удалось создать запись";
+
       Alert.alert("Ошибка", errorMessage);
     } finally {
       setLoading(false);
@@ -123,6 +131,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
         console.error("Error deleting appointment:", error);
       }
     }
+
     onCancel();
   };
 
@@ -135,7 +144,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
         <View style={styles.row}><Text style={styles.label}>Услуга:</Text><Text style={styles.value}>{displayedService}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Дата:</Text><Text style={styles.value}>{formattedDate}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Время:</Text><Text style={styles.value}>{time}</Text></View>
-        
+
         {loading ? (
           <ActivityIndicator size="large" color="#1280b2" style={{ marginTop: 20 }} />
         ) : (

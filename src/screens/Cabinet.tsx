@@ -64,9 +64,9 @@ const CabinetScreen = () => {
         <Header title="Профиль" isAuthenticated={true} />
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <CabinetInfo patient={patient} setPatient={setPatient }/>
-          
+
           <ChildSelectorButton />
-          
+
           <CabinetOptions id={patient?.id} />
         </ScrollView>
 

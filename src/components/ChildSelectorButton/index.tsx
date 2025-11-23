@@ -21,8 +21,8 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadSelectedChild();
-    
+    void loadSelectedChild();
+
     const unsubscribe = navigation.addListener('focus', () => {
       void loadSelectedChild();
     });
@@ -37,12 +37,15 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
 
       if (childrenStr) {
         const children: Child[] = JSON.parse(childrenStr);
+
         setChildrenCount(children.length);
 
         if (childId) {
           const child = children.find((c) => c.id === parseInt(childId));
+
           if (child) {
             setSelectedChild(child);
+
             if (onChildChange) {
               onChildChange(child);
             }
@@ -73,8 +76,8 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
   }
 
   return (
-    <TouchableOpacity 
-      style={styles.container} 
+    <TouchableOpacity
+      style={styles.container}
       onPress={handleOpenSelector}
       activeOpacity={0.7}
     >
@@ -126,4 +129,3 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
 };
 
 export default ChildSelectorButton;
-

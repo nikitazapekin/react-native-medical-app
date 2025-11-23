@@ -44,6 +44,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
       try {
         setLoading(true);
         const data = await DoctorService.getAllDoctors();
+
         setDoctors(data);
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -77,6 +78,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
 
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
+
       filtered = filtered.filter((d) =>
         `${d.firstName} ${d.middleName} ${d.lastName}`.toLowerCase().includes(q) ||
         d.specialization.toLowerCase().includes(q)

@@ -5,9 +5,11 @@ class DoctorService {
   static async getAllDoctors(): Promise<DoctorResponse[]> {
     try {
       const response = await $api.get<DoctorResponse[]>("/doctors");
+
       return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
       console.error("Error fetching doctors:", error);
+
       return [];
     }
   }
@@ -15,6 +17,7 @@ class DoctorService {
   static async getDoctorById(id: number): Promise<DoctorResponse> {
     try {
       const response = await $api.get<DoctorResponse>(`/doctors/${id}`);
+
       return response.data;
     } catch (error) {
       console.error(`Error fetching doctor ${id}:`, error);
@@ -31,13 +34,14 @@ class DoctorService {
   }): Promise<DoctorResponse[]> {
     try {
       const response = await $api.get<DoctorResponse[]>("/doctors/search", { params });
+
       return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
       console.error("Error searching doctors:", error);
+
       return [];
     }
   }
 }
 
 export default DoctorService;
-

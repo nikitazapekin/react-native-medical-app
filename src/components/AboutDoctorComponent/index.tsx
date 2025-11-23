@@ -3,19 +3,18 @@ import { Image, Text, View } from "react-native";
 import RatingStar from "@assets/profile/star.png";
 import type { RouteProp } from "@react-navigation/native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
-import { getDoctorAvatar } from "@/constants/doctorImages";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
+import { getDoctorAvatar } from "@/constants/doctorImages";
 import type { DoctorResponse } from "@/http/types/doctor";
 import { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 
 interface AboutDoctorComponentProps {
-  doctor: DoctorResponse | any; 
+  doctor: DoctorResponse | any;
 }
 
 type AboutRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_ABOUT_DOCTOR>;
@@ -24,15 +23,15 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const route = useRoute<AboutRouteProp>();
   const serviceName = route.params?.serviceName;
-  
+
   const handleAppointment = () => {
     navigation.navigate(ROUTES.STACK.USER_REGISTRATION_AT_CLINIC, { doctor, serviceName });
   };
 
-  const fullName = doctor.firstName 
+  const fullName = doctor.firstName
     ? `${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()
     : doctor.name;
-  
+
   const rating = doctor.rate || doctor.rating || 0;
   const spec = doctor.specialization || doctor.spec;
   const exp = doctor.experience || "Не указан";
@@ -45,9 +44,9 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
       <View style={styles.descriptionCard}>
         <View style={styles.cardContent}>
           <View style={styles.mainContent}>
-            <Image 
-              source={getDoctorAvatar(doctor.avatar)} 
-              style={styles.doctorAvatar} 
+            <Image
+              source={getDoctorAvatar(doctor.avatar)}
+              style={styles.doctorAvatar}
             />
             <View style={styles.doctorInfo}>
               <Text style={styles.doctorName}>{fullName}</Text>

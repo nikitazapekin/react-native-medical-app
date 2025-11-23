@@ -48,17 +48,18 @@ const AuthForm = () => {
       if (userRole === 'PATIENT') {
         try {
           const userId = await AsyncStorage.getItem('userId');
+
           if (userId) {
             const children = await ChildrenService.getChildrenByParentId(parseInt(userId));
-            
+
             if (children && children.length > 0) {
               await AsyncStorage.setItem('childrenList', JSON.stringify(children));
-              
+
               if (children.length === 1) {
                 await AsyncStorage.setItem('childId', children[0].id.toString());
                 console.log('Single child, auto-selected ID:', children[0].id);
               } else {
-  
+
                 await AsyncStorage.setItem('childId', children[0].id.toString());
                 console.log('Multiple children found, selected first child ID:', children[0].id);
                 console.log('Total children:', children.length);
