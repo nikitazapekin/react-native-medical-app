@@ -12,7 +12,7 @@ export default function ChildSelectionScreen() {
   return (
     <View style={styles.container}>
       <Header title="Выбор ребенка" isAuthenticated={true} showBackButton={true} />
-      
+
       <ChildSelector />
 
       <Footer />
@@ -21,4 +21,3 @@ export default function ChildSelectionScreen() {
     </View>
   );
 }
-

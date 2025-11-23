@@ -7,7 +7,6 @@ import { COLORS } from 'appStyles';
 import { styles } from './styles';
 
 import ChildrenService, { type Child } from '@/http/children';
-import { ROUTES } from '@/navigation/routes';
 import type { FormNavigationProp } from '@/navigation/types';
 
 const ChildSelector: React.FC = () => {
@@ -17,20 +16,21 @@ const ChildSelector: React.FC = () => {
   const [selectedChildId, setSelectedChildId] = useState<number | null>(null);
 
   useEffect(() => {
-    loadChildren();
+    void loadChildren();
   }, []);
 
   const loadChildren = async () => {
     try {
       const userId = await AsyncStorage.getItem('userId');
       const savedChildId = await AsyncStorage.getItem('childId');
-      
+
       if (savedChildId) {
         setSelectedChildId(parseInt(savedChildId));
       }
 
       if (userId) {
         const childrenList = await ChildrenService.getChildrenByParentId(parseInt(userId));
+
         setChildren(childrenList);
       }
     } catch (error) {
@@ -75,8 +75,8 @@ const ChildSelector: React.FC = () => {
           У вас {children.length} {children.length === 1 ? 'ребенок' : children.length < 5 ? 'ребенка' : 'детей'}
         </Text>
       </View>
-      
-      <ScrollView 
+
+      <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
@@ -107,7 +107,7 @@ const ChildSelector: React.FC = () => {
                 {child.age} {child.age === 1 ? 'год' : child.age < 5 ? 'года' : 'лет'} • {child.gender}
               </Text>
             </View>
-            
+
             {selectedChildId === child.id && (
               <View style={styles.checkmarkContainer}>
                 <Text style={styles.checkmark}>✓</Text>
@@ -121,4 +121,3 @@ const ChildSelector: React.FC = () => {
 };
 
 export default ChildSelector;
-

@@ -7,9 +7,11 @@ class MedicalAppointmentService {
       const response = await $api.get<MedicalAppointmentResponse[]>(
         `/medical-appointments/medical-card/${medicalCardId}`
       );
+
       return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
       console.error("Error fetching appointments:", error);
+
       return [];
     }
   }
@@ -17,6 +19,7 @@ class MedicalAppointmentService {
   static async getAppointmentById(id: number): Promise<MedicalAppointmentResponse> {
     try {
       const response = await $api.get<MedicalAppointmentResponse>(`/medical-appointments/${id}`);
+
       return response.data;
     } catch (error) {
       console.error(`Error fetching appointment ${id}:`, error);
@@ -27,6 +30,7 @@ class MedicalAppointmentService {
   static async createAppointment(appointment: MedicalAppointmentRequest): Promise<MedicalAppointmentResponse> {
     try {
       const response = await $api.post<MedicalAppointmentResponse>("/medical-appointments", appointment);
+
       return response.data;
     } catch (error) {
       console.error("Error creating appointment:", error);

@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   noSlots: {
     color: '#999',
     textAlign: 'center',
-    marginTop: 20 
+    marginTop: 20
   },
   slot: {
     width: 177,

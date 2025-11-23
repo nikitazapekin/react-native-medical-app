@@ -5,9 +5,11 @@ class ServiceService {
   static async getAllServices(): Promise<ServiceResponse[]> {
     try {
       const response = await $api.get<ServiceResponse[]>("/services");
+
       return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
       console.error("Error fetching services:", error);
+
       return [];
     }
   }
@@ -15,6 +17,7 @@ class ServiceService {
   static async getServiceById(id: number): Promise<ServiceResponse> {
     try {
       const response = await $api.get<ServiceResponse>(`/services/${id}`);
+
       return response.data;
     } catch (error) {
       console.error(`Error fetching service ${id}:`, error);
@@ -24,4 +27,3 @@ class ServiceService {
 }
 
 export default ServiceService;
-

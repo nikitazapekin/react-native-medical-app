@@ -19,11 +19,11 @@ export type RootStackParamList = {
   [ROUTES.STACK.TUBE]: undefined;
   [ROUTES.STACK.CABINET]: undefined;
   [ROUTES.STACK.PAYMENTS]: { id: number };
-  [ROUTES.STACK.DOCTOR]: undefined; 
-  [ROUTES.STACK.DOCTOR_CHAT]: { id: number }; 
-  [ROUTES.STACK.DOCTOR_CABINET]: undefined; 
-  [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined; 
-  [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined; 
+  [ROUTES.STACK.DOCTOR]: undefined;
+  [ROUTES.STACK.DOCTOR_CHAT]: { id: number };
+  [ROUTES.STACK.DOCTOR_CABINET]: undefined;
+  [ROUTES.STACK.DOCTOR_APPOINTMENTS]: undefined;
+  [ROUTES.STACK.DOCTOR_CABINET_EDIT]: undefined;
   [ROUTES.STACK.CHILDRENS]: undefined;
   [ROUTES.STACK.CHILDREN]:  { id: number };
   [ROUTES.STACK.CHILDREN_DOCTORS]: { childId: number };
