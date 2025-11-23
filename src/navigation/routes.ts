@@ -44,7 +44,8 @@ export const ROUTES = {
     USER_EDIT_CHILDRESN: "USER_EDIT_CHILDRESN",
     USER_ABOUT_DOCTOR: "UserAboutDoctor",
     USER_REGISTRATION_AT_CLINIC: "UserRegistrationAtClinic",
-    USER_REGISTRATION_SUMMARY: "UserRegistrationSummary"
+    USER_REGISTRATION_SUMMARY: "UserRegistrationSummary",
+    CHILD_SELECTION: "ChildSelection"
   },
   TABS: {
     HOME: "HomeTab",
