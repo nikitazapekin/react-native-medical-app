@@ -12,8 +12,12 @@ const ChildrenItem = ({ item, id }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("медицинская карта")) {
+    const itemText = item.text.toLocaleLowerCase();
+    
+    if (itemText.includes("медицинская карта")) {
       navigation.navigate(ROUTES.STACK.MEDICALCARD, { id: Number(id) });
+    } else if (itemText.includes("список консультировавших врачей")) {
+      navigation.navigate(ROUTES.STACK.CHILDREN_DOCTORS, { childId: Number(id) });
     }
   };
 
