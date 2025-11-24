@@ -130,9 +130,9 @@ const CatalogComponent = () => {
       ) : topServices && topServices.length > 0 ? (
         <>
           {topServices.map((service) => (
-            <TouchableOpacity 
-              key={service.id} 
-              activeOpacity={0.7} 
+            <TouchableOpacity
+              key={service.id}
+              activeOpacity={0.7}
               onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, { serviceId: service.id, serviceName: service.title })}
             >
               <ServiceComponent title={service.title} subtitle={service.subtitle || ""} />
