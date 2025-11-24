@@ -104,6 +104,7 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_AT_CLINIC} component={UserRegistrationAtClinic} />
         <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_SUMMARY} component={UserRegistrationSummaryScreen} />
         <Stack.Screen name={ROUTES.STACK.CHILD_SELECTION} component={ChildSelectionScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_POPULAR_DOCTORS} component={UserCatalogDoctorsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
