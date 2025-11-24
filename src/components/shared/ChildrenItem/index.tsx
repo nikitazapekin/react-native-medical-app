@@ -27,12 +27,22 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
     return item.img;
   };
 
+  const getAgeText = (age: number) => {
+    if (age === 1) {
+      return `${age} год`;
+    } else if (age >= 2 && age <= 4) {
+      return `${age} года`;
+    } else {
+      return `${age} лет`;
+    }
+  };
+
   return (
     <Pressable onPress={handlePress} style={styles.wrapper}>
       <Image source={getImageSource()} alt={item.alt} style={styles.image} />
       <View style={styles.content}>
         <Text style={styles.title}>{item.name}</Text>
-        <Text style={styles.age}>Возраст: {item.age}</Text>
+        <Text style={styles.age}>Возраст: {getAgeText(Number(item.age))}</Text>
         <Text style={styles.gender}>Пол: {item.gender}</Text>
       </View>
     </Pressable>

@@ -38,22 +38,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
+    gap: 15,
   },
-  avatarContainer: {
-    marginRight: 12,
-  },
-  avatarPlaceholder: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: COLORS.PRIMARY,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  avatarText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: COLORS.WHITE,
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 60,
   },
   textContainer: {
     flex: 1,

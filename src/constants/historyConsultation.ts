@@ -1,5 +1,5 @@
 export interface ConsultationItem {
-  id: string;
+  id: number;
   category: string;
   title: string;
   date: string;
@@ -8,6 +8,10 @@ export interface ConsultationItem {
   duration: string;
   price: string;
   patientName: string;
+  appointmentDate?: string;
+  completedAt?: string;
+  status?: string;
+  doctorInitials?: string;
 }
 
 export const historyConsultation: ConsultationItem[] = [

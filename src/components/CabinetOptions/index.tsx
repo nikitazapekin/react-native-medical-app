@@ -13,7 +13,11 @@ const ListItem = ({ item , id }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история")) {
+    if (item.text.toLocaleLowerCase().includes("история консультаций")) {
+      navigation.navigate(ROUTES.STACK.USER_CONSULTATION_HISTORY);
+    }
+
+    if (item.text.toLocaleLowerCase().includes("история платежей")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS, {id: Number(id)});
     }
 
@@ -33,7 +37,7 @@ const ListItem = ({ item , id }: ListItemProps) => {
 
     if(item.text.toLocaleLowerCase().includes("избранное")) {
 
-      navigation.navigate(ROUTES.STACK.USER_FAVOURITE_DRUGS);
+      navigation.navigate(ROUTES.STACK.USER_FAVOURITE_DRUGS, { id: Number(id) });
     }
 
   };
