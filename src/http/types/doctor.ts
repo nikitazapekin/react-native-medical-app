@@ -45,4 +45,13 @@ export interface MedicalAppointmentResponse {
   doctorInitials?: string;
   doctor?: DoctorResponse;
   service?: ServiceResponse;
+  // Поля для истории консультаций
+  status?: string;
+  category?: string;
+  title?: string;
+  duration?: string;
+  price?: number;
+  completedAt?: string;
+  patientName?: string;
+  childId?: number;
 }

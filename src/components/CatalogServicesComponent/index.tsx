@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "appStyles";
@@ -32,8 +32,8 @@ const CatalogServicesComponent = () => {
     const fetchServices = async () => {
       try {
         setLoading(true);
-        const data = sortType 
-          ? await ServiceService.getSortedServices(sortType) 
+        const data = sortType
+          ? await ServiceService.getSortedServices(sortType)
           : await ServiceService.getAllServices();
 
         setServices(data);
@@ -63,9 +63,9 @@ const CatalogServicesComponent = () => {
             </Text>
           )}
           {services.map((service) => (
-            <TouchableOpacity 
-              key={service.id} 
-              activeOpacity={0.7} 
+            <TouchableOpacity
+              key={service.id}
+              activeOpacity={0.7}
               onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, { serviceId: service.id, serviceName: service.title })}
             >
               <ServiceComponent title={service.title} subtitle={service.subtitle || ""} />

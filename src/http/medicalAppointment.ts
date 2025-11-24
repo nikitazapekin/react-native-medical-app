@@ -46,6 +46,46 @@ class MedicalAppointmentService {
       throw new Error("Failed to delete appointment");
     }
   }
+
+  // История консультаций
+  static async getConsultationHistory(
+    patientId: number,
+    year?: number,
+    sortBy?: string
+  ): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const params: any = { sortBy: sortBy || "date_desc" };
+
+      if (year) {
+        params.year = year;
+      }
+
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/consultations/patient/${patientId}`,
+        { params }
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching consultation history:", error);
+
+      return [];
+    }
+  }
+
+  static async getConsultationHistoryByChild(childId: number): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/consultations/child/${childId}`
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching child consultation history:", error);
+
+      return [];
+    }
+  }
 }
 
 export default MedicalAppointmentService;

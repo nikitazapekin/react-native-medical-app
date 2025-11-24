@@ -20,7 +20,7 @@ export default function UserCatalogDoctorsScreen() {
   const serviceName = route.params?.serviceName;
   const serviceId = route.params?.serviceId;
   const showPopular = route.params?.showPopular;
-  
+
   const title = showPopular ? "Популярные врачи" : serviceName ? "Врачи по услуге" : "Врачи";
 
   return (

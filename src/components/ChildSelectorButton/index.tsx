@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
+import ChildrenImg from '@assets/mockPhotos/ChildrenImg.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS } from 'appStyles';
@@ -75,6 +76,24 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
     return null;
   }
 
+  const getImageSource = () => {
+    if (selectedChild.avatar && selectedChild.avatar.trim() !== '') {
+      return { uri: selectedChild.avatar };
+    }
+
+    return ChildrenImg;
+  };
+
+  const getAgeText = (age: number) => {
+    if (age === 1) {
+      return `${age} год`;
+    } else if (age >= 2 && age <= 4) {
+      return `${age} года`;
+    } else {
+      return `${age} лет`;
+    }
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -91,24 +110,19 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
       </View>
 
       <View style={styles.content}>
-        <View style={styles.avatarContainer}>
-          <View style={styles.avatarPlaceholder}>
-            <Text style={styles.avatarText}>
-              {selectedChild.name.charAt(0).toUpperCase()}
-            </Text>
-          </View>
-        </View>
+        <Image
+          source={getImageSource()}
+          style={styles.avatar}
+          resizeMode="cover"
+        />
 
         <View style={styles.textContainer}>
           <Text style={styles.childName}>{selectedChild.name}</Text>
           <Text style={styles.childDetails}>
-            {selectedChild.age}{' '}
-            {selectedChild.age === 1
-              ? 'год'
-              : selectedChild.age < 5
-                ? 'года'
-                : 'лет'}{' '}
-            • {selectedChild.gender}
+            Возраст: {getAgeText(selectedChild.age)}
+          </Text>
+          <Text style={styles.childDetails}>
+            Пол: {selectedChild.gender}
           </Text>
         </View>
 
