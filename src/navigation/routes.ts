@@ -45,7 +45,8 @@ export const ROUTES = {
     USER_ABOUT_DOCTOR: "UserAboutDoctor",
     USER_REGISTRATION_AT_CLINIC: "UserRegistrationAtClinic",
     USER_REGISTRATION_SUMMARY: "UserRegistrationSummary",
-    CHILD_SELECTION: "ChildSelection"
+    CHILD_SELECTION: "ChildSelection",
+    USER_POPULAR_DOCTORS: "UserPopularDoctors"
   },
   TABS: {
     HOME: "HomeTab",

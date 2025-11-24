@@ -42,6 +42,30 @@ class DoctorService {
       return [];
     }
   }
+
+  static async getPopularDoctors(): Promise<DoctorResponse[]> {
+    try {
+      const response = await $api.get<DoctorResponse[]>("/doctors/popular");
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching popular doctors:", error);
+
+      return [];
+    }
+  }
+
+  static async getTop3PopularDoctors(): Promise<DoctorResponse[]> {
+    try {
+      const response = await $api.get<DoctorResponse[]>("/doctors/popular/top3");
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching top 3 popular doctors:", error);
+
+      return [];
+    }
+  }
 }
 
 export default DoctorService;

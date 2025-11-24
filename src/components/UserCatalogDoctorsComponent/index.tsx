@@ -19,7 +19,7 @@ import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = doctorsSortOptions;
 
-const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, childId }) => {
+const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, childId, showPopular }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialization, setSelectedSpecialization] = useState<string>("");
   const [sortType, setSortType] = useState<string>("");
@@ -43,7 +43,9 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     const fetchDoctors = async () => {
       try {
         setLoading(true);
-        const data = await DoctorService.getAllDoctors();
+        const data = showPopular 
+          ? await DoctorService.getPopularDoctors() 
+          : await DoctorService.getAllDoctors();
 
         setDoctors(data);
       } catch (error) {
@@ -54,7 +56,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     };
 
     void fetchDoctors();
-  }, []);
+  }, [showPopular]);
 
   const filteredDoctors = useMemo(() => {
     let filtered = doctors;
@@ -120,7 +122,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         placeholderTextColor="#000"
       />
 
-      <Text style={styles.title}>Список врачей</Text>
+      <Text style={styles.title}>{showPopular ? "Популярные врачи" : "Список врачей"}</Text>
 
       {loading ? (
         <ActivityIndicator size="large" color={COLORS.PRIMARY} />
@@ -128,7 +130,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         <View style={styles.listWrapper}>
           {hasNoDoctors && (
             <Text style={{ fontSize: 16, color: "#6B7280", fontWeight: "600" }}>
-              {serviceName ? `Нет врачей по услуге "${serviceName}"` : "Врачи не найдены"}
+              {showPopular ? "Популярные врачи не найдены" : serviceName ? `Нет врачей по услуге "${serviceName}"` : "Врачи не найдены"}
             </Text>
           )}
           {filteredDoctors.map((doctor) => (

@@ -9,9 +9,11 @@ import CustomButton from "@/components/shared/Button";
 import DoctorCard from "@/components/shared/DoctorCard";
 import RecomendationCard from "@/components/shared/RecomendationCard";
 import ServiceComponent from "@/components/shared/ServiceComponent";
-import { doctorsCatalog } from "@/constants/doctorsCatalog";
+import { getDoctorAvatar } from "@/constants/doctorImages";
 import { servicesCatalog } from "@/constants/servicesCatalog";
+import DoctorService from "@/http/doctor";
 import RecommendationService from "@/http/recommendation";
+import type { DoctorResponse } from "@/http/types/doctor";
 import type { RecommendationResponse } from "@/http/types/recommendation";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
@@ -21,6 +23,8 @@ const CatalogComponent = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const [recommendations, setRecommendations] = useState<RecommendationResponse[]>([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(true);
+  const [popularDoctors, setPopularDoctors] = useState<DoctorResponse[]>([]);
+  const [loadingDoctors, setLoadingDoctors] = useState(true);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -39,8 +43,25 @@ const CatalogComponent = () => {
     void fetchRecommendations();
   }, []);
 
-  const handleViewAllDoctors = () => {
-    navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS);
+  useEffect(() => {
+    const fetchPopularDoctors = async () => {
+      try {
+        setLoadingDoctors(true);
+        const data = await DoctorService.getTop3PopularDoctors();
+
+        setPopularDoctors(data);
+      } catch (error) {
+        console.error("Error fetching popular doctors:", error);
+      } finally {
+        setLoadingDoctors(false);
+      }
+    };
+
+    void fetchPopularDoctors();
+  }, []);
+
+  const handleViewAllPopularDoctors = () => {
+    navigation.navigate(ROUTES.STACK.USER_POPULAR_DOCTORS, { showPopular: true });
   };
 
   const handleViewAllServices = () => {
@@ -56,15 +77,32 @@ const CatalogComponent = () => {
 
       <Text style={styles.sectionTitle}>Популярные врачи</Text>
 
-      {doctorsCatalog.slice(0, 3).map((d) => (
-        <TouchableOpacity key={d.id} activeOpacity={0.7} onPress={() => navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor: d })}>
-          <DoctorCard name={d.name} spec={d.spec} availability={d.availability} avatar={d.avatar} />
-        </TouchableOpacity>
-      ))}
+      {loadingDoctors ? (
+        <ActivityIndicator size="large" color={COLORS.PRIMARY} />
+      ) : popularDoctors && popularDoctors.length > 0 ? (
+        <>
+          {popularDoctors.map((doctor) => (
+            <TouchableOpacity 
+              key={doctor.id} 
+              activeOpacity={0.7} 
+              onPress={() => navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor })}
+            >
+              <DoctorCard 
+                name={`${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()} 
+                spec={doctor.specialization} 
+                availability={doctor.status} 
+                avatar={getDoctorAvatar(doctor.avatar)} 
+              />
+            </TouchableOpacity>
+          ))}
 
-      <View style={styles.primaryButtonWrapper}>
-        <CustomButton text="Посмотреть всех популярных врачей" handler={handleViewAllDoctors} backgroundColor={COLORS.PRIMARY} />
-      </View>
+          <View style={styles.primaryButtonWrapper}>
+            <CustomButton text="Посмотреть всех популярных врачей" handler={handleViewAllPopularDoctors} backgroundColor={COLORS.PRIMARY} />
+          </View>
+        </>
+      ) : (
+        <Text>Популярные врачи не найдены</Text>
+      )}
 
       <Text style={styles.sectionTitle}>Спектр услуг</Text>
 

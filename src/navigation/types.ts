@@ -37,7 +37,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.ISTORIABOLEZNEI]:  { id: number };
   [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
-  [ROUTES.STACK.USER_CATALOG_DOCTORS]: { serviceName?: string } | undefined;
+  [ROUTES.STACK.USER_CATALOG_DOCTORS]: { serviceName?: string; showPopular?: boolean } | undefined;
   [ROUTES.STACK.USER_CATALOG_SERVICES]: undefined;
   [ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION]: {
@@ -61,6 +61,7 @@ export type RootStackParamList = {
     serviceName?: string;
   };
   [ROUTES.STACK.CHILD_SELECTION]: undefined;
+  [ROUTES.STACK.USER_POPULAR_DOCTORS]: { showPopular: boolean; serviceName?: string };
   [ROUTES.STACK.USER_DRUG_DETAIL_SCREEN]: {
     drug: {
       id: number;
