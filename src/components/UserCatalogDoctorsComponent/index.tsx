@@ -133,12 +133,12 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         <View style={styles.listWrapper}>
           {hasNoDoctors && (
             <Text style={{ fontSize: 16, color: "#6B7280", fontWeight: "600" }}>
-              {childId 
-                ? "Нет врачей, которые консультировали ребенка" 
-                : showPopular 
-                  ? "Популярные врачи не найдены" 
-                  : serviceName 
-                    ? `Нет врачей по услуге "${serviceName}"` 
+              {childId
+                ? "Нет врачей, которые консультировали ребенка"
+                : showPopular
+                  ? "Популярные врачи не найдены"
+                  : serviceName
+                    ? `Нет врачей по услуге "${serviceName}"`
                     : "Врачи не найдены"}
             </Text>
           )}

@@ -4,15 +4,25 @@ import { Image, Text, View } from "react-native";
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
-import type { ClinicItem } from "@/constants/clinicList";
+import { getClinicImage } from "@/constants/clinicImages";
+import type { ClinicResponse } from "@/http/types/clinic";
 
 type Props = {
-  clinic: ClinicItem;
+  clinic: ClinicResponse;
   childName: string;
   onViewMap: () => void;
 };
 
 const InformationAboutClinicComponent: React.FC<Props> = ({ clinic, childName, onViewMap }) => {
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -21,16 +31,18 @@ const InformationAboutClinicComponent: React.FC<Props> = ({ clinic, childName, o
           <Text style={styles.label}>Название:</Text>
           <Text style={styles.value}>{clinic.name}</Text>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Дата прописки в поликлинику:</Text>
-          <Text style={styles.value}>{clinic.registrationDate}</Text>
-        </View>
+        {clinic.registrationDate && (
+          <View style={styles.row}>
+            <Text style={styles.label}>Дата прописки в поликлинику:</Text>
+            <Text style={styles.value}>{formatDate(clinic.registrationDate)}</Text>
+          </View>
+        )}
         <View style={styles.row}>
           <Text style={styles.label}>Пациент:</Text>
           <Text style={styles.value}>{childName}</Text>
         </View>
 
-        <Image source={clinic.imagePath} style={styles.clinicImage} />
+        <Image source={getClinicImage(clinic.imagePath)} style={styles.clinicImage} />
 
         <Text style={styles.address}>Адрес: {clinic.address}</Text>
 

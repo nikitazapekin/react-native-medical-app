@@ -20,7 +20,7 @@ export default function ChildrenScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.containerWhite}>
-      <Header title={"Ребенок"} isAuthenticated={true} />
+      <Header title={"Ребенок"} isAuthenticated={true} showBackButton={true}/>
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <ChildrenComponent id={id} />
       </ScrollView>
