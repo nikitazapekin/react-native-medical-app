@@ -7,4 +7,3 @@ export interface ClinicResponse {
   longitude: number;
   registrationDate?: string;
 }
-
