@@ -9,15 +9,16 @@ import { styles } from "./styles";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import UserCatalogDoctorsComponent from "@/components/UserCatalogDoctorsComponent";
-import { ROUTES } from "@/navigation/routes";
+import type { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 
-type DoctorsRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_CATALOG_DOCTORS> | 
+type DoctorsRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_CATALOG_DOCTORS> |
                         RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_POPULAR_DOCTORS>;
 
 export default function UserCatalogDoctorsScreen() {
   const route = useRoute<DoctorsRouteProp>();
   const serviceName = route.params?.serviceName;
+  const serviceId = route.params?.serviceId;
   const showPopular = route.params?.showPopular;
   
   const title = showPopular ? "Популярные врачи" : serviceName ? "Врачи по услуге" : "Врачи";
@@ -27,7 +28,7 @@ export default function UserCatalogDoctorsScreen() {
       <Header title={title} isAuthenticated={true} showBackButton={true}/>
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <UserCatalogDoctorsComponent serviceName={serviceName} showPopular={showPopular} />
+        <UserCatalogDoctorsComponent serviceName={serviceName} serviceId={serviceId} showPopular={showPopular} />
       </ScrollView>
 
       <Footer />

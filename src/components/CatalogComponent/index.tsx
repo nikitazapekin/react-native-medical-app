@@ -10,10 +10,10 @@ import DoctorCard from "@/components/shared/DoctorCard";
 import RecomendationCard from "@/components/shared/RecomendationCard";
 import ServiceComponent from "@/components/shared/ServiceComponent";
 import { getDoctorAvatar } from "@/constants/doctorImages";
-import { servicesCatalog } from "@/constants/servicesCatalog";
 import DoctorService from "@/http/doctor";
 import RecommendationService from "@/http/recommendation";
-import type { DoctorResponse } from "@/http/types/doctor";
+import ServiceService from "@/http/service";
+import type { DoctorResponse, ServiceResponse } from "@/http/types/doctor";
 import type { RecommendationResponse } from "@/http/types/recommendation";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
@@ -25,6 +25,8 @@ const CatalogComponent = () => {
   const [loadingRecommendations, setLoadingRecommendations] = useState(true);
   const [popularDoctors, setPopularDoctors] = useState<DoctorResponse[]>([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
+  const [topServices, setTopServices] = useState<ServiceResponse[]>([]);
+  const [loadingServices, setLoadingServices] = useState(true);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -60,6 +62,23 @@ const CatalogComponent = () => {
     void fetchPopularDoctors();
   }, []);
 
+  useEffect(() => {
+    const fetchTopServices = async () => {
+      try {
+        setLoadingServices(true);
+        const data = await ServiceService.getTop3Services();
+
+        setTopServices(data);
+      } catch (error) {
+        console.error("Error fetching top services:", error);
+      } finally {
+        setLoadingServices(false);
+      }
+    };
+
+    void fetchTopServices();
+  }, []);
+
   const handleViewAllPopularDoctors = () => {
     navigation.navigate(ROUTES.STACK.USER_POPULAR_DOCTORS, { showPopular: true });
   };
@@ -82,16 +101,16 @@ const CatalogComponent = () => {
       ) : popularDoctors && popularDoctors.length > 0 ? (
         <>
           {popularDoctors.map((doctor) => (
-            <TouchableOpacity 
-              key={doctor.id} 
-              activeOpacity={0.7} 
+            <TouchableOpacity
+              key={doctor.id}
+              activeOpacity={0.7}
               onPress={() => navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor })}
             >
-              <DoctorCard 
-                name={`${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()} 
-                spec={doctor.specialization} 
-                availability={doctor.status} 
-                avatar={getDoctorAvatar(doctor.avatar)} 
+              <DoctorCard
+                name={`${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()}
+                spec={doctor.specialization}
+                availability={doctor.status}
+                avatar={getDoctorAvatar(doctor.avatar)}
               />
             </TouchableOpacity>
           ))}
@@ -106,15 +125,27 @@ const CatalogComponent = () => {
 
       <Text style={styles.sectionTitle}>Спектр услуг</Text>
 
-      {servicesCatalog.slice(0, 3).map((s) => (
-        <TouchableOpacity key={s.id} activeOpacity={0.7} onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, { serviceName: s.title })}>
-          <ServiceComponent title={s.title} subtitle={s.subtitle} />
-        </TouchableOpacity>
-      ))}
+      {loadingServices ? (
+        <ActivityIndicator size="large" color={COLORS.PRIMARY} />
+      ) : topServices && topServices.length > 0 ? (
+        <>
+          {topServices.map((service) => (
+            <TouchableOpacity 
+              key={service.id} 
+              activeOpacity={0.7} 
+              onPress={() => navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, { serviceId: service.id, serviceName: service.title })}
+            >
+              <ServiceComponent title={service.title} subtitle={service.subtitle || ""} />
+            </TouchableOpacity>
+          ))}
 
-      <View style={styles.primaryButtonWrapper}>
-        <CustomButton text="Посмотреть все услуги" handler={handleViewAllServices} backgroundColor={COLORS.PRIMARY} />
-      </View>
+          <View style={styles.primaryButtonWrapper}>
+            <CustomButton text="Посмотреть все услуги" handler={handleViewAllServices} backgroundColor={COLORS.PRIMARY} />
+          </View>
+        </>
+      ) : (
+        <Text>Услуги не найдены</Text>
+      )}
 
       <Text style={styles.sectionTitle}>Рекомендации</Text>
 

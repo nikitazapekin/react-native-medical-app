@@ -19,7 +19,7 @@ import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = doctorsSortOptions;
 
-const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, childId, showPopular }) => {
+const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, serviceId, childId, showPopular }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialization, setSelectedSpecialization] = useState<string>("");
   const [sortType, setSortType] = useState<string>("");
@@ -36,16 +36,22 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
   };
 
   const handleDoctorPress = (doctor: DoctorResponse) => {
-    navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor, serviceName });
+    navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor, serviceName, serviceId });
   };
 
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
         setLoading(true);
-        const data = showPopular 
-          ? await DoctorService.getPopularDoctors() 
-          : await DoctorService.getAllDoctors();
+        let data: DoctorResponse[];
+
+        if (showPopular) {
+          data = await DoctorService.getPopularDoctors();
+        } else if (serviceId) {
+          data = await DoctorService.getDoctorsByServiceId(serviceId);
+        } else {
+          data = await DoctorService.getAllDoctors();
+        }
 
         setDoctors(data);
       } catch (error) {
@@ -56,7 +62,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     };
 
     void fetchDoctors();
-  }, [showPopular]);
+  }, [showPopular, serviceId]);
 
   const filteredDoctors = useMemo(() => {
     let filtered = doctors;
@@ -68,7 +74,8 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
       filtered = filtered.filter((d) => doctorIds.includes(d.id));
     }
 
-    if (serviceName) {
+    // Не фильтруем по serviceName если есть serviceId, так как врачи уже загружены по услуге
+    if (serviceName && !serviceId) {
       const q = serviceName.toLowerCase();
 
       filtered = filtered.filter((d) => d.specialization.toLowerCase().includes(q));
@@ -106,7 +113,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     }
 
     return filtered;
-  }, [childId, serviceName, selectedSpecialization, sortType, doctors, searchQuery]);
+  }, [childId, serviceName, serviceId, selectedSpecialization, sortType, doctors, searchQuery]);
 
   const hasNoDoctors = filteredDoctors.length === 0;
 

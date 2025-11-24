@@ -18,10 +18,11 @@ type Props = {
   selectedDate: string | null;
   selectedTime: string | null;
   serviceName?: string;
+  serviceId?: number;
   onCancel: () => void;
 };
 
-const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, onCancel }) => {
+const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, serviceId, onCancel }) => {
   const navigation = useNavigation<FormNavigationProp>();
   const [loading, setLoading] = useState(false);
   const [appointmentId, setAppointmentId] = useState<number | null>(null);
@@ -88,7 +89,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
       const appointmentRequest = {
         medicalCardId,
         doctorId: doctor.id,
-        serviceId: serviceName ? undefined : (defaultServiceId ?? undefined),
+        serviceId: serviceId ?? (serviceName ? undefined : (defaultServiceId ?? undefined)),
         appointmentName: `Прием у ${fullName}`,
         appointmentDate: new Date(selectedDate).toISOString(),
         appointmentTime: selectedTime,
