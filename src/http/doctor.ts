@@ -78,6 +78,18 @@ class DoctorService {
       return [];
     }
   }
+
+  static async getDoctorsByChildId(childId: number): Promise<DoctorResponse[]> {
+    try {
+      const response = await $api.get<DoctorResponse[]>(`/doctors/by-child/${childId}`);
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error(`Error fetching doctors by child ${childId}:`, error);
+
+      return [];
+    }
+  }
 }
 
 export default DoctorService;

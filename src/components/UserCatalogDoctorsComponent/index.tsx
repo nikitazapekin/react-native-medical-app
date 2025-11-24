@@ -11,7 +11,6 @@ import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
 import { getDoctorAvatar } from "@/constants/doctorImages";
 import { doctorOptions, doctorsSortOptions } from "@/constants/doctorsCatalog";
-import { historyConsultation } from "@/constants/historyConsultation";
 import DoctorService from "@/http/doctor";
 import type { DoctorResponse } from "@/http/types/doctor";
 import { ROUTES } from "@/navigation/routes";
@@ -45,7 +44,9 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         setLoading(true);
         let data: DoctorResponse[];
 
-        if (showPopular) {
+        if (childId) {
+          data = await DoctorService.getDoctorsByChildId(childId);
+        } else if (showPopular) {
           data = await DoctorService.getPopularDoctors();
         } else if (serviceId) {
           data = await DoctorService.getDoctorsByServiceId(serviceId);
@@ -62,20 +63,13 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     };
 
     void fetchDoctors();
-  }, [showPopular, serviceId]);
+  }, [showPopular, serviceId, childId]);
 
   const filteredDoctors = useMemo(() => {
     let filtered = doctors;
 
-    if (childId) {
-      const childConsultations = historyConsultation.filter((c) => c.childId === childId);
-      const doctorIds = [...new Set(childConsultations.map((c) => c.doctorId))];
-
-      filtered = filtered.filter((d) => doctorIds.includes(d.id));
-    }
-
-    // Не фильтруем по serviceName если есть serviceId, так как врачи уже загружены по услуге
-    if (serviceName && !serviceId) {
+    // Не фильтруем по serviceName если есть serviceId или childId, так как врачи уже загружены по услуге/ребенку
+    if (serviceName && !serviceId && !childId) {
       const q = serviceName.toLowerCase();
 
       filtered = filtered.filter((d) => d.specialization.toLowerCase().includes(q));
@@ -129,7 +123,9 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         placeholderTextColor="#000"
       />
 
-      <Text style={styles.title}>{showPopular ? "Популярные врачи" : "Список врачей"}</Text>
+      <Text style={styles.title}>
+        {childId ? "Консультировавшие врачи" : showPopular ? "Популярные врачи" : "Список врачей"}
+      </Text>
 
       {loading ? (
         <ActivityIndicator size="large" color={COLORS.PRIMARY} />
@@ -137,7 +133,13 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
         <View style={styles.listWrapper}>
           {hasNoDoctors && (
             <Text style={{ fontSize: 16, color: "#6B7280", fontWeight: "600" }}>
-              {showPopular ? "Популярные врачи не найдены" : serviceName ? `Нет врачей по услуге "${serviceName}"` : "Врачи не найдены"}
+              {childId 
+                ? "Нет врачей, которые консультировали ребенка" 
+                : showPopular 
+                  ? "Популярные врачи не найдены" 
+                  : serviceName 
+                    ? `Нет врачей по услуге "${serviceName}"` 
+                    : "Врачи не найдены"}
             </Text>
           )}
           {filteredDoctors.map((doctor) => (
