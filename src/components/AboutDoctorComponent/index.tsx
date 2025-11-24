@@ -23,9 +23,10 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const route = useRoute<AboutRouteProp>();
   const serviceName = route.params?.serviceName;
+  const serviceId = route.params?.serviceId;
 
   const handleAppointment = () => {
-    navigation.navigate(ROUTES.STACK.USER_REGISTRATION_AT_CLINIC, { doctor, serviceName });
+    navigation.navigate(ROUTES.STACK.USER_REGISTRATION_AT_CLINIC, { doctor, serviceName, serviceId });
   };
 
   const fullName = doctor.firstName

@@ -66,6 +66,18 @@ class DoctorService {
       return [];
     }
   }
+
+  static async getDoctorsByServiceId(serviceId: number): Promise<DoctorResponse[]> {
+    try {
+      const response = await $api.get<DoctorResponse[]>(`/doctors/by-service/${serviceId}`);
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error(`Error fetching doctors by service ${serviceId}:`, error);
+
+      return [];
+    }
+  }
 }
 
 export default DoctorService;
