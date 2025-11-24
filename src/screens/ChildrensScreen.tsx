@@ -12,7 +12,7 @@ export default function ChildrensScreen( ) {
   return (
     <View style={styles.container}>
 
-      <Header title={"Список детей"} isAuthenticated={true} />
+      <Header title={"Список детей"} isAuthenticated={true} showBackButton={true}/>
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <ChildrensList />
       </ScrollView>
