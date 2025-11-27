@@ -1,7 +1,9 @@
 import React from "react";
 import { ScrollView, StyleSheet,Text, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { useRoute } from "@react-navigation/native";
 
+import FooterDoctor from "@/components/shared/FooterDoctor";
 import Header from "@/components/shared/Header";
 
 interface Record {
@@ -23,7 +25,7 @@ const RecordDetailScreen = () => {
     <View style={styles.container}>
       <Header title="Детали записи" isAuthenticated={true} showBackButton={true} />
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <View style={styles.card}>
           <View style={styles.infoSection}>
             <Text style={styles.sectionTitle}>Информация о приеме</Text>
@@ -69,6 +71,9 @@ const RecordDetailScreen = () => {
           </View>
         </View>
       </ScrollView>
+
+      <FooterDoctor />
+      <StatusBar style="auto" />
     </View>
   );
 };
@@ -81,6 +86,9 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginTop: 70,
+  },
+  contentContainer: {
+    paddingBottom: 100,
   },
   card: {
     backgroundColor: "white",

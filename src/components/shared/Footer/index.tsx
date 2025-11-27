@@ -32,6 +32,16 @@ const Footer = () => {
       }
     }
 
+    if (currentRouteName === ROUTES.STACK.USER_DRUG_DETAIL_SCREEN) {
+      const medTab = tabIcons.find((item) => item.type === "tube");
+
+      if (medTab) {
+        setActiveTab(medTab.type);
+
+        return;
+      }
+    }
+
     const activeTabItem = tabIcons.find(
       (item) => ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
     );
