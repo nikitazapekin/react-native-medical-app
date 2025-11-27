@@ -32,10 +32,10 @@ const InformationAboutClinicComponent: React.FC<Props> = ({ clinic, childName, o
           <Text style={styles.value}>{clinic.name}</Text>
         </View>
         {clinic.registrationDate && (
-        <View style={styles.row}>
-          <Text style={styles.label}>Дата прописки в поликлинику:</Text>
+          <View style={styles.row}>
+            <Text style={styles.label}>Дата прописки в поликлинику:</Text>
             <Text style={styles.value}>{formatDate(clinic.registrationDate)}</Text>
-        </View>
+          </View>
         )}
         <View style={styles.row}>
           <Text style={styles.label}>Пациент:</Text>

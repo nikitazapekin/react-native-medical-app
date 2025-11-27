@@ -1,6 +1,9 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+
+import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 
 interface Drugs {
@@ -21,47 +24,58 @@ const UserCatalogDrugDetail = () => {
   const { drug } = route.params as RouteParams;
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.wrapper}>
       <Header title="Детали лекарства" isAuthenticated={true} showBackButton={true} />
 
-      <View style={styles.card}>
-        <View style={styles.infoSection}>
-          <Text style={styles.sectionTitle}>Информация о лекарстве</Text>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.card}>
+          <View style={styles.infoSection}>
+            <Text style={styles.sectionTitle}>Информация о лекарстве</Text>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Название:</Text>
-            <Text style={styles.value}>{drug.title}</Text>
-          </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Название:</Text>
+              <Text style={styles.value}>{drug.title}</Text>
+            </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Описание:</Text>
-            <Text style={styles.value}>{drug.description}</Text>
-          </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Описание:</Text>
+              <Text style={styles.value}>{drug.description}</Text>
+            </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Цена:</Text>
-            <Text style={styles.value}>{drug.price} ₽</Text>
-          </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Цена:</Text>
+              <Text style={styles.value}>{drug.price} ₽</Text>
+            </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Тип:</Text>
-            <Text style={styles.value}>{drug.type}</Text>
-          </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Тип:</Text>
+              <Text style={styles.value}>{drug.type}</Text>
+            </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Дозировка:</Text>
-            <Text style={styles.value}>{drug.dosage}</Text>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Дозировка:</Text>
+              <Text style={styles.value}>{drug.dosage}</Text>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+
+      <Footer />
+      <StatusBar style="auto" />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
     backgroundColor: "#f8f9fa",
+  },
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: 100,
   },
   header: {
     backgroundColor: "#007AFF",

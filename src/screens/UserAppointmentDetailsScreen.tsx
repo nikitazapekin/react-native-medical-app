@@ -62,7 +62,7 @@ export default function UserAppointmentDetailsScreen() {
               await MedicalAppointmentService.cancelAppointment(Number(appointmentId));
               Alert.alert("Успешно", "Запись отменена");
               await fetchConsultation();
-            } catch (error) {
+            } catch {
               Alert.alert("Ошибка", "Не удалось отменить запись");
             }
           },
@@ -110,8 +110,8 @@ export default function UserAppointmentDetailsScreen() {
     <View style={styles.container}>
       <Header title="Запись в поликлинику" isAuthenticated={true} showBackButton={true} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <AppointmentDetailsComponent 
-          consultation={consultation} 
+        <AppointmentDetailsComponent
+          consultation={consultation}
           onReBook={handleReBook}
           onCancel={handleCancel}
           onReschedule={handleReschedule}

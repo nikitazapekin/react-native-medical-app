@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     width: 377,
     alignSelf: "center",
     marginTop: 15,
+    marginBottom: 15,
     padding: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },

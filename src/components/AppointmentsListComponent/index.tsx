@@ -79,12 +79,16 @@ const AppointmentsListComponent = () => {
     switch (status) {
       case "SCHEDULED":
         return "Запланирована";
+
       case "COMPLETED":
         return "Завершена";
+
       case "CANCELLED":
         return "Отменена";
+
       case "PENDING":
         return "Ожидает подтверждения";
+
       default:
         return status;
     }
@@ -94,12 +98,16 @@ const AppointmentsListComponent = () => {
     switch (status) {
       case "SCHEDULED":
         return COLORS.SCHEDULED;
+
       case "COMPLETED":
         return COLORS.SUCCESS;
+
       case "CANCELLED":
         return COLORS.SECONDARY;
+
       case "PENDING":
         return COLORS.WARNING;
+
       default:
         return COLORS.GRAY_DARK;
     }
@@ -158,4 +166,3 @@ const AppointmentsListComponent = () => {
 };
 
 export default AppointmentsListComponent;
-

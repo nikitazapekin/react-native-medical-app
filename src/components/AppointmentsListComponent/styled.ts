@@ -54,4 +54,3 @@ export const styles = StyleSheet.create({
     color: "#4B5563",
   },
 });
-

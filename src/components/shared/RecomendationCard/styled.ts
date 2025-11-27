@@ -1,5 +1,5 @@
-import { COLORS } from "appStyles";
 import { StyleSheet } from "react-native";
+import { COLORS } from "appStyles";
 
 const CARD_RADIUS = 10;
 

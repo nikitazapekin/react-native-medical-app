@@ -16,6 +16,16 @@ const FooterDoctor = () => {
   useEffect(() => {
     const currentRouteName = route.name;
 
+    if (currentRouteName === ROUTES.STACK.DOCTOR_RECORD_DETAIL) {
+      const appointmentsTab = DoctortabIcons.find((item) => item.type === "doctorAppointments");
+
+      if (appointmentsTab) {
+        setActiveTab(appointmentsTab.type);
+
+        return;
+      }
+    }
+
     const activeTabItem = DoctortabIcons.find(
       (item) => ROUTES.STACK[item.stack as keyof typeof ROUTES.STACK] === currentRouteName
     );
@@ -30,7 +40,9 @@ const FooterDoctor = () => {
 
     if (validRoutes.includes(routeName)) {
       setActiveTab(type);
-      navigation.navigate(ROUTES.STACK[routeName as keyof typeof ROUTES.STACK]);
+      const routeKey = routeName as keyof typeof ROUTES.STACK;
+
+      navigation.navigate(ROUTES.STACK[routeKey] as any);
     }
   };
 
