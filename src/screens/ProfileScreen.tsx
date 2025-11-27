@@ -1,6 +1,5 @@
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 

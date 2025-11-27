@@ -3,7 +3,6 @@ import { View } from "react-native";
 import { ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 

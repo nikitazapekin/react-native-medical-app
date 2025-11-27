@@ -14,7 +14,7 @@ export default function UserSpisokSovetovScreen() {
       <View style={styles.content}>
         <SpisokSovetov />
       </View>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

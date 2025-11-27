@@ -17,7 +17,7 @@ export default function CatalogScreen() {
         <CatalogComponent/>
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

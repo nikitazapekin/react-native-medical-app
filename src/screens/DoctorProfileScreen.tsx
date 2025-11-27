@@ -11,7 +11,7 @@ const DoctorProfileScreen = () => {
     <View style={styles.container}>
       <Header title="Чаты" isAuthenticated={true} DoctorLogin={true}></Header>
 
-      <FooterDoctor></FooterDoctor>    
+      <FooterDoctor></FooterDoctor>
     </View>
   );
 };

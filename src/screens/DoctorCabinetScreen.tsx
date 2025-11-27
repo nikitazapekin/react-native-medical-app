@@ -19,7 +19,7 @@ const DoctorCabinetScreen = () => {
           <DoctorCabinetOptions />
         </ScrollView>
 
-        <FooterDoctor />      
+        <FooterDoctor />
       </View>
     </>
   );

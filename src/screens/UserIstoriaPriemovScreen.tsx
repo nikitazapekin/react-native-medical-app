@@ -24,7 +24,7 @@ export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProp
       <View style={styles.content}>
         <IstoriaPriemov  id={String(id)}/>
       </View>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

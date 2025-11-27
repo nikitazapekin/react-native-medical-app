@@ -14,7 +14,7 @@ export default function SpisokSovetov() {
 
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

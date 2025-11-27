@@ -18,7 +18,7 @@ const ChildrenHealthStatus = () => {
 
         </ScrollView>
 
-        <Footer />      
+        <Footer />
       </View>
     </>
   );

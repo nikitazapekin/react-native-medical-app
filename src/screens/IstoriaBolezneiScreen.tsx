@@ -25,7 +25,7 @@ export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) 
       <View style={styles.content}>
         <IstoriaBoleznei id={String(id)} />
       </View>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

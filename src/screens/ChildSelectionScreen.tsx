@@ -14,7 +14,7 @@ export default function ChildSelectionScreen() {
 
       <ChildSelector />
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

@@ -25,7 +25,7 @@ const DoctorScreen = () => {
         <TodayDoctorRecords />
       </View>
 
-      <FooterDoctor />    
+      <FooterDoctor />
     </View>
   );
 };

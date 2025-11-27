@@ -59,7 +59,7 @@ const UserCatalogDrugDetail = () => {
         </View>
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 };

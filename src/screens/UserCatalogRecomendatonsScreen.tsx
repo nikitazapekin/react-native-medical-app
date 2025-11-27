@@ -16,7 +16,7 @@ export default function UserCatalogRecomendatonsScreen() {
         <CatalogRecomendationComponent />
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

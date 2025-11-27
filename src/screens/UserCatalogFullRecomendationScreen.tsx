@@ -59,7 +59,7 @@ export default function UserCatalogFullRecomendationScreen() {
         )}
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

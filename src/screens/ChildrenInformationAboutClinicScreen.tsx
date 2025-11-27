@@ -85,7 +85,7 @@ export default function ChildrenInformationAboutClinicScreen() {
           <InformationAboutClinicComponent clinic={clinic} childName={child.name} onViewMap={handleViewMap} />
         )}
       </ScrollView>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

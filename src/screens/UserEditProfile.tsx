@@ -12,7 +12,7 @@ const UserEditCabinet = () => {
       <Header title="Редактировать профиль" isAuthenticated={true} DoctorLogin={true} showBackButton={true}></Header>
       <UserEditForm />
 
-      <Footer />    
+      <Footer />
     </View>
   );
 };

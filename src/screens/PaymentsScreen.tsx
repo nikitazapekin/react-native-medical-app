@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -29,4 +28,3 @@ export default function PaymentScreen({ route }: UserEditChildrenProps) {
     </View>
   );
 }
-

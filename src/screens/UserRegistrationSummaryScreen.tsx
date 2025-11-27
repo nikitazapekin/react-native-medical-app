@@ -36,7 +36,7 @@ export default function UserRegistrationSummaryScreen() {
           onCancel={handleCancel}
         />
       </ScrollView>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

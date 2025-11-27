@@ -24,7 +24,7 @@ export default function MedicalCardScreen({ route }: UserEditChildrenProps) {
         <MedicalCardComponent id={String(id)} />
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

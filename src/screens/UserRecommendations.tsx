@@ -14,7 +14,7 @@ export default function UserRecommendations() {
       <View style={styles.content}>
         <Recommendations />
       </View>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

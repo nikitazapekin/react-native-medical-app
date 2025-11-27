@@ -23,7 +23,7 @@ export default function UserAnalyzeScreen({ route }: UserEditChildrenProps) {
       <View style={styles.content}>
         <IstoriaAnalyze  id={String(id)}/>
       </View>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

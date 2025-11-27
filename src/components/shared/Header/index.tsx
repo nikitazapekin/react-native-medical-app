@@ -25,6 +25,7 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
     const loadUserAvatar = async () => {
       try {
         const userData = await UserService.getCurrentUser();
+
         setUserAvatar(userData.avatar || null);
       } catch (error) {
         console.log("Failed to load user avatar:", error);

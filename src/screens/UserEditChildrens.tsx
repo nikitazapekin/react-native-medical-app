@@ -20,7 +20,7 @@ const UserEditChildren = ({ route }: UserEditChildrenProps) => {
       <Header title="Редактировать" isAuthenticated={true} DoctorLogin={true} showBackButton={true}></Header>
       <UserEditChildrenComponent id={String(id)}/>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 };

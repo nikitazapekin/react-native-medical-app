@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 

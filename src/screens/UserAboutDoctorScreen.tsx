@@ -64,7 +64,7 @@ export default function UserAboutDoctorScreen() {
           <Text>Врач не найден</Text>
         )}
       </ScrollView>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

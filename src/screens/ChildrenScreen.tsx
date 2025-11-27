@@ -24,7 +24,7 @@ export default function ChildrenScreen({ route }: UserEditChildrenProps) {
         <ChildrenComponent id={id} />
       </ScrollView>
 
-      <Footer />    
+      <Footer />
     </View>
   );
 }

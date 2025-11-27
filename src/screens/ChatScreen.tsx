@@ -354,7 +354,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       <ChatKeypad
         onSendMessage={handleSendMessage}
         disabled={!isConnected || !chatId || isLoadingHistory}
-      />    
+      />
     </View>
   );
 }

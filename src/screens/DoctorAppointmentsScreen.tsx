@@ -18,7 +18,7 @@ const DoctorAppointmentsScreen = () => {
       }}>
         < TodayDoctorRecords/>
       </View>
-      <FooterDoctor></FooterDoctor>    
+      <FooterDoctor></FooterDoctor>
     </View>
   );
 };

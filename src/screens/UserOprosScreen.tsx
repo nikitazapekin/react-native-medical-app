@@ -25,7 +25,7 @@ export default function UserOprosScreen({ route }: UserEditChildrenProps) {
       <View style={styles.content}>
         <OprosSoveti id={String(id)} />
       </View>
-      <Footer />    
+      <Footer />
     </View>
   );
 }

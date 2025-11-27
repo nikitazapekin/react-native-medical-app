@@ -116,7 +116,7 @@ export default function UserAppointmentDetailsScreen() {
           onReschedule={handleReschedule}
         />
       </ScrollView>
-      <Footer />    
+      <Footer />
     </View>
   );
 }
