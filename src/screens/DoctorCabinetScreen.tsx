@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -20,9 +19,7 @@ const DoctorCabinetScreen = () => {
           <DoctorCabinetOptions />
         </ScrollView>
 
-        <FooterDoctor />
-
-        <StatusBar style="auto" />
+        <FooterDoctor />      
       </View>
     </>
   );

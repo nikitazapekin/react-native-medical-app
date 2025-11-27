@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -15,8 +14,7 @@ export default function UserSpisokSovetovScreen() {
       <View style={styles.content}>
         <SpisokSovetov />
       </View>
-      <Footer />
-      <StatusBar style="auto" />
+      <Footer />    
     </View>
   );
 }

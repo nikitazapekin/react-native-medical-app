@@ -62,7 +62,7 @@ const CabinetScreen = () => {
     <>
       <View style={styles.container}>
         <Header title="Профиль" isAuthenticated={true} showBackButton={true}/>
-        <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+        <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
           <CabinetInfo patient={patient} setPatient={setPatient }/>
 
           <ChildSelectorButton />
@@ -72,7 +72,6 @@ const CabinetScreen = () => {
 
         <Footer />
 
-        <StatusBar style="auto" />
       </View>
     </>
   );

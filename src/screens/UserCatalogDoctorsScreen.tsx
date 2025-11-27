@@ -27,13 +27,12 @@ export default function UserCatalogDoctorsScreen() {
     <View style={styles.container}>
       <Header title={title} isAuthenticated={true} showBackButton={true}/>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <UserCatalogDoctorsComponent serviceName={serviceName} serviceId={serviceId} showPopular={showPopular} />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

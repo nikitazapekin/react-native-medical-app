@@ -1,6 +1,5 @@
 import {   View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -21,8 +20,7 @@ const UserEditChildren = ({ route }: UserEditChildrenProps) => {
       <Header title="Редактировать" isAuthenticated={true} DoctorLogin={true} showBackButton={true}></Header>
       <UserEditChildrenComponent id={String(id)}/>
 
-      <Footer />
-      <StatusBar style="auto" />
+      <Footer />    
     </View>
   );
 };

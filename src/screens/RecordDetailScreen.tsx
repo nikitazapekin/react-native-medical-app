@@ -73,7 +73,6 @@ const RecordDetailScreen = () => {
       </ScrollView>
 
       <FooterDoctor />
-      <StatusBar style="auto" />
     </View>
   );
 };

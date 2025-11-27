@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Arrow from "@assets/dropdown/arrow.png";
 
 import { styles } from "./styled";
@@ -33,18 +33,17 @@ const DroppableList = ({ sortOptions, handler, placeholder }: DroppableListProps
 
       {isVisible && (
         <View style={styles.dropdownList}>
-          <FlatList
-            data={sortOptions}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
+          <ScrollView nestedScrollEnabled={true}>
+            {sortOptions.map((item) => (
               <TouchableOpacity
+                key={item.id}
                 style={[styles.listItem, selectedValue.id === item.id && styles.selectedItem]}
                 onPress={() => handleSelect(item)}
               >
                 <Text style={styles.itemText}>{item.label}</Text>
               </TouchableOpacity>
-            )}
-          />
+            ))}
+          </ScrollView>
         </View>
       )}
     </View>

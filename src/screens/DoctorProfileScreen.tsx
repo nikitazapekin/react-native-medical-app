@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -12,8 +11,7 @@ const DoctorProfileScreen = () => {
     <View style={styles.container}>
       <Header title="Чаты" isAuthenticated={true} DoctorLogin={true}></Header>
 
-      <FooterDoctor></FooterDoctor>
-      <StatusBar style="auto" />
+      <FooterDoctor></FooterDoctor>    
     </View>
   );
 };

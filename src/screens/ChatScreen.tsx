@@ -3,7 +3,6 @@ import { ActivityIndicator, Alert, ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { type RouteProp } from "@react-navigation/native";
 import { Client } from '@stomp/stompjs';
-import { StatusBar } from "expo-status-bar";
 import SockJS from 'sockjs-client';
 
 import Avatar from "../assets/mockPhotos/Avatar.png";
@@ -355,9 +354,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
       <ChatKeypad
         onSendMessage={handleSendMessage}
         disabled={!isConnected || !chatId || isLoadingHistory}
-      />
-
-      <StatusBar style="auto" />
+      />    
     </View>
   );
 }

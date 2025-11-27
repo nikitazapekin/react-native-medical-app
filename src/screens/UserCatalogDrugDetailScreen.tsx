@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
@@ -60,8 +59,7 @@ const UserCatalogDrugDetail = () => {
         </View>
       </ScrollView>
 
-      <Footer />
-      <StatusBar style="auto" />
+      <Footer />    
     </View>
   );
 };

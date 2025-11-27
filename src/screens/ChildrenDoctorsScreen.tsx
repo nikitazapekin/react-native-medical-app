@@ -22,13 +22,12 @@ export default function ChildrenDoctorsScreen() {
     <View style={styles.container}>
       <Header title="Консультировавшие врачи" isAuthenticated={true} showBackButton={true}/>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <UserCatalogDoctorsComponent childId={childId} />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

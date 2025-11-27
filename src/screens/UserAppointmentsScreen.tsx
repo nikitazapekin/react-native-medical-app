@@ -13,13 +13,12 @@ export default function UserAppointmentsScreen() {
     <View style={styles.container}>
       <Header title="Записи в поликлинику" isAuthenticated={true} showBackButton={true} />
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <AppointmentsListComponent />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

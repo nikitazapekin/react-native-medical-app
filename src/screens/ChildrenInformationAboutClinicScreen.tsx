@@ -3,7 +3,6 @@ import { ActivityIndicator, Alert, Linking, ScrollView, Text, View } from "react
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { COLORS } from "appStyles";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -86,8 +85,7 @@ export default function ChildrenInformationAboutClinicScreen() {
           <InformationAboutClinicComponent clinic={clinic} childName={child.name} onViewMap={handleViewMap} />
         )}
       </ScrollView>
-      <Footer />
-      <StatusBar style="auto" />
+      <Footer />    
     </View>
   );
 }

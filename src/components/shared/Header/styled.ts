@@ -33,6 +33,20 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     alignSelf: "center",
   },
+  avatarContainer: {
+    position: "absolute",
+    left: 37,
+    width: 57,
+    height: 57,
+    borderRadius: 28.5,
+    overflow: "hidden",
+    alignSelf: "center",
+    backgroundColor: "white",
+  },
+  avatar: {
+    width: "100%",
+    height: "100%",
+  },
   backButton: {
     position: "absolute",
     left: 18,

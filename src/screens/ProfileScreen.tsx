@@ -14,7 +14,7 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <Header title={TEXTS.HEADER.HOME} isAuthenticated={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <Text style={styles.sectionTitle}>Личная информация</Text>
 
         <SwiperWithDots />
@@ -22,7 +22,6 @@ export default function ProfileScreen() {
       </ScrollView>
 
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

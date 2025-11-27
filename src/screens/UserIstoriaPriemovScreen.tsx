@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -25,8 +24,7 @@ export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProp
       <View style={styles.content}>
         <IstoriaPriemov  id={String(id)}/>
       </View>
-      <Footer />
-      <StatusBar style="auto" />
+      <Footer />    
     </View>
   );
 }

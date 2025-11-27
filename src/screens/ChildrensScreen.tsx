@@ -13,13 +13,12 @@ export default function ChildrensScreen( ) {
     <View style={styles.container}>
 
       <Header title={"Список детей"} isAuthenticated={true} showBackButton={true}/>
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <ChildrensList />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

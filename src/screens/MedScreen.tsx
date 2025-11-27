@@ -13,13 +13,12 @@ export default function MedScreen() {
     <View style={styles.container}>
       <Header title="Лекарства" isAuthenticated={true} />
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <MedScreenDrugs />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }
