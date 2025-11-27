@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import { useRoute } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
