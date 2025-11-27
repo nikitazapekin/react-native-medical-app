@@ -17,7 +17,7 @@ type SummaryRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_R
 export default function UserRegistrationSummaryScreen() {
   const route = useRoute<SummaryRouteProp>();
   const navigation = useNavigation();
-  const { doctor, selectedDate, selectedTime, serviceName, serviceId } = route.params;
+  const { doctor, selectedDate, selectedTime, serviceName, serviceId, appointmentId } = route.params;
 
   const handleCancel = () => {
     navigation.goBack();
@@ -33,6 +33,7 @@ export default function UserRegistrationSummaryScreen() {
           selectedTime={selectedTime}
           serviceName={serviceName}
           serviceId={serviceId}
+          appointmentId={appointmentId}
           onCancel={handleCancel}
         />
       </ScrollView>

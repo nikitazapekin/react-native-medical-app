@@ -10,7 +10,7 @@ import Header from "@/components/shared/Header";
 export default function SpisokSovetov() {
   return (
     <View style={styles.container}>
-      <Header title="Список советов" isAuthenticated={true} />
+      <Header title="Список советов" isAuthenticated={true} showBackButton={true} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
 
       </ScrollView>

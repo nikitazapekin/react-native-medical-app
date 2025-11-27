@@ -22,6 +22,18 @@ export const styles = StyleSheet.create({
     elevation: 3,
     width: "100%",
   },
+  statusBadge: {
+    alignSelf: "flex-start",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
+    marginBottom: 8,
+  },
+  statusText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#FFFFFF",
+  },
   title: {
     fontSize: 18,
     fontWeight: "700",
@@ -42,5 +54,6 @@ export const styles = StyleSheet.create({
   buttonWrapper: {
     marginTop: 16,
     width: "100%",
+    gap: 12,
   },
 });

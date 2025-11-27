@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   },
 
   wrapper: {
-    maxWidth: 376,
+    width: "100%",
   },
   text: {
     fontWeight: 500,

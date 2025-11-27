@@ -20,7 +20,7 @@ export default function UserAnalyzeScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.container}>
-      <Header title={"История анализов"} isAuthenticated={true} />
+      <Header title={"История анализов"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
         <IstoriaAnalyze  id={String(id)}/>
       </View>

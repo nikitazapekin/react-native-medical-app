@@ -19,13 +19,14 @@ type Props = {
   selectedTime: string | null;
   serviceName?: string;
   serviceId?: number;
+  appointmentId?: number;
   onCancel: () => void;
 };
 
-const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, serviceId, onCancel }) => {
+const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, serviceId, appointmentId, onCancel }) => {
   const navigation = useNavigation<FormNavigationProp>();
   const [loading, setLoading] = useState(false);
-  const [appointmentId, setAppointmentId] = useState<number | null>(null);
+  const [createdAppointmentId, setCreatedAppointmentId] = useState<number | null>(null);
   const [defaultServiceId, setDefaultServiceId] = useState<number | null>(null);
   const [medicalCardId, setMedicalCardId] = useState<number | null>(null);
 
@@ -77,7 +78,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
   }, []);
 
   const handleConfirm = async () => {
-    if (!selectedDate || !selectedTime || !medicalCardId) {
+    if (!selectedDate || !selectedTime) {
       Alert.alert("Ошибка", "Пожалуйста, выберите дату и время");
 
       return;
@@ -86,36 +87,67 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
     try {
       setLoading(true);
 
-      const appointmentRequest = {
-        medicalCardId,
-        doctorId: doctor.id,
-        serviceId: serviceId ?? (serviceName ? undefined : (defaultServiceId ?? undefined)),
-        appointmentName: `Прием у ${fullName}`,
-        appointmentDate: new Date(selectedDate).toISOString(),
-        appointmentTime: selectedTime,
-        appointmentType: displayedService,
-        description: `Запись на ${displayedService}`
-      };
+      // Если есть appointmentId, то это перенос записи
+      if (appointmentId) {
+        console.log('Rescheduling appointment:', appointmentId, 'to', selectedDate, selectedTime);
 
-      console.log('Creating appointment with data:', appointmentRequest);
+        const result = await MedicalAppointmentService.rescheduleAppointment(
+          appointmentId,
+          new Date(selectedDate).toISOString(),
+          selectedTime
+        );
 
-      const result = await MedicalAppointmentService.createAppointment(appointmentRequest);
+        console.log('Rescheduled appointment:', result);
 
-      setAppointmentId(result.id);
+        Alert.alert(
+          "Успешно",
+          "Запись перенесена",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
+            }
+          ]
+        );
+      } else {
+        // Иначе создаем новую запись
+        if (!medicalCardId) {
+          Alert.alert("Ошибка", "Не удалось получить медицинскую карту");
 
-      Alert.alert(
-        "Успешно",
-        "Запись создана",
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
-          }
-        ]
-      );
+          return;
+        }
+
+        const appointmentRequest = {
+          medicalCardId,
+          doctorId: doctor.id,
+          serviceId: serviceId ?? (serviceName ? undefined : (defaultServiceId ?? undefined)),
+          appointmentName: `Прием у ${fullName}`,
+          appointmentDate: new Date(selectedDate).toISOString(),
+          appointmentTime: selectedTime,
+          appointmentType: displayedService,
+          description: `Запись на ${displayedService}`
+        };
+
+        console.log('Creating appointment with data:', appointmentRequest);
+
+        const result = await MedicalAppointmentService.createAppointment(appointmentRequest);
+
+        setCreatedAppointmentId(result.id);
+
+        Alert.alert(
+          "Успешно",
+          "Запись создана",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
+            }
+          ]
+        );
+      }
     } catch (error: any) {
-      console.error("Error creating appointment:", error);
-      const errorMessage = error?.response?.data?.message || error?.message || "Не удалось создать запись";
+      console.error("Error with appointment:", error);
+      const errorMessage = error?.response?.data?.message || error?.message || "Не удалось выполнить операцию";
 
       Alert.alert("Ошибка", errorMessage);
     } finally {
@@ -124,9 +156,9 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
   };
 
   const handleCancel = async () => {
-    if (appointmentId) {
+    if (createdAppointmentId) {
       try {
-        await MedicalAppointmentService.deleteAppointment(appointmentId);
+        await MedicalAppointmentService.deleteAppointment(createdAppointmentId);
         Alert.alert("Отменено", "Запись удалена");
       } catch (error) {
         console.error("Error deleting appointment:", error);
@@ -139,7 +171,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Детали записи</Text>
+        <Text style={styles.title}>{appointmentId ? 'Перенос записи' : 'Детали записи'}</Text>
         <View style={styles.row}><Text style={styles.label}>Врач:</Text><Text style={styles.value}>{fullName}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Специальность:</Text><Text style={styles.value}>{spec}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Услуга:</Text><Text style={styles.value}>{displayedService}</Text></View>
@@ -150,9 +182,12 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           <ActivityIndicator size="large" color="#1280b2" style={{ marginTop: 20 }} />
         ) : (
           <View style={styles.buttonWrapper}>
-            {!appointmentId ? (
-              <CustomButton text="Подтвердить запись" handler={handleConfirm} fullWidth backgroundColor="#1280b2" />
-            ) : null}
+            <CustomButton 
+              text={appointmentId ? "Подтвердить перенос" : "Подтвердить запись"} 
+              handler={handleConfirm} 
+              fullWidth 
+              backgroundColor="#1280b2" 
+            />
             <CustomButton text="Отменить" handler={handleCancel} fullWidth />
           </View>
         )}

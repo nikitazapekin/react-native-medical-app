@@ -22,7 +22,7 @@ export default function UserOprosScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.container}>
-      <Header title={"Опрос"} isAuthenticated={true} />
+      <Header title={"Опрос"} isAuthenticated={true} showBackButton={true} />
       <View style={styles.content}>
         <OprosSoveti id={String(id)} />
       </View>

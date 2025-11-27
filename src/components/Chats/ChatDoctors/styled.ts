@@ -23,10 +23,13 @@ export const styles = StyleSheet.create({
   input: {
     width: "100%",
     backgroundColor: COLORS.WHITE,
-    height: 50,
-    padding: 5,
-    borderRadius: 5,
+    borderRadius: 30,
+    marginTop: 20,
     marginBottom: 15,
-
+    paddingLeft: 20,
+    paddingRight: 15,
+    paddingVertical: 10,
+    fontSize: 16,
+    color: COLORS.BLACK,
   },
 });

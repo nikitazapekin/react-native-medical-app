@@ -4,17 +4,17 @@ import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
-import ConsultationHistoryComponent from "@/components/ConsultationHistoryComponent";
+import AppointmentsListComponent from "@/components/AppointmentsListComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 
-export default function UserConsultationHistory() {
+export default function UserAppointmentsScreen() {
   return (
     <View style={styles.container}>
-      <Header title="История консультаций" isAuthenticated={true} showBackButton={true} />
+      <Header title="Записи в поликлинику" isAuthenticated={true} showBackButton={true} />
 
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <ConsultationHistoryComponent />
+        <AppointmentsListComponent />
       </ScrollView>
 
       <Footer />

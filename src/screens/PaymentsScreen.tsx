@@ -19,7 +19,7 @@ export default function PaymentScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.container}>
-      <Header title="История платежей" isAuthenticated={true} />
+      <Header title="История платежей" isAuthenticated={true} showBackButton={true}/>
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <PaymentsHistory id={String(id)} />
       </ScrollView>

@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   childName: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
     color: COLORS.BLACK,
     marginBottom: 4,

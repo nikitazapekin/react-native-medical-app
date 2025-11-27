@@ -20,7 +20,7 @@ export default function MedicalCardScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.container}>
-      <Header title="Медицинская карта" isAuthenticated={true} DoctorLogin={false} />
+      <Header title="Медицинская карта" isAuthenticated={true} DoctorLogin={false} showBackButton={true}/>
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <MedicalCardComponent id={String(id)} />
       </ScrollView>

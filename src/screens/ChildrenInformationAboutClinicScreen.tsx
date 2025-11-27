@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Linking, ScrollView, Text, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import { COLORS } from "appStyles";
+import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -12,8 +12,8 @@ import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import ChildrenService from "@/http/children";
 import ClinicService from "@/http/clinic";
-import type { ClinicResponse } from "@/http/types/clinic";
 import type { ChildFull } from "@/http/types/childFull";
+import type { ClinicResponse } from "@/http/types/clinic";
 import type { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 

@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     alignSelf: "flex-start",
     paddingTop: 16,
-    paddingLeft: 36,
+    paddingLeft: 16,
   },
   subtitle: {
     fontSize: 16,

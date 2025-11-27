@@ -9,7 +9,7 @@ const DoctorCabinetInfo = () => {
     <View style={styles.wrapper}>
       <View style={styles.preview}>
         <View style={styles.main}>
-          <Image style={styles.image} source={MockImage} alt="Image" resizeMode="contain" />
+          <Image style={styles.image} source={MockImage} alt="Image" resizeMode="cover" />
 
           <View style={styles.info}>
             <Text style={styles.title}>Андрей Быков</Text>
@@ -22,7 +22,6 @@ const DoctorCabinetInfo = () => {
 
             <Text style={styles.location}>Заведующий отделением</Text>
 
-            <Text style={styles.tel}>+375297542229</Text>
           </View>
 
           <View style={styles.dots}>
