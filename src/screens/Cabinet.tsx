@@ -3,7 +3,6 @@ import { View } from "react-native";
 import { ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -62,7 +61,7 @@ const CabinetScreen = () => {
     <>
       <View style={styles.container}>
         <Header title="Профиль" isAuthenticated={true} showBackButton={true}/>
-        <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+        <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
           <CabinetInfo patient={patient} setPatient={setPatient }/>
 
           <ChildSelectorButton />
@@ -72,7 +71,6 @@ const CabinetScreen = () => {
 
         <Footer />
 
-        <StatusBar style="auto" />
       </View>
     </>
   );

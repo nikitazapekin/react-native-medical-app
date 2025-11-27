@@ -1,7 +1,6 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -20,25 +19,12 @@ export default function PaymentScreen({ route }: UserEditChildrenProps) {
   return (
     <View style={styles.container}>
       <Header title="История платежей" isAuthenticated={true} showBackButton={true}/>
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <View style={[styles.content, styles.contentContainer]}>
         <PaymentsHistory id={String(id)} />
-      </ScrollView>
+      </View>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }
-
-/*
-
-interface UserEditChildrenProps {
-  route: RouteProp<RootStackParamList, 'UserPriemiHistory'>;
-
-}
-export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProps) {
-  const { id } = route.params || {};
-
-  console.log(id);
-  */

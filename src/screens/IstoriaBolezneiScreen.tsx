@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from "react-native";
 import type { RouteProp } from '@react-navigation/native';
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -27,7 +26,6 @@ export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) 
         <IstoriaBoleznei id={String(id)} />
       </View>
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { COLORS } from "../../appStyles";
 
@@ -13,9 +12,7 @@ export default function SettingsScreen() {
         <Text style={styles.headerText}>{TEXTS.HEADER.SETTINGS}</Text>
       </View>
       <View style={styles.content}>
-        <Text>{TEXTS.CONTENT.SETTINGS}</Text>
-        <StatusBar style="auto" />
-      </View>
+        <Text>{TEXTS.CONTENT.SETTINGS}</Text>      </View>
     </View>
   );
 }

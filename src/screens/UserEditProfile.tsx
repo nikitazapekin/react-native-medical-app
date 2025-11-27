@@ -1,5 +1,4 @@
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -14,7 +13,6 @@ const UserEditCabinet = () => {
       <UserEditForm />
 
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 };

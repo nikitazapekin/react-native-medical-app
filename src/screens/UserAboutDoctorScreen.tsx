@@ -3,7 +3,6 @@ import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import type { RouteProp} from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { COLORS } from "appStyles";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -66,7 +65,6 @@ export default function UserAboutDoctorScreen() {
         )}
       </ScrollView>
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -12,13 +11,12 @@ export default function UserFavouritesDrugsScreen() {
   return (
     <View style={styles.container}>
       <Header title="Избранные лекарства" isAuthenticated={true} showBackButton={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <UserFavouritesDrugs />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

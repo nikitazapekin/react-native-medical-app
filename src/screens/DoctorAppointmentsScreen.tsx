@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -20,7 +19,6 @@ const DoctorAppointmentsScreen = () => {
         < TodayDoctorRecords/>
       </View>
       <FooterDoctor></FooterDoctor>
-      <StatusBar style="auto" />
     </View>
   );
 };

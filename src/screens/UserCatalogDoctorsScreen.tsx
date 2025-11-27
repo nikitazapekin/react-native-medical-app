@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -27,13 +26,12 @@ export default function UserCatalogDoctorsScreen() {
     <View style={styles.container}>
       <Header title={title} isAuthenticated={true} showBackButton={true}/>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <UserCatalogDoctorsComponent serviceName={serviceName} serviceId={serviceId} showPopular={showPopular} />
       </ScrollView>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

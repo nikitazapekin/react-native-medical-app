@@ -1,5 +1,4 @@
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -14,7 +13,6 @@ const DoctorEditCabinet = () => {
       <DoctorEditForm />
 
       <FooterDoctor></FooterDoctor>
-      <StatusBar style="auto" />
     </View>
   );
 };
