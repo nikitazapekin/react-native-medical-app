@@ -18,7 +18,7 @@ const UserEditChildren = ({ route }: UserEditChildrenProps) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Редактировать" isAuthenticated={true} DoctorLogin={true}></Header>
+      <Header title="Редактировать" isAuthenticated={true} DoctorLogin={true} showBackButton={true}></Header>
       <UserEditChildrenComponent id={String(id)}/>
 
       <Footer />

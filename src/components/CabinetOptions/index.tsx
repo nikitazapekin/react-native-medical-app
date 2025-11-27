@@ -13,33 +13,27 @@ const ListItem = ({ item , id }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история консультаций")) {
-      navigation.navigate(ROUTES.STACK.USER_CONSULTATION_HISTORY);
+    const itemText = item.text.toLocaleLowerCase();
+
+    if (itemText.includes("записи в поликлинику") || itemText.includes("мои записи")) {
+      navigation.navigate(ROUTES.STACK.USER_APPOINTMENTS);
     }
 
-    if (item.text.toLocaleLowerCase().includes("история платежей")) {
+    if (itemText.includes("история платежей")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS, {id: Number(id)});
     }
 
-    if(item.text.toLocaleLowerCase().includes("дети")) {
-      /*
- navigation.navigate(ROUTES.STACK.USER_DRUG_DETAIL_SCREEN , {
-      drug: item
-    });
-    */
+    if(itemText.includes("дети")) {
       navigation.navigate(ROUTES.STACK.CHILDRENS);
     }
 
-    if(item.text.toLocaleLowerCase().includes("советов")) {
-
+    if(itemText.includes("советов")) {
       navigation.navigate(ROUTES.STACK.USER_SPISOK_SOVETOV);
     }
 
-    if(item.text.toLocaleLowerCase().includes("избранное")) {
-
+    if(itemText.includes("избранное")) {
       navigation.navigate(ROUTES.STACK.USER_FAVOURITE_DRUGS, { id: Number(id) });
     }
-
   };
 
   return (

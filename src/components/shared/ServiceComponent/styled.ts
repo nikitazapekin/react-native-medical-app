@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
   },
   cardSubtitle: {
-    marginTop: 4,
+    marginTop: 8,
     fontSize: 14,
     fontWeight: "400",
   },

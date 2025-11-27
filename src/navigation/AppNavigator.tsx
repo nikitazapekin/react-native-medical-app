@@ -38,11 +38,11 @@ import UserCatalogDrugDetail from "@/screens/UserCatalogDrugDetailScreen";
 import UserCatalogFullRecomendationScreen from "@/screens/UserCatalogFullRecomendationScreen";
 import UserCatalogRecomendatonsScreen from "@/screens/UserCatalogRecomendatonsScreen";
 import UserCatalogServicesScreen from "@/screens/UserCatalogServicesScreen";
-import UserConsultationHistory from "@/screens/UserConsultationHistory";
+import UserAppointmentsScreen from "@/screens/UserAppointmentsScreen";
 import UserEditChildren from "@/screens/UserEditChildrens";
 import UserEditCabinet from "@/screens/UserEditProfile";
 import UserFavouritesDrugsScreen from "@/screens/UserFavouritesDrugs";
-import UserFullConsultationScreen from "@/screens/UserFullConsultationScreen";
+import UserAppointmentDetailsScreen from "@/screens/UserAppointmentDetailsScreen";
 import UserIstoriaPriemovScreen from "@/screens/UserIstoriaPriemovScreen";
 import UserOprosScreen from "@/screens/UserOprosScreen";
 import UserRecommendations from "@/screens/UserRecommendations";
@@ -97,8 +97,8 @@ export default function AppNavigator() {
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_DOCTORS} component={UserCatalogDoctorsScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_SERVICES} component={UserCatalogServicesScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_RECOMMENDATIONS} component={UserCatalogRecomendatonsScreen} />
-        <Stack.Screen name={ROUTES.STACK.USER_CONSULTATION_HISTORY} component={UserConsultationHistory} />
-        <Stack.Screen name={ROUTES.STACK.USER_FULL_CONSULTATION} component={UserFullConsultationScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_APPOINTMENTS} component={UserAppointmentsScreen} />
+        <Stack.Screen name={ROUTES.STACK.USER_APPOINTMENT_DETAILS} component={UserAppointmentDetailsScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION} component={UserCatalogFullRecomendationScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_ABOUT_DOCTOR} component={UserAboutDoctorScreen} />
         <Stack.Screen name={ROUTES.STACK.USER_REGISTRATION_AT_CLINIC} component={UserRegistrationAtClinic} />

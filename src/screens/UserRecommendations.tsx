@@ -11,7 +11,7 @@ import Header from "@/components/shared/Header";
 export default function UserRecommendations() {
   return (
     <View style={styles.container}>
-      <Header title={"Рекомендации"} isAuthenticated={true} />
+      <Header title={"Рекомендации"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
         <Recommendations />
       </View>

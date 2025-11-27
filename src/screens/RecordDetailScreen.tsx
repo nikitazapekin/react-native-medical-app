@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet,Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import Header from "@/components/shared/Header";
 
 interface Record {
   id: string;
@@ -18,20 +19,23 @@ const RecordDetailScreen = () => {
   const { record } = route.params as RouteParams;
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Детали записи</Text>
-        <Text style={styles.subtitle}>ID: {record.id}</Text>
-      </View>
+    <View style={styles.container}>
+      <Header title="Детали записи" isAuthenticated={true} showBackButton={true} />
+      
+      <ScrollView style={styles.content}>
+        <View style={styles.card}>
+          <View style={styles.infoSection}>
+            <Text style={styles.sectionTitle}>Информация о приеме</Text>
 
-      <View style={styles.card}>
-        <View style={styles.infoSection}>
-          <Text style={styles.sectionTitle}>Информация о приеме</Text>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>ID записи:</Text>
+              <Text style={styles.value}>{record.id}</Text>
+            </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Пациент:</Text>
-            <Text style={styles.value}>{record.patient}</Text>
-          </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Пациент:</Text>
+              <Text style={styles.value}>{record.patient}</Text>
+            </View>
 
           <View style={styles.infoRow}>
             <Text style={styles.label}>Время приема:</Text>
@@ -64,6 +68,7 @@ const RecordDetailScreen = () => {
         </View>
       </View>
     </ScrollView>
+    </View>
   );
 };
 
@@ -72,21 +77,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f8f9fa",
   },
-  header: {
-    backgroundColor: "#007AFF",
-    padding: 20,
-    paddingTop: 60,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "white",
-    opacity: 0.8,
+  content: {
+    flex: 1,
+    marginTop: 70,
   },
   card: {
     backgroundColor: "white",

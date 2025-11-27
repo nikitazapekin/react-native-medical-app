@@ -11,7 +11,7 @@ import UserFavouritesDrugs from "@/components/UserFavouriteDrugs";
 export default function UserFavouritesDrugsScreen() {
   return (
     <View style={styles.container}>
-      <Header title="Избранные лекарства" isAuthenticated={true} />
+      <Header title="Избранные лекарства" isAuthenticated={true} showBackButton={true} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <UserFavouritesDrugs />
       </ScrollView>

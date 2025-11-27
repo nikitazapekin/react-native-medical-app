@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import Header from "@/components/shared/Header";
 
 interface Drugs {
   id: number;
@@ -21,10 +22,7 @@ const UserCatalogDrugDetail = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Детали лекарства</Text>
-        <Text style={styles.subtitle}>ID: {drug.id}</Text>
-      </View>
+      <Header title="Детали лекарства" isAuthenticated={true} showBackButton={true} />
 
       <View style={styles.card}>
         <View style={styles.infoSection}>
@@ -70,20 +68,10 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 60,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "white",
-    opacity: 0.8,
-  },
   card: {
     backgroundColor: "white",
-    margin: 16,
+    marginHorizontal: 16,
+    marginTop: 95,
     borderRadius: 12,
     padding: 16,
     shadowColor: "#000",
@@ -104,7 +92,7 @@ const styles = StyleSheet.create({
   infoRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
@@ -112,11 +100,16 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     color: "#666",
+    marginRight: 12,
+    flexShrink: 0,
   },
   value: {
     fontSize: 16,
     fontWeight: "500",
     color: "#333",
+    flex: 1,
+    textAlign: "right",
+    flexWrap: "wrap",
   },
 });
 

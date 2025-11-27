@@ -18,7 +18,7 @@ type UserRegistrationRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STA
 export default function UserRegistrationAtClinic() {
   const route = useRoute<UserRegistrationRouteProp>();
   const navigation = useNavigation();
-  const { doctor, serviceName, serviceId } = route.params;
+  const { doctor, serviceName, serviceId, appointmentId } = route.params;
 
   const handleSelectionChange = ({ date, time }: { date: Date | null; time: string | null }) => {
     navigation.setParams?.({ doctor, selectedDate: date?.toISOString?.() ?? null, selectedTime: time ?? null } as any);
@@ -34,6 +34,7 @@ export default function UserRegistrationAtClinic() {
       selectedTime: selectedTimeVal,
       serviceName,
       serviceId,
+      appointmentId,
     });
   };
 

@@ -93,15 +93,16 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
             {Array.isArray(qualification) ? qualification.join(". ") : qualification}
           </Text>
         )}
+
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            text="Записаться на консультацию"
+            handler={handleAppointment}
+            backgroundColor="#1280b2"
+          />
+        </View>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          text="Записаться на консультацию"
-          handler={handleAppointment}
-          backgroundColor="#1280b2"
-        />
-      </View>
     </View>
   );
 };

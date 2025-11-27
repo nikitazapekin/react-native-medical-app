@@ -13,7 +13,7 @@ const ChildrenHealthStatus = () => {
   return (
     <>
       <View style={styles.container}>
-        <Header title="Состояние ребенка" isAuthenticated={true} DoctorLogin={false} />
+        <Header title="Состояние ребенка" isAuthenticated={true} DoctorLogin={false} showBackButton={true}/>
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <ChildrenHealthStatusComponent />
 

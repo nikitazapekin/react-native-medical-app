@@ -1,21 +1,25 @@
+import { COLORS } from "appStyles";
 import { StyleSheet } from "react-native";
+
+const CARD_RADIUS = 10;
 
 export const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
+    height: 92,
     padding: 16,
-    height: 93,
+    borderRadius: CARD_RADIUS,
+    backgroundColor: COLORS.WHITE,
     shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
     elevation: 3,
   },
   headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    marginTop: 5,
   },
   category: {
     color: "#000",

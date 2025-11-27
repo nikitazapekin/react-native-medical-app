@@ -43,8 +43,8 @@ export type RootStackParamList = {
   [ROUTES.STACK.USER_CATALOG_FULL_RECOMENDATION]: {
     recommendationId: number;
   };
-  [ROUTES.STACK.USER_CONSULTATION_HISTORY]: undefined;
-  [ROUTES.STACK.USER_FULL_CONSULTATION]: { consultationId: number };
+  [ROUTES.STACK.USER_APPOINTMENTS]: undefined;
+  [ROUTES.STACK.USER_APPOINTMENT_DETAILS]: { appointmentId: number };
   [ROUTES.STACK.USER_EDIT_CHILDRESN]: { id: number };
   [ROUTES.STACK.USER_ABOUT_DOCTOR]: {
     doctor: DoctorResponse | Doctor;
@@ -55,6 +55,7 @@ export type RootStackParamList = {
     doctor: DoctorResponse | Doctor;
     serviceName?: string;
     serviceId?: number;
+    appointmentId?: number;
   };
   [ROUTES.STACK.USER_REGISTRATION_SUMMARY]: {
     doctor: Doctor;
@@ -62,6 +63,7 @@ export type RootStackParamList = {
     selectedTime: string | null;
     serviceName?: string;
     serviceId?: number;
+    appointmentId?: number;
   };
   [ROUTES.STACK.CHILD_SELECTION]: undefined;
   [ROUTES.STACK.USER_POPULAR_DOCTORS]: { showPopular: boolean; serviceName?: string; serviceId?: number };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { COLORS } from "appStyles";
 
 import { styles } from "./styled";
 
@@ -9,9 +10,44 @@ import type { MedicalAppointmentResponse } from "@/http/types/doctor";
 type Props = {
   consultation: MedicalAppointmentResponse;
   onReBook: () => void;
+  onCancel?: () => void;
+  onReschedule?: () => void;
 };
 
-const FullConsultationComponent: React.FC<Props> = ({ consultation, onReBook }) => {
+const AppointmentDetailsComponent: React.FC<Props> = ({ consultation, onReBook, onCancel, onReschedule }) => {
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case "SCHEDULED":
+        return "Запланирована";
+      case "COMPLETED":
+        return "Завершена";
+      case "CANCELLED":
+        return "Отменена";
+      case "PENDING":
+        return "Ожидает подтверждения";
+      default:
+        return status;
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "SCHEDULED":
+        return COLORS.SCHEDULED;
+      case "COMPLETED":
+        return COLORS.SUCCESS;
+      case "CANCELLED":
+        return COLORS.SECONDARY;
+      case "PENDING":
+        return COLORS.WARNING;
+      default:
+        return COLORS.GRAY_DARK;
+    }
+  };
+
+  const isActiveAppointment = consultation.status === "SCHEDULED" || consultation.status === "PENDING";
+  const isCompletedOrCancelled = consultation.status === "COMPLETED" || consultation.status === "CANCELLED";
+
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     const day = String(date.getDate()).padStart(2, '0');
@@ -32,7 +68,11 @@ const FullConsultationComponent: React.FC<Props> = ({ consultation, onReBook }) 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Консультация: {consultation.category || "Общая"}</Text>
+        <View style={[styles.statusBadge, { backgroundColor: getStatusColor(consultation.status || "SCHEDULED") }]}>
+          <Text style={styles.statusText}>{getStatusText(consultation.status || "SCHEDULED")}</Text>
+        </View>
+        
+        <Text style={styles.title}>Запись: {consultation.service?.title || consultation.category || "Общая"}</Text>
         <View style={styles.row}>
           <Text style={styles.label}>Врач:</Text>
           <Text style={styles.value}>{doctorName}</Text>
@@ -70,11 +110,38 @@ const FullConsultationComponent: React.FC<Props> = ({ consultation, onReBook }) 
           </View>
         )}
         <View style={styles.buttonWrapper}>
-          <CustomButton text="Записаться повторно" handler={onReBook} fullWidth backgroundColor="#1280B2" />
+          {isActiveAppointment && (
+            <>
+              {onReschedule && (
+                <CustomButton 
+                  text="Перенести запись" 
+                  handler={onReschedule} 
+                  fullWidth 
+                  backgroundColor={COLORS.PRIMARY}
+                />
+              )}
+              {onCancel && (
+                <CustomButton 
+                  text="Отменить" 
+                  handler={onCancel} 
+                  fullWidth
+                />
+              )}
+            </>
+          )}
+          
+          {isCompletedOrCancelled && (
+            <CustomButton 
+              text="Записаться повторно" 
+              handler={onReBook} 
+              fullWidth 
+              backgroundColor={COLORS.PRIMARY}
+            />
+          )}
         </View>
       </View>
     </View>
   );
 };
 
-export default FullConsultationComponent;
+export default AppointmentDetailsComponent;

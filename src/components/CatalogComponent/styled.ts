@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   sectionTitle: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "700",
     color: COLORS.BLACK,
   },

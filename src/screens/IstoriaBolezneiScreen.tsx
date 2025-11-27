@@ -22,7 +22,7 @@ export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) 
 
   return (
     <View style={styles.container}>
-      <Header title={"История болезней"} isAuthenticated={true} />
+      <Header title={"История болезней"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
         <IstoriaBoleznei id={String(id)} />
       </View>

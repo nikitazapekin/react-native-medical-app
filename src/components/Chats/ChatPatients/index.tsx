@@ -167,6 +167,7 @@ const Chats = () => {
       <TextInput
         style={styles.input}
         placeholder="Введите фамилию доктора для поиска"
+        placeholderTextColor="#B0B0B0"
         value={lastName}
         onChangeText={handleInputLastName}
       />

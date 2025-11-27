@@ -10,7 +10,7 @@ import UserEditForm from "@/components/UserEditForm";
 const UserEditCabinet = () => {
   return (
     <View style={styles.container}>
-      <Header title="Редактировать профиль" isAuthenticated={true} DoctorLogin={true}></Header>
+      <Header title="Редактировать профиль" isAuthenticated={true} DoctorLogin={true} showBackButton={true}></Header>
       <UserEditForm />
 
       <Footer />

@@ -21,7 +21,7 @@ export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProp
 
   return (
     <View style={styles.container}>
-      <Header title={"История приемов"} isAuthenticated={true} />
+      <Header title={"История приемов"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
         <IstoriaPriemov  id={String(id)}/>
       </View>

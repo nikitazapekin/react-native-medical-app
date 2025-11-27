@@ -61,7 +61,7 @@ const CabinetScreen = () => {
   return (
     <>
       <View style={styles.container}>
-        <Header title="Профиль" isAuthenticated={true} />
+        <Header title="Профиль" isAuthenticated={true} showBackButton={true}/>
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <CabinetInfo patient={patient} setPatient={setPatient }/>
 

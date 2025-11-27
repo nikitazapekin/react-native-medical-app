@@ -21,47 +21,49 @@ const DoctorCabinetOptions = () => {
 
         <View style={styles.section}>
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Опыт работы:</Text>
-            <Text style={styles.value}>5 лет</Text>
+            <Text style={styles.value}>
+              <Text style={styles.label}>Опыт работы: </Text>
+              5 лет
+            </Text>
           </View>
 
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Образование:</Text>
-            <Text style={styles.value}>БГМУ (2013-2019)</Text>
+            <Text style={styles.value}>
+              <Text style={styles.label}>Образование: </Text>
+              БГМУ (2013-2019)
+            </Text>
           </View>
 
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Специализация:</Text>
-            <Text style={styles.value}>Невропатология</Text>
+            <Text style={styles.value}>
+              <Text style={styles.label}>Специализация: </Text>
+              Невропатология
+            </Text>
           </View>
 
           <View style={styles.infoRow}>
-            <View style={styles.infoColumn}>
-              <Text style={styles.label}>Достижения:</Text>
-              <Text style={styles.valueMultiline}>
-                Автор 10 научных публикаций в области малоинвазивной хирургии. Защитил диссертацию в
-                области хирургии.
-              </Text>
-            </View>
+            <Text style={styles.value}>
+              <Text style={styles.label}>Достижения: </Text>
+              Автор 10 научных публикаций в области малоинвазивной хирургии. Защитил диссертацию в области хирургии.
+            </Text>
           </View>
 
           <View style={styles.infoRow}>
-            <View style={styles.infoColumn}>
-              <Text style={styles.label}>Повышение квалификации:</Text>
-              <Text style={styles.valueMultiline}>
-                Повышение квалификации по лапароскопической хирургии, 2020
-              </Text>
-            </View>
+            <Text style={styles.value}>
+              <Text style={styles.label}>Повышение квалификации: </Text>
+              Повышение квалификации по лапароскопической хирургии, 2020
+            </Text>
           </View>
         </View>
-      </View>
 
-      <View style={styles.gap} />
-      <CustomButton
-        handler={handleDoctorScreen}
-        text="Редактировать профиль"
-        backgroundColor="#1280b2"
-      />
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            handler={handleDoctorScreen}
+            text="Редактировать профиль"
+            backgroundColor="#1280b2"
+          />
+        </View>
+      </View>
     </View>
   );
 };

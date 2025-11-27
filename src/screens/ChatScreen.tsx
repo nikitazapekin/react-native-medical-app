@@ -316,7 +316,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.container}>
-      <Header title="Чат" isAuthenticated={true} />
+      <Header title="Чат" isAuthenticated={true} showBackButton={true}/>
 
       <View style={{ padding: 10, backgroundColor: '#f5f5f5' }}>
         <Text style={{ color: isConnected ? 'green' : 'red', fontSize: 12 }}>

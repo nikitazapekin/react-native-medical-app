@@ -120,7 +120,8 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
       <SearchInput
         value={searchQuery}
         onChangeText={setSearchQuery}
-        placeholderTextColor="#000"
+        placeholder="Поиск по врачу, специализации..."
+        placeholderTextColor="#B0B0B0"
       />
 
       <Text style={styles.title}>
