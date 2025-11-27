@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet,Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
+
 import Header from "@/components/shared/Header";
 
 interface Record {
@@ -21,7 +22,7 @@ const RecordDetailScreen = () => {
   return (
     <View style={styles.container}>
       <Header title="Детали записи" isAuthenticated={true} showBackButton={true} />
-      
+
       <ScrollView style={styles.content}>
         <View style={styles.card}>
           <View style={styles.infoSection}>
@@ -37,37 +38,37 @@ const RecordDetailScreen = () => {
               <Text style={styles.value}>{record.patient}</Text>
             </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Время приема:</Text>
-            <Text style={styles.value}>{record.time}</Text>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Время приема:</Text>
+              <Text style={styles.value}>{record.time}</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Тип услуги:</Text>
+              <Text style={styles.value}>{record.service}</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Статус:</Text>
+              <Text style={[styles.value, styles.statusConfirmed]}>Подтвержден</Text>
+            </View>
           </View>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Тип услуги:</Text>
-            <Text style={styles.value}>{record.service}</Text>
-          </View>
+          <View style={styles.infoSection}>
+            <Text style={styles.sectionTitle}>Дополнительная информация</Text>
 
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Статус:</Text>
-            <Text style={[styles.value, styles.statusConfirmed]}>Подтвержден</Text>
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Продолжительность:</Text>
+              <Text style={styles.value}>30 минут</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+              <Text style={styles.label}>Кабинет:</Text>
+              <Text style={styles.value}>№ 214</Text>
+            </View>
           </View>
         </View>
-
-        <View style={styles.infoSection}>
-          <Text style={styles.sectionTitle}>Дополнительная информация</Text>
-
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Продолжительность:</Text>
-            <Text style={styles.value}>30 минут</Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Кабинет:</Text>
-            <Text style={styles.value}>№ 214</Text>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
     </View>
   );
 };

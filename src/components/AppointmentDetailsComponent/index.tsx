@@ -19,12 +19,16 @@ const AppointmentDetailsComponent: React.FC<Props> = ({ consultation, onReBook, 
     switch (status) {
       case "SCHEDULED":
         return "Запланирована";
+
       case "COMPLETED":
         return "Завершена";
+
       case "CANCELLED":
         return "Отменена";
+
       case "PENDING":
         return "Ожидает подтверждения";
+
       default:
         return status;
     }
@@ -34,12 +38,16 @@ const AppointmentDetailsComponent: React.FC<Props> = ({ consultation, onReBook, 
     switch (status) {
       case "SCHEDULED":
         return COLORS.SCHEDULED;
+
       case "COMPLETED":
         return COLORS.SUCCESS;
+
       case "CANCELLED":
         return COLORS.SECONDARY;
+
       case "PENDING":
         return COLORS.WARNING;
+
       default:
         return COLORS.GRAY_DARK;
     }
@@ -71,7 +79,7 @@ const AppointmentDetailsComponent: React.FC<Props> = ({ consultation, onReBook, 
         <View style={[styles.statusBadge, { backgroundColor: getStatusColor(consultation.status || "SCHEDULED") }]}>
           <Text style={styles.statusText}>{getStatusText(consultation.status || "SCHEDULED")}</Text>
         </View>
-        
+
         <Text style={styles.title}>Запись: {consultation.service?.title || consultation.category || "Общая"}</Text>
         <View style={styles.row}>
           <Text style={styles.label}>Врач:</Text>
@@ -113,28 +121,28 @@ const AppointmentDetailsComponent: React.FC<Props> = ({ consultation, onReBook, 
           {isActiveAppointment && (
             <>
               {onReschedule && (
-                <CustomButton 
-                  text="Перенести запись" 
-                  handler={onReschedule} 
-                  fullWidth 
+                <CustomButton
+                  text="Перенести запись"
+                  handler={onReschedule}
+                  fullWidth
                   backgroundColor={COLORS.PRIMARY}
                 />
               )}
               {onCancel && (
-                <CustomButton 
-                  text="Отменить" 
-                  handler={onCancel} 
+                <CustomButton
+                  text="Отменить"
+                  handler={onCancel}
                   fullWidth
                 />
               )}
             </>
           )}
-          
+
           {isCompletedOrCancelled && (
-            <CustomButton 
-              text="Записаться повторно" 
-              handler={onReBook} 
-              fullWidth 
+            <CustomButton
+              text="Записаться повторно"
+              handler={onReBook}
+              fullWidth
               backgroundColor={COLORS.PRIMARY}
             />
           )}

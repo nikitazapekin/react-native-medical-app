@@ -117,7 +117,9 @@ class MedicalAppointmentService {
       };
 
       if (filters?.year) params.year = filters.year;
+
       if (filters?.status) params.status = filters.status;
+
       if (filters?.search) params.search = filters.search;
 
       const response = await $api.get<MedicalAppointmentResponse[]>(

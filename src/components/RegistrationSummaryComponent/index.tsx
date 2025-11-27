@@ -182,11 +182,11 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           <ActivityIndicator size="large" color="#1280b2" style={{ marginTop: 20 }} />
         ) : (
           <View style={styles.buttonWrapper}>
-            <CustomButton 
-              text={appointmentId ? "Подтвердить перенос" : "Подтвердить запись"} 
-              handler={handleConfirm} 
-              fullWidth 
-              backgroundColor="#1280b2" 
+            <CustomButton
+              text={appointmentId ? "Подтвердить перенос" : "Подтвердить запись"}
+              handler={handleConfirm}
+              fullWidth
+              backgroundColor="#1280b2"
             />
             <CustomButton text="Отменить" handler={handleCancel} fullWidth />
           </View>
