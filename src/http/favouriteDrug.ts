@@ -48,17 +48,6 @@ class FavouriteDrugService {
     }
   }
 
-  static async updateFavouriteDrug(id: number, request: FavouriteDrugRequest): Promise<FavouriteDrug> {
-    try {
-      const response = await $api.put<FavouriteDrug>(`/favourite-drugs/${id}`, request);
-
-      return response.data;
-    } catch (error) {
-      console.error('Error updating favourite drug:', error);
-      throw new Error('Failed to update favourite drug');
-    }
-  }
-
   static async deleteFavouriteDrug(id: number): Promise<void> {
     try {
       await $api.delete(`/favourite-drugs/${id}`);
@@ -70,4 +59,6 @@ class FavouriteDrugService {
 }
 
 export default FavouriteDrugService;
+
+
 

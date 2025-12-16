@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Alert, FlatList, Text, View } from "react-native";
+import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import DroppableList from "../shared/DroppableList";
 import DrugsItem from "../shared/DrugsItem";
@@ -8,6 +9,8 @@ import { styles } from "./styled";
 
 import FavouriteDrugService from "@/http/favouriteDrug";
 import type { FavouriteDrug } from "@/http/types/favouriteDrug";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = [
   { id: "1", label: "По названию", type: "name" },
@@ -17,33 +20,61 @@ const sortOptions = [
 
 const UserFavouritesDrugs = () => {
   const [drugs, setDrugs] = useState<FavouriteDrug[]>([]);
+  const navigation = useNavigation<FormNavigationProp>();
 
-  const renderItem = ({ item }: { item: FavouriteDrug }) => (
-    <DrugsItem
-      item={{
-        id: item.id,
+  const handleDrugPress = (item: FavouriteDrug) => {
+    navigation.navigate(ROUTES.STACK.USER_DRUG_DETAIL_SCREEN, {
+      drug: {
+        id: item.drugId,
         title: item.title,
+        shortDescription: item.shortDescription,
+        description: item.description || "",
         price: item.price,
         type: item.type || "",
-        description: item.description || "",
-        dosage: item.dosage || ""
-      }}
-    />
+        dosage: item.dosage || "",
+        imagePath: item.imagePath,
+      },
+      isFavourite: true,
+      favouriteId: item.id,
+    });
+  };
+
+  const renderItem = ({ item }: { item: FavouriteDrug }) => (
+    <TouchableOpacity onPress={() => handleDrugPress(item)}>
+      <DrugsItem
+        item={{
+          id: item.drugId,
+          title: item.title,
+          price: item.price,
+          type: item.type || "",
+          shortDescription: item.shortDescription,
+          description: item.description || "",
+          dosage: item.dosage || ""
+        }}
+      />
+    </TouchableOpacity>
   );
 
+  const loadFavouriteDrugs = async () => {
+    try {
+      const resp = await FavouriteDrugService.getMyFavouriteDrugs();
+      setDrugs(resp || []);
+    } catch {
+      Alert.alert("Ошибка", "Не удалось загрузить избранные лекарства");
+    }
+  };
+
   useEffect(() => {
-    const handleGet = async () => {
-      try {
-        const resp = await FavouriteDrugService.getMyFavouriteDrugs();
-
-        setDrugs(resp || []);
-      } catch {
-        Alert.alert("Ошибка", "Не удалось загрузить избранные лекарства");
-      }
-    };
-
-    handleGet().catch(() => Alert.alert("Error"));
+    loadFavouriteDrugs().catch(() => Alert.alert("Error"));
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadFavouriteDrugs();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={styles.content}>
