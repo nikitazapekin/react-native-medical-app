@@ -3,7 +3,6 @@ import { ActivityIndicator, Alert, ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { type RouteProp } from "@react-navigation/native";
 import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 
 import Avatar from "../assets/mockPhotos/Avatar.png";
 import ChatService, { type MessageDTO } from "../http/chat";
@@ -119,7 +118,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     console.log('Initializing WebSocket connection with chatId:', chatId);
 
     const client = new Client({
-      webSocketFactory: () => new SockJS('http://192.168.1.14:7082/ws-chat'),
+      webSocketFactory: () => new WebSocket('ws://192.168.1.14:7082/ws-chat'),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
