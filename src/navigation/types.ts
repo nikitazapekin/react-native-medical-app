@@ -71,11 +71,15 @@ export type RootStackParamList = {
     drug: {
       id: number;
       title: string;
+      shortDescription?: string;
       description: string;
       price: number;
       type: string;
       dosage: string;
+      imagePath?: string;
     };
+    isFavourite?: boolean;
+    favouriteId?: number;
   };
   [ROUTES.STACK.USER_SPISOK_SOVETOV]: undefined;
   [ROUTES.STACK.USER_OPROS]:  { id: number };
