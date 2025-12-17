@@ -14,7 +14,7 @@ import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = [
   { id: "1", label: "По названию", type: "name" },
-  { id: "2", label: "По Стоимости", type: "cost" },
+  { id: "2", label: "По стоимости", type: "cost" },
   { id: "3", label: "По типу", type: "type" },
 ];
 
@@ -58,6 +58,7 @@ const UserFavouritesDrugs = () => {
   const loadFavouriteDrugs = async () => {
     try {
       const resp = await FavouriteDrugService.getMyFavouriteDrugs();
+
       setDrugs(resp || []);
     } catch {
       Alert.alert("Ошибка", "Не удалось загрузить избранные лекарства");
@@ -70,7 +71,7 @@ const UserFavouritesDrugs = () => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      loadFavouriteDrugs();
+      void loadFavouriteDrugs();
     });
 
     return unsubscribe;
@@ -81,7 +82,7 @@ const UserFavouritesDrugs = () => {
       <DroppableList sortOptions={sortOptions} />
       <Text style={styles.title}>Ваши лекарства</Text>
       {drugs.length === 0 ? (
-        <View>
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <Text>Избранные лекарства не найдены</Text>
         </View>
       ) : (
@@ -91,6 +92,7 @@ const UserFavouritesDrugs = () => {
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.listWrapper}
           showsVerticalScrollIndicator={false}
+          style={{ flex: 1, width: "100%" }}
         />
       )}
     </View>

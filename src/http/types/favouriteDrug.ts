@@ -15,4 +15,3 @@ export interface FavouriteDrug {
 export interface FavouriteDrugRequest {
   drugId: number;
 }
-

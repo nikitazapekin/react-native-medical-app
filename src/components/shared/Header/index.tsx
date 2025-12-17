@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import ArrowBack from "@assets/mockPhotos/ArrowBack.png";
 import MockImage from "@assets/mockPhotos/Avatar.png";
+import DoctorDefaultImage from "@assets/mockPhotos/doctorDefault.png";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
@@ -20,16 +21,20 @@ interface HeaderProps {
 const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderProps) => {
   const navigation = useNavigation<FormNavigationProp>();
   const [userAvatar, setUserAvatar] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<"PATIENT" | "DOCTOR" | null>(null);
 
   useEffect(() => {
     const loadUserAvatar = async () => {
       try {
         const userData = await UserService.getCurrentUser();
+        const role = await UserService.getUserType();
 
         setUserAvatar(userData.avatar || null);
+        setUserRole(role);
       } catch (error) {
         console.log("Failed to load user avatar:", error);
         setUserAvatar(null);
+        setUserRole(null);
       }
     };
 
@@ -50,6 +55,22 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
     navigation.goBack();
   };
 
+ 
+  const getDefaultAvatar = () => {
+    if (userRole === "DOCTOR") {
+      return DoctorDefaultImage;
+    }
+    return MockImage; 
+  };
+
+ 
+  const getAvatarSource = () => {
+    if (userAvatar && userAvatar !== "doctorDefault.png") {
+      return { uri: userAvatar };
+    }
+    return getDefaultAvatar();
+  };
+
   return (
     <View style={styles.header}>
       {showBackButton && (
@@ -64,7 +85,7 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
       {isAuthenticated && !showBackButton && (
         <TouchableOpacity style={styles.avatarContainer} onPress={handleNavigate}>
           <Image
-            source={userAvatar ? { uri: userAvatar } : MockImage}
+            source={getAvatarSource()}
             style={styles.avatar}
             resizeMode="cover"
           />

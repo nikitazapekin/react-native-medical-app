@@ -29,7 +29,7 @@ export type RootStackParamList = {
   [ROUTES.STACK.CHILDREN_DOCTORS]: { childId: number };
   [ROUTES.STACK.CHILDREN_INFORMATION_ABOUT_CLINIC]: { childId: number };
   [ROUTES.STACK.SPISOKSOVETOV]: undefined;
-  [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: undefined;
+  [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: { childId: number };
   [ROUTES.STACK.MEDICALCARD]: { id: number };
   [ROUTES.STACK.USER_FAVOURITE_DRUGS]: { id: number };
   [ROUTES.STACK.USER_ANALYZE_HISTORY]:  { id: number };

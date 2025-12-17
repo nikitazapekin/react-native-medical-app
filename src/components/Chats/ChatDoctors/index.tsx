@@ -9,6 +9,7 @@ import DialogItem from "../../shared/DialogItem";
 
 import { styles } from "./styled";
 
+import { getDoctorAvatar } from "@/constants/doctorImages";
 import SearchService from "@/http/search";
 import type { Doctor } from "@/http/types/personInfo";
 
@@ -113,19 +114,13 @@ const Chats = () => {
   const transformDoctorToSearchItem = (doctor: Doctor): SearchDoctor => {
     console.log("Transforming doctor:", doctor);
 
-    let avatarSource = Avatar;
-
-    if (doctor.avatar) {
-      avatarSource = { uri: doctor.avatar };
-    }
-
     return {
       id: doctor.id,
       name: `Доктор ${doctor.lastName} ${doctor.firstName.charAt(0)}.`,
       text: doctor.specialization || "Специалист",
       status: doctor.specialization || "Врач",
       time: new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" }),
-      avatar: avatarSource,
+      avatar: getDoctorAvatar(doctor.avatar),
     };
   };
 

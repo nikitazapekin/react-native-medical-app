@@ -59,6 +59,3 @@ class FavouriteDrugService {
 }
 
 export default FavouriteDrugService;
-
-
-

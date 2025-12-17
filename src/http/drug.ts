@@ -5,11 +5,11 @@ class DrugService {
   static async getAllDrugs(params?: DrugSearchParams): Promise<Drug[]> {
     try {
       const queryParams = new URLSearchParams();
-      
+
       if (params?.search) {
         queryParams.append('search', params.search);
       }
-      
+
       if (params?.sortBy) {
         queryParams.append('sortBy', params.sortBy);
       }
@@ -18,9 +18,11 @@ class DrugService {
       const url = `/drugs${queryString ? `?${queryString}` : ''}`;
 
       const response = await $api.get<Drug[]>(url);
+
       return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
       console.error('Error fetching drugs:', error);
+
       return [];
     }
   }
@@ -28,6 +30,7 @@ class DrugService {
   static async getDrugById(id: number): Promise<Drug> {
     try {
       const response = await $api.get<Drug>(`/drugs/${id}`);
+
       return response.data;
     } catch (error) {
       console.error(`Error fetching drug ${id}:`, error);
@@ -38,6 +41,7 @@ class DrugService {
   static async createDrug(request: DrugRequest): Promise<Drug> {
     try {
       const response = await $api.post<Drug>('/drugs', request);
+
       return response.data;
     } catch (error) {
       console.error('Error creating drug:', error);
@@ -48,6 +52,7 @@ class DrugService {
   static async updateDrug(id: number, request: DrugRequest): Promise<Drug> {
     try {
       const response = await $api.put<Drug>(`/drugs/${id}`, request);
+
       return response.data;
     } catch (error) {
       console.error('Error updating drug:', error);
@@ -66,4 +71,3 @@ class DrugService {
 }
 
 export default DrugService;
-

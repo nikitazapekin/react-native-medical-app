@@ -172,6 +172,28 @@ class MedicalAppointmentService {
       throw new Error("Failed to reschedule appointment");
     }
   }
+  
+  // Записи врача на сегодня
+  static async getDoctorTodayAppointments(): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments/today');
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error('Error fetching doctor today appointments:', error);
+      return [];
+    }
+  }
+  
+  // Все записи врача
+  static async getDoctorAllAppointments(): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments');
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error('Error fetching doctor appointments:', error);
+      return [];
+    }
+  }
 }
 
 export default MedicalAppointmentService;
