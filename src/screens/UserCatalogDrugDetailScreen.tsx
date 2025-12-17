@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Alert, Image, ImageSourcePropType, ScrollView, StyleSheet, Text, View } from "react-native";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
+import type { ImageSourcePropType} from "react-native";
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useNavigation,useRoute } from "@react-navigation/native";
 
+import CustomButton from "@/components/shared/Button";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
-import CustomButton from "@/components/shared/Button";
-
 import FavouriteDrugService from "@/http/favouriteDrug";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -32,12 +32,10 @@ const getDrugImage = (imagePath: string | null | undefined): ImageSourcePropType
     return require("@assets/mockPhotos/recommendation2.jpg");
   }
 
-  
   if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
     return { uri: imagePath };
   }
 
-  
   return require("@assets/mockPhotos/recommendation2.jpg");
 };
 
@@ -48,23 +46,25 @@ const UserCatalogDrugDetail = () => {
   const [isInFavourites, setIsInFavourites] = useState(isFavourite || false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    checkIfInFavourites();
-  }, []);
-
-  const checkIfInFavourites = async () => {
+  const checkIfInFavourites = useCallback(async () => {
     try {
       const favourites = await FavouriteDrugService.getMyFavouriteDrugs();
       const found = favourites.some(f => f.drugId === drug.id);
+
       setIsInFavourites(found);
     } catch (error) {
       console.error("Error checking favourites:", error);
     }
-  };
+  }, [drug.id]);
+
+  useEffect(() => {
+    void checkIfInFavourites();
+  }, [checkIfInFavourites]);
 
   const handleAddToFavourites = async () => {
     if (isInFavourites) {
       Alert.alert("Информация", "Лекарство уже в избранном");
+
       return;
     }
 
@@ -75,9 +75,10 @@ const UserCatalogDrugDetail = () => {
       });
       setIsInFavourites(true);
       Alert.alert("Успешно", "Лекарство добавлено в избранное");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error adding to favourites:", error);
-      const message = error?.response?.data?.message || "Не удалось добавить лекарство в избранное";
+      const message = (error as { response?: { data?: { message?: string } } })?.response?.data?.message || "Не удалось добавить лекарство в избранное";
+
       Alert.alert("Ошибка", message);
     } finally {
       setLoading(false);
@@ -87,6 +88,7 @@ const UserCatalogDrugDetail = () => {
   const handleRemoveFromFavourites = async () => {
     if (!favouriteId) {
       Alert.alert("Ошибка", "Не удалось удалить из избранного");
+
       return;
     }
 
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingBottom: 100,
+    paddingBottom: 120,
   },
   card: {
     backgroundColor: "white",
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    height: 250,
+    aspectRatio: 1,
     marginBottom: 20,
     borderRadius: 8,
     overflow: "hidden",

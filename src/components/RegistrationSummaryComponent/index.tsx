@@ -117,12 +117,23 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           return;
         }
 
+        // Создаем дату без учета часового пояса
+        const appointmentDateObj = new Date(selectedDate);
+        const appointmentDateString = new Date(
+          appointmentDateObj.getFullYear(),
+          appointmentDateObj.getMonth(),
+          appointmentDateObj.getDate(),
+          12, // Устанавливаем полдень, чтобы избежать проблем с часовым поясом
+          0,
+          0
+        ).toISOString();
+
         const appointmentRequest = {
           medicalCardId,
           doctorId: doctor.id,
           serviceId: serviceId ?? (serviceName ? undefined : (defaultServiceId ?? undefined)),
           appointmentName: `Прием у ${fullName}`,
-          appointmentDate: new Date(selectedDate).toISOString(),
+          appointmentDate: appointmentDateString,
           appointmentTime: selectedTime,
           appointmentType: displayedService,
           description: `Запись на ${displayedService}`

@@ -10,6 +10,7 @@ import DialogItem from "../../shared/DialogItem";
 
 import { styles } from "./styled";
 
+import { getDoctorAvatar } from "@/constants/doctorImages";
 import SearchService from "@/http/search";
 import type { Doctor } from "@/http/types/personInfo";
 
@@ -97,7 +98,7 @@ const Chats = () => {
     text: doctor.specialization || "Специалист",
     status: doctor.specialization || "Врач",
     time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
-    avatar: doctor.avatar ? { uri: doctor.avatar } : Avatar,
+    avatar: getDoctorAvatar(doctor.avatar),
   });
 
   const searchDoctorsByLastName = async (searchTerm: string) => {

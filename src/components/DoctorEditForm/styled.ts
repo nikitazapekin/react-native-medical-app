@@ -8,13 +8,14 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   form: {
-    justifyContent: "center",
+    flex: 1,
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#fff",
     width: 373,
     borderRadius: 8,
-
     alignSelf: "center",
+    maxHeight: "100%",
   },
   title: {
     fontSize: 32,
@@ -30,13 +31,22 @@ export const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-    paddingTop: 17,
+    paddingTop: 80,
     paddingRight: 0,
     paddingBottom: 16,
     paddingLeft: 30,
     borderBottomColor: COLORS.GRAY_BORDER,
     borderBottomWidth: 1,
     marginBottom: 10,
+  },
+  scrollView: {
+    width: "100%",
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 100,
+    paddingTop: 10,
+    paddingHorizontal: 10,
   },
   fields: {
     width: "100%",

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
   },
   listWrapper: {
-    paddingBottom: 25,
+    paddingBottom: 50,
     gap: 12,
   },
 });

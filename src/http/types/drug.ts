@@ -24,4 +24,3 @@ export interface DrugSearchParams {
   search?: string;
   sortBy?: 'name' | 'cost' | 'type';
 }
-

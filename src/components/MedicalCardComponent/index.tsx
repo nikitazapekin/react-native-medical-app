@@ -50,7 +50,13 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
     }
 
     if (item ==  "ChildrenHealthStatus") {
-      navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS);
+      // Передаем childId из info, если доступен
+      if (info?.childId) {
+        navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, { childId: info.childId });
+      } else {
+        // Если childId не доступен, используем id из route params
+        navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, { childId: Number(id) });
+      }
     }
   };
 

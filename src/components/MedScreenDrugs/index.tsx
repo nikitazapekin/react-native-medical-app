@@ -9,14 +9,14 @@ import SearchInput from "../shared/SearchInput";
 
 import { styles } from "./styled";
 
-import { ROUTES } from "@/navigation/routes";
-import type { FormNavigationProp } from "@/navigation/types";
 import DrugService from "@/http/drug";
 import type { Drug } from "@/http/types/drug";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = [
   { id: "1", label: "По названию", type: "name" },
-  { id: "2", label: "По Стоимости", type: "cost" },
+  { id: "2", label: "По стоимости", type: "cost" },
   { id: "3", label: "По типу", type: "type" },
 ];
 
@@ -35,6 +35,7 @@ const MedScreenDrugs = () => {
         search: search || undefined,
         sortBy: sortBy as 'name' | 'cost' | 'type' | undefined,
       });
+
       setDrugs(data);
     } catch (error) {
       console.error("Error loading drugs:", error);
@@ -45,12 +46,12 @@ const MedScreenDrugs = () => {
   }, []);
 
   useEffect(() => {
-    loadDrugs();
+    void loadDrugs();
   }, [loadDrugs]);
 
   const debouncedSearch = useCallback(
     debounce((searchTerm: string) => {
-      loadDrugs(searchTerm || undefined, sortType || undefined);
+      void loadDrugs(searchTerm || undefined, sortType || undefined);
     }, 300),
     [loadDrugs, sortType]
   );
@@ -62,8 +63,9 @@ const MedScreenDrugs = () => {
 
   const handleSortChange = (selectedOption: { id: string; label: string; type?: string }) => {
     const newSortType = selectedOption.type || "";
+
     setSortType(newSortType);
-    loadDrugs(searchQuery || undefined, newSortType || undefined);
+    void loadDrugs(searchQuery || undefined, newSortType || undefined);
   };
 
   const handleDrugPress = (item: Drug) => {
@@ -121,6 +123,7 @@ const MedScreenDrugs = () => {
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.listWrapper}
           showsVerticalScrollIndicator={false}
+          style={{ flex: 1, width: "100%" }}
         />
       )}
     </View>
