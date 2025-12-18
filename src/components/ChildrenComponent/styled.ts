@@ -4,10 +4,13 @@ export const styles = StyleSheet.create({
   wrapper: {
     width: "100%",
     flexDirection: "column",
+    alignItems: "center",
     gap: 10,
   },
 
   title: {
+    textAlign: "left",
+    width: "100%",
     fontSize: 16,
     fontWeight: 500,
     paddingBottom: 15
@@ -16,5 +19,5 @@ export const styles = StyleSheet.create({
     width: 376,
     flexDirection: "column",
     gap: 10
-  }
+  },
 });

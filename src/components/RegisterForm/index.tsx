@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert,Text, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
@@ -117,6 +117,32 @@ const RegisterForm = () => {
             type="password"
             value={formData.password}
           />
+
+          {/* Выбор роли */}
+          <View style={styles.roleContainer}>
+            <Text style={styles.roleLabel}>Регистрация как:</Text>
+            <View style={styles.radioGroup}>
+              <TouchableOpacity
+                style={styles.radioButton}
+                onPress={() => handleInputChange('role', 'PATIENT')}
+              >
+                <View style={[styles.radioCircle, formData.role === 'PATIENT' && styles.radioCircleSelected]}>
+                  {formData.role === 'PATIENT' && <View style={styles.radioDot} />}
+                </View>
+                <Text style={styles.radioText}>Пациент</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.radioButton}
+                onPress={() => handleInputChange('role', 'DOCTOR')}
+              >
+                <View style={[styles.radioCircle, formData.role === 'DOCTOR' && styles.radioCircleSelected]}>
+                  {formData.role === 'DOCTOR' && <View style={styles.radioDot} />}
+                </View>
+                <Text style={styles.radioText}>Врач</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
         <View style={styles.btns}>
           <CustomButton

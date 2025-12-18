@@ -24,6 +24,7 @@ export const COLORS = {
   WARNING: "#F59E0B",
   ERROR: "#EF4444",
   INFO: "#3B82F6",
+  SCHEDULED: "#11A3E5",
 };
 
 export const SIZES = {

@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -20,14 +19,12 @@ export default function ChildrenScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.containerWhite}>
-      <Header title={"Ребенок"} isAuthenticated={true} />
+      <Header title={"Ребенок"} isAuthenticated={true} showBackButton={true}/>
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
         <ChildrenComponent id={id} />
       </ScrollView>
 
       <Footer />
-
-      <StatusBar style="auto" />
     </View>
   );
 }

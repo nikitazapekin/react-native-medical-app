@@ -37,12 +37,13 @@ export interface Patient {
 export interface Doctor {
   id: number;
   firstName: string;
+  middleName?: string;
   lastName: string;
   rate?: number;
   status?: string;
   citate?: string;
   experience?: number;
-  education?: string[];
+  education?: string;
   specialization?: string;
   achievements?: string;
   incrementQualification?: string;

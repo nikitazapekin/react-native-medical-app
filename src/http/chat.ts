@@ -82,6 +82,8 @@ class ChatService {
 
   static async getDoctorChats(doctorId: number): Promise<ChatDTO[]> {
     try {
+      doctorId = 13
+      console.log(doctorId)
       console.log('Getting doctor chats for doctorId:', doctorId);
       const response = await $api.get<ChatDTO[]>(`/chat/doctor/${doctorId}`);
 

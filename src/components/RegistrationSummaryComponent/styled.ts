@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
   },
   buttonWrapper: {
     marginTop: 16,
+    gap: 15,
     width: "100%",
   },
 });

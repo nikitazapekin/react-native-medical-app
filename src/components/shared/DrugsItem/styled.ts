@@ -14,11 +14,14 @@ export const styles = StyleSheet.create({
 
     justifyContent: "space-between",
     flexDirection: "row",
+    minHeight: 80,
   },
 
   content: {
     flexDirection: "column",
-    gap: 10,
+    gap: 8,
+    flex: 1,
+    marginRight: 12,
   },
   title: {
     fontSize: 16,
@@ -28,11 +31,14 @@ export const styles = StyleSheet.create({
   description: {
     fontWeight: 400,
     fontSize: 13,
+    color: COLORS.BLACK,
+    flexShrink: 1,
   },
 
   price: {
     alignSelf: "center",
     fontSize: 15,
     fontWeight: 500,
+    flexShrink: 0,
   },
 });

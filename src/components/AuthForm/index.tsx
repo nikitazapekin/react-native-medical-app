@@ -11,6 +11,7 @@ import { styles } from "./styled";
 import type { LoginFormData } from "./types";
 
 import AuthService from "@/http/auth";
+import ChildrenService from "@/http/children";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -43,18 +44,47 @@ const AuthForm = () => {
 
       const userRole = await AsyncStorage.getItem('userRole');
 
+      // Если пользователь - пациент, получаем детей и сохраняем их
+      if (userRole === 'PATIENT') {
+        try {
+          const userId = await AsyncStorage.getItem('userId');
+
+          if (userId) {
+            const children = await ChildrenService.getChildrenByParentId(parseInt(userId));
+
+            if (children && children.length > 0) {
+              await AsyncStorage.setItem('childrenList', JSON.stringify(children));
+
+              if (children.length === 1) {
+                await AsyncStorage.setItem('childId', children[0].id.toString());
+                console.log('Single child, auto-selected ID:', children[0].id);
+              } else {
+
+                await AsyncStorage.setItem('childId', children[0].id.toString());
+                console.log('Multiple children found, selected first child ID:', children[0].id);
+                console.log('Total children:', children.length);
+              }
+            } else {
+              await AsyncStorage.setItem('childId', '1');
+              console.log('No children found, using fallback childId=1');
+            }
+          }
+        } catch (error) {
+          console.error('Error loading child:', error);
+          // При ошибке используем fallback
+          await AsyncStorage.setItem('childId', '1');
+        }
+      }
+
       Alert.alert("Успех", "Вход выполнен успешно!");
 
       if (userRole === 'DOCTOR') {
-
         navigation.navigate(ROUTES.STACK.DOCTOR);
       } else {
-
         navigation.navigate(ROUTES.STACK.HOMEPAGE);
       }
 
     } catch{
-
       Alert.alert("Ошибка входа");
     } finally {
       setLoading(false);
@@ -86,7 +116,6 @@ const AuthForm = () => {
           <FormInput
             label="Пароль"
             handler={(value) => handleInputChange('password', value)}
-            //   type="password"
             placeholder="Пароль"
             value={formData.password}
           />

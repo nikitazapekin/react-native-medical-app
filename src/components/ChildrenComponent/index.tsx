@@ -37,7 +37,7 @@ const ChildrenComponent = ({ id }: ChildrenComponentTypes) => {
 
       <ChildrenOptions  id={String(id)}  />
 
-      <CustomButton handler={() => {}} color="#fff" text="Удалить профиль ребенка" />
+      <CustomButton handler={() => {}} color="#fff" text="Удалить профиль ребенка" fullWidth={false} />
     </View>
   );
 };

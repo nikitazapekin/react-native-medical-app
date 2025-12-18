@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     gap: 10,
     alignItems: "center",
-    paddingBottom: 25,
+    paddingBottom: 50,
   },
   cardTouchable: {
     width: "100%",

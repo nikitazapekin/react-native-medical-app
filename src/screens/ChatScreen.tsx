@@ -3,8 +3,6 @@ import { ActivityIndicator, Alert, ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { type RouteProp } from "@react-navigation/native";
 import { Client } from '@stomp/stompjs';
-import { StatusBar } from "expo-status-bar";
-import SockJS from 'sockjs-client';
 
 import Avatar from "../assets/mockPhotos/Avatar.png";
 import ChatService, { type MessageDTO } from "../http/chat";
@@ -15,6 +13,7 @@ import Chat from "@/components/Chat";
 import ChatKeypad from "@/components/ChatKeypad";
 import Header from "@/components/shared/Header";
 import type { RootStackParamList } from "@/navigation/types";
+import SockJS from "sockjs-client";
 
 interface UserData {
   email: string | null;
@@ -120,7 +119,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     console.log('Initializing WebSocket connection with chatId:', chatId);
 
     const client = new Client({
-      webSocketFactory: () => new SockJS('http://10.40.164.183:7082/ws-chat'),
+      webSocketFactory: () => new SockJS('http://192.168.1.14:7082/ws-chat'),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
@@ -316,7 +315,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
 
   return (
     <View style={styles.container}>
-      <Header title="Чат" isAuthenticated={true} />
+      <Header title="Чат" isAuthenticated={true} showBackButton={true}/>
 
       <View style={{ padding: 10, backgroundColor: '#f5f5f5' }}>
         <Text style={{ color: isConnected ? 'green' : 'red', fontSize: 12 }}>
@@ -356,8 +355,6 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
         onSendMessage={handleSendMessage}
         disabled={!isConnected || !chatId || isLoadingHistory}
       />
-
-      <StatusBar style="auto" />
     </View>
   );
 }

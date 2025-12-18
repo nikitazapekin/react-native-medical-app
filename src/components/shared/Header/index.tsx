@@ -1,9 +1,13 @@
-import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import ArrowBack from "@assets/mockPhotos/ArrowBack.png";
+import MockImage from "@assets/mockPhotos/Avatar.png";
+import DoctorDefaultImage from "@assets/mockPhotos/doctorDefault.png";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 
+import UserService from "@/http/userService";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -16,6 +20,28 @@ interface HeaderProps {
 
 const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderProps) => {
   const navigation = useNavigation<FormNavigationProp>();
+  const [userAvatar, setUserAvatar] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<"PATIENT" | "DOCTOR" | null>(null);
+
+  useEffect(() => {
+    const loadUserAvatar = async () => {
+      try {
+        const userData = await UserService.getCurrentUser();
+        const role = await UserService.getUserType();
+
+        setUserAvatar(userData.avatar || null);
+        setUserRole(role);
+      } catch (error) {
+        console.log("Failed to load user avatar:", error);
+        setUserAvatar(null);
+        setUserRole(null);
+      }
+    };
+
+    if (isAuthenticated && !showBackButton) {
+      loadUserAvatar().catch(() => console.log("Avatar load error"));
+    }
+  }, [isAuthenticated, showBackButton]);
 
   const handleNavigate = () => {
     if (DoctorLogin) {
@@ -27,6 +53,22 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
 
   const handleBack = () => {
     navigation.goBack();
+  };
+
+ 
+  const getDefaultAvatar = () => {
+    if (userRole === "DOCTOR") {
+      return DoctorDefaultImage;
+    }
+    return MockImage; 
+  };
+
+ 
+  const getAvatarSource = () => {
+    if (userAvatar && userAvatar !== "doctorDefault.png") {
+      return { uri: userAvatar };
+    }
+    return getDefaultAvatar();
   };
 
   return (
@@ -41,7 +83,13 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
         </TouchableOpacity>
       )}
       {isAuthenticated && !showBackButton && (
-        <Pressable style={styles.circle} onPress={handleNavigate} />
+        <TouchableOpacity style={styles.avatarContainer} onPress={handleNavigate}>
+          <Image
+            source={getAvatarSource()}
+            style={styles.avatar}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
       )}
       <Text style={styles.headerTitle}>{title}</Text>
     </View>

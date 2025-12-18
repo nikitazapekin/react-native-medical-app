@@ -27,8 +27,8 @@ export const ROUTES = {
     USER_CATALOG_SERVICES: "UserCatalogServices",
     USER_CATALOG_RECOMMENDATIONS: "UserCatalogRecommendations",
     USER_CATALOG_FULL_RECOMENDATION: "UserCatalogFullRecomendation",
-    USER_CONSULTATION_HISTORY: "UserConsultationHistory",
-    USER_FULL_CONSULTATION: "UserFullConsultation",
+    USER_APPOINTMENTS: "UserAppointments",
+    USER_APPOINTMENT_DETAILS: "UserAppointmentDetails",
     ISTORIABOLEZNEI: "IstoriaBoleznei",
     CHILDREN_HEALTH_STATUS: "ChildrenHealthStatus",
     USER_FAVOURITE_DRUGS: "UserFavouritesDrugs",
@@ -44,7 +44,9 @@ export const ROUTES = {
     USER_EDIT_CHILDRESN: "USER_EDIT_CHILDRESN",
     USER_ABOUT_DOCTOR: "UserAboutDoctor",
     USER_REGISTRATION_AT_CLINIC: "UserRegistrationAtClinic",
-    USER_REGISTRATION_SUMMARY: "UserRegistrationSummary"
+    USER_REGISTRATION_SUMMARY: "UserRegistrationSummary",
+    CHILD_SELECTION: "ChildSelection",
+    USER_POPULAR_DOCTORS: "UserPopularDoctors"
   },
   TABS: {
     HOME: "HomeTab",

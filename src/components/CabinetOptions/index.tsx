@@ -1,10 +1,12 @@
 
-import { Image, Pressable, Text, View } from "react-native";
+import { Alert, Image, Pressable, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 import type { CabinetProps, ListItemProps } from "./types";
 
+import CustomButton from "@/components/shared/Button";
 import { profileOptions } from "@/constants";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
@@ -13,29 +15,27 @@ const ListItem = ({ item , id }: ListItemProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleNavigate = () => {
-    if (item.text.toLocaleLowerCase().includes("история")) {
+    const itemText = item.text.toLocaleLowerCase();
+
+    if (itemText.includes("записи в поликлинику") || itemText.includes("мои записи")) {
+      navigation.navigate(ROUTES.STACK.USER_APPOINTMENTS);
+    }
+
+    if (itemText.includes("история платежей")) {
       navigation.navigate(ROUTES.STACK.PAYMENTS, {id: Number(id)});
     }
 
-    if(item.text.toLocaleLowerCase().includes("дети")) {
-      /*
- navigation.navigate(ROUTES.STACK.USER_DRUG_DETAIL_SCREEN , {
-      drug: item
-    });
-    */
+    if(itemText.includes("дети")) {
       navigation.navigate(ROUTES.STACK.CHILDRENS);
     }
 
-    if(item.text.toLocaleLowerCase().includes("советов")) {
-
+    if(itemText.includes("советов")) {
       navigation.navigate(ROUTES.STACK.USER_SPISOK_SOVETOV);
     }
 
-    if(item.text.toLocaleLowerCase().includes("избранное")) {
-
-      navigation.navigate(ROUTES.STACK.USER_FAVOURITE_DRUGS);
+    if(itemText.includes("избранное")) {
+      navigation.navigate(ROUTES.STACK.USER_FAVOURITE_DRUGS, { id: Number(id) });
     }
-
   };
 
   return (
@@ -47,6 +47,48 @@ const ListItem = ({ item , id }: ListItemProps) => {
 };
 
 const CabinetOptions = ({id}: CabinetProps) => {
+  const navigation = useNavigation<FormNavigationProp>();
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Выход из аккаунта",
+      "Вы уверены, что хотите выйти?",
+      [
+        {
+          text: "Отмена",
+          style: "cancel",
+        },
+        {
+          text: "Выйти",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              // Очищаем все данные из AsyncStorage
+              await AsyncStorage.multiRemove([
+                'accessToken',
+                'userRole',
+                'userEmail',
+                'userId',
+                'id',
+                'childId',
+                'childrenList',
+              ]);
+              
+              // Переходим на экран авторизации
+              navigation.reset({
+                index: 0,
+                routes: [{ name: ROUTES.STACK.AUTH }],
+              });
+            } catch (error) {
+              console.error('Logout error:', error);
+              Alert.alert('Ошибка', 'Не удалось выйти из аккаунта');
+            }
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.text}>Категории</Text>
@@ -54,6 +96,14 @@ const CabinetOptions = ({id}: CabinetProps) => {
         {profileOptions.map((item) => (
           <ListItem key={item.id} item={item} id={id} />
         ))}
+      </View>
+      
+      <View style={styles.logoutButtonContainer}>
+        <CustomButton
+          handler={handleLogout}
+          text="Выйти из аккаунта"
+          backgroundColor="#993B4A"
+        />
       </View>
     </View>
   );

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Image,
   SectionList,
   StyleSheet,
@@ -8,14 +9,11 @@ import {
   View} from "react-native";
 import Med from "@assets/mockPhotos/Vector.png";
 import { useNavigation } from "@react-navigation/native";
+import MedicalAppointmentService from "@/http/medicalAppointment";
+import type { MedicalAppointmentResponse } from "@/http/types/doctor";
 
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
-
-// type DoctorRecordsNavigationProp = StackNavigationProp<
-//   RootStackParamList,
-//   typeof ROUTES.STACK.DOCTOR_RECORD_DETAIL
-// >;
 
 interface Record {
   id: string;
@@ -26,47 +24,88 @@ interface Record {
 
 interface Section {
   title: string;
+  date: Date; // Для сортировки
   data: Record[];
 }
 
-const sections: Section[] = [
-  {
-    title: "Понедельник, 28 декабря",
-    data: [
-      { id: "1", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Обследование" },
-      { id: "2", time: "11:00", patient: "Петров Иван Сергеевич", service: "Консультация" },
-      { id: "3", time: "14:00", patient: "Сидорова Мария Владимировна", service: "Осмотр" },
-    ],
-  },
-  {
-    title: "Вторник, 29 декабря",
-    data: [
-      { id: "4", time: "09:30", patient: "Козлова Анна Дмитриевна", service: "Обследование" },
-      { id: "5", time: "12:00", patient: "Николаев Денис Олегович", service: "Консультация" },
-    ],
-  },
-  {
-    title: "Среда, 30 декабря",
-    data: [
-      { id: "6", time: "10:00", patient: "Алексин Андрей Михайлович", service: "Повторный осмотр" },
-      { id: "7", time: "11:30", patient: "Орлова Екатерина Викторовна", service: "Обследование" },
-      { id: "8", time: "15:00", patient: "Громов Павел Александрович", service: "Консультация" },
-    ],
-  },
-  {
-    title: "Четверг, 31 декабря",
-    data: [
-      { id: "9", time: "09:00", patient: "Белова Юлия Игоревна", service: "Осмотр" },
-      { id: "10", time: "13:00", patient: "Давыдов Артем Николаевич", service: "Обследование" },
-      { id: "11", time: "16:00", patient: "Семенова Ольга Петровна", service: "Консультация" },
-    ],
-  },
-];
-
 const TodayDoctorRecords = () => {
   const navigation = useNavigation<FormNavigationProp>();
-  const handleRecordPress = (item: Record) => {
+  const [sections, setSections] = useState<Section[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const loadAppointments = async () => {
+      try {
+        setLoading(true);
+        const appointments = await MedicalAppointmentService.getDoctorAllAppointments();
+        
+        // Получаем сегодняшнюю дату (без времени)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // Фильтруем только записи со статусом SCHEDULED и датой >= сегодня
+        const scheduledAppointments = appointments.filter((appointment) => {
+          if (appointment.status !== 'SCHEDULED') {
+            return false;
+          }
+          
+          const appointmentDate = new Date(appointment.appointmentDate);
+          appointmentDate.setHours(0, 0, 0, 0);
+          
+          return appointmentDate >= today;
+        });
+        
+        // Сначала сортируем все записи по дате
+        const sortedAppointments = scheduledAppointments.sort((a, b) => {
+          const dateA = new Date(a.appointmentDate).getTime();
+          const dateB = new Date(b.appointmentDate).getTime();
+          return dateA - dateB; // По возрастанию
+        });
+        
+        // Группируем записи по дням с сохранением даты для сортировки
+        const groupedByDate: { [key: string]: { date: Date; appointments: MedicalAppointmentResponse[] } } = {};
+        
+        sortedAppointments.forEach((appointment) => {
+          const date = new Date(appointment.appointmentDate);
+          const dateKey = date.toLocaleDateString("ru-RU", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          });
+          
+          if (!groupedByDate[dateKey]) {
+            groupedByDate[dateKey] = {
+              date: new Date(date.getFullYear(), date.getMonth(), date.getDate()), // Сохраняем дату для сортировки
+              appointments: []
+            };
+          }
+          groupedByDate[dateKey].appointments.push(appointment);
+        });
+        
+        // Преобразуем в секции (уже отсортированные, т.к. исходный массив был отсортирован)
+        const newSections: Section[] = Object.keys(groupedByDate).map((dateKey) => ({
+          title: dateKey.charAt(0).toUpperCase() + dateKey.slice(1),
+          date: groupedByDate[dateKey].date, // Для сортировки
+          data: groupedByDate[dateKey].appointments.map((appointment) => ({
+            id: appointment.id.toString(),
+            time: appointment.appointmentTime || "",
+            patient: appointment.patientName || "Пациент не указан",
+            service: appointment.appointmentType || appointment.service?.title || "Услуга не указана",
+          })),
+        }));
+        
+        setSections(newSections);
+      } catch (error) {
+        console.error("Error loading appointments:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadAppointments();
+  }, []);
+
+  const handleRecordPress = (item: Record) => {
     navigation.navigate(ROUTES.STACK.DOCTOR_RECORD_DETAIL , {
       record: item
     });
@@ -95,16 +134,30 @@ const TodayDoctorRecords = () => {
     </View>
   );
 
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
+        <ActivityIndicator size="large" color="#1280b2" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <SectionList
-        sections={sections}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        renderSectionHeader={renderSectionHeader}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 }}
-      />
+      {sections.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>Записей не найдено</Text>
+        </View>
+      ) : (
+        <SectionList
+          sections={sections}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          renderSectionHeader={renderSectionHeader}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+      )}
     </View>
   );
 };
@@ -172,5 +225,15 @@ const styles = StyleSheet.create({
   serviceText: {
     fontSize: 14,
     color: "#555",
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: "#666",
   },
 });

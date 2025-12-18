@@ -3,9 +3,10 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   content: {
+    flex: 1,
     width: "100%",
-    height: "100%",
     alignItems: "center",
+    paddingHorizontal: 16,
   },
   title: {
     color: COLORS.BLACK,
@@ -23,6 +24,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     maxWidth: 376,
+    paddingBottom: 30,
   },
 });
 /* import { StyleSheet } from "react-native";

@@ -14,10 +14,20 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#000",
   },
+  availabilityDoctor: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 10
+  },
   slotsRow: {
     flexDirection: "row",
     gap: 10,
     flexWrap: "wrap",
+  },
+  noSlots: {
+    color: '#999',
+    textAlign: 'center',
+    marginTop: 20
   },
   slot: {
     width: 177,
