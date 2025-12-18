@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Text, View } from "react-native";
 import RatingStar from "@assets/profile/star.png";
-import DoctorInfoService from "@/http/doctorInfo";
-import type { Doctor } from "@/http/types/personInfo";
-import { getDoctorAvatar } from "@/constants/doctorImages";
 
 import { styles } from "./styled";
+
+import { getDoctorAvatar } from "@/constants/doctorImages";
+import DoctorInfoService from "@/http/doctorInfo";
+import type { Doctor } from "@/http/types/personInfo";
 
 const DoctorCabinetInfo = () => {
   const [doctor, setDoctor] = useState<Doctor | null>(null);
@@ -18,6 +19,7 @@ const DoctorCabinetInfo = () => {
         setLoading(true);
         setError(null);
         const doctorData = await DoctorInfoService.getCurrentDoctor();
+
         setDoctor(doctorData);
       } catch (err) {
         console.error("Error loading doctor info:", err);

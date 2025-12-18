@@ -86,14 +86,17 @@ const CustomSwiper = () => {
         // Скидка 20% - переход на каталог врачей
         navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, {});
         break;
+
       case "2":
         // Анализы -30% - переход на каталог услуг
         navigation.navigate(ROUTES.STACK.USER_CATALOG_SERVICES);
         break;
+
       case "3":
         // Новые врачи - переход на популярных врачей
         navigation.navigate(ROUTES.STACK.USER_POPULAR_DOCTORS, { showPopular: true });
         break;
+
       default:
         break;
     }
@@ -274,4 +277,3 @@ const styles = StyleSheet.create({
 });
 
 export default CustomSwiper;
-

@@ -9,9 +9,9 @@ import {
   View} from "react-native";
 import Med from "@assets/mockPhotos/Vector.png";
 import { useNavigation } from "@react-navigation/native";
+
 import MedicalAppointmentService from "@/http/medicalAppointment";
 import type { MedicalAppointmentResponse } from "@/http/types/doctor";
-
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -38,33 +38,36 @@ const TodayDoctorRecords = () => {
       try {
         setLoading(true);
         const appointments = await MedicalAppointmentService.getDoctorAllAppointments();
-        
+
         // Получаем сегодняшнюю дату (без времени)
         const today = new Date();
+
         today.setHours(0, 0, 0, 0);
-        
+
         // Фильтруем только записи со статусом SCHEDULED и датой >= сегодня
         const scheduledAppointments = appointments.filter((appointment) => {
           if (appointment.status !== 'SCHEDULED') {
             return false;
           }
-          
+
           const appointmentDate = new Date(appointment.appointmentDate);
+
           appointmentDate.setHours(0, 0, 0, 0);
-          
+
           return appointmentDate >= today;
         });
-        
+
         // Сначала сортируем все записи по дате
         const sortedAppointments = scheduledAppointments.sort((a, b) => {
           const dateA = new Date(a.appointmentDate).getTime();
           const dateB = new Date(b.appointmentDate).getTime();
+
           return dateA - dateB; // По возрастанию
         });
-        
+
         // Группируем записи по дням с сохранением даты для сортировки
         const groupedByDate: { [key: string]: { date: Date; appointments: MedicalAppointmentResponse[] } } = {};
-        
+
         sortedAppointments.forEach((appointment) => {
           const date = new Date(appointment.appointmentDate);
           const dateKey = date.toLocaleDateString("ru-RU", {
@@ -72,16 +75,17 @@ const TodayDoctorRecords = () => {
             day: "numeric",
             month: "long",
           });
-          
+
           if (!groupedByDate[dateKey]) {
             groupedByDate[dateKey] = {
               date: new Date(date.getFullYear(), date.getMonth(), date.getDate()), // Сохраняем дату для сортировки
               appointments: []
             };
           }
+
           groupedByDate[dateKey].appointments.push(appointment);
         });
-        
+
         // Преобразуем в секции (уже отсортированные, т.к. исходный массив был отсортирован)
         const newSections: Section[] = Object.keys(groupedByDate).map((dateKey) => ({
           title: dateKey.charAt(0).toUpperCase() + dateKey.slice(1),
@@ -93,7 +97,7 @@ const TodayDoctorRecords = () => {
             service: appointment.appointmentType || appointment.service?.title || "Услуга не указана",
           })),
         }));
-        
+
         setSections(newSections);
       } catch (error) {
         console.error("Error loading appointments:", error);

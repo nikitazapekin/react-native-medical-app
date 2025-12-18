@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Image, Text, TouchableOpacity, View } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import type { RouteProp } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { styles } from "./styled";
 
@@ -24,6 +24,7 @@ const ChildrenHealthStatusComponent = () => {
       try {
         setLoading(true);
         const childData = await ChildrenService.getChildById(childId);
+
         setChild(childData);
       } catch (error) {
         console.error("Error loading child data:", error);
@@ -38,7 +39,9 @@ const ChildrenHealthStatusComponent = () => {
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return "Не указано";
+
     const date = new Date(dateString);
+
     return date.toLocaleDateString("ru-RU", {
       day: "2-digit",
       month: "2-digit",
@@ -83,8 +86,6 @@ const ChildrenHealthStatusComponent = () => {
 
         <Text style={styles.label}>Дата прописки в поликлинику:</Text>
         <Text style={styles.value}>{formatDate(child.clinicRegistrationDate)}</Text>
-
-        
 
         <Image source={{ uri: child.avatar }} style={styles.imagePlaceholder} />
 

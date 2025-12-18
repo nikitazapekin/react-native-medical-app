@@ -3,6 +3,7 @@ import { ActivityIndicator, Alert, ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { type RouteProp } from "@react-navigation/native";
 import { Client } from '@stomp/stompjs';
+import SockJS from "sockjs-client";
 
 import Avatar from "../assets/mockPhotos/Avatar.png";
 import ChatService, { type MessageDTO } from "../http/chat";
@@ -13,7 +14,6 @@ import Chat from "@/components/Chat";
 import ChatKeypad from "@/components/ChatKeypad";
 import Header from "@/components/shared/Header";
 import type { RootStackParamList } from "@/navigation/types";
-import SockJS from "sockjs-client";
 
 interface UserData {
   email: string | null;

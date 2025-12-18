@@ -9,13 +9,13 @@ import { styles } from "./styles";
 import ChildrenHealthStatusComponent from "@/components/ChildrenHealthStatus";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
-import { ROUTES } from "@/navigation/routes";
+import type { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 
 type ChildrenHealthStatusRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.CHILDREN_HEALTH_STATUS>;
 
 const ChildrenHealthStatus = () => {
-  const route = useRoute<ChildrenHealthStatusRouteProp>();
+//  const route = useRoute<ChildrenHealthStatusRouteProp>();
 
   return (
     <>
