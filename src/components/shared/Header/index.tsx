@@ -55,19 +55,19 @@ const Header = ({ title, isAuthenticated, DoctorLogin, showBackButton }: HeaderP
     navigation.goBack();
   };
 
- 
   const getDefaultAvatar = () => {
     if (userRole === "DOCTOR") {
       return DoctorDefaultImage;
     }
-    return MockImage; 
+
+    return MockImage;
   };
 
- 
   const getAvatarSource = () => {
     if (userAvatar && userAvatar !== "doctorDefault.png") {
       return { uri: userAvatar };
     }
+
     return getDefaultAvatar();
   };
 

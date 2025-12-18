@@ -4,11 +4,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 import CustomButton from "../shared/Button";
-import DoctorInfoService from "@/http/doctorInfo";
-import type { Doctor } from "@/http/types/personInfo";
 
 import { styles } from "./styled";
 
+import DoctorInfoService from "@/http/doctorInfo";
+import type { Doctor } from "@/http/types/personInfo";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -22,6 +22,7 @@ const DoctorCabinetOptions = () => {
       try {
         setLoading(true);
         const doctorData = await DoctorInfoService.getCurrentDoctor();
+
         setDoctor(doctorData);
       } catch (err) {
         console.error("Error loading doctor info:", err);
@@ -30,7 +31,7 @@ const DoctorCabinetOptions = () => {
       }
     };
 
-    loadDoctorInfo();
+    void loadDoctorInfo();
   }, []);
 
   const handleDoctorScreen = () => {
@@ -61,7 +62,7 @@ const DoctorCabinetOptions = () => {
                 'childId',
                 'childrenList',
               ]);
-              
+
               // Переходим на экран авторизации
               navigation.reset({
                 index: 0,

@@ -73,7 +73,7 @@ const CabinetOptions = ({id}: CabinetProps) => {
                 'childId',
                 'childrenList',
               ]);
-              
+
               // Переходим на экран авторизации
               navigation.reset({
                 index: 0,
@@ -97,7 +97,7 @@ const CabinetOptions = ({id}: CabinetProps) => {
           <ListItem key={item.id} item={item} id={id} />
         ))}
       </View>
-      
+
       <View style={styles.logoutButtonContainer}>
         <CustomButton
           handler={handleLogout}

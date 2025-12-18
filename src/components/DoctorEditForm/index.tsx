@@ -4,18 +4,17 @@ import { useNavigation } from "@react-navigation/native";
 
 import CustomButton from "../shared/Button";
 import FormInput from "../shared/FormInput";
-import DoctorInfoService from "@/http/doctorInfo";
-import type { Doctor } from "@/http/types/personInfo";
 
 import { styles } from "./styled";
 
 import { DOCTOR_EDIT_CONSTANTS } from "@/constants/doctorEdit";
+import DoctorInfoService from "@/http/doctorInfo";
+import type { Doctor } from "@/http/types/personInfo";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const DoctorEditForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
-  const [doctor, setDoctor] = useState<Doctor | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState<Partial<Doctor>>({});
@@ -25,7 +24,7 @@ const DoctorEditForm = () => {
       try {
         setLoading(true);
         const doctorData = await DoctorInfoService.getCurrentDoctor();
-        setDoctor(doctorData);
+
         setFormData({
           firstName: doctorData.firstName || "",
           middleName: doctorData.middleName || "",
@@ -46,7 +45,7 @@ const DoctorEditForm = () => {
       }
     };
 
-    loadDoctorInfo();
+    void loadDoctorInfo();
   }, []);
 
   const handleInputChange = (field: string, value: string | number) => {
@@ -84,7 +83,7 @@ const DoctorEditForm = () => {
           <Text style={styles.headerText}>Изменить профиль</Text>
         </View>
 
-        <ScrollView 
+        <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={true}
@@ -92,8 +91,8 @@ const DoctorEditForm = () => {
           <View style={styles.fields}>
             {DOCTOR_EDIT_CONSTANTS.map((item) => {
               const fieldValue = formData[item.field as keyof Doctor];
-              const value = fieldValue !== undefined && fieldValue !== null 
-                ? String(fieldValue) 
+              const value = fieldValue !== undefined && fieldValue !== null
+                ? String(fieldValue)
                 : "";
 
               return (
@@ -102,6 +101,7 @@ const DoctorEditForm = () => {
                   handler={(text: string) => {
                     if (item.type === "numeric") {
                       const numValue = parseInt(text, 10);
+
                       if (!isNaN(numValue)) {
                         handleInputChange(item.field, numValue);
                       }

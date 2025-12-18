@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Med from "@assets/mockPhotos/Vector.png";
+import { useNavigation } from "@react-navigation/native";
+
 import MedicalAppointmentService from "@/http/medicalAppointment";
 import type { MedicalAppointmentResponse } from "@/http/types/doctor";
-import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
@@ -17,6 +18,7 @@ const TodayDoctorRecords = () => {
       try {
         setLoading(true);
         const data = await MedicalAppointmentService.getDoctorTodayAppointments();
+
         setAppointments(data);
       } catch (error) {
         console.error("Error loading today appointments:", error);
@@ -25,11 +27,12 @@ const TodayDoctorRecords = () => {
       }
     };
 
-    loadAppointments();
+    void loadAppointments();
   }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
+
     return date.toLocaleDateString("ru-RU", {
       day: "2-digit",
       month: "2-digit",
