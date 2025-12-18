@@ -3,20 +3,23 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   wrapper: {
-    maxWidth: 374,
     backgroundColor: COLORS.WHITE,
-    marginTop: 10,
-    paddingTop: 10,
-    paddingLeft: 15,
-    paddingRight: 10,
-    paddingBottom: 36,
-    width: "100%",
     borderRadius: 13,
-    alignContent: "center",
+    width: 377,
+    alignSelf: "center",
+    marginTop: 15,
+    marginBottom: 15,
+    padding: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 3,
   },
 
   icon: {
-    marginLeft: 5,
+    width: 17,
+    height: 16,
   },
 
   preview: {
@@ -29,58 +32,46 @@ export const styles = StyleSheet.create({
   main: {
     flex: 1,
     flexDirection: "row",
-    gap: 7,
+    gap: 12,
+    marginBottom: 15,
   },
 
   info: {
     flex: 1,
-    rowGap: 4,
     flexDirection: "column",
+    gap: 8,
   },
 
   image: {
-    width: 90,
-    height: 90,
-    borderRadius: 100,
-  },
-  text: {
-    fontWeight: 500,
-    fontSize: 16,
-    color: COLORS.BLACK,
-    paddingTop: 15,
-    paddingBottom: 15,
+    width: 79,
+    height: 76,
+    borderRadius: 38,
   },
   title: {
-    fontWeight: 500,
     fontSize: 16,
+    fontWeight: "700",
     color: COLORS.BLACK,
   },
 
   registration: {
     flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
 
   registrationRegular: {
-    fontWeight: 300,
-    fontSize: 12,
+    fontSize: 16,
     color: COLORS.BLACK,
   },
 
   registrationBold: {
-    fontWeight: 500,
-    fontSize: 12,
+    fontSize: 16,
+    fontWeight: "600",
     color: COLORS.BLACK,
   },
 
   location: {
-    fontWeight: 300,
-    fontSize: 12,
-    color: COLORS.BLACK,
-  },
-
-  tel: {
-    fontWeight: 300,
-    fontSize: 12,
+    fontSize: 16,
     color: COLORS.BLACK,
   },
 
@@ -96,9 +87,10 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.BLACK,
   },
   citate: {
-    fontWeight: 300,
-    fontSize: 12,
+    fontSize: 16,
     color: COLORS.BLACK,
-    marginTop: 11,
+    lineHeight: 18,
+    marginTop: 10,
+    paddingHorizontal: 2,
   },
 });

@@ -22,8 +22,10 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   contentContainer: {
-    padding: 16,
-    paddingBottom: 20,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 2,
+    paddingTop: 16,
   },
   sectionTitle: {
     fontSize: 16,

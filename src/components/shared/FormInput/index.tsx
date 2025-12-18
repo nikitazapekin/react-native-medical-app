@@ -32,7 +32,8 @@ const FormInput = ({
         keyboardType={
           type === "email" ? "email-address" :
             type === "tel" ? "phone-pad" :
-              "default"
+              type === "numeric" ? "numeric" :
+                "default"
         }
       />
     </View>

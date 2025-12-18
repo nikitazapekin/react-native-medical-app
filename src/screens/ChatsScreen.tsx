@@ -1,6 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
 
 import { styles } from "./styles";
 
@@ -12,13 +11,12 @@ export default function ChatsScreen() {
   return (
     <View style={styles.container}>
       <Header title={"Чаты"} isAuthenticated={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <View style={[styles.content, styles.contentContainer]}>
         <Chats />
-      </ScrollView>
+      </View>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

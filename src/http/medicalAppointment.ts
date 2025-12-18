@@ -1,101 +1,201 @@
-import type { MedicalAppointment, MedicalAppointmentRequest } from './types/medical';
-import $api from './api';
+import type { MedicalAppointmentRequest, MedicalAppointmentResponse } from "./types/doctor";
+import $api from "./api";
 
 class MedicalAppointmentService {
-  static async createMedicalAppointment(
-    medicalCardId: number,
-    request: MedicalAppointmentRequest
-  ): Promise<MedicalAppointment> {
+  static async getAppointmentsByMedicalCardId(medicalCardId: number): Promise<MedicalAppointmentResponse[]> {
     try {
-      const response = await $api.post<MedicalAppointment>(
-        `/medical-cards/${medicalCardId}/appointments`,
-        request
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/medical-card/${medicalCardId}`
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+
+      return [];
+    }
+  }
+
+  static async getAnalyzesByMedicalCardId(medicalCardId: number): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/medical-card/${medicalCardId}/analyzes`
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching analyzes:", error);
+
+      return [];
+    }
+  }
+
+  static async getAppointmentById(id: number): Promise<MedicalAppointmentResponse> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse>(`/medical-appointments/${id}`);
+
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching appointment ${id}:`, error);
+      throw new Error("Failed to get appointment information");
+    }
+  }
+
+  static async createAppointment(appointment: MedicalAppointmentRequest): Promise<MedicalAppointmentResponse> {
+    try {
+      const response = await $api.post<MedicalAppointmentResponse>("/medical-appointments", appointment);
+
+      return response.data;
+    } catch (error) {
+      console.error("Error creating appointment:", error);
+      throw new Error("Failed to create appointment");
+    }
+  }
+
+  static async deleteAppointment(id: number): Promise<void> {
+    try {
+      await $api.delete(`/medical-appointments/${id}`);
+    } catch (error) {
+      console.error(`Error deleting appointment ${id}:`, error);
+      throw new Error("Failed to delete appointment");
+    }
+  }
+
+  // История консультаций
+  static async getConsultationHistory(
+    patientId: number,
+    year?: number,
+    sortBy?: string
+  ): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const params: any = { sortBy: sortBy || "date_desc" };
+
+      if (year) {
+        params.year = year;
+      }
+
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/consultations/patient/${patientId}`,
+        { params }
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching consultation history:", error);
+
+      return [];
+    }
+  }
+
+  static async getConsultationHistoryByChild(childId: number): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/consultations/child/${childId}`
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching child consultation history:", error);
+
+      return [];
+    }
+  }
+
+  // Все записи пациента с фильтрами
+  static async getAllAppointments(
+    patientId: number,
+    filters?: {
+      year?: number;
+      status?: string;
+      sortBy?: string;
+      search?: string;
+    }
+  ): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const params: any = {
+        sortBy: filters?.sortBy || "date_desc",
+      };
+
+      if (filters?.year) params.year = filters.year;
+
+      if (filters?.status) params.status = filters.status;
+
+      if (filters?.search) params.search = filters.search;
+
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/patient/${patientId}`,
+        { params }
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+
+      return [];
+    }
+  }
+
+  // Отмена записи
+  static async cancelAppointment(id: number): Promise<MedicalAppointmentResponse> {
+    try {
+      const response = await $api.patch<MedicalAppointmentResponse>(
+        `/medical-appointments/${id}/cancel`
       );
 
       return response.data;
     } catch (error) {
-      console.error('Error creating medical appointment:', error);
-      throw new Error('Failed to create medical appointment');
+      console.error(`Error cancelling appointment ${id}:`, error);
+      throw new Error("Failed to cancel appointment");
     }
   }
 
-  static async getMedicalAppointments(medicalCardId: number): Promise<MedicalAppointment[]> {
-    try {
-      const response = await $api.get<MedicalAppointment[]>(
-        `/medical-cards/${medicalCardId}/appointments`
-      );
-
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching medical appointments:', error);
-      throw new Error('Failed to get medical appointments');
-    }
-  }
-
-  static async getMedicalAppointmentById(id: number): Promise<MedicalAppointment> {
-    try {
-      const response = await $api.get<MedicalAppointment>(`/appointments/${id}`);
-
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching medical appointment:', error);
-      throw new Error('Failed to get medical appointment');
-    }
-  }
-
-  static async updateMedicalAppointment(
+  // Перенос записи
+  static async rescheduleAppointment(
     id: number,
-    request: MedicalAppointmentRequest
-  ): Promise<MedicalAppointment> {
+    newDate: string,
+    newTime?: string
+  ): Promise<MedicalAppointmentResponse> {
     try {
-      const response = await $api.put<MedicalAppointment>(`/appointments/${id}`, request);
+      const params: any = { newDate };
 
-      return response.data;
-    } catch (error) {
-      console.error('Error updating medical appointment:', error);
-      throw new Error('Failed to update medical appointment');
-    }
-  }
+      if (newTime) params.newTime = newTime;
 
-  static async deleteMedicalAppointment(id: number): Promise<void> {
-    try {
-      await $api.delete(`/appointments/${id}`);
-    } catch (error) {
-      console.error('Error deleting medical appointment:', error);
-      throw new Error('Failed to delete medical appointment');
-    }
-  }
-
-  static async getMedicalAppointmentsByDate(
-    medicalCardId: number,
-    date: string
-  ): Promise<MedicalAppointment[]> {
-    try {
-      const response = await $api.get<MedicalAppointment[]>(
-        `/medical-cards/${medicalCardId}/appointments/by-date?date=${date}`
+      const response = await $api.patch<MedicalAppointmentResponse>(
+        `/medical-appointments/${id}/reschedule`,
+        null,
+        { params }
       );
 
       return response.data;
     } catch (error) {
-      console.error('Error fetching medical appointments by date:', error);
-      throw new Error('Failed to get medical appointments by date');
+      console.error(`Error rescheduling appointment ${id}:`, error);
+      throw new Error("Failed to reschedule appointment");
     }
   }
 
-  static async getMedicalAppointmentsByPeriod(
-    medicalCardId: number,
-    startDate: string,
-    endDate: string
-  ): Promise<MedicalAppointment[]> {
+  // Записи врача на сегодня
+  static async getDoctorTodayAppointments(): Promise<MedicalAppointmentResponse[]> {
     try {
-      const response = await $api.get<MedicalAppointment[]>(
-        `/medical-cards/${medicalCardId}/appointments/by-period?startDate=${startDate}&endDate=${endDate}`
-      );
+      const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments/today');
 
-      return response.data;
+      return Array.isArray(response.data) ? response.data : [];
     } catch (error) {
-      console.error('Error fetching medical appointments by period:', error);
-      throw new Error('Failed to get medical appointments by period');
+      console.error('Error fetching doctor today appointments:', error);
+
+      return [];
+    }
+  }
+
+  // Все записи врача
+  static async getDoctorAllAppointments(): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments');
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error('Error fetching doctor appointments:', error);
+
+      return [];
     }
   }
 }

@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -18,7 +17,7 @@ type UserRegistrationRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STA
 export default function UserRegistrationAtClinic() {
   const route = useRoute<UserRegistrationRouteProp>();
   const navigation = useNavigation();
-  const { doctor, serviceName } = route.params;
+  const { doctor, serviceName, serviceId, appointmentId } = route.params;
 
   const handleSelectionChange = ({ date, time }: { date: Date | null; time: string | null }) => {
     navigation.setParams?.({ doctor, selectedDate: date?.toISOString?.() ?? null, selectedTime: time ?? null } as any);
@@ -33,17 +32,18 @@ export default function UserRegistrationAtClinic() {
       selectedDate: selectedDateIso,
       selectedTime: selectedTimeVal,
       serviceName,
+      serviceId,
+      appointmentId,
     });
   };
 
   return (
     <View style={styles.container}>
       <Header title="Запись" isAuthenticated={true} showBackButton={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
         <RegistrationAtClinicComponent onSelectionChange={handleSelectionChange} onSubmit={handleSubmit} />
       </ScrollView>
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

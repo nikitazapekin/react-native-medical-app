@@ -1,6 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
 
 import { styles } from "./styles";
 
@@ -13,13 +12,12 @@ export default function MedScreen() {
     <View style={styles.container}>
       <Header title="Лекарства" isAuthenticated={true} />
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <View style={styles.content}>
         <MedScreenDrugs />
-      </ScrollView>
+      </View>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }

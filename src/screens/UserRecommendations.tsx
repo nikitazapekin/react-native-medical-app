@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -11,12 +10,11 @@ import Header from "@/components/shared/Header";
 export default function UserRecommendations() {
   return (
     <View style={styles.container}>
-      <Header title={"Рекомендации"} isAuthenticated={true} />
+      <Header title={"Рекомендации"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
         <Recommendations />
       </View>
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

@@ -3,8 +3,9 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   outerWrapper: {
+    width: "100%",
     backgroundColor: "#D9F0FF",
-    padding: 10,
+    paddingTop: 10,
     borderRadius: 10,
     alignItems: "center",
   },
@@ -15,7 +16,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     width: "100%",
-    maxWidth: 340,
     alignItems: "center",
   },
 
@@ -42,8 +42,8 @@ export const styles = StyleSheet.create({
   },
 
   imagePlaceholder: {
-    width: 230,
-    height: 150,
+    width: "100%",
+    height: 200,
     borderRadius: 10,
     backgroundColor: "#E5E5E5",
     marginTop: 10,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#00AEEF",
+    backgroundColor: COLORS.PRIMARY,
     borderRadius: 6,
     width: "100%",
     paddingVertical: 10,

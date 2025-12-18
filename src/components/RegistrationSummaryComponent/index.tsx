@@ -1,36 +1,207 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Alert, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styled";
 
 import CustomButton from "@/components/shared/Button";
-import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
+import MedicalAppointmentService from "@/http/medicalAppointment";
+import MedicalCardService from "@/http/medicalCard";
+import ServiceService from "@/http/service";
+import type { DoctorResponse } from "@/http/types/doctor";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 type Props = {
-  doctor: Doctor;
+  doctor: DoctorResponse | any;
   selectedDate: string | null;
   selectedTime: string | null;
   serviceName?: string;
+  serviceId?: number;
+  appointmentId?: number;
   onCancel: () => void;
 };
 
-const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, onCancel }) => {
+const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, selectedTime, serviceName, serviceId, appointmentId, onCancel }) => {
+  const navigation = useNavigation<FormNavigationProp>();
+  const [loading, setLoading] = useState(false);
+  const [createdAppointmentId, setCreatedAppointmentId] = useState<number | null>(null);
+  const [defaultServiceId, setDefaultServiceId] = useState<number | null>(null);
+  const [medicalCardId, setMedicalCardId] = useState<number | null>(null);
+
   const formattedDate = selectedDate ? new Intl.DateTimeFormat("ru-RU").format(new Date(selectedDate)) : "—";
   const time = selectedTime ?? "—";
   const displayedService = serviceName ?? "Консультация";
 
+  const fullName = doctor.firstName
+    ? `${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()
+    : doctor.name;
+
+  const spec = doctor.specialization || doctor.spec;
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const services = await ServiceService.getAllServices();
+        const consultation = services.find(s => s.title === "Консультация");
+
+        if (consultation) {
+          setDefaultServiceId(consultation.id);
+        }
+
+        const childIdStr = await AsyncStorage.getItem('childId');
+
+        console.log('Child ID:', childIdStr);
+
+        if (!childIdStr) {
+          console.error('No childId found in storage');
+          setMedicalCardId(1);
+
+          return;
+        }
+
+        const childId = parseInt(childIdStr);
+
+        const medicalCard = await MedicalCardService.getMedicalCardByChildId(childId);
+
+        setMedicalCardId(medicalCard.id);
+
+        console.log('Loaded medical card ID:', medicalCard.id);
+      } catch (error) {
+        console.error("Error loading data:", error);
+        setMedicalCardId(1);
+      }
+    };
+
+    void loadData();
+  }, []);
+
+  const handleConfirm = async () => {
+    if (!selectedDate || !selectedTime) {
+      Alert.alert("Ошибка", "Пожалуйста, выберите дату и время");
+
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // Если есть appointmentId, то это перенос записи
+      if (appointmentId) {
+        console.log('Rescheduling appointment:', appointmentId, 'to', selectedDate, selectedTime);
+
+        const result = await MedicalAppointmentService.rescheduleAppointment(
+          appointmentId,
+          new Date(selectedDate).toISOString(),
+          selectedTime
+        );
+
+        console.log('Rescheduled appointment:', result);
+
+        Alert.alert(
+          "Успешно",
+          "Запись перенесена",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
+            }
+          ]
+        );
+      } else {
+        // Иначе создаем новую запись
+        if (!medicalCardId) {
+          Alert.alert("Ошибка", "Не удалось получить медицинскую карту");
+
+          return;
+        }
+
+        // Создаем дату без учета часового пояса
+        const appointmentDateObj = new Date(selectedDate);
+        const appointmentDateString = new Date(
+          appointmentDateObj.getFullYear(),
+          appointmentDateObj.getMonth(),
+          appointmentDateObj.getDate(),
+          12, // Устанавливаем полдень, чтобы избежать проблем с часовым поясом
+          0,
+          0
+        ).toISOString();
+
+        const appointmentRequest = {
+          medicalCardId,
+          doctorId: doctor.id,
+          serviceId: serviceId ?? (serviceName ? undefined : (defaultServiceId ?? undefined)),
+          appointmentName: `Прием у ${fullName}`,
+          appointmentDate: appointmentDateString,
+          appointmentTime: selectedTime,
+          appointmentType: displayedService,
+          description: `Запись на ${displayedService}`
+        };
+
+        console.log('Creating appointment with data:', appointmentRequest);
+
+        const result = await MedicalAppointmentService.createAppointment(appointmentRequest);
+
+        setCreatedAppointmentId(result.id);
+
+        Alert.alert(
+          "Успешно",
+          "Запись создана",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
+            }
+          ]
+        );
+      }
+    } catch (error: any) {
+      console.error("Error with appointment:", error);
+      const errorMessage = error?.response?.data?.message || error?.message || "Не удалось выполнить операцию";
+
+      Alert.alert("Ошибка", errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancel = async () => {
+    if (createdAppointmentId) {
+      try {
+        await MedicalAppointmentService.deleteAppointment(createdAppointmentId);
+        Alert.alert("Отменено", "Запись удалена");
+      } catch (error) {
+        console.error("Error deleting appointment:", error);
+      }
+    }
+
+    onCancel();
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Детали записи</Text>
-        <View style={styles.row}><Text style={styles.label}>Врач:</Text><Text style={styles.value}>{doctor.name}</Text></View>
-        <View style={styles.row}><Text style={styles.label}>Специальность:</Text><Text style={styles.value}>{doctor.spec}</Text></View>
+        <Text style={styles.title}>{appointmentId ? 'Перенос записи' : 'Детали записи'}</Text>
+        <View style={styles.row}><Text style={styles.label}>Врач:</Text><Text style={styles.value}>{fullName}</Text></View>
+        <View style={styles.row}><Text style={styles.label}>Специальность:</Text><Text style={styles.value}>{spec}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Услуга:</Text><Text style={styles.value}>{displayedService}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Дата:</Text><Text style={styles.value}>{formattedDate}</Text></View>
         <View style={styles.row}><Text style={styles.label}>Время:</Text><Text style={styles.value}>{time}</Text></View>
-        <View style={styles.buttonWrapper}>
-          <CustomButton text="Отмена" handler={onCancel} fullWidth/>
-        </View>
+
+        {loading ? (
+          <ActivityIndicator size="large" color="#1280b2" style={{ marginTop: 20 }} />
+        ) : (
+          <View style={styles.buttonWrapper}>
+            <CustomButton
+              text={appointmentId ? "Подтвердить перенос" : "Подтвердить запись"}
+              handler={handleConfirm}
+              fullWidth
+              backgroundColor="#1280b2"
+            />
+            <CustomButton text="Отменить" handler={handleCancel} fullWidth />
+          </View>
+        )}
       </View>
     </View>
   );

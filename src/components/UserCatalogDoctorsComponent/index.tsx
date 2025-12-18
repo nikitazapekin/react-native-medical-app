@@ -1,25 +1,29 @@
-import React, { useMemo, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useMemo, useState } from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "appStyles";
 
 import { styles } from "./styled";
-import type { Doctor, UserCatalogDoctorsProps } from "./types";
+import type { UserCatalogDoctorsProps } from "./types";
 
 import DoctorCard from "@/components/shared/DoctorCard";
 import DroppableList from "@/components/shared/DroppableList";
 import SearchInput from "@/components/shared/SearchInput";
-import { doctorOptions,doctorsCatalog, doctorsSortOptions } from "@/constants/doctorsCatalog";
-import { historyConsultation } from "@/constants/historyConsultation";
+import { getDoctorAvatar } from "@/constants/doctorImages";
+import { doctorOptions, doctorsSortOptions } from "@/constants/doctorsCatalog";
+import DoctorService from "@/http/doctor";
+import type { DoctorResponse } from "@/http/types/doctor";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
 
 const sortOptions = doctorsSortOptions;
-const mockDoctors: Doctor[] = doctorsCatalog;
 
-const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, childId }) => {
+const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ serviceName, serviceId, childId, showPopular }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialization, setSelectedSpecialization] = useState<string>("");
   const [sortType, setSortType] = useState<string>("");
+  const [doctors, setDoctors] = useState<DoctorResponse[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation<FormNavigationProp>();
 
   const handleSort = (item: { id: string; label: string; type?: string }) => {
@@ -30,41 +34,71 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     setSelectedSpecialization(item.type || "");
   };
 
-  const handleDoctorPress = (doctor: Doctor) => {
-    navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor, serviceName });
+  const handleDoctorPress = (doctor: DoctorResponse) => {
+    navigation.navigate(ROUTES.STACK.USER_ABOUT_DOCTOR, { doctor, serviceName, serviceId });
   };
 
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        setLoading(true);
+        let data: DoctorResponse[];
+
+        if (childId) {
+          data = await DoctorService.getDoctorsByChildId(childId);
+        } else if (showPopular) {
+          data = await DoctorService.getPopularDoctors();
+        } else if (serviceId) {
+          data = await DoctorService.getDoctorsByServiceId(serviceId);
+        } else {
+          data = await DoctorService.getAllDoctors();
+        }
+
+        setDoctors(data);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchDoctors();
+  }, [showPopular, serviceId, childId]);
+
   const filteredDoctors = useMemo(() => {
-    let filtered = mockDoctors;
+    let filtered = doctors;
 
-    if (childId) {
-      const childConsultations = historyConsultation.filter((c) => c.childId === childId);
-      const doctorIds = [...new Set(childConsultations.map((c) => c.doctorId))];
-
-      filtered = filtered.filter((d) => doctorIds.includes(d.id));
-    }
-
-    if (serviceName) {
+    // Не фильтруем по serviceName если есть serviceId или childId, так как врачи уже загружены по услуге/ребенку
+    if (serviceName && !serviceId && !childId) {
       const q = serviceName.toLowerCase();
 
       filtered = filtered.filter((d) => d.specialization.toLowerCase().includes(q));
     }
 
     if (selectedSpecialization) {
-      filtered = filtered.filter((d) => d.spec === selectedSpecialization);
+      filtered = filtered.filter((d) => d.specialization === selectedSpecialization);
+    }
+
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+
+      filtered = filtered.filter((d) =>
+        `${d.firstName} ${d.middleName} ${d.lastName}`.toLowerCase().includes(q) ||
+        d.specialization.toLowerCase().includes(q)
+      );
     }
 
     if (sortType) {
       filtered = [...filtered].sort((a, b) => {
         switch (sortType) {
           case "name":
-            return a.name.localeCompare(b.name, "ru");
+            return `${a.lastName} ${a.firstName}`.localeCompare(`${b.lastName} ${b.firstName}`, "ru");
 
           case "specialization":
-            return a.spec.localeCompare(b.spec, "ru");
+            return a.specialization.localeCompare(b.specialization, "ru");
 
           case "rating":
-            return b.rating - a.rating;
+            return (b.rate || 0) - (a.rate || 0);
 
           default:
             return 0;
@@ -73,7 +107,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
     }
 
     return filtered;
-  }, [childId, serviceName, selectedSpecialization, sortType]);
+  }, [childId, serviceName, serviceId, selectedSpecialization, sortType, doctors, searchQuery]);
 
   const hasNoDoctors = filteredDoctors.length === 0;
 
@@ -86,30 +120,45 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
       <SearchInput
         value={searchQuery}
         onChangeText={setSearchQuery}
-        placeholderTextColor="#000"
+        placeholder="Поиск по врачу, специализации..."
+        placeholderTextColor="#B0B0B0"
       />
 
-      <Text style={styles.title}>Список врачей</Text>
+      <Text style={styles.title}>
+        {childId ? "Консультировавшие врачи" : showPopular ? "Популярные врачи" : "Список врачей"}
+      </Text>
 
-      <View style={styles.listWrapper}>
-        {hasNoDoctors && (
-          <Text style={{ fontSize: 16, color: "#6B7280", fontWeight: "600" }}>Нет врачей по услуге "{serviceName}"</Text>
-        )}
-        {filteredDoctors.map((doctor) => (
-          <TouchableOpacity
-            key={doctor.id}
-            style={styles.cardTouchable}
-            onPress={() => handleDoctorPress(doctor)}
-          >
-            <DoctorCard
-              name={doctor.name}
-              spec={doctor.spec}
-              availability={doctor.availability}
-              avatar={doctor.avatar}
-            />
-          </TouchableOpacity>
-        ))}
-      </View>
+      {loading ? (
+        <ActivityIndicator size="large" color={COLORS.PRIMARY} />
+      ) : (
+        <View style={styles.listWrapper}>
+          {hasNoDoctors && (
+            <Text style={{ fontSize: 16, color: "#6B7280", fontWeight: "600" }}>
+              {childId
+                ? "Нет врачей, которые консультировали ребенка"
+                : showPopular
+                  ? "Популярные врачи не найдены"
+                  : serviceName
+                    ? `Нет врачей по услуге "${serviceName}"`
+                    : "Врачи не найдены"}
+            </Text>
+          )}
+          {filteredDoctors.map((doctor) => (
+            <TouchableOpacity
+              key={doctor.id}
+              style={styles.cardTouchable}
+              onPress={() => handleDoctorPress(doctor)}
+            >
+              <DoctorCard
+                name={`${doctor.lastName} ${doctor.firstName} ${doctor.middleName || ''}`.trim()}
+                spec={doctor.specialization}
+                availability={doctor.status}
+                avatar={getDoctorAvatar(doctor.avatar)}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
 
     </View>
   );

@@ -1,17 +1,18 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Alert, Linking, ScrollView, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Alert, Linking, ScrollView, Text, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
+import { COLORS } from "appStyles";
 
 import { styles } from "./styles";
 
 import InformationAboutClinicComponent from "@/components/InformationAboutClinicComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
-import { clinicList } from "@/constants/clinicList";
 import ChildrenService from "@/http/children";
+import ClinicService from "@/http/clinic";
 import type { ChildFull } from "@/http/types/childFull";
+import type { ClinicResponse } from "@/http/types/clinic";
 import type { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 
@@ -21,35 +22,40 @@ export default function ChildrenInformationAboutClinicScreen() {
   const route = useRoute<ClinicRouteProp>();
   const { childId } = route.params;
   const [child, setChild] = useState<ChildFull | null>(null);
-
-  const clinic = useMemo(() => {
-    return clinicList.find((c) => c.childId === childId);
-  }, [childId]);
+  const [clinic, setClinic] = useState<ClinicResponse | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadChild = async () => {
+    const loadData = async () => {
       try {
-        const childData = await ChildrenService.getFullInfo(childId);
+        setLoading(true);
+        const [childData, clinicData] = await Promise.all([
+          ChildrenService.getFullInfo(childId),
+          ClinicService.getClinicByChildId(childId),
+        ]);
 
         setChild(childData);
+        setClinic(clinicData);
       } catch (_error) {
-        Alert.alert("Ошибка", "Не удалось загрузить данные ребенка");
+        Alert.alert("Ошибка", "Не удалось загрузить данные");
+      } finally {
+        setLoading(false);
       }
     };
 
     if (childId) {
-      void loadChild();
+      void loadData();
     }
   }, [childId]);
 
   const handleViewMap = async () => {
-    if (!clinic?.coordinates) {
+    if (!clinic?.latitude || !clinic?.longitude) {
       Alert.alert("Ошибка", "Координаты поликлиники не найдены");
 
       return;
     }
 
-    const { latitude, longitude } = clinic.coordinates;
+    const { latitude, longitude } = clinic;
     const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 
     try {
@@ -65,18 +71,21 @@ export default function ChildrenInformationAboutClinicScreen() {
     }
   };
 
-  if (!clinic || !child) {
-    return null;
-  }
-
   return (
     <View style={styles.container}>
       <Header title="Информация" isAuthenticated={true} showBackButton={true} />
       <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <InformationAboutClinicComponent clinic={clinic} childName={child.name} onViewMap={handleViewMap} />
+        {loading ? (
+          <ActivityIndicator size="large" color={COLORS.PRIMARY} />
+        ) : !clinic || !child ? (
+          <Text style={{ fontSize: 16, color: "#6B7280", fontWeight: "600", textAlign: "center", marginTop: 20 }}>
+            Поликлиника не найдена для этого ребенка
+          </Text>
+        ) : (
+          <InformationAboutClinicComponent clinic={clinic} childName={child.name} onViewMap={handleViewMap} />
+        )}
       </ScrollView>
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

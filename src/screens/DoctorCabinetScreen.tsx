@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -14,15 +13,13 @@ const DoctorCabinetScreen = () => {
   return (
     <>
       <View style={styles.container}>
-        <Header title="Профиль" isAuthenticated={true} DoctorLogin={true} />
+        <Header title="Профиль" isAuthenticated={true} DoctorLogin={true} showBackButton={true}/>
         <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
           <DoctorCabinetInfo />
           <DoctorCabinetOptions />
         </ScrollView>
 
         <FooterDoctor />
-
-        <StatusBar style="auto" />
       </View>
     </>
   );

@@ -8,6 +8,9 @@ export interface Child {
   age: number;
   gender: string;
   parentId: number;
+  clinicId?: number;
+  clinicRegistrationDate?: string;
+  createdAt?: string;
 }
 
 export interface CreateChildRequest {

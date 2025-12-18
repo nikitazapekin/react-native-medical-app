@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./styles";
 
@@ -17,7 +16,7 @@ type SummaryRouteProp = RouteProp<RootStackParamList, typeof ROUTES.STACK.USER_R
 export default function UserRegistrationSummaryScreen() {
   const route = useRoute<SummaryRouteProp>();
   const navigation = useNavigation();
-  const { doctor, selectedDate, selectedTime, serviceName } = route.params;
+  const { doctor, selectedDate, selectedTime, serviceName, serviceId, appointmentId } = route.params;
 
   const handleCancel = () => {
     navigation.goBack();
@@ -32,11 +31,12 @@ export default function UserRegistrationSummaryScreen() {
           selectedDate={selectedDate}
           selectedTime={selectedTime}
           serviceName={serviceName}
+          serviceId={serviceId}
+          appointmentId={appointmentId}
           onCancel={handleCancel}
         />
       </ScrollView>
       <Footer />
-      <StatusBar style="auto" />
     </View>
   );
 }

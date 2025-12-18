@@ -3,6 +3,7 @@ import AvatarImg from "@assets/mockPhotos/AvatarDoctorCatalog.png";
 import type { Doctor } from "@/components/UserCatalogDoctorsComponent/types";
 
 export const doctorsSortOptions = [
+  { id: "0", label: "Снять сортировку", type: "" },
   { id: "1", label: "По имени", type: "name" },
   { id: "2", label: "По специализации", type: "specialization" },
   { id: "3", label: "По рейтингу", type: "rating" },

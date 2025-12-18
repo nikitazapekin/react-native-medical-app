@@ -1,54 +1,104 @@
-import React from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Med from "@assets/mockPhotos/Vector.png";
+import { useNavigation } from "@react-navigation/native";
 
-interface Record {
-  id: string;
-  record: string;
-  date: string;
-  patient: string;
-}
-
-const Records: Record[] = [
-  { id: "1", record: "Запись 1", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "2", record: "Запись 2", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "3", record: "Запись 3", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "4", record: "Запись 4", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "5", record: "Запись 5", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "6", record: "Запись 6", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "7", record: "Запись 7", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "8", record: "Запись 8", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "9", record: "Запись 9", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-  { id: "10", record: "Запись 10", date: "10.10.2024", patient: "Пациент Журавлев А.Д." },
-];
+import MedicalAppointmentService from "@/http/medicalAppointment";
+import type { MedicalAppointmentResponse } from "@/http/types/doctor";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const TodayDoctorRecords = () => {
-  const renderAppointment = ({ item }: { item: Record }) => (
-    <View style={styles.appointmentItem}>
-      {}
+  const navigation = useNavigation<FormNavigationProp>();
+  const [appointments, setAppointments] = useState<MedicalAppointmentResponse[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadAppointments = async () => {
+      try {
+        setLoading(true);
+        const data = await MedicalAppointmentService.getDoctorTodayAppointments();
+
+        setAppointments(data);
+      } catch (error) {
+        console.error("Error loading today appointments:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void loadAppointments();
+  }, []);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString("ru-RU", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  const handleAppointmentPress = (appointment: MedicalAppointmentResponse) => {
+    navigation.navigate(ROUTES.STACK.DOCTOR_RECORD_DETAIL, {
+      record: {
+        id: appointment.id.toString(),
+        time: appointment.appointmentTime || "",
+        patient: appointment.patientName || "Пациент не указан",
+        service: appointment.appointmentType || appointment.service?.title || "Услуга не указана",
+      },
+    });
+  };
+
+  const renderAppointment = ({ item, index }: { item: MedicalAppointmentResponse; index: number }) => (
+    <TouchableOpacity
+      style={styles.appointmentItem}
+      onPress={() => handleAppointmentPress(item)}
+    >
       <Image source={Med} style={styles.icon} resizeMode="contain" />
 
-      {}
       <View style={{ flex: 1 }}>
-        <Text style={styles.recordText}>{item.record}</Text>
-        <Text style={styles.patientText}>{item.patient}</Text>
+        <Text style={styles.recordText}>Запись {index + 1}</Text>
+        <Text style={styles.patientText}>
+          {item.patientName || "Пациент не указан"}
+        </Text>
+        <Text style={styles.serviceText}>
+          {item.appointmentType || item.service?.title || ""}
+        </Text>
       </View>
 
-      {}
-      <Text style={styles.dateText}>{item.date}</Text>
-    </View>
+      <View>
+        <Text style={styles.dateText}>{formatDate(item.appointmentDate)}</Text>
+        <Text style={styles.timeText}>{item.appointmentTime}</Text>
+      </View>
+    </TouchableOpacity>
   );
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { flex: 1, justifyContent: "center", alignItems: "center" }]}>
+        <ActivityIndicator size="large" color="#1280b2" />
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.container, { flex: 1 }]}>
       <Text style={styles.title}>Записи на сегодня</Text>
-      <FlatList
-        data={Records}
-        renderItem={renderAppointment}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 }}
-      />
+      {appointments.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>На сегодня записей нет</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={appointments}
+          renderItem={renderAppointment}
+          keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+      )}
     </View>
   );
 };
@@ -77,6 +127,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: "#E9ECEF",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
   icon: {
     width: 24,
@@ -92,11 +147,32 @@ const styles = StyleSheet.create({
   patientText: {
     fontSize: 15,
     color: "#333",
+    marginBottom: 2,
+  },
+  serviceText: {
+    fontSize: 14,
+    color: "#555",
   },
   dateText: {
     fontSize: 14,
     color: "#007BFF",
     fontWeight: "500",
-    marginLeft: 12,
+    textAlign: "right",
+  },
+  timeText: {
+    fontSize: 13,
+    color: "#666",
+    marginTop: 2,
+    textAlign: "right",
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: "#666",
   },
 });

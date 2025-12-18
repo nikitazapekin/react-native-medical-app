@@ -3,7 +3,7 @@ import { COLORS } from "appStyles";
 
 export const styles = StyleSheet.create({
   wrapper: {
-    width: 356,
+    width: "100%",
     paddingTop: 16,
     paddingBottom: 16,
     paddingLeft: 14,

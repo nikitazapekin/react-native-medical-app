@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
 import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import CustomButton from "@/components/shared/Button";
+import { ROUTES } from "@/navigation/routes";
+import type { FormNavigationProp } from "@/navigation/types";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -9,11 +14,15 @@ interface SwiperItem {
   title: string;
   content: string;
   icon?: string;
+  badge?: string;
+  buttonText?: string;
+  buttonColor?: string;
 }
 
 const CustomSwiper = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+  const navigation = useNavigation<FormNavigationProp>();
 
   const CARD_WIDTH = 356;
 
@@ -22,21 +31,30 @@ const CustomSwiper = () => {
   const swiperData: SwiperItem[] = [
     {
       id: "1",
-      title: "Основная информация",
-      content: "Здесь будет основная информация пользователя",
-      icon: "📋",
+      title: "Скидка 20%",
+      content: "Первый прием у специалиста со скидкой",
+      icon: "🎉",
+      badge: "АКЦИЯ",
+      buttonText: "Записаться",
+      buttonColor: "#1280B2",
     },
     {
       id: "2",
-      title: "Достижения",
-      content: "Ваши достижения и награды",
-      icon: "🏆",
+      title: "Анализы -30%",
+      content: "Комплексное обследование по спеццене",
+      icon: "🔬",
+      badge: "СКИДКА",
+      buttonText: "Подробнее",
+      buttonColor: "#1280B2",
     },
     {
       id: "3",
-      title: "Статистика",
-      content: "Статистика активности и прогресс",
-      icon: "📊",
+      title: "Новые врачи",
+      content: "Врачи высшей категории уже ждут вас",
+      icon: "👨‍⚕️",
+      badge: "НОВИНКА",
+      buttonText: "Посмотреть",
+      buttonColor: "#1280B2",
     },
   ];
 
@@ -62,11 +80,50 @@ const CustomSwiper = () => {
     index,
   });
 
+  const handleButtonPress = (item: SwiperItem) => {
+    switch (item.id) {
+      case "1":
+        // Скидка 20% - переход на каталог врачей
+        navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, {});
+        break;
+
+      case "2":
+        // Анализы -30% - переход на каталог услуг
+        navigation.navigate(ROUTES.STACK.USER_CATALOG_SERVICES);
+        break;
+
+      case "3":
+        // Новые врачи - переход на популярных врачей
+        navigation.navigate(ROUTES.STACK.USER_POPULAR_DOCTORS, { showPopular: true });
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const renderCard = (item: SwiperItem) => (
     <View style={[styles.card, { width: CARD_WIDTH }]}>
-      <Text style={styles.cardIcon}>{item.icon}</Text>
-      <Text style={styles.cardTitle}>{item.title}</Text>
-      <Text style={styles.cardContent}>{item.content}</Text>
+      {item.badge && (
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{item.badge}</Text>
+        </View>
+      )}
+      <View style={styles.cardContent}>
+        <Text style={styles.cardIcon}>{item.icon}</Text>
+        <Text style={styles.cardTitle}>{item.title}</Text>
+        <Text style={styles.cardDescription}>{item.content}</Text>
+      </View>
+      {item.buttonText && (
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            text={item.buttonText}
+            handler={() => handleButtonPress(item)}
+            backgroundColor={item.buttonColor || "#1280B2"}
+            fullWidth
+          />
+        </View>
+      )}
     </View>
   );
 
@@ -119,172 +176,104 @@ const CustomSwiper = () => {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,
-    height: 220,
+    height: 340,
   },
   flatListContent: {
     paddingHorizontal: 0,
   },
   card: {
-    backgroundColor: "white",
-    borderRadius: 12,
-    padding: 16,
-    height: 180,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
+    padding: 24,
+    height: 280,
+    justifyContent: "space-between",
+    position: "relative",
+    shadowColor: "#1280B2",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 8,
+    borderWidth: 1,
+    borderColor: "#E8F4F8",
   },
-  cardIcon: {
-    fontSize: 32,
-    marginBottom: 12,
+  badge: {
+    position: "absolute",
+    top: 16,
+    right: 16,
+    backgroundColor: "#993B4A",
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 14,
   },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
-    color: "#000",
-    textAlign: "center",
+  badgeText: {
+    color: "#FFFFFF",
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 0.8,
   },
   cardContent: {
-    fontSize: 14,
-    color: "orange",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 16,
+  },
+  cardIcon: {
+    fontSize: 52,
+    marginBottom: 16,
+  },
+  cardTitle: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 10,
+    color: "#1A202C",
     textAlign: "center",
+    letterSpacing: 0.3,
+  },
+  cardDescription: {
+    fontSize: 14,
+    color: "#64748B",
+    textAlign: "center",
+    lineHeight: 20,
+    paddingHorizontal: 12,
+  },
+  buttonContainer: {
+    width: "100%",
+    marginTop: 16,
   },
   pagination: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 16,
+    marginTop: 20,
   },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginHorizontal: 4,
+    marginHorizontal: 5,
   },
   activeDot: {
-    backgroundColor: "red",
-    width: 12,
+    backgroundColor: "#1280B2",
+    width: 24,
+    height: 8,
+    borderRadius: 4,
   },
   inactiveDot: {
-    backgroundColor: "#E2E8F0",
+    backgroundColor: "#CBD5E1",
   },
   positionIndicator: {
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 12,
   },
   positionText: {
-    fontSize: 14,
-    color: "#718096",
-    fontWeight: "500",
+    fontSize: 13,
+    color: "#94A3B8",
+    fontWeight: "600",
+    letterSpacing: 0.5,
   },
 });
 
 export default CustomSwiper;
-
-/* import { useState } from "react";
-import type { NativeScrollEvent, NativeSyntheticEvent} from "react-native";
-import { FlatList , Text,View } from "react-native";
-
-import { styles } from "./styled";
-
-import { ChildrenImage } from "@/constants";
-
-interface SwiperItem {
-  id: string;
-  title: string;
-  content: string;
-}
-
-const CARD_WIDTH = 356;
-const CARD_MARGIN = 16;
-
-const SwiperWithDots = () => {
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const swiperData: SwiperItem[] = [
-    {
-      id: '1',
-      title: 'Основная информация',
-      content: 'Здесь будет основная информация пользователя'
-    },
-    {
-      id: '2',
-      title: 'Достижения',
-      content: 'Ваши достижения и награды'
-    },
-    {
-      id: '3',
-      title: 'Статистика',
-      content: 'Статистика активности'
-    }
-  ];
-
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const itemWidth = CARD_WIDTH + CARD_MARGIN * 2;
-    const index = Math.round(scrollPosition / itemWidth);
-
-    setActiveIndex(index);
-  };
-
-  const getItemLayout = (_: unknown, index: number) => ({
-    length: CARD_WIDTH + CARD_MARGIN * 2,
-    offset: (CARD_WIDTH + CARD_MARGIN * 2) * index,
-    index,
-  });
-  const renderItem = ({ item }: { item: SwiperItem }) => (
-    <View style={[styles.slide, { width: CARD_WIDTH }]}>
-      <Text style={styles.slideTitle}>{item.title}</Text>
-      <Text style={styles.slideContent}>{item.content}</Text>
-    </View>
-  );
-
-  const renderPagination = () => {
-    return (
-      <View style={styles.pagination}>
-        {swiperData.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              index === activeIndex ? styles.activeDot : styles.inactiveDot
-            ]}
-          />
-        ))}
-      </View>
-    );
-  };
-
-  return (
-    <View style={styles.swiperContainer}>
-      <FlatList
-        data={swiperData}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-        getItemLayout={getItemLayout}
-        snapToInterval={CARD_WIDTH + CARD_MARGIN * 2}
-        snapToAlignment="center"
-        decelerationRate="fast"
-        contentContainerStyle={styles.flatListContent}
-      />
-      {renderPagination()}
-    </View>
-
-  );
-};
-
-export default SwiperWithDots;
- */

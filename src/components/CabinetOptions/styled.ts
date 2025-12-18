@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
 
   wrapper: {
     maxWidth: 376,
+    paddingBottom: 20,
   },
   text: {
     fontWeight: 500,
@@ -27,5 +28,12 @@ export const styles = StyleSheet.create({
     color: COLORS.BLACK,
     paddingTop: 15,
     paddingBottom: 15,
+  },
+  logoutButtonContainer: {
+    marginTop: 20,
+    marginBottom: 20,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

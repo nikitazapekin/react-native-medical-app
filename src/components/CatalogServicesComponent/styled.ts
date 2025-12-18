@@ -10,6 +10,6 @@ export const styles = StyleSheet.create({
   },
   listWrapper: {
     gap: 11,
-    paddingBottom: 25,
+    paddingBottom: 50,
   },
 });

@@ -10,7 +10,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ name, spec, availability, avata
     <View style={styles.cardShadowWrapper}>
       <View style={styles.doctorCard}>
         <View style={styles.avatarWrapper}>
-          <Image source={avatar} style={styles.avatarImage} resizeMode="contain" />
+          <Image source={avatar} style={styles.avatarImage} resizeMode="cover" />
         </View>
 
         <View style={styles.doctorTextBlock}>

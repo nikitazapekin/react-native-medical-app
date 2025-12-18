@@ -22,5 +22,13 @@ export const styles = StyleSheet.create({
   input: {
     width: "100%",
     backgroundColor: COLORS.WHITE,
+    borderRadius: 30,
+    marginTop: 20,
+    marginBottom: 15,
+    paddingLeft: 20,
+    paddingRight: 15,
+    paddingVertical: 10,
+    fontSize: 16,
+    color: COLORS.BLACK,
   },
 });

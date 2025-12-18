@@ -1,6 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
 
 import { styles } from "./styles";
 
@@ -11,14 +10,13 @@ import UserFavouritesDrugs from "@/components/UserFavouriteDrugs";
 export default function UserFavouritesDrugsScreen() {
   return (
     <View style={styles.container}>
-      <Header title="Избранные лекарства" isAuthenticated={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
+      <Header title="Избранные лекарства" isAuthenticated={true} showBackButton={true} />
+      <View style={styles.content}>
         <UserFavouritesDrugs />
-      </ScrollView>
+      </View>
 
       <Footer />
 
-      <StatusBar style="auto" />
     </View>
   );
 }
