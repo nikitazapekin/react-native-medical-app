@@ -9,7 +9,6 @@ const $api = axios.create({
   withCredentials: true,
   timeout: 10000,
 });
- 
 
 $api.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
