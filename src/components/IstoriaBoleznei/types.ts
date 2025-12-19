@@ -1,3 +1,4 @@
 export interface IstoriaBolezneiProps {
-  id: string
+  id: string,
+  selectedDate: string
 }

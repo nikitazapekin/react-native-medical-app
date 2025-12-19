@@ -15,15 +15,15 @@ interface UserEditChildrenProps {
 }
 
 export default function IstoriaBolezneiScreen({ route }: UserEditChildrenProps) {
-  const { id } = route.params || {};
+  const { id , selectedDate} = route.params || {};
 
-  console.log("id", id);
+  console.log("id", id, selectedDate);
 
   return (
     <View style={styles.container}>
       <Header title={"История болезней"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
-        <IstoriaBoleznei id={String(id)} />
+        <IstoriaBoleznei id={String(id)} selectedDate={ selectedDate} />
       </View>
       <Footer />
     </View>

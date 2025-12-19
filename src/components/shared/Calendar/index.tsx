@@ -12,13 +12,27 @@ type CalendarProps = {
   primaryColor?: string;
 };
 
-const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedDate, onSelectDate, primaryColor = PRIMARY }) => {
+const Calendar: React.FC<CalendarProps> = ({
+  initialDate = new Date(),
+  selectedDate = null,
+  onSelectDate,
+  primaryColor = PRIMARY
+}) => {
   const [currentDate, setCurrentDate] = useState<Date>(initialDate);
-  const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(selectedDate ?? null);
+  const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(selectedDate);
 
+  // Синхронизируем внутреннее состояние с пропсами
   useEffect(() => {
-    if (selectedDate !== undefined) {
-      setInternalSelectedDate(selectedDate);
+    setInternalSelectedDate(selectedDate);
+  }, [selectedDate]);
+
+  // Также обновляем currentDate если selectedDate меняется на другую дату
+  useEffect(() => {
+    if (selectedDate && (
+      selectedDate.getMonth() !== currentDate.getMonth() ||
+      selectedDate.getFullYear() !== currentDate.getFullYear()
+    )) {
+      setCurrentDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1));
     }
   }, [selectedDate]);
 
@@ -66,7 +80,9 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
   const isSameDay = (a: Date | null, b: Date | null): boolean => {
     if (!a || !b) return false;
 
-    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    return a.getFullYear() === b.getFullYear() &&
+           a.getMonth() === b.getMonth() &&
+           a.getDate() === b.getDate();
   };
 
   const selectedDayScale = useMemo(() => new Animated.Value(0), []);
@@ -85,25 +101,51 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
 
     setInternalSelectedDate(date);
+
     onSelectDate?.(date);
+
     animateSelect();
+  };
+
+  const isToday = (day: number): boolean => {
+    const today = new Date();
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+
+    return date.getFullYear() === today.getFullYear() &&
+           date.getMonth() === today.getMonth() &&
+           date.getDate() === today.getDate();
+  };
+
+  // Проверяем, является ли день выбранным
+  const isSelectedDay = (day: number): boolean => {
+    if (!internalSelectedDate) return false;
+
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+
+    return isSameDay(date, internalSelectedDate);
   };
 
   return (
     <View style={styles.calendarContainer}>
 
       <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => changeMonth(-1)}
+
+        >
+          <Text style={[styles.arrow, { color: primaryColor }]}>&lt;</Text>
+        </TouchableOpacity>
+
         <Text style={styles.monthYear}>
           {months[currentDate.getMonth()]} {currentDate.getFullYear()}
         </Text>
-        <View style={styles.arrows}>
-          <TouchableOpacity onPress={() => changeMonth(-1)}>
-            <Text style={styles.arrow}>&lt;</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => changeMonth(1)}>
-            <Text style={styles.arrow}>&gt;</Text>
-          </TouchableOpacity>
-        </View>
+
+        <TouchableOpacity
+          onPress={() => changeMonth(1)}
+
+        >
+          <Text style={[styles.arrow, { color: primaryColor }]}>&gt;</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.weekDays}>
@@ -116,37 +158,51 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate = new Date(), selectedD
 
       <View style={styles.daysGrid}>
         {days.map((day, index) => {
-          const date = day
-            ? new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
-            : null;
-          const selected = isSameDay(date, internalSelectedDate);
-          const scale = selected ? selectedDayScale.interpolate({ inputRange: [0, 1], outputRange: [0.8, 1] }) : 1;
+          if (!day) {
+            return (
+              <View key={index} style={styles.dayCell}>
+                <View style={{ width: 32, height: 32 }} />
+              </View>
+            );
+          }
+
+          const today = isToday(day);
+          const selected = isSelectedDay(day);
+          const scale = selected ? selectedDayScale.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.8, 1]
+          }) : 1;
 
           return (
             <TouchableOpacity
               key={index}
               style={styles.dayCell}
-              disabled={!day}
-              onPress={() => day && handleSelectDay(day)}
+              onPress={() => handleSelectDay(day)}
               activeOpacity={0.8}
             >
-              {day ? (
-                <Animated.View
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 16,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: selected ? primaryColor : "transparent",
-                    transform: [{ scale }],
-                  }}
-                >
-                  <Text style={[styles.day, { color: selected ? "#fff" : styles.day.color }]}>{day}</Text>
-                </Animated.View>
-              ) : (
-                <View style={{ width: 32, height: 32 }} />
-              )}
+              <Animated.View
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 16,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: selected ? primaryColor : "transparent",
+                  borderWidth: today ? 1 : 0,
+                  borderColor: today ? primaryColor : "transparent",
+                  transform: [{ scale }],
+                }}
+              >
+                <Text style={[
+                  styles.day,
+                  {
+                    color: selected ? "#fff" : today ? primaryColor : styles.day.color,
+                    fontWeight: today ? "600" : "400"
+                  }
+                ]}>
+                  {day}
+                </Text>
+              </Animated.View>
             </TouchableOpacity>
           );
         })}

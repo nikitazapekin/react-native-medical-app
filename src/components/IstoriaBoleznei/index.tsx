@@ -25,14 +25,14 @@ function formatDate(isoDateString: string): string {
   return isoDateString.split('T')[0];
 }
 
-const IstoriaBoleznei = ({ id }: IstoriaBolezneiProps) => {
+const IstoriaBoleznei = ({ id , selectedDate }: IstoriaBolezneiProps) => {
   const [bolezni, setBolezni] = useState<DiseaseHistory[]>([]);
 
   useEffect(() => {
     const handleGet = async () => {
       try {
 
-        const resp = await DiseaseHistoryService.getDiseaseHistories(Number(id));
+        const resp = await DiseaseHistoryService.getDiseaseHistories(Number(id), selectedDate);
 
         setBolezni(resp || []);
       } catch (error) {
@@ -57,6 +57,7 @@ const IstoriaBoleznei = ({ id }: IstoriaBolezneiProps) => {
 
   return (
     <View style={styles.wrapper}>
+
       <DroppableList sortOptions={sortOptions} />
       <DroppableList sortOptions={sortOptions1} />
 

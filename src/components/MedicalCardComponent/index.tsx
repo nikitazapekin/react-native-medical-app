@@ -18,6 +18,7 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
   const navigation = useNavigation<FormNavigationProp>();
 
   const [info, setInfo] = useState<MedicalCard>();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   useEffect(() => {
     const handleGetInfo = async () => {
@@ -30,32 +31,51 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
       }
     };
 
-    handleGetInfo().catch(()=> Alert.alert("Error"));
+    handleGetInfo().catch(() => Alert.alert("Error"));
   }, [id]);
 
-  //info?.id - id медицинской карты
+  const handleDateSelect = (date: Date) => {
+    setSelectedDate(date);
+
+    console.log("Selected date:", date.toISOString().split("T")[0]);
+  };
+
   const handleNavigate = (
     item: "IstoriaBoleznei" | "ChildrenHealthStatus" | "UserAnalyzeHistory" | "UserPriemiHistory"
   ) => {
+   
+
     if (item == "IstoriaBoleznei") {
-      navigation.navigate(ROUTES.STACK.ISTORIABOLEZNEI, { id: Number(info?.id) });
+      navigation.navigate(ROUTES.STACK.ISTORIABOLEZNEI, {
+        id: Number(info?.id),
+        selectedDate: String(selectedDate?.toISOString()),
+      });
     }
 
     if (item == "UserAnalyzeHistory") {
-      navigation.navigate(ROUTES.STACK.USER_ANALYZE_HISTORY, { id: Number(info?.id) });
+      navigation.navigate(ROUTES.STACK.USER_ANALYZE_HISTORY, {
+        id: Number(info?.id),
+        selectedDate: String(selectedDate?.toISOString()),
+      });
     }
 
     if (item == "UserPriemiHistory") {
-      navigation.navigate(ROUTES.STACK.USER_ISTORIA_PRIEMOV, { id: Number(info?.id) });
+      navigation.navigate(ROUTES.STACK.USER_ISTORIA_PRIEMOV, {
+        id: Number(info?.id),
+        selectedDate: String(selectedDate?.toISOString()),
+      });
     }
 
-    if (item ==  "ChildrenHealthStatus") {
-      // Передаем childId из info, если доступен
+    if (item == "ChildrenHealthStatus") {
       if (info?.childId) {
-        navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, { childId: info.childId });
+        navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, {
+          childId: info.childId,
+          //     selectedDate: selectedDate?.toISOString()
+        });
       } else {
-        // Если childId не доступен, используем id из route params
-        navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, { childId: Number(id) });
+        navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, {
+          childId: Number(id),
+        });
       }
     }
   };
@@ -64,7 +84,13 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
     <View style={styles.wrapper}>
       <View style={styles.content}>
         <Text style={styles.title}>Медицинская карта {info?.id}</Text>
-        <Calendar />
+
+        {/* Календарь с обработчиком выбора даты */}
+        <Calendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
+
+        {/* Отображение выбранной даты */}
+        {selectedDate && <Text>Выбранная дата: {selectedDate.toLocaleDateString("ru-RU")}</Text>}
+
         <Text style={styles.subtitle}>Журнал</Text>
         <View style={styles.buttons}>
           {medicalCardButtons.map((item) => (
@@ -73,7 +99,6 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
               item={item}
               id={String(info?.id)}
               onPress={() => handleNavigate(item.screen)}
-              //  onPress={() => navigation.navigate(item.screen)}
             />
           ))}
         </View>

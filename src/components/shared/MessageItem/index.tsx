@@ -31,7 +31,7 @@ const MessageItem = ({ item, currentUserId }: MessageTypes) => {
       }
     };
 
-    handleGet().catch(()=> Alert.alert("err"))
+    handleGet().catch(()=> Alert.alert("err"));
   }, [item.from]);
 
   const getAvatarSource = (): ImageSourcePropType => {

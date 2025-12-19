@@ -118,7 +118,6 @@ const RegisterForm = () => {
             value={formData.password}
           />
 
-          {/* Выбор роли */}
           <View style={styles.roleContainer}>
             <Text style={styles.roleLabel}>Регистрация как:</Text>
             <View style={styles.radioGroup}>

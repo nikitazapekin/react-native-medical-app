@@ -32,9 +32,15 @@ export type RootStackParamList = {
   [ROUTES.STACK.CHILDREN_HEALTH_STATUS]: { childId: number };
   [ROUTES.STACK.MEDICALCARD]: { id: number };
   [ROUTES.STACK.USER_FAVOURITE_DRUGS]: { id: number };
-  [ROUTES.STACK.USER_ANALYZE_HISTORY]:  { id: number };
-  [ROUTES.STACK.USER_ISTORIA_PRIEMOV]:  { id: number };
-  [ROUTES.STACK.ISTORIABOLEZNEI]:  { id: number };
+  [ROUTES.STACK.USER_ANALYZE_HISTORY]:  { id: number, selectedDate: string  };
+  [ROUTES.STACK.USER_ISTORIA_PRIEMOV]:  { id: number , selectedDate: string  };
+  [ROUTES.STACK.ISTORIABOLEZNEI]:  { id: number, selectedDate: string };
+  /*
+    const params = {
+      id: Number(info?.id),
+      selectedDate: selectedDate?.toISOString()
+    };
+    */
   [ROUTES.STACK.USER_RECOMMENDATIONS]: undefined;
   [ROUTES.STACK.USER_EDIT_PROFILE]: undefined;
   [ROUTES.STACK.USER_CATALOG_DOCTORS]: { serviceName?: string; serviceId?: number; showPopular?: boolean } | undefined;

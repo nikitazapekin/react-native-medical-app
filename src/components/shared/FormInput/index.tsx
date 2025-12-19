@@ -3,13 +3,7 @@ import { Text, TextInput, View } from "react-native";
 import { styles } from "./styled";
 import type { FormInputProps } from "./types";
 
-const FormInput = ({
-  placeholder,
-  handler,
-  label,
-  type,
-  value
-}: FormInputProps) => {
+const FormInput = ({ placeholder, handler, label, type, value }: FormInputProps) => {
   const isPasswordVisible = false;
   const isPasswordField = type === "password";
   const secureTextEntry = isPasswordField && !isPasswordVisible;
@@ -30,10 +24,13 @@ const FormInput = ({
         autoCorrect={!isPasswordField}
         value={value}
         keyboardType={
-          type === "email" ? "email-address" :
-            type === "tel" ? "phone-pad" :
-              type === "numeric" ? "numeric" :
-                "default"
+          type === "email"
+            ? "email-address"
+            : type === "tel"
+              ? "phone-pad"
+              : type === "numeric"
+                ? "numeric"
+                : "default"
         }
       />
     </View>

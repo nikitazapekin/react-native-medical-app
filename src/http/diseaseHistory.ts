@@ -19,11 +19,41 @@ class DiseaseHistoryService {
     }
   }
 
-  static async getDiseaseHistories(medicalCardId: number): Promise<DiseaseHistory[]> {
+  /*   static async getDiseaseHistories(medicalCardId: number, selectedDate: string): Promise<DiseaseHistory[]> {
     try {
       const response = await $api.get<DiseaseHistory[]>(
         `/medical-cards/${medicalCardId}/disease-history`
       );
+
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching disease histories:', error);
+      throw new Error('Failed to get disease histories');
+    }
+  } */
+
+  static async getDiseaseHistories(
+    medicalCardId: number,
+    selectedDate?: string | null
+  ): Promise<DiseaseHistory[]> {
+
+    console.log("SELECTEDDD", selectedDate);
+    try {
+      let url = `/medical-cards/${medicalCardId}/disease-history`;
+
+      if (selectedDate) {
+
+        const date = new Date(selectedDate);
+        const formattedDate = date.toLocaleDateString('ru-RU', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }).replace(/\./g, '.');
+
+        url = `/medical-cards/${medicalCardId}/disease-history/by-date?date=${encodeURIComponent(formattedDate)}`;
+      }
+
+      const response = await $api.get<DiseaseHistory[]>(url);
 
       return response.data;
     } catch (error) {
