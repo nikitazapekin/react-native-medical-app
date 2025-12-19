@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { TextInput, TouchableOpacity,View } from "react-native";
+import { Image,TextInput, TouchableOpacity,View } from "react-native";
+import Send from "@assets/chat/Send.png";
 
 import { styles } from "./styled";
 
@@ -37,7 +38,10 @@ const ChatKeypad = ({ onSendMessage }: ChatKeypadProps) => {
           style={[styles.sendButton]}
           onPress={handleSend}
           disabled={!message.trim()}
-        ></TouchableOpacity>
+        >
+
+          <Image source={Send} style={styles.sendIcon} />
+        </TouchableOpacity>
       </View>
     </View>
   );

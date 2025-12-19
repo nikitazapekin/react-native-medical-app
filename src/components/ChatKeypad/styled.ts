@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     borderTopWidth: 1,
     borderTopColor: "#e0e0e0",
-    marginBottom: 100
+    marginBottom: 50
   },
   inputWrapper: {
     flexDirection: "row",

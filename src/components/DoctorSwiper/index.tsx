@@ -70,21 +70,21 @@ const DoctorSwiper: React.FC<SwiperWithDotsProps> = ({ data = defaultData }) => 
 const defaultData: CardData[] = [
   {
     id: "1",
-    image: require("../../assets/Children.png"),
-    title: "Карточка 1",
-    description: "Это описание первой карточки с интересным контентом.",
+    image: require("../../assets/home/bicov.jpg"),
+    title: "Быков А. Е.",
+    description: "Интернатуры - это вам не хухры-мухры!",
   },
   {
     id: "2",
-    image: require("../../assets/Children.png"),
-    title: "Карточка 2",
-    description: "Вторая карточка с другой информацией и контентом.",
+    image: require("../../assets/home/lovanov.jpg"),
+    title: "Лобанов",
+    description: "Я не просто врач, я Лобанов!",
   },
   {
     id: "3",
-    image: require("../../assets/Children.png"),
-    title: "Карточка 3",
-    description: "Третья карточка завершает наш свайпер примеров.",
+    image: require("../../assets/home/kupitmen.jpg"),
+    title: "Купитман",
+    description: "Без сто грамм не разберешься...",
   },
 ];
 

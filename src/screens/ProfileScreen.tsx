@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { styles } from "./styles";
 
@@ -13,9 +13,11 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <Header title={TEXTS.HEADER.HOME} isAuthenticated={true} />
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
-        <Text style={styles.sectionTitle}>Личная информация</Text>
-
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={styles.contentContainer}
+        nestedScrollEnabled={true}
+      >
         <SwiperWithDots />
         <DoctorSwiper />
       </ScrollView>
