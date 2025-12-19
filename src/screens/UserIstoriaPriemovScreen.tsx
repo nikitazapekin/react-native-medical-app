@@ -14,15 +14,20 @@ interface UserEditChildrenProps {
 
 }
 export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProps) {
-  const { id } = route.params || {};
+/*   const { id } = route.params || {};
 
   console.log(id);
+ */
+  const { id , selectedDate} = route.params || {};
+
+  console.log("idsss", id, selectedDate);
+
 
   return (
     <View style={styles.container}>
       <Header title={"История приемов"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
-        <IstoriaPriemov  id={String(id)}/>
+        <IstoriaPriemov  id={String(id)}  selectedDate={selectedDate} />
       </View>
       <Footer />
     </View>

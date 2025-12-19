@@ -25,7 +25,7 @@ function formatDate(isoDateString: string): string {
   return isoDateString.split('T')[0];
 }
 
-const IstoriaPriemov = ({ id }: IstoriaPriemovProps) => {
+const IstoriaPriemov = ({ id, selectedDate}: IstoriaPriemovProps) => {
   const [priemi, setPriemi] = useState<MedicalTest[]>([]);
 
   const renderItem = ({ item }: { item: MedicalTest }) => (
@@ -43,7 +43,7 @@ const IstoriaPriemov = ({ id }: IstoriaPriemovProps) => {
     const handleGet = async () => {
       try {
 
-        const resp = await MedicalTestService.getMedicalTests(Number(id));
+        const resp = await MedicalTestService.getMedicalTests(Number(id), selectedDate);
 
         setPriemi(resp || []);
       } catch   {
@@ -66,13 +66,14 @@ const IstoriaPriemov = ({ id }: IstoriaPriemovProps) => {
         </View>
       ) : (
         <FlatList
-          data={priemi}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
+        data={priemi}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
-        />
-      )}
+          />
+        )}
+       
     </View>
   );
 };

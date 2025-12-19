@@ -43,7 +43,6 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
   const handleNavigate = (
     item: "IstoriaBoleznei" | "ChildrenHealthStatus" | "UserAnalyzeHistory" | "UserPriemiHistory"
   ) => {
-   
 
     if (item == "IstoriaBoleznei") {
       navigation.navigate(ROUTES.STACK.ISTORIABOLEZNEI, {

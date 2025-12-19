@@ -19,12 +19,41 @@ class MedicalTestService {
     }
   }
 
-  static async getMedicalTests(medicalCardId: number): Promise<MedicalTest[]> {
+ /*  static async getMedicalTests(medicalCardId: number, selectedDate: string): Promise<MedicalTest[]> {
     try {
       const response = await $api.get<MedicalTest[]>(
         `/medical-cards/${medicalCardId}/medical-tests`
       );
 
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching medical tests:', error);
+      throw new Error('Failed to get medical tests');
+    }
+  } */
+
+
+     static async getMedicalTests(
+    medicalCardId: number, 
+    selectedDate?: string | null
+  ): Promise<MedicalTest[]> {
+    try {
+      console.log("SELL", selectedDate)
+      let url = `/medical-cards/${medicalCardId}/medical-tests`;
+     
+      if (selectedDate) {
+      
+        const date = new Date(selectedDate);
+        const formattedDate = date.toLocaleDateString('ru-RU', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }).replace(/\./g, '.');
+        
+        url = `/medical-cards/${medicalCardId}/medical-tests/by-date?date=${encodeURIComponent(formattedDate)}`;
+      }
+      
+      const response = await $api.get<MedicalTest[]>(url);
       return response.data;
     } catch (error) {
       console.error('Error fetching medical tests:', error);

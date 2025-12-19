@@ -1,3 +1,4 @@
 export interface IstoriaPriemovProps {
-  id: string
+  id: string ,
+  selectedDate: string
 }
