@@ -16,7 +16,52 @@ class MedicalAppointmentService {
     }
   }
 
-  static async getAnalyzesByMedicalCardId(medicalCardId: number): Promise<MedicalAppointmentResponse[]> {
+  /*  static async getAnalyzesByMedicalCardId(medicalCardId: number, selectedDate: string): Promise<MedicalAppointmentResponse[]> {
+    try {
+      const response = await $api.get<MedicalAppointmentResponse[]>(
+        `/medical-appointments/medical-card/${medicalCardId}/analyzes`
+      );
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching analyzes:", error);
+
+      return [];
+    }
+  } */
+
+  /*
+     static async getAnalyzesByMedicalCardId(
+    medicalCardId: number,
+    selectedDate?: string | null
+  ): Promise<MedicalAppointmentResponse[]> {
+    console.log("SELLLL", selectedDate)
+    try {
+      let url = `/medical-appointments/medical-card/${medicalCardId}/analyzes`;
+
+      const params: any = {};
+
+      if (selectedDate) {
+
+        const date = new Date(selectedDate);
+
+        const formattedDate = date.toISOString().split('T')[0];
+        params.date = formattedDate;
+      }
+
+      const response = await $api.get<MedicalAppointmentResponse[]>(url, { params });
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error("Error fetching analyzes:", error);
+      return [];
+    }
+  } */
+
+  static async getAnalyzesByMedicalCardId(
+    medicalCardId: number,   selectedDate?: string | null
+  ): Promise<MedicalAppointmentResponse[]> {
+    console.log(selectedDate);
     try {
       const response = await $api.get<MedicalAppointmentResponse[]>(
         `/medical-appointments/medical-card/${medicalCardId}/analyzes`
@@ -61,7 +106,6 @@ class MedicalAppointmentService {
     }
   }
 
-  // История консультаций
   static async getConsultationHistory(
     patientId: number,
     year?: number,

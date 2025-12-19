@@ -15,13 +15,13 @@ interface UserEditChildrenProps {
 }
 
 export default function UserAnalyzeScreen({ route }: UserEditChildrenProps) {
-  const { id } = route.params || {};
+  const { id, selectedDate} = route.params || {};
 
   return (
     <View style={styles.container}>
       <Header title={"История анализов"} isAuthenticated={true} showBackButton={true}/>
       <View style={styles.content}>
-        <IstoriaAnalyze  id={String(id)}/>
+        <IstoriaAnalyze  id={String(id)}  selectedDate={selectedDate} />
       </View>
       <Footer />
     </View>

@@ -22,7 +22,6 @@ export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProp
 
   console.log("idsss", id, selectedDate);
 
-
   return (
     <View style={styles.container}>
       <Header title={"История приемов"} isAuthenticated={true} showBackButton={true}/>

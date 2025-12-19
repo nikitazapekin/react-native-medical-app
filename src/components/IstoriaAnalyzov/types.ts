@@ -1,3 +1,4 @@
 export interface IstoriaAnalyzovProps {
-id: string
+id: string,
+selectedDate: string
 }

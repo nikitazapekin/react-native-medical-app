@@ -66,14 +66,14 @@ const IstoriaPriemov = ({ id, selectedDate}: IstoriaPriemovProps) => {
         </View>
       ) : (
         <FlatList
-        data={priemi}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+          data={priemi}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
-          />
-        )}
-       
+        />
+      )}
+
     </View>
   );
 };
