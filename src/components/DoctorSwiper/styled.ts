@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
   },
   image: {
     width: 320,
+    height: 300
   },
   textContainer: {
     padding: 20,
