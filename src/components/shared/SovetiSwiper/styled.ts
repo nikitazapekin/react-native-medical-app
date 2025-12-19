@@ -8,10 +8,10 @@ const CARD_MARGIN = 9;
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: CARD_HEIGHT + 50,  
+    height: CARD_HEIGHT + 50,
   },
   scrollContent: {
-    paddingHorizontal: 16, 
+    paddingHorizontal: 16,
   },
   card: {
     width: CARD_WIDTH,

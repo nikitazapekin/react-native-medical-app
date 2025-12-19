@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-  
+
     paddingLeft: 5,
     paddingRight: 5,
     paddingBottom: 10,

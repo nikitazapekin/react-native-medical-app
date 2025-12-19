@@ -18,7 +18,6 @@ class DiseaseHistoryService {
       throw new Error('Failed to create disease history');
     }
   }
- 
 
   static async getDiseaseHistories(
     medicalCardId: number,

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   calendarContainer: {
     width: 376,
- 
+
     borderRadius: 8,
     padding: 16,
   },
@@ -59,4 +59,3 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
- 

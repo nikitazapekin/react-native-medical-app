@@ -15,7 +15,6 @@ class MedicalAppointmentService {
       return [];
     }
   }
- 
 
   static async getAnalyzesByMedicalCardId(
     medicalCardId: number,   selectedDate?: string | null
@@ -103,7 +102,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
- 
+
   static async getAllAppointments(
     patientId: number,
     filters?: {
@@ -136,7 +135,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
- 
+
   static async cancelAppointment(id: number): Promise<MedicalAppointmentResponse> {
     try {
       const response = await $api.patch<MedicalAppointmentResponse>(
@@ -149,7 +148,7 @@ class MedicalAppointmentService {
       throw new Error("Failed to cancel appointment");
     }
   }
- 
+
   static async rescheduleAppointment(
     id: number,
     newDate: string,
@@ -172,7 +171,7 @@ class MedicalAppointmentService {
       throw new Error("Failed to reschedule appointment");
     }
   }
- 
+
   static async getDoctorTodayAppointments(): Promise<MedicalAppointmentResponse[]> {
     try {
       const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments/today');
@@ -184,7 +183,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
- 
+
   static async getDoctorAllAppointments(): Promise<MedicalAppointmentResponse[]> {
     try {
       const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments');

@@ -24,7 +24,7 @@ interface Record {
 
 interface Section {
   title: string;
-  date: Date; 
+  date: Date;
   data: Record[];
 }
 
@@ -39,12 +39,10 @@ const TodayDoctorRecords = () => {
         setLoading(true);
         const appointments = await MedicalAppointmentService.getDoctorAllAppointments();
 
-     
         const today = new Date();
 
         today.setHours(0, 0, 0, 0);
 
-     
         const scheduledAppointments = appointments.filter((appointment) => {
           if (appointment.status !== 'SCHEDULED') {
             return false;
@@ -57,14 +55,13 @@ const TodayDoctorRecords = () => {
           return appointmentDate >= today;
         });
 
-       
         const sortedAppointments = scheduledAppointments.sort((a, b) => {
           const dateA = new Date(a.appointmentDate).getTime();
           const dateB = new Date(b.appointmentDate).getTime();
 
-          return dateA - dateB; 
+          return dateA - dateB;
         });
- 
+
         const groupedByDate: { [key: string]: { date: Date; appointments: MedicalAppointmentResponse[] } } = {};
 
         sortedAppointments.forEach((appointment) => {
@@ -77,17 +74,17 @@ const TodayDoctorRecords = () => {
 
           if (!groupedByDate[dateKey]) {
             groupedByDate[dateKey] = {
-              date: new Date(date.getFullYear(), date.getMonth(), date.getDate()), 
+              date: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
               appointments: []
             };
           }
 
           groupedByDate[dateKey].appointments.push(appointment);
         });
- 
+
         const newSections: Section[] = Object.keys(groupedByDate).map((dateKey) => ({
           title: dateKey.charAt(0).toUpperCase() + dateKey.slice(1),
-          date: groupedByDate[dateKey].date, 
+          date: groupedByDate[dateKey].date,
           data: groupedByDate[dateKey].appointments.map((appointment) => ({
             id: appointment.id.toString(),
             time: appointment.appointmentTime || "",

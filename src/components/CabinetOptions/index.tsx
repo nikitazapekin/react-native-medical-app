@@ -63,7 +63,7 @@ const CabinetOptions = ({id}: CabinetProps) => {
           style: "destructive",
           onPress: async () => {
             try {
-              
+
               await AsyncStorage.multiRemove([
                 'accessToken',
                 'userRole',
@@ -74,7 +74,6 @@ const CabinetOptions = ({id}: CabinetProps) => {
                 'childrenList',
               ]);
 
-           
               navigation.reset({
                 index: 0,
                 routes: [{ name: ROUTES.STACK.AUTH }],

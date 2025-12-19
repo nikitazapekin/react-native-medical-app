@@ -60,4 +60,4 @@ export const styles = StyleSheet.create({
     height: 18,
     tintColor: "#fff",
   },
-}); 
+});

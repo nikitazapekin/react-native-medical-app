@@ -44,5 +44,6 @@ export const styles = StyleSheet.create({
   },
   buttonWrapper: {
     marginVertical: 16,
+    marginBottom: 50
   },
 });

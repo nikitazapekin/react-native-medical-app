@@ -18,7 +18,7 @@ class MedicalTestService {
       throw new Error('Failed to create medical test');
     }
   }
- 
+
   static async getMedicalTests(
     medicalCardId: number,
     selectedDate?: string | null

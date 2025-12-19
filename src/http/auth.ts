@@ -49,7 +49,7 @@ export default class AuthService {
   static async refreshToken(): Promise<string> {
     try {
       const refreshApi = axios.create({
-       
+
         baseURL: "http:///192.168.1.14:7082/api",
         withCredentials: true,
         timeout: 10000,

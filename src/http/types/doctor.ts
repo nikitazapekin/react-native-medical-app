@@ -29,8 +29,8 @@ export interface MedicalAppointmentRequest {
   doctorId: number;
   serviceId?: number;
   appointmentName: string;
-  appointmentDate: string; 
-  appointmentTime: string; 
+  appointmentDate: string;
+  appointmentTime: string;
   description?: string;
   appointmentType?: string;
 }

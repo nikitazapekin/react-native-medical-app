@@ -20,11 +20,11 @@ const Calendar: React.FC<CalendarProps> = ({
 }) => {
   const [currentDate, setCurrentDate] = useState<Date>(initialDate);
   const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(selectedDate);
- 
+
   useEffect(() => {
     setInternalSelectedDate(selectedDate);
   }, [selectedDate]);
- 
+
   useEffect(() => {
     if (selectedDate && (
       selectedDate.getMonth() !== currentDate.getMonth() ||
@@ -113,7 +113,7 @@ const Calendar: React.FC<CalendarProps> = ({
            date.getMonth() === today.getMonth() &&
            date.getDate() === today.getDate();
   };
- 
+
   const isSelectedDay = (day: number): boolean => {
     if (!internalSelectedDate) return false;
 

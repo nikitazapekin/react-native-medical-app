@@ -86,7 +86,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
 
     try {
       setLoading(true);
- 
+
       if (appointmentId) {
         console.log('Rescheduling appointment:', appointmentId, 'to', selectedDate, selectedTime);
 
@@ -109,20 +109,19 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           ]
         );
       } else {
-       
+
         if (!medicalCardId) {
           Alert.alert("Ошибка", "Не удалось получить медицинскую карту");
 
           return;
         }
 
- 
         const appointmentDateObj = new Date(selectedDate);
         const appointmentDateString = new Date(
           appointmentDateObj.getFullYear(),
           appointmentDateObj.getMonth(),
           appointmentDateObj.getDate(),
-          12, 
+          12,
           0,
           0
         ).toISOString();

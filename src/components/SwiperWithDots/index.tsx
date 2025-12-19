@@ -83,17 +83,17 @@ const CustomSwiper = () => {
   const handleButtonPress = (item: SwiperItem) => {
     switch (item.id) {
       case "1":
-       
+
         navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, {});
         break;
 
       case "2":
-       
+
         navigation.navigate(ROUTES.STACK.USER_CATALOG_SERVICES);
         break;
 
       case "3":
-     
+
         navigation.navigate(ROUTES.STACK.USER_POPULAR_DOCTORS, { showPopular: true });
         break;
 

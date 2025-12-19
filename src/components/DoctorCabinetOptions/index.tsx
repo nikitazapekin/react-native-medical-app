@@ -52,7 +52,7 @@ const DoctorCabinetOptions = () => {
           style: "destructive",
           onPress: async () => {
             try {
-             
+
               await AsyncStorage.multiRemove([
                 'accessToken',
                 'userRole',
@@ -63,7 +63,6 @@ const DoctorCabinetOptions = () => {
                 'childrenList',
               ]);
 
-         
               navigation.reset({
                 index: 0,
                 routes: [{ name: ROUTES.STACK.AUTH }],

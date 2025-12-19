@@ -1,7 +1,7 @@
 import DefaultPreference from 'react-native-default-preference';
- 
+
 let initializedStorage: { [key: string]: string } = {};
- 
+
 export const initializeStorage = async (): Promise<void> => {
   try {
     const allValues = await DefaultPreference.getAll();
@@ -20,9 +20,9 @@ export const getInitializedItem = (key: string): string | null => {
 
 export const SyncStorage = {
   setItem: (key: string, value: string): void => {
-  
+
     initializedStorage[key] = value;
-   
+
     DefaultPreference.set(key, value).catch((error) => {
       console.log('SyncStorage setItem error:', error);
     });
@@ -35,16 +35,16 @@ export const SyncStorage = {
   removeItem: (key: string): void => {
 
     delete initializedStorage[key];
-  
+
     DefaultPreference.clear(key).catch((error) => {
       console.log(' SyncStorage removeItem error:', error);
     });
   },
 
   clear: (): void => {
- 
+
     initializedStorage = {};
-   
+
     DefaultPreference.clearAll().catch((error) => {
       console.log('SyncStorage clear error:', error);
     });

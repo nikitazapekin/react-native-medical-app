@@ -67,7 +67,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
 
   const filteredDoctors = useMemo(() => {
     let filtered = doctors;
- 
+
     if (serviceName && !serviceId && !childId) {
       const q = serviceName.toLowerCase();
 

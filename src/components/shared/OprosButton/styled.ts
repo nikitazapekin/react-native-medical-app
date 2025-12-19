@@ -21,4 +21,4 @@ export const styles = StyleSheet.create({
     color: COLORS.WHITE,
     fontWeight: "600",
   },
-}); 
+});

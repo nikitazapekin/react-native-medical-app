@@ -26,4 +26,4 @@ export const styles = StyleSheet.create({
     maxWidth: 376,
     paddingBottom: 30,
   },
-}); 
+});
