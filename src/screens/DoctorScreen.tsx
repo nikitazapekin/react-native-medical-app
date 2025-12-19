@@ -7,8 +7,7 @@ import DoctorCabinetInfo from "@/components/DoctorCabinetInfo";
 import FooterDoctor from "@/components/shared/FooterDoctor";
 import Header from '@/components/shared/Header';
 import TodayDoctorRecords from "@/components/shared/Recorditem";
-
-//type DoctorScreenNavigationProp = StackNavigationProp<RootStackParamList, typeof ROUTES.STACK.DOCTOR>;
+ 
 
 const DoctorScreen = () => {
   return (

@@ -18,20 +18,7 @@ class MedicalTestService {
       throw new Error('Failed to create medical test');
     }
   }
-
-  /*  static async getMedicalTests(medicalCardId: number, selectedDate: string): Promise<MedicalTest[]> {
-    try {
-      const response = await $api.get<MedicalTest[]>(
-        `/medical-cards/${medicalCardId}/medical-tests`
-      );
-
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching medical tests:', error);
-      throw new Error('Failed to get medical tests');
-    }
-  } */
-
+ 
   static async getMedicalTests(
     medicalCardId: number,
     selectedDate?: string | null

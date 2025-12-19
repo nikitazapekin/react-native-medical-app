@@ -8,8 +8,7 @@ import MedicalCardComponent from "@/components/MedicalCardComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import type { RootStackParamList } from "@/navigation/types";
-
-// MEDICALCARD: "MedicalCard",
+ 
 interface UserEditChildrenProps {
   route: RouteProp<RootStackParamList, 'MedicalCard'>;
 

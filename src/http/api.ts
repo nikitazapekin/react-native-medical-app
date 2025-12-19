@@ -3,8 +3,7 @@ import type { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axio
 import axios from 'axios';
 
 import AuthService from './auth';
-
-/* const BASE_URL = 'http://192.168.1.14:7081/api'; */
+ 
 const BASE_URL = 'http:///192.168.1.14:7082/api';
 
 const $api = axios.create({

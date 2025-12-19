@@ -20,13 +20,11 @@ const Calendar: React.FC<CalendarProps> = ({
 }) => {
   const [currentDate, setCurrentDate] = useState<Date>(initialDate);
   const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(selectedDate);
-
-  // Синхронизируем внутреннее состояние с пропсами
+ 
   useEffect(() => {
     setInternalSelectedDate(selectedDate);
   }, [selectedDate]);
-
-  // Также обновляем currentDate если selectedDate меняется на другую дату
+ 
   useEffect(() => {
     if (selectedDate && (
       selectedDate.getMonth() !== currentDate.getMonth() ||
@@ -115,8 +113,7 @@ const Calendar: React.FC<CalendarProps> = ({
            date.getMonth() === today.getMonth() &&
            date.getDate() === today.getDate();
   };
-
-  // Проверяем, является ли день выбранным
+ 
   const isSelectedDay = (day: number): boolean => {
     if (!internalSelectedDate) return false;
 

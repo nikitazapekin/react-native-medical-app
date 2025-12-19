@@ -15,48 +15,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
-
-  /*  static async getAnalyzesByMedicalCardId(medicalCardId: number, selectedDate: string): Promise<MedicalAppointmentResponse[]> {
-    try {
-      const response = await $api.get<MedicalAppointmentResponse[]>(
-        `/medical-appointments/medical-card/${medicalCardId}/analyzes`
-      );
-
-      return Array.isArray(response.data) ? response.data : [];
-    } catch (error) {
-      console.error("Error fetching analyzes:", error);
-
-      return [];
-    }
-  } */
-
-  /*
-     static async getAnalyzesByMedicalCardId(
-    medicalCardId: number,
-    selectedDate?: string | null
-  ): Promise<MedicalAppointmentResponse[]> {
-    console.log("SELLLL", selectedDate)
-    try {
-      let url = `/medical-appointments/medical-card/${medicalCardId}/analyzes`;
-
-      const params: any = {};
-
-      if (selectedDate) {
-
-        const date = new Date(selectedDate);
-
-        const formattedDate = date.toISOString().split('T')[0];
-        params.date = formattedDate;
-      }
-
-      const response = await $api.get<MedicalAppointmentResponse[]>(url, { params });
-
-      return Array.isArray(response.data) ? response.data : [];
-    } catch (error) {
-      console.error("Error fetching analyzes:", error);
-      return [];
-    }
-  } */
+ 
 
   static async getAnalyzesByMedicalCardId(
     medicalCardId: number,   selectedDate?: string | null
@@ -144,8 +103,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
-
-  // Все записи пациента с фильтрами
+ 
   static async getAllAppointments(
     patientId: number,
     filters?: {
@@ -178,8 +136,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
-
-  // Отмена записи
+ 
   static async cancelAppointment(id: number): Promise<MedicalAppointmentResponse> {
     try {
       const response = await $api.patch<MedicalAppointmentResponse>(
@@ -192,8 +149,7 @@ class MedicalAppointmentService {
       throw new Error("Failed to cancel appointment");
     }
   }
-
-  // Перенос записи
+ 
   static async rescheduleAppointment(
     id: number,
     newDate: string,
@@ -216,8 +172,7 @@ class MedicalAppointmentService {
       throw new Error("Failed to reschedule appointment");
     }
   }
-
-  // Записи врача на сегодня
+ 
   static async getDoctorTodayAppointments(): Promise<MedicalAppointmentResponse[]> {
     try {
       const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments/today');
@@ -229,8 +184,7 @@ class MedicalAppointmentService {
       return [];
     }
   }
-
-  // Все записи врача
+ 
   static async getDoctorAllAppointments(): Promise<MedicalAppointmentResponse[]> {
     try {
       const response = await $api.get<MedicalAppointmentResponse[]>('/doctors/appointments');

@@ -18,19 +18,7 @@ class DiseaseHistoryService {
       throw new Error('Failed to create disease history');
     }
   }
-
-  /*   static async getDiseaseHistories(medicalCardId: number, selectedDate: string): Promise<DiseaseHistory[]> {
-    try {
-      const response = await $api.get<DiseaseHistory[]>(
-        `/medical-cards/${medicalCardId}/disease-history`
-      );
-
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching disease histories:', error);
-      throw new Error('Failed to get disease histories');
-    }
-  } */
+ 
 
   static async getDiseaseHistories(
     medicalCardId: number,

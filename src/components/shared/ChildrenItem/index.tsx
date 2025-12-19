@@ -50,19 +50,4 @@ const ChildrenItem = ({ item, openModal }: ChildrenItemProps) => {
 };
 
 export default ChildrenItem;
-
-/*
-
-  const [id, setId] = useState<string>("");
-  const handleNavigate = () => {
-    navigation.navigate(ROUTES.STACK.USER_EDIT_CHILDRESN, { id: Number(id) });
-  };
-  const handleLoadId = async () => {
-    const id = await AsyncStorage.getItem("id");
-
-    if (typeof id == "string") {
-      setId(id);
-    }
-  };
-
-  */
+ 

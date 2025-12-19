@@ -69,7 +69,7 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
       if (info?.childId) {
         navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, {
           childId: info.childId,
-          //     selectedDate: selectedDate?.toISOString()
+       
         });
       } else {
         navigation.navigate(ROUTES.STACK.CHILDREN_HEALTH_STATUS, {
@@ -84,10 +84,10 @@ const MedicalCardComponent = ({ id }: MedicalCardProps) => {
       <View style={styles.content}>
         <Text style={styles.title}>Медицинская карта {info?.id}</Text>
 
-        {/* Календарь с обработчиком выбора даты */}
+      
         <Calendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
 
-        {/* Отображение выбранной даты */}
+        
         {selectedDate && <Text>Выбранная дата: {selectedDate.toLocaleDateString("ru-RU")}</Text>}
 
         <Text style={styles.subtitle}>Журнал</Text>

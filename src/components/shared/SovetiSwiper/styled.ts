@@ -8,10 +8,10 @@ const CARD_MARGIN = 9;
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: CARD_HEIGHT + 50, // Добавляем место для текста
+    height: CARD_HEIGHT + 50,  
   },
   scrollContent: {
-    paddingHorizontal: 16, // Отступы по краям
+    paddingHorizontal: 16, 
   },
   card: {
     width: CARD_WIDTH,

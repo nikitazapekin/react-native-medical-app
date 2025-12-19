@@ -14,10 +14,7 @@ interface UserEditChildrenProps {
 
 }
 export default function UserIstoriaPriemovScreen({ route }: UserEditChildrenProps) {
-/*   const { id } = route.params || {};
-
-  console.log(id);
- */
+ 
   const { id , selectedDate} = route.params || {};
 
   console.log("idsss", id, selectedDate);

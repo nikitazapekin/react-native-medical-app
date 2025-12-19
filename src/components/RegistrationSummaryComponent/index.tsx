@@ -86,8 +86,7 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
 
     try {
       setLoading(true);
-
-      // Если есть appointmentId, то это перенос записи
+ 
       if (appointmentId) {
         console.log('Rescheduling appointment:', appointmentId, 'to', selectedDate, selectedTime);
 
@@ -110,20 +109,20 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           ]
         );
       } else {
-        // Иначе создаем новую запись
+       
         if (!medicalCardId) {
           Alert.alert("Ошибка", "Не удалось получить медицинскую карту");
 
           return;
         }
 
-        // Создаем дату без учета часового пояса
+ 
         const appointmentDateObj = new Date(selectedDate);
         const appointmentDateString = new Date(
           appointmentDateObj.getFullYear(),
           appointmentDateObj.getMonth(),
           appointmentDateObj.getDate(),
-          12, // Устанавливаем полдень, чтобы избежать проблем с часовым поясом
+          12, 
           0,
           0
         ).toISOString();

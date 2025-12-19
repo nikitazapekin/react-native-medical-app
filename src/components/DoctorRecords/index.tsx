@@ -24,7 +24,7 @@ interface Record {
 
 interface Section {
   title: string;
-  date: Date; // Для сортировки
+  date: Date; 
   data: Record[];
 }
 
@@ -39,12 +39,12 @@ const TodayDoctorRecords = () => {
         setLoading(true);
         const appointments = await MedicalAppointmentService.getDoctorAllAppointments();
 
-        // Получаем сегодняшнюю дату (без времени)
+     
         const today = new Date();
 
         today.setHours(0, 0, 0, 0);
 
-        // Фильтруем только записи со статусом SCHEDULED и датой >= сегодня
+     
         const scheduledAppointments = appointments.filter((appointment) => {
           if (appointment.status !== 'SCHEDULED') {
             return false;
@@ -57,15 +57,14 @@ const TodayDoctorRecords = () => {
           return appointmentDate >= today;
         });
 
-        // Сначала сортируем все записи по дате
+       
         const sortedAppointments = scheduledAppointments.sort((a, b) => {
           const dateA = new Date(a.appointmentDate).getTime();
           const dateB = new Date(b.appointmentDate).getTime();
 
-          return dateA - dateB; // По возрастанию
+          return dateA - dateB; 
         });
-
-        // Группируем записи по дням с сохранением даты для сортировки
+ 
         const groupedByDate: { [key: string]: { date: Date; appointments: MedicalAppointmentResponse[] } } = {};
 
         sortedAppointments.forEach((appointment) => {
@@ -78,18 +77,17 @@ const TodayDoctorRecords = () => {
 
           if (!groupedByDate[dateKey]) {
             groupedByDate[dateKey] = {
-              date: new Date(date.getFullYear(), date.getMonth(), date.getDate()), // Сохраняем дату для сортировки
+              date: new Date(date.getFullYear(), date.getMonth(), date.getDate()), 
               appointments: []
             };
           }
 
           groupedByDate[dateKey].appointments.push(appointment);
         });
-
-        // Преобразуем в секции (уже отсортированные, т.к. исходный массив был отсортирован)
+ 
         const newSections: Section[] = Object.keys(groupedByDate).map((dateKey) => ({
           title: dateKey.charAt(0).toUpperCase() + dateKey.slice(1),
-          date: groupedByDate[dateKey].date, // Для сортировки
+          date: groupedByDate[dateKey].date, 
           data: groupedByDate[dateKey].appointments.map((appointment) => ({
             id: appointment.id.toString(),
             time: appointment.appointmentTime || "",

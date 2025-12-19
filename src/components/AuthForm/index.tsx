@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Alert,Text, TouchableOpacity, View } from "react-native";
-// import { Text, TouchableOpacity, View } from "react-native";
+ 
 import CustomButton from "@components/shared/Button";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
@@ -19,7 +19,7 @@ const AuthForm = () => {
   const navigation = useNavigation<FormNavigationProp>();
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [loading] = useState(false);
+ 
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: ""
@@ -30,7 +30,7 @@ const AuthForm = () => {
   };
 
   const handleLogin = async () => {
-    // navigation.navigate(ROUTES.STACK.HOMEPAGE);
+    
     if (!formData.email || !formData.password) {
       Alert.alert("Ошибка", "Пожалуйста, заполните все поля");
 
@@ -43,8 +43,7 @@ const AuthForm = () => {
       await AuthService.login(formData);
 
       const userRole = await AsyncStorage.getItem('userRole');
-
-      // Если пользователь - пациент, получаем детей и сохраняем их
+ 
       if (userRole === 'PATIENT') {
         try {
           const userId = await AsyncStorage.getItem('userId');
@@ -71,7 +70,7 @@ const AuthForm = () => {
           }
         } catch (error) {
           console.error('Error loading child:', error);
-          // При ошибке используем fallback
+         
           await AsyncStorage.setItem('childId', '1');
         }
       }

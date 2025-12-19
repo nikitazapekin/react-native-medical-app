@@ -67,8 +67,7 @@ const UserCatalogDoctorsComponent: React.FC<UserCatalogDoctorsProps> = ({ servic
 
   const filteredDoctors = useMemo(() => {
     let filtered = doctors;
-
-    // Не фильтруем по serviceName если есть serviceId или childId, так как врачи уже загружены по услуге/ребенку
+ 
     if (serviceName && !serviceId && !childId) {
       const q = serviceName.toLowerCase();
 

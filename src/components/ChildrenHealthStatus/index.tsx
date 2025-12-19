@@ -50,7 +50,7 @@ const ChildrenHealthStatusComponent = () => {
   };
 
   const handleAppointment = () => {
-    // Навигация к записи на прием
+ 
     navigation.navigate(ROUTES.STACK.USER_CATALOG_DOCTORS, {});
   };
 

@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 80,
-    //   backgroundColor: COLORS.WHITE,
+    
   },
   scrollContent: {
     flexGrow: 1,
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
     paddingTop: 15,
     paddingBottom: 15,
-    textAlign: "left", // центрируем текст
+    textAlign: "left",  
     width: "100%",
   },
 

@@ -134,17 +134,17 @@ const IstoriaAnalyze = ({ id, selectedDate }: IstoriaAnalyzovProps) => {
         setLoading(true);
         const resp = await MedicalAppointmentService.getAnalyzesByMedicalCardId(Number(id), selectedDate);
 
-        // Если получили данные и они не пустые, используем их
+        
         if (resp && resp.length > 0) {
           setAnalyzi(resp);
           setUseMockData(false);
         } else {
-          // Иначе используем моковые данные
+        
           setAnalyzi(mockAnalyzes);
           setUseMockData(true);
         }
       } catch {
-        // В случае ошибки тоже используем моковые данные
+     
         setAnalyzi(mockAnalyzes);
         setUseMockData(true);
         Alert.alert("Внимание", "Используются демонстрационные данные");
