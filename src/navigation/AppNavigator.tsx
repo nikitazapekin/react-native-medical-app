@@ -15,7 +15,7 @@ import ChildrenHealthStatus from "@/screens/ChildrenHealthStatusScreen";
 import ChildrenInformationAboutClinicScreen from "@/screens/ChildrenInformationAboutClinicScreen";
 import ChildrenScreen from "@/screens/ChildrenScreen";
 import ChildrensScreen from "@/screens/ChildrensScreen";
- import ChildSelectionScreen from "@/screens/ChildSelectionScreen";
+import ChildSelectionScreen from "@/screens/ChildSelectionScreen";
 import DoctorAppointmentsScreen from "@/screens/DoctorAppointmentsScreen";
 import DoctorCabinetScreen from "@/screens/DoctorCabinetScreen";
 import DoctorChatScreen from "@/screens/DoctorChatScreen";

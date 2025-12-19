@@ -27,18 +27,18 @@ export interface MessageDTO {
 }
 
 class ChatService {
-  static async startChat(patientId: number, doctorId: number, authorId: number): Promise<number> {
+  static async startChat(patientId: number, doctorId: number, authorId: number, isDoctor: boolean): Promise<number> {
+    console.log('Starting chat with patientId:', patientId, 'doctorId:', doctorId, 'authorId:', authorId, isDoctor);
     try {
-      console.log('Starting chat with patientId:', patientId, 'doctorId:', doctorId, 'authorId:', authorId);
       const response = await $api.post<number>(
-        `/chat/start?patientId=${patientId}&doctorId=${doctorId}&authorId=${authorId}`
+        `/chat/start?patientId=${patientId}&doctorId=${doctorId}&authorId=${authorId}&isDoctor=${isDoctor}`
       );
 
       console.log('Chat started successfully, chatId:', response.data);
 
       return response.data;
     } catch (error: any) {
-      console.error('Error starting chat:', error);
+      console.error('Error startinggggg chat:', error);
       throw new Error(error.response?.data?.message || 'Failed to start chat');
     }
   }
