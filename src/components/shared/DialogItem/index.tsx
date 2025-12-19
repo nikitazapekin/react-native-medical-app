@@ -61,8 +61,8 @@ const DialogItem = ({ item }: DialogItemType) => {
       const patientId = isDoctor ? recipientId : currentUserId;
       const doctorId = isDoctor ?     currentUserId :  recipientId ;
 
-      console.log("Res", recipientId)
-       console.log("current", currentUserId)
+      console.log("Res", recipientId);
+      console.log("current", currentUserId);
       const chatId = await ChatService.startChat(patientId, doctorId, currentUserId, isDoctor);
 
       navigation.navigate(ROUTES.STACK.CHAT, {
@@ -175,4 +175,3 @@ const DialogItem = ({ item }: DialogItemType) => {
 };
 
 export default DialogItem;
- 
