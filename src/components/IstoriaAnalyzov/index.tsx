@@ -115,7 +115,8 @@ const IstoriaAnalyze = ({ id, selectedDate }: IstoriaAnalyzovProps) => {
   const [analyzi, setAnalyzi] = useState<MedicalAppointmentResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [useMockData, setUseMockData] = useState(false);
-console.log(useMockData)
+
+  console.log(useMockData);
   const renderItem = ({ item }: { item: MedicalAppointmentResponse }) => (
     <ElementBolezni
       item={{
