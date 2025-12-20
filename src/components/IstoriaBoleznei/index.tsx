@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo,useState } from "react";
 import { Alert, FlatList, Text, View } from "react-native";
 
 import DroppableList from "../shared/DroppableList";
@@ -30,22 +30,22 @@ const sortOptions = [
 // Функция для определения типа болезни
 const getDiseaseType = (diseaseName: string): string => {
   const lowerName = diseaseName.toLowerCase();
-  
-  if (lowerName.includes('грипп') || lowerName.includes('простуда') || 
+
+  if (lowerName.includes('грипп') || lowerName.includes('простуда') ||
       lowerName.includes('кашель') || lowerName.includes('орви')) {
     return 'respiratory';
   }
-  
-  if (lowerName.includes('живот') || lowerName.includes('желуд') || 
+
+  if (lowerName.includes('живот') || lowerName.includes('желуд') ||
       lowerName.includes('кишеч') || lowerName.includes('гастрит')) {
     return 'gastro';
   }
-  
-  if (lowerName.includes('боль') || lowerName.includes('головн') || 
+
+  if (lowerName.includes('боль') || lowerName.includes('головн') ||
       lowerName.includes('мигрень')) {
     return 'pain';
   }
-  
+
   return 'other';
 };
 
@@ -64,6 +64,7 @@ const IstoriaBoleznei = ({ id, selectedDate }: IstoriaBolezneiProps) => {
     const handleGet = async () => {
       try {
         const resp = await DiseaseHistoryService.getDiseaseHistories(Number(id), selectedDate);
+
         setBolezni(resp || []);
         // Применяем фильтр и сортировку к загруженным данным
         applyFiltersAndSort(resp || [], selectedFilter, selectedSort);
@@ -88,6 +89,7 @@ const IstoriaBoleznei = ({ id, selectedDate }: IstoriaBolezneiProps) => {
     if (filter.type !== 'all') {
       result = result.filter(item => {
         const diseaseType = getDiseaseType(item.diseaseName || '');
+
         return diseaseType === filter.type;
       });
     }
@@ -97,16 +99,16 @@ const IstoriaBoleznei = ({ id, selectedDate }: IstoriaBolezneiProps) => {
       switch (sort.type) {
         case 'date_desc':
           return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
-        
+
         case 'date_asc':
           return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
-        
+
         case 'name_asc':
           return (a.diseaseName || '').localeCompare(b.diseaseName || '', 'ru');
-        
+
         case 'name_desc':
           return (b.diseaseName || '').localeCompare(a.diseaseName || '', 'ru');
-        
+
         default:
           return 0;
       }
@@ -157,6 +159,7 @@ const IstoriaBoleznei = ({ id, selectedDate }: IstoriaBolezneiProps) => {
 
     bolezni.forEach(item => {
       const type = getDiseaseType(item.diseaseName || '');
+
       if (counts[type] !== undefined) {
         counts[type]++;
       }
@@ -168,18 +171,18 @@ const IstoriaBoleznei = ({ id, selectedDate }: IstoriaBolezneiProps) => {
   return (
     <View style={styles.wrapper}>
       {/* Фильтр по типу болезни */}
-      <DroppableList 
+      <DroppableList
         sortOptions={filterOptions.map(option => ({
           ...option,
           label: `${option.label} (${diseaseCounts[option.type] || 0})`
-        }))} 
+        }))}
         handler={handleFilterSelect}
         placeholder="Фильтр по типу"
       />
-      
+
       {/* Сортировка */}
-      <DroppableList 
-        sortOptions={sortOptions} 
+      <DroppableList
+        sortOptions={sortOptions}
         handler={handleSortSelect}
         placeholder="Сортировка"
       />
@@ -197,8 +200,8 @@ const IstoriaBoleznei = ({ id, selectedDate }: IstoriaBolezneiProps) => {
       {filteredBolezni.length === 0 ? (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
           <Text>
-            {bolezni.length === 0 
-              ? "История болезней не найдена" 
+            {bolezni.length === 0
+              ? "История болезней не найдена"
               : `Болезни типа "${selectedFilter.label}" не найдены`}
           </Text>
         </View>
