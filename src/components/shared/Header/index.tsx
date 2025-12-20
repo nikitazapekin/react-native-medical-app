@@ -157,7 +157,6 @@ const Header = ({
 
     return MockImage;
   };
- 
 
   const avatarSource = getAvatarSource();
 

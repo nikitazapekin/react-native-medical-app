@@ -26,7 +26,7 @@ const WelcomeComponent = ({ navigation }: HomeScreenProps) => {
   const handleContinue = () => {
     navigation.navigate(ROUTES.STACK.AUTH);
   };
- 
+
   return (
     <View style={styles.centerContent}>
       <Text style={styles.title}>Добро пожаловать</Text>
