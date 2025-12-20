@@ -7,9 +7,10 @@ export const styles = StyleSheet.create({
 
     columnGap: 20,
     height: "auto",
+
   },
   card: {
-    width: 320,
+    width: 356,
     height: "100%",
     backgroundColor: "#fff",
     borderRadius: 25,
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     gap: 20,
   },
   image: {
-    width: 320,
+    width: 356,
     height: 300
   },
   textContainer: {

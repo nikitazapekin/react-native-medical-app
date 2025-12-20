@@ -119,7 +119,7 @@ export default function ChatScreen({ route }: UserEditChildrenProps) {
     console.log("Initializing WebSocket connection with chatId:", chatId);
 
     const client = new Client({
-      webSocketFactory: () => new SockJS("http://192.168.1.14:7082/ws-chat-sockjs"),
+      webSocketFactory: () => new SockJS("http://10.40.164.183:7082/ws-chat-sockjs"),
 
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,

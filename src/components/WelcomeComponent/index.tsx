@@ -26,18 +26,14 @@ const WelcomeComponent = ({ navigation }: HomeScreenProps) => {
   const handleContinue = () => {
     navigation.navigate(ROUTES.STACK.AUTH);
   };
-
-  const handleDoctorScreen = () => {
-    navigation.navigate(ROUTES.STACK.DOCTOR);
-  };
-
+ 
   return (
     <View style={styles.centerContent}>
       <Text style={styles.title}>Добро пожаловать</Text>
       <Image source={LogoImage} style={styles.image} resizeMode="contain" />
       <CustomButton handler={handleContinue} text="Продолжить" backgroundColor="#1280b2" />
       <View style={styles.gap} />
-      <CustomButton handler={handleDoctorScreen} text="Экран врача" backgroundColor="#28a745" />
+
     </View>
   );
 };
