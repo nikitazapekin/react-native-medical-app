@@ -32,6 +32,9 @@ const ChildSelector: React.FC = () => {
         const childrenList = await ChildrenService.getChildrenByParentId(parseInt(userId));
 
         setChildren(childrenList);
+        
+        // Сохраняем список детей в AsyncStorage для использования в других компонентах
+        await AsyncStorage.setItem('childrenList', JSON.stringify(childrenList));
       }
     } catch (error) {
       console.error('Error loading children:', error);

@@ -13,6 +13,7 @@ import ChildSelectorButton from "@/components/ChildSelectorButton";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import AuthService from "@/http/auth";
+import ChildrenService from "@/http/children";
 import UserService from "@/http/userService";
 import { ROUTES } from "@/navigation/routes";
 import type { FormNavigationProp } from "@/navigation/types";
@@ -46,6 +47,13 @@ const CabinetScreen = () => {
         setPatient(userData);
 
         await AsyncStorage.setItem('id', String(userData.id));
+
+        // Загружаем список детей для обновления ChildSelectorButton
+        const userId = await AsyncStorage.getItem('userId');
+        if (userId) {
+          const childrenList = await ChildrenService.getChildrenByParentId(parseInt(userId));
+          await AsyncStorage.setItem('childrenList', JSON.stringify(childrenList));
+        }
 
       } catch {
         navigation.navigate(ROUTES.STACK.AUTH);

@@ -111,6 +111,12 @@ const AppointmentDetailsComponent: React.FC<Props> = ({ consultation, onReBook, 
           <Text style={styles.label}>Дата:</Text>
           <Text style={styles.value}>{displayDate}</Text>
         </View>
+        {consultation.appointmentTime && (
+          <View style={styles.row}>
+            <Text style={styles.label}>Время:</Text>
+            <Text style={styles.value}>{consultation.appointmentTime}</Text>
+          </View>
+        )}
         {consultation.description && (
           <View style={styles.row}>
             <Text style={styles.label}>Описание:</Text>

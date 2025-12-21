@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Text, View } from "react-native";
 import type { RouteProp } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
@@ -10,6 +10,7 @@ import Calendar from "@/components/shared/Calendar";
 import TimeSlot from "@/components/shared/TimeSlot";
 import { PRIMARY } from "@/constants/colors";
 import { timeSlots } from "@/constants/timeSlots";
+import MedicalAppointmentService from "@/http/medicalAppointment";
 import type { ROUTES } from "@/navigation/routes";
 import type { RootStackParamList } from "@/navigation/types";
 
@@ -27,6 +28,35 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
   const primaryColor = PRIMARY;
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
+
+  useEffect(() => {
+    const loadBookedSlots = async () => {
+      if (!selectedDate || !doctor?.id) {
+        setBookedSlots([]);
+        return;
+      }
+
+      try {
+        const dateToSend = new Date(
+          selectedDate.getFullYear(),
+          selectedDate.getMonth(),
+          selectedDate.getDate(),
+          12,
+          0,
+          0
+        ).toISOString();
+
+        const booked = await MedicalAppointmentService.getBookedTimeSlots(doctor.id, dateToSend);
+        setBookedSlots(booked);
+      } catch (error) {
+        console.error('Error loading booked slots:', error);
+        setBookedSlots([]);
+      }
+    };
+
+    void loadBookedSlots();
+  }, [selectedDate, doctor?.id]);
 
   const availableSlots = useMemo(() => {
     const doctorStatus = (doctor as any)?.status;
@@ -58,16 +88,22 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
       return slotHour >= startHour && slotHour < endHour;
     };
 
+    const filterByDoctorSchedule = (slots: string[]) => slots.filter(isSlotAvailable);
+    const filterByBooked = (slots: string[]) => slots.filter(slot => !bookedSlots.includes(slot));
+
+    const applyFilters = (slots: string[]) => filterByBooked(filterByDoctorSchedule(slots));
+
     return {
-      morning: timeSlots.morning.filter(isSlotAvailable),
-      afternoon: timeSlots.afternoon.filter(isSlotAvailable),
-      evening: timeSlots.evening.filter(isSlotAvailable),
+      morning: applyFilters(timeSlots.morning),
+      afternoon: applyFilters(timeSlots.afternoon),
+      evening: applyFilters(timeSlots.evening),
     };
-  }, [doctor]);
+  }, [doctor, bookedSlots]);
 
   const handleSelectDate = (date: Date) => {
     setSelectedDate(date);
-    onSelectionChange?.({ date, time: selectedTime });
+    setSelectedTime(null);
+    onSelectionChange?.({ date, time: null });
   };
 
   const handleSelectTime = (time: string) => {
@@ -81,7 +117,7 @@ const RegistrationAtClinicComponent: React.FC<Props> = ({ onSelectionChange, onS
 
   return (
     <View style={styles.container}>
-      <Calendar selectedDate={selectedDate ?? undefined} onSelectDate={handleSelectDate} primaryColor={primaryColor} />
+      <Calendar selectedDate={selectedDate ?? undefined} onSelectDate={handleSelectDate} primaryColor={primaryColor} disablePastDates={true} />
 
       <Text style={styles.sectionTitle}>Время приема</Text>
       {doctor && (

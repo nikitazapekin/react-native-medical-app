@@ -146,7 +146,7 @@ const Header = ({
 
       // Если это относительный путь
       if (effectiveAvatar.startsWith('/')) {
-        return { uri: `http://192.168.1.14:7082${effectiveAvatar}` };
+        return { uri: `http://192.168.0.103:7081${effectiveAvatar}` };
       }
     }
 

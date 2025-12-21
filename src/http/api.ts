@@ -3,7 +3,7 @@ import type { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axio
 import axios from 'axios';
 
 //10.40.164.183
-const BASE_URL = 'http:///192.168.1.14:7082/api';
+const BASE_URL = 'http://192.168.0.103:7081/api';
 
 const $api = axios.create({
   baseURL: BASE_URL,

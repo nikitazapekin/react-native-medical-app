@@ -108,4 +108,18 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  statusWarning: {
+    backgroundColor: "#FEF3C7",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#F59E0B",
+  },
+  statusWarningText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#92400E",
+    textAlign: "center",
+  },
 });

@@ -10,13 +10,15 @@ type CalendarProps = {
   selectedDate?: Date | null;
   onSelectDate?: (date: Date) => void;
   primaryColor?: string;
+  disablePastDates?: boolean;
 };
 
 const Calendar: React.FC<CalendarProps> = ({
   initialDate = new Date(),
   selectedDate = null,
   onSelectDate,
-  primaryColor = PRIMARY
+  primaryColor = PRIMARY,
+  disablePastDates = false
 }) => {
   const [currentDate, setCurrentDate] = useState<Date>(initialDate);
   const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(selectedDate);
@@ -96,6 +98,10 @@ const Calendar: React.FC<CalendarProps> = ({
   };
 
   const handleSelectDay = (day: number) => {
+    if (disablePastDates && isPastDate(day)) {
+      return;
+    }
+
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
 
     setInternalSelectedDate(date);
@@ -120,6 +126,16 @@ const Calendar: React.FC<CalendarProps> = ({
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
 
     return isSameDay(date, internalSelectedDate);
+  };
+
+  const isPastDate = (day: number): boolean => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    date.setHours(0, 0, 0, 0);
+
+    return date < today;
   };
 
   return (
@@ -165,6 +181,7 @@ const Calendar: React.FC<CalendarProps> = ({
 
           const today = isToday(day);
           const selected = isSelectedDay(day);
+          const isPast = disablePastDates && isPastDate(day);
           const scale = selected ? selectedDayScale.interpolate({
             inputRange: [0, 1],
             outputRange: [0.8, 1]
@@ -176,6 +193,7 @@ const Calendar: React.FC<CalendarProps> = ({
               style={styles.dayCell}
               onPress={() => handleSelectDay(day)}
               activeOpacity={0.8}
+              disabled={isPast}
             >
               <Animated.View
                 style={{
@@ -188,12 +206,13 @@ const Calendar: React.FC<CalendarProps> = ({
                   borderWidth: today ? 1 : 0,
                   borderColor: today ? primaryColor : "transparent",
                   transform: [{ scale }],
+                  opacity: isPast ? 0.3 : 1,
                 }}
               >
                 <Text style={[
                   styles.day,
                   {
-                    color: selected ? "#fff" : today ? primaryColor : styles.day.color,
+                    color: selected ? "#fff" : today ? primaryColor : isPast ? "#999" : styles.day.color,
                     fontWeight: today ? "600" : "400"
                   }
                 ]}>

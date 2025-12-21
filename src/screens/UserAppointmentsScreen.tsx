@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useRef } from "react";
 import { ScrollView, View } from "react-native";
 
 import { styles } from "./styles";
@@ -7,17 +7,28 @@ import AppointmentsListComponent from "@/components/AppointmentsListComponent";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 
+export const ScrollViewContext = createContext<React.RefObject<ScrollView | null> | null>(null);
+
 export default function UserAppointmentsScreen() {
+  const scrollViewRef = useRef<ScrollView>(null);
+
   return (
-    <View style={styles.container}>
-      <Header title="Записи в поликлинику" isAuthenticated={true} showBackButton={true} />
+    <ScrollViewContext.Provider value={scrollViewRef}>
+      <View style={styles.container}>
+        <Header title="Записи в поликлинику" isAuthenticated={true} showBackButton={true} />
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer} nestedScrollEnabled={true}>
-        <AppointmentsListComponent />
-      </ScrollView>
+        <ScrollView 
+          ref={scrollViewRef}
+          style={styles.content} 
+          contentContainerStyle={styles.contentContainer} 
+          nestedScrollEnabled={true}
+        >
+          <AppointmentsListComponent />
+        </ScrollView>
 
-      <Footer />
+        <Footer />
 
-    </View>
+      </View>
+    </ScrollViewContext.Provider>
   );
 }
