@@ -39,6 +39,11 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
   const edu = doctor.education;
   const achievements = doctor.achievements || [];
   const qualification = doctor.incrementQualification || doctor.qualificationImprovement;
+  
+  // Проверка статуса врача
+  const doctorStatus = doctor.status?.toLowerCase() || '';
+  const isUnavailable = doctorStatus.includes('выходной') || doctorStatus.includes('не работает');
+  const statusMessage = isUnavailable ? doctor.status : null;
 
   return (
     <View style={styles.container}>
@@ -94,11 +99,18 @@ const AboutDoctorComponent: React.FC<AboutDoctorComponentProps> = ({ doctor }) =
           </Text>
         )}
 
+        {isUnavailable && statusMessage && (
+          <View style={styles.statusWarning}>
+            <Text style={styles.statusWarningText}>⚠️ Врач недоступен: {statusMessage}</Text>
+          </View>
+        )}
+
         <View style={styles.buttonContainer}>
           <CustomButton
             text="Записаться на консультацию"
             handler={handleAppointment}
-            backgroundColor="#1280b2"
+            backgroundColor={isUnavailable ? "#9CA3AF" : "#1280b2"}
+            disabled={isUnavailable}
           />
         </View>
       </View>

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
 import ChildrenImg from '@assets/mockPhotos/ChildrenImg.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { COLORS } from 'appStyles';
 
 import { styles } from './styles';
@@ -21,15 +21,11 @@ const ChildSelectorButton: React.FC<Props> = ({ onChildChange }) => {
   const [childrenCount, setChildrenCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    void loadSelectedChild();
-
-    const unsubscribe = navigation.addListener('focus', () => {
+  useFocusEffect(
+    useCallback(() => {
       void loadSelectedChild();
-    });
-
-    return unsubscribe;
-  }, []);
+    }, [])
+  );
 
   const loadSelectedChild = async () => {
     try {

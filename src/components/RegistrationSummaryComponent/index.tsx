@@ -104,7 +104,9 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           [
             {
               text: "OK",
-              onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
+              onPress: () => navigation.navigate(ROUTES.STACK.USER_APPOINTMENTS, { 
+                highlightedAppointmentId: appointmentId 
+              } as never)
             }
           ]
         );
@@ -149,7 +151,9 @@ const RegistrationSummaryComponent: React.FC<Props> = ({ doctor, selectedDate, s
           [
             {
               text: "OK",
-              onPress: () => navigation.navigate(ROUTES.STACK.HOMEPAGE)
+              onPress: () => navigation.navigate(ROUTES.STACK.USER_APPOINTMENTS, { 
+                highlightedAppointmentId: result.id 
+              } as never)
             }
           ]
         );

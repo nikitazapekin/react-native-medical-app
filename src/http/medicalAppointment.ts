@@ -195,6 +195,20 @@ class MedicalAppointmentService {
       return [];
     }
   }
+
+  static async getBookedTimeSlots(doctorId: number, date: string): Promise<string[]> {
+    try {
+      const response = await $api.get<string[]>('/medical-appointments/booked-slots', {
+        params: { doctorId, date }
+      });
+
+      return Array.isArray(response.data) ? response.data : [];
+    } catch (error) {
+      console.error('Error fetching booked time slots:', error);
+
+      return [];
+    }
+  }
 }
 
 export default MedicalAppointmentService;
